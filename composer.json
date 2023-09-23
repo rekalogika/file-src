@@ -1,4 +1,8 @@
 {
+    "name": "rekalogika/file-src",
+    "description": "Monorepo for rekalogika/file and related packages",
+    "type": "project",
+    "license": "MIT",
     "authors": [
         {
             "name": "Priyadi Iman Nurcahyo",
