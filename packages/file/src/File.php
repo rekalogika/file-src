@@ -96,6 +96,9 @@ class File implements FileInterface
         }
     }
 
+    /**
+     * @return array<array-key,mixed>
+     */
     public function __serialize(): array
     {
         throw new \LogicException('Serialization is not supported. Use getPointer() to get a pointer to this file and serialize it instead.');

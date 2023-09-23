@@ -27,6 +27,6 @@
     },
     "require": {
         "psr/http-message": "^1.0",
-        "symfony/translation-contracts": "^3.1"
+        "symfony/translation-contracts": "^3.0"
     }
 }

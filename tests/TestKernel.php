@@ -68,7 +68,7 @@ class TestKernel extends HttpKernelKernel
         yield new FrameworkBundle();
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(function (ContainerBuilder $container) {
             $container->loadFromExtension('rekalogika_file', $this->config);
