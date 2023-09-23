@@ -1,0 +1,36 @@
+{
+    "name": "rekalogika/file-bundle",
+    "description": "Integrates rekalogika/file library into Symfony framework.",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Priyadi Iman Nurcahyo",
+            "email": "priyadi@rekalogika.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rekalogika\\File\\Bundle\\": "src/"
+        }
+    },
+    "require": {
+        "league/flysystem": "^3.16",
+        "league/flysystem-local": "^3.16",
+        "psr/container": "^2.0",
+        "rekalogika/file": "self.version",
+        "rekalogika/file-contracts": "self.version",
+        "symfony/config": "^6.0",
+        "symfony/dependency-injection": "^6.0",
+        "symfony/http-kernel": "^6.0"
+    },
+    "require-dev": {
+        "symfony/routing":"^6.0"
+    },
+    "suggest": {
+        "rekalogika/file-image": "Allows easy resizing image",
+        "rekalogika/file-association": "Attach files to entities",
+        "rekalogika/file-server": "Temporary URL generator for FileInterface",
+        "rekalogika/file-symfony-bridge": "Adapters for Symfony components"
+    }
+}

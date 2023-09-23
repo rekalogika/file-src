@@ -1,0 +1,15 @@
+parameters:
+    level: max
+    paths:
+        - packages
+        - tests
+    ignoreErrors:
+        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children#'
+
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan-mockery/extension.neon
+    - vendor/bnf/phpstan-psr-container/extension.neon
+    - vendor/ekino/phpstan-banned-code/extension.neon

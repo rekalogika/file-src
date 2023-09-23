@@ -1,0 +1,103 @@
+{
+    "authors": [
+        {
+            "name": "Priyadi Iman Nurcahyo",
+            "email": "priyadi@rekalogika.com"
+        }
+    ],
+    "require": {
+        "cardinalby/content-disposition": "^1.1",
+        "doctrine/collections": "^2.1",
+        "fileeye/mimemap": "^2.0",
+        "intervention/image": "^2.5",
+        "league/flysystem": "^3.16",
+        "league/flysystem-local": "^3.16",
+        "league/mime-type-detection": "^1.0.0",
+        "oneup/uploader-bundle": "^4.0",
+        "php": "^8.2",
+        "php-http/discovery": "^1",
+        "psr/container": "^2.0",
+        "psr/http-factory-implementation": "*",
+        "psr/http-message": "^1.0",
+        "rekalogika/direct-property-access": "^1.1.2 || ^1.2",
+        "rekalogika/reconstitutor": "^0.1",
+        "rekalogika/temporary-url-bundle": "^1.1",
+        "symfony/config": "^6.0",
+        "symfony/dependency-injection": "^6.0",
+        "symfony/deprecation-contracts": "^3.1",
+        "symfony/filesystem": "^6.0",
+        "symfony/form": "^6.0",
+        "symfony/http-foundation": "^6.0",
+        "symfony/http-kernel": "^6.0",
+        "symfony/mime": "^6.0",
+        "symfony/property-access": "^6.0",
+        "symfony/serializer": "^6.0",
+        "symfony/service-contracts": "^3.3",
+        "symfony/translation-contracts": "^3.1",
+        "symfony/validator": "^6.0",
+        "thecodingmachine/safe": "^2.5",
+        "twig/twig": "^2.12|^3.0",
+        "webmozart/assert": "^1.11"
+    },
+    "require-dev": {
+        "bnf/phpstan-psr-container": "^1.0",
+        "ekino/phpstan-banned-code": "^1.0",
+        "lctrs/psalm-psr-container-plugin": "^1.9",
+        "league/flysystem-memory": "^3.16",
+        "mockery/mockery": "^1.6",
+        "nyholm/psr7": "^1.8",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-deprecation-rules": "^1.1",
+        "phpstan/phpstan-mockery": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "phpunit/phpunit": "^9.5",
+        "psalm/plugin-mockery": "^1.1",
+        "psalm/plugin-phpunit": "^0.18.4",
+        "symfony/framework-bundle": "^6.0",
+        "symfony/phpunit-bridge": "^6.0",
+        "symfony/routing": "^6.0",
+        "symfony/yaml": "^6.3",
+        "symplify/monorepo-builder": "^11.2",
+        "vimeo/psalm": "^5.15"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rekalogika\\Contracts\\File\\": "packages/file-contracts/src/",
+            "Rekalogika\\Contracts\\File\\Association\\": "packages/file-association-contracts/src/",
+            "Rekalogika\\Contracts\\File\\Metadata\\": "packages/file-metadata-contracts/src/",
+            "Rekalogika\\File\\": "packages/file/src/",
+            "Rekalogika\\File\\Association\\": "packages/file-association/src/",
+            "Rekalogika\\File\\Bridge\\Flysystem\\": "packages/file-flysystem-bridge/src/",
+            "Rekalogika\\File\\Bridge\\OneupUploader\\": "packages/file-oneup-uploader-bridge/src/",
+            "Rekalogika\\File\\Bridge\\Symfony\\": "packages/file-symfony-bridge/src/",
+            "Rekalogika\\File\\Bundle\\": "packages/file-bundle/src/",
+            "Rekalogika\\File\\Derivation\\": "packages/file-derivation/src/",
+            "Rekalogika\\File\\Image\\": "packages/file-image/src/",
+            "Rekalogika\\File\\Server\\": "packages/file-server/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rekalogika\\File\\Tests\\": "tests/"
+        }
+    },
+    "replace": {
+        "rekalogika/file": "self.version",
+        "rekalogika/file-association": "self.version",
+        "rekalogika/file-association-contracts": "self.version",
+        "rekalogika/file-bundle": "self.version",
+        "rekalogika/file-contracts": "self.version",
+        "rekalogika/file-derivation": "self.version",
+        "rekalogika/file-flysystem-bridge": "self.version",
+        "rekalogika/file-image": "self.version",
+        "rekalogika/file-metadata-contracts": "self.version",
+        "rekalogika/file-oneup-uploader-bridge": "self.version",
+        "rekalogika/file-server": "self.version",
+        "rekalogika/file-symfony-bridge": "self.version"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<psalm
+        errorLevel="1"
+        resolveFromConfigFile="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+        findUnusedBaselineEntry="true"
+        findUnusedCode="false">
+
+    <projectFiles>
+        <directory name="packages" />
+        <directory name="tests" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="packages/file-symfony-bridge/src/Constraints/" />
+                <file name="packages/file-symfony-bridge/src/HttpFoundation/FileResponse.php" />
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        <RedundantPropertyInitializationCheck>
+            <errorLevel type="suppress">
+                <file name="packages/file-derivation/src/Filter/AbstractFileFilter.php" />
+            </errorLevel>
+        </RedundantPropertyInitializationCheck>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <file name="tests/File/FileRepositoryTest.php" />
+            </errorLevel>
+        </MissingConstructor>
+        <UndefinedMethod>
+            <errorLevel type="suppress">
+                <file name="packages/file-bundle/src/DependencyInjection/Configuration.php" />
+            </errorLevel>
+        </UndefinedMethod>
+        <MixedMethodCall>
+            <errorLevel type="suppress">
+                <file name="packages/file-bundle/src/DependencyInjection/Configuration.php" />
+            </errorLevel>
+        </MixedMethodCall>
+    </issueHandlers>
+
+    <plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
+        <pluginClass class="Lctrs\PsalmPsrContainerPlugin\Plugin" />
+        <pluginClass class="Psalm\MockeryPlugin\Plugin" />
+    </plugins>
+</psalm>

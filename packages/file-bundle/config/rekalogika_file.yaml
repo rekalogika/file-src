@@ -1,0 +1,10 @@
+rekalogika_file:
+    # all the filesystems registered in FileRepository
+    filesystems:
+        # our default filesystem
+        default: rekalogika.file.default_filesystem
+
+        # # the default storage if using Flysystem Bundle
+        # default: '@default.storage'
+
+    default_filesystem_directory: '%kernel.project_dir%/var/storage/default'

@@ -1,0 +1,35 @@
+{
+    "name": "rekalogika/file-symfony-bridge",
+    "description": "Provides integrations for Rekalogika FileInterface with Symfony HttpFoundation, Form, and Validator.",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "file",
+        "symfony",
+        "httpfoundation",
+        "form",
+        "validator",
+        "adapter",
+        "response",
+        "streaming"
+    ],
+    "authors": [
+        {
+            "name": "Priyadi Iman Nurcahyo",
+            "email": "priyadi@rekalogika.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rekalogika\\File\\Bridge\\Symfony\\": "src/"
+        }
+    },
+    "require": {
+        "rekalogika/file": "self.version",
+        "rekalogika/file-contracts": "self.version",
+        "rekalogika/file-metadata-contracts": "self.version",
+        "symfony/form": "^6.0",
+        "symfony/http-foundation": "^6.0",
+        "symfony/validator": "^6.0"
+    }
+}

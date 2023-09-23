@@ -1,0 +1,35 @@
+{
+    "name": "rekalogika/file-image",
+    "description": "Simple image resizing filter for rekalogika/file. Callers provide the maximum width or height of the desired result, and whether to square-crop it.",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "file",
+        "image",
+        "resize",
+        "filter",
+        "thumbnail",
+        "jpeg",
+        "png",
+        "intervention"
+    ],
+    "authors": [
+        {
+            "name": "Priyadi Iman Nurcahyo",
+            "email": "priyadi@rekalogika.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rekalogika\\File\\Image\\": "src/"
+        }
+    },
+    "require": {
+        "intervention/image": "^2.5",
+        "rekalogika/file-contracts": "self.version",
+        "rekalogika/file-derivation": "self.version",
+        "symfony/service-contracts": "^3.3",
+        "twig/twig": "^2.12|^3.0",
+        "webmozart/assert": "^1.11"
+    }
+}

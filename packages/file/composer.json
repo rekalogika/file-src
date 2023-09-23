@@ -1,0 +1,50 @@
+{
+    "name": "rekalogika/file",
+    "description": "High-level file abstraction library built on top of Flysystem",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "flysystem",
+        "filesystem",
+        "file",
+        "storage",
+        "stream",
+        "upload",
+        "download",
+        "file abstraction",
+        "file interface"
+    ],
+    "authors": [
+        {
+            "name": "Priyadi Iman Nurcahyo",
+            "email": "priyadi@rekalogika.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rekalogika\\File\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "cardinalby/content-disposition": "^1.1",
+        "php-http/discovery": "^1",
+        "psr/http-message": "^1.0",
+        "psr/http-factory-implementation": "*",
+        "fileeye/mimemap": "^2.0",
+        "league/flysystem": "^3.16",
+        "league/mime-type-detection": "^1.0.0",
+        "rekalogika/file-contracts": "self.version",
+        "rekalogika/file-metadata-contracts": "self.version",
+        "symfony/deprecation-contracts": "^3.1",
+        "symfony/translation-contracts": "^3.1"
+    },
+    "require-dev": {
+        "nyholm/psr7": "^1.8"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
+        }
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "name": "rekalogika/file-association",
+    "description": "Handles the association between Doctrine entities and files using rekalogika/file framework, including from file uploads.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "file",
+        "association",
+        "upload",
+        "entity",
+        "attachment",
+        "doctrine",
+        "file upload",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Priyadi Iman Nurcahyo",
+            "email": "priyadi@rekalogika.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rekalogika\\File\\Association\\": "src/"
+        }
+    },
+    "require": {
+        "rekalogika/direct-property-access": "^1.1.2 || ^1.2",
+        "rekalogika/file-association-contracts": "self.version",
+        "rekalogika/file-contracts": "self.version",
+        "rekalogika/reconstitutor": "^0.1",
+        "symfony/property-access": "^6.0"
+    }
+}

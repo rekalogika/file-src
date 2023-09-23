@@ -1,0 +1,32 @@
+{
+    "name": "rekalogika/file-contracts",
+    "description": "Interfaces, traits, and nominal classes for file abstraction.",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "file",
+        "filesystem",
+        "stream",
+        "storage",
+        "repository",
+        "upload",
+        "file upload",
+        "entity",
+        "attachment"
+    ],
+    "authors": [
+        {
+            "name": "Priyadi Iman Nurcahyo",
+            "email": "priyadi@rekalogika.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rekalogika\\Contracts\\File\\": "src/"
+        }
+    },
+    "require": {
+        "psr/http-message": "^1.0",
+        "symfony/translation-contracts": "^3.1"
+    }
+}

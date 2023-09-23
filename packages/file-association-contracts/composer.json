@@ -1,0 +1,23 @@
+{
+    "name": "rekalogika/file-association-contracts",
+    "description": "Interface for file association. To be implemented in entities that support file association.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "file",
+        "association",
+        "upload",
+        "file upload"
+    ],
+    "authors": [
+        {
+            "name": "Priyadi Iman Nurcahyo",
+            "email": "priyadi@rekalogika.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rekalogika\\Contracts\\File\\Association\\": "src/"
+        }
+    }
+}
