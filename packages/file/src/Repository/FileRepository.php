@@ -337,10 +337,26 @@ class FileRepository implements FileRepositoryInterface
         ?string $prefix = null,
         ?string $filesystemId = null
     ): FileInterface {
-        $prefix ??= 'tmp/file-';
-
         $filesystemId = $filesystemId ??
             $this->defaultFilesystemIdForTemporaryFile;
+
+        if ($filesystemId === null) {
+            $tmpDir = sys_get_temp_dir();
+            $tmpFile = \tempnam($tmpDir, $prefix ?? 'rekalogika-file-');
+
+            if ($tmpFile === false) {
+                throw new \RuntimeException(
+                    sprintf(
+                        'Failed to create temporary file in %s',
+                        $tmpDir
+                    )
+                );
+            }
+
+            return TemporaryFile::createFromExisting($tmpFile);
+        }
+
+        $prefix ??= 'tmp/file-';
 
         $filesystem = $this->filesystemRepository
             ->getFilesystem($filesystemId);
