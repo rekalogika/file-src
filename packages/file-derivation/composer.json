@@ -21,6 +21,6 @@
         }
     },
     "require": {
-        "rekalogika/file-contracts": "^0.2"
+        "rekalogika/file-contracts": "^0.1.1"
     }
 }
