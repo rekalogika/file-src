@@ -19,8 +19,8 @@
         "league/flysystem": "^3.16",
         "league/flysystem-local": "^3.16",
         "psr/container": "^2.0",
-        "rekalogika/file": "^0.1",
-        "rekalogika/file-contracts": "^0.1",
+        "rekalogika/file": "^0.2",
+        "rekalogika/file-contracts": "^0.2",
         "symfony/config": "^6.2",
         "symfony/dependency-injection": "^6.2",
         "symfony/http-kernel": "^6.2"
