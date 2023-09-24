@@ -1,8 +1,5 @@
-# rekalogika/file-src
+# CHANGELOG
 
-This is a monorepo for `rekalogika/file` and related packages.
+## 0.1.0
 
-## Documentation
-
-* [rekalogika.dev/file](https://rekalogika.dev/file).
-* [rekalogika.dev/file-bundle](https://rekalogika.dev/file-bundle).
+* Initial Release
