@@ -10,6 +10,15 @@
             "email": "priyadi@rekalogika.com"
         }
     ],
+    "keywords": [
+        "file",
+        "filesystem",
+        "flysystem",
+        "symfony",
+        "symfony-bundle",
+        "upload",
+        "file-upload"
+    ],
     "autoload": {
         "psr-4": {
             "Rekalogika\\File\\Bundle\\": "src/"
