@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file-metadata-contracts",
     "description": "Additional abstractions of metadata types for rekalogika/file.",
+    "homepage": "https://rekalogika.dev/file",
     "license": "MIT",
     "type": "library",
     "keywords": [

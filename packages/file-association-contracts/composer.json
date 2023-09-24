@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file-association-contracts",
     "description": "Interface for file association. To be implemented in entities that support file association.",
+    "homepage": "https://rekalogika.dev/file-bundle",
     "type": "library",
     "license": "MIT",
     "keywords": [

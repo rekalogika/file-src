@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file-image",
     "description": "Simple image resizing filter for rekalogika/file. Callers provide the maximum width or height of the desired result, and whether to square-crop it.",
+    "homepage": "https://rekalogika.dev/file-bundle",
     "license": "MIT",
     "type": "library",
     "keywords": [

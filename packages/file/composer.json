@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file",
     "description": "High-level file abstraction library built on top of Flysystem",
+    "homepage": "https://rekalogika.dev/file",
     "type": "library",
     "license": "MIT",
     "keywords": [

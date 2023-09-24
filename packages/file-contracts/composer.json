@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file-contracts",
     "description": "Interfaces, traits, and nominal classes for file abstraction.",
+    "homepage": "https://rekalogika.dev/file",
     "license": "MIT",
     "type": "library",
     "keywords": [

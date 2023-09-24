@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file-bundle",
     "description": "Integrates rekalogika/file library into Symfony framework.",
+    "homepage": "https://rekalogika.dev/file-bundle",
     "license": "MIT",
     "type": "symfony-bundle",
     "authors": [

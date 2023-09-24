@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file-oneup-uploader-bridge",
     "description": "An adapter to convert Oneup Uploader Bundle's FileInterface to rekalogika/file FileInterface.",
+    "homepage": "https://rekalogika.dev/file",
     "license": "MIT",
     "type": "library",
     "keywords": [

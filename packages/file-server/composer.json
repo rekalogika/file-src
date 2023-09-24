@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file-server",
     "description": "Temporary URL resource server for rekalogika/file FileInterface.",
+    "homepage": "https://rekalogika.dev/file-bundle",
     "license": "MIT",
     "type": "library",
     "keywords": [

@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file-src",
     "description": "Monorepo for rekalogika/file and related packages",
+    "homepage": "https://rekalogika.dev/file",
     "type": "project",
     "license": "MIT",
     "authors": [

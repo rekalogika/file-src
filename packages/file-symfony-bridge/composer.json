@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file-symfony-bridge",
     "description": "Provides integrations for Rekalogika FileInterface with Symfony HttpFoundation, Form, and Validator.",
+    "homepage": "https://rekalogika.dev/file-bundle",
     "license": "MIT",
     "type": "library",
     "keywords": [

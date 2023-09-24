@@ -1,6 +1,7 @@
 {
     "name": "rekalogika/file-derivation",
     "description": "Provides an abstract class to streamline the creation of filters using the file derivation feature of the rekalogika/file framework.",
+    "homepage": "https://rekalogika.dev/file-bundle",
     "type": "library",
     "license": "MIT",
     "keywords": [
