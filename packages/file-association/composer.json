@@ -27,8 +27,8 @@
     },
     "require": {
         "rekalogika/direct-property-access": "^1.1.2 || ^1.2",
-        "rekalogika/file-association-contracts": "self.version",
-        "rekalogika/file-contracts": "self.version",
+        "rekalogika/file-association-contracts": "^0.1",
+        "rekalogika/file-contracts": "^0.1",
         "rekalogika/reconstitutor": "^1.0",
         "symfony/property-access": "^6.2"
     }

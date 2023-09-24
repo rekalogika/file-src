@@ -19,14 +19,14 @@
         "league/flysystem": "^3.16",
         "league/flysystem-local": "^3.16",
         "psr/container": "^2.0",
-        "rekalogika/file": "self.version",
-        "rekalogika/file-contracts": "self.version",
+        "rekalogika/file": "^0.1",
+        "rekalogika/file-contracts": "^0.1",
         "symfony/config": "^6.2",
         "symfony/dependency-injection": "^6.2",
         "symfony/http-kernel": "^6.2"
     },
     "require-dev": {
-        "symfony/routing":"^6.2"
+        "symfony/routing": "^6.2"
     },
     "suggest": {
         "rekalogika/file-image": "Allows easy resizing image",

@@ -23,8 +23,8 @@
         }
     },
     "require": {
-        "oneup/uploader-bundle":"^4.0",
-        "rekalogika/file-contracts": "self.version",
-        "rekalogika/file": "self.version"
+        "oneup/uploader-bundle": "^4.0",
+        "rekalogika/file-contracts": "^0.1",
+        "rekalogika/file": "^0.1"
     }
 }
