@@ -1,0 +1,89 @@
+name: 'Packages Split'
+
+on:
+    push:
+        branches:
+            - main
+        tags:
+            - '*'
+
+env:
+    GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+jobs:
+    packages_split:
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+            matrix:
+                # define package to repository map
+                package:
+                    -
+                        local_path: 'file'
+                        split_repository: 'file'
+                    -
+                        local_path: 'file-association'
+                        split_repository: 'file-association'
+                    -
+                        local_path: 'file-association-contracts'
+                        split_repository: 'file-association-contracts'
+                    -
+                        local_path: 'file-bundle'
+                        split_repository: 'file-bundle'
+                    -
+                        local_path: 'file-contracts'
+                        split_repository: 'file-contracts'
+                    -
+                        local_path: 'file-derivation'
+                        split_repository: 'file-derivation'
+                    -
+                        local_path: 'file-image'
+                        split_repository: 'file-image'
+                    -
+                        local_path: 'file-metadata-contracts'
+                        split_repository: 'file-metadata-contracts'
+                    -
+                        local_path: 'file-oneup-uploader-bridge'
+                        split_repository: 'file-oneup-uploader-bridge'
+                    -
+                        local_path: 'file-server'
+                        split_repository: 'file-server'
+                    -
+                        local_path: 'file-symfony-bridge'
+                        split_repository: 'file-symfony-bridge'
+
+        steps:
+            -   uses: actions/checkout@v2
+
+            # no tag
+            -
+                if: "!startsWith(github.ref, 'refs/tags/')"
+                uses: "danharrin/monorepo-split-github-action@v2.3.0"
+                with:
+                    package_directory: 'packages/${{ matrix.package.local_path }}'
+
+                    repository_organization: 'rekalogika'
+                    repository_name: '${{ matrix.package.split_repository }}'
+
+                    repository_host: github.com
+
+                    user_name: "Priyadi Iman Nurcahyo"
+                    user_email: "1102197+priyadi@users.noreply.github.com"
+
+            # with tag
+            -
+                if: "startsWith(github.ref, 'refs/tags/')"
+                uses: "danharrin/monorepo-split-github-action@v2.3.0"
+                with:
+                    tag: ${GITHUB_REF#refs/tags/}
+
+                    package_directory: 'packages/${{ matrix.package.local_path }}'
+
+                    repository_organization: 'rekalogika'
+                    repository_name: '${{ matrix.package.split_repository }}'
+
+                    repository_host: github.com
+
+                    user_name: "Priyadi Iman Nurcahyo"
+                    user_email: "1102197+priyadi@users.noreply.github.com"
