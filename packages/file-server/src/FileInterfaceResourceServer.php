@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Server;
 
+use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Bridge\Symfony\HttpFoundation\FileResponse;
+use Rekalogika\TemporaryUrl\Attribute\AsTemporaryUrlResourceTransformer;
 use Rekalogika\TemporaryUrl\Attribute\AsTemporaryUrlServer;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,6 +27,13 @@ class FileInterfaceResourceServer
         private readonly FileRepositoryInterface $fileRepository,
     ) {
     }
+
+    #[AsTemporaryUrlResourceTransformer]
+    public function transform(FileInterface $file): FilePointerInterface
+    {
+        return $file->getPointer();
+    }
+
 
     #[AsTemporaryUrlServer]
     public function respond(FilePointerInterface $filePointer): Response

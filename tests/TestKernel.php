@@ -33,6 +33,7 @@ use Rekalogika\File\Image\ImageResizer;
 use Rekalogika\Psr16SimpleCacheBundle\RekalogikaPsr16SimpleCacheBundle;
 use Rekalogika\Reconstitutor\RekalogikaReconstitutorBundle;
 use Rekalogika\TemporaryUrl\RekalogikaTemporaryUrlBundle;
+use Rekalogika\TemporaryUrl\TemporaryUrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -103,6 +104,8 @@ class TestKernel extends HttpKernelKernel
             SymfonyPropertyAccessorBridge::class,
             PropertyReaderInterface::class,
             PropertyWriterInterface::class,
+
+            TemporaryUrlGeneratorInterface::class,
         ];
     }
 }

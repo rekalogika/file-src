@@ -23,6 +23,8 @@ class Factory
     public static function createUrlGenerator(): UrlGeneratorInterface
     {
         $urlGenerator = \Mockery::mock(UrlGeneratorInterface::class);
+        $urlGenerator->shouldReceive('generate')
+            ->andReturn('__route__');
 
         return $urlGenerator;
     }

@@ -4,6 +4,7 @@
 
 * Use `sys_get_temp_dir()` and `tempnam()` to get a temporary file path if the
   filesystem is local.
+* Allow temporary URL generation for `FileInterface`
 ## 0.1.0
 
 * Initial Release

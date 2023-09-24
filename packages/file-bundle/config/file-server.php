@@ -24,6 +24,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('rekalogika.temporary_url.resource_server', [
             'method' => 'respond',
         ])
+        ->tag('rekalogika.temporary_url.resource_transformer', [
+            'method' => 'transform',
+        ])
         ->args([
             service(FileRepositoryInterface::class),
         ]);
