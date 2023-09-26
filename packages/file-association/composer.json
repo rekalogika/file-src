@@ -1,6 +1,6 @@
 {
     "name": "rekalogika/file-association",
-    "description": "Handles the association between Doctrine entities and files using rekalogika/file framework, including from file uploads.",
+    "description": "Handles the association between Doctrine entities and files using the rekalogika/file framework, including from file uploads.",
     "homepage": "https://rekalogika.dev/file-bundle",
     "type": "library",
     "license": "MIT",

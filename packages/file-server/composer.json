@@ -1,6 +1,6 @@
 {
     "name": "rekalogika/file-server",
-    "description": "Temporary URL resource server for rekalogika/file FileInterface.",
+    "description": "Temporary URL resource server for rekalogika/file FileInterface. Access files easily in your application by creating temporary URLs that expire after a set amount of time.",
     "homepage": "https://rekalogika.dev/file-bundle",
     "license": "MIT",
     "type": "library",

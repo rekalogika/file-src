@@ -2,9 +2,16 @@
 
 Interfaces, traits, and nominal classes for file abstraction.
 
-[Documentation](https://rekalogika.dev/file)
+## Documentation
+
+[rekalogika.dev/file](https://rekalogika.dev/file)
+
+## License
+
+MIT
 
 ## Contributing
 
-This is a READ-ONLY repository. Issues and pull requests should be submitted to
-the [rekalogika/file-src](https://github.com/rekalogika/file-src) monorepo.
+The `rekalogika/file-contracts` repository is a read-only repo split from the
+main repo. Issues and pull requests should be submitted to the
+[rekalogika/file-src](https://github.com/rekalogika/file-src) monorepo.
