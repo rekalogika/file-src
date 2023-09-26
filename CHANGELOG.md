@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.2
+
+* FileType: Catch `MappingException` on `getDescription()`.
+
 ## 0.1.1
 
 * Use `sys_get_temp_dir()` and `tempnam()` to get a temporary file path if the
