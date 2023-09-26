@@ -15,6 +15,7 @@ namespace Rekalogika\File\Tests\File;
 
 use PHPUnit\Framework\TestCase;
 use Rekalogika\File\Type\MimeMapFileTypeAdapter;
+use Symfony\Contracts\Translation\TranslatableInterface;
 
 class FileTypeTest extends TestCase
 {
@@ -28,5 +29,12 @@ class FileTypeTest extends TestCase
         $this->assertSame('jpeg', $type->getExtension());
         $this->assertSame('JPEG image', (string) $type->getDescription());
         $this->assertSame('image/jpeg', (string) $type);
+    }
+
+    public function testUnknownFileType(): void
+    {
+        $type = new MimeMapFileTypeAdapter('application/x-zerosize');
+        $this->assertSame('Unknown file type', (string) $type->getDescription());
+        $this->assertInstanceOf(TranslatableInterface::class, $type->getDescription());
     }
 }
