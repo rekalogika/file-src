@@ -3,6 +3,7 @@
 ## 1.1.0
 
 * Change translated return type from `string|(\Stringable&TranslatableInterface)` to `\Stringable&TranslatableInterface`
+* Allow PHP 8.1
 
 ## 1.0.1
 
