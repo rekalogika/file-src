@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.1.3
+## 0.1.4
 
 * `AttributesPropertyLister` now caches the results in memory.
 
