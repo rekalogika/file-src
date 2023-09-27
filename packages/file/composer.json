@@ -35,8 +35,8 @@
         "fileeye/mimemap": "^2.0",
         "league/flysystem": "^3.16",
         "league/mime-type-detection": "^1.0.0",
-        "rekalogika/file-contracts": "^1.1",
-        "rekalogika/file-metadata-contracts": "^1.1",
+        "rekalogika/file-contracts": "^1.0.1",
+        "rekalogika/file-metadata-contracts": "^1.0.1",
         "symfony/deprecation-contracts": "^3.1",
         "symfony/translation-contracts": "^3.0"
     },
