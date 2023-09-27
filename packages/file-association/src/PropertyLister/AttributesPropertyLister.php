@@ -19,24 +19,37 @@ use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 /**
  * Determines all the file association properties by looking at
  * AsFileAssociation attributes.
- *
- * @todo: expensive
  */
 class AttributesPropertyLister implements PropertyListerInterface
 {
+    /**
+     * @var array<string,iterable<string>>
+     */
+    private array $cache = [];
+
     public function getFileProperties(object $object): iterable
     {
-        foreach (self::getReflectionPropertiesWithAttribute($object, AsFileAssociation::class) as $reflectionProperty) {
-            yield $reflectionProperty->getName();
+        if (isset($this->cache[get_class($object)])) {
+            return $this->cache[get_class($object)];
         }
+
+        $class = get_class($object);
+        $properties = [];
+
+        foreach (self::getReflectionPropertiesWithAttribute($class, AsFileAssociation::class) as $reflectionProperty) {
+            $properties[$reflectionProperty->getName()] = 1;
+        }
+
+        return $this->cache[$class] = array_keys($properties);
     }
 
     /**
+     * @param class-string $class
      * @return iterable<\ReflectionProperty>
      */
-    private static function getReflectionProperties(object $object): iterable
+    private static function getReflectionProperties(string $class): iterable
     {
-        $reflectionClass = (new \ReflectionClass(get_class($object)));
+        $reflectionClass = (new \ReflectionClass($class));
         while ($reflectionClass instanceof \ReflectionClass) {
             foreach ($reflectionClass->getProperties() as $reflectionProperty) {
                 if ($reflectionProperty->isStatic()) {
@@ -51,14 +64,15 @@ class AttributesPropertyLister implements PropertyListerInterface
     }
 
     /**
+     * @param class-string $class
      * @param class-string $attribute
      * @return iterable<\ReflectionProperty>
      */
     private static function getReflectionPropertiesWithAttribute(
-        object $object,
+        string $class,
         string $attribute
     ): iterable {
-        foreach (self::getReflectionProperties($object) as $reflectionProperty) {
+        foreach (self::getReflectionProperties($class) as $reflectionProperty) {
             $attributes = $reflectionProperty
                 ->getAttributes($attribute);
 

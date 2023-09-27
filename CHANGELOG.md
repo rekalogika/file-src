@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.3
+
+* `AttributesPropertyLister` now caches the results in memory.
+
 ## 0.1.2
 
 * FileType: Catch `MappingException` on `getDescription()`.
