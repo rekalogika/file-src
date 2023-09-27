@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.1
+
+* Fix translation directory location
+
 ## 1.0.0
 
 * Refactor translation
