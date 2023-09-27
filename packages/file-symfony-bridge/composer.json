@@ -26,9 +26,9 @@
         }
     },
     "require": {
-        "rekalogika/file": "^0.2",
-        "rekalogika/file-contracts": "^0.2",
-        "rekalogika/file-metadata-contracts": "^0.2",
+        "rekalogika/file": "^1.0",
+        "rekalogika/file-contracts": "^1.0",
+        "rekalogika/file-metadata-contracts": "^1.0",
         "symfony/form": "^6.2",
         "symfony/http-foundation": "^6.2",
         "symfony/validator": "^6.2"
