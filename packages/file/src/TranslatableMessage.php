@@ -11,7 +11,7 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Name;
+namespace Rekalogika\File;
 
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -19,7 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * Translatable string for file name
  */
-final class TranslatableName implements TranslatableInterface, \Stringable
+final class TranslatableMessage implements TranslatableInterface, \Stringable
 {
     /**
      * @param array<string,string> $parameters
@@ -43,7 +43,7 @@ final class TranslatableName implements TranslatableInterface, \Stringable
         return $translator->trans(
             $this->translationId,
             $this->parameters,
-            'rekalogika-file',
+            'rekalogika_file',
             $locale
         );
     }

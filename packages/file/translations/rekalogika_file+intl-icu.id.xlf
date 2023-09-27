@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="en" trgLang="id">
+  <file id="rekalogika_file.id">
+    <unit id="untitled" name="Untitled">
+      <segment>
+        <source>Untitled</source>
+        <target>Tanpa Judul</target>
+      </segment>
+    </unit>
+    <unit id="untitled-extension" name="Untitled.{extension}">
+      <segment>
+        <source>Untitled.{extension}</source>
+        <target>Tanpa Judul.{extension}</target>
+      </segment>
+    </unit>
+    <unit id="unknown-file-type" name="Unknown file type ({type})">
+      <segment>
+        <source>Unknown file type ({type})</source>
+        <target>Jenis berkas tak diketahui ({type})</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

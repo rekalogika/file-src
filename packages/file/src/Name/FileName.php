@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Name;
 
 use Rekalogika\Contracts\File\FileNameInterface;
+use Rekalogika\File\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -72,7 +73,7 @@ final class FileName implements FileNameInterface
     {
         if ($this->name === null) {
             if ($this->extension) {
-                return new TranslatableName(
+                return new TranslatableMessage(
                     'Untitled.' . $this->extension,
                     'Untitled.{extension}',
                     [
@@ -80,7 +81,7 @@ final class FileName implements FileNameInterface
                     ]
                 );
             } else {
-                return new TranslatableName('Untitled', 'Untitled');
+                return new TranslatableMessage('Untitled', 'Untitled');
             }
         }
 
@@ -95,7 +96,7 @@ final class FileName implements FileNameInterface
     public function getBase(): string|(\Stringable&TranslatableInterface)
     {
         if ($this->name === null) {
-            return new TranslatableName('Untitled', 'Untitled');
+            return new TranslatableMessage('Untitled', 'Untitled');
         }
 
         return $this->name;

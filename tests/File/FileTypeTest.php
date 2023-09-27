@@ -34,7 +34,7 @@ class FileTypeTest extends TestCase
     public function testUnknownFileType(): void
     {
         $type = new MimeMapFileTypeAdapter('application/x-zerosize');
-        $this->assertSame('Unknown file type', (string) $type->getDescription());
+        $this->assertSame('Unknown file type (application/x-zerosize)', (string) $type->getDescription());
         $this->assertInstanceOf(TranslatableInterface::class, $type->getDescription());
     }
 }

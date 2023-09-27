@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0
+
+* Refactor translation
+
 ## 0.1.4
 
 * `AttributesPropertyLister` now caches the results in memory.

@@ -17,6 +17,7 @@ use FileEye\MimeMap\MalformedTypeException;
 use FileEye\MimeMap\MappingException;
 use FileEye\MimeMap\Type;
 use Rekalogika\Contracts\File\FileTypeInterface;
+use Rekalogika\File\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatableInterface;
 
 final class MimeMapFileTypeAdapter implements FileTypeInterface
@@ -83,8 +84,12 @@ final class MimeMapFileTypeAdapter implements FileTypeInterface
         try {
             return $this->getParsed()->getDescription();
         } catch (MappingException) {
-            return new TranslatableTypeDescription(
-                'Unknown file type'
+            return new TranslatableMessage(
+                sprintf('Unknown file type (%s)', $this->type),
+                'Unknown file type ({type})',
+                [
+                    '{type}' => $this->type
+                ],
             );
         }
     }
