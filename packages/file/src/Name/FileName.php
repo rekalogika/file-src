@@ -69,7 +69,7 @@ final class FileName implements FileNameInterface
         return (string) $this->getFull();
     }
 
-    public function getFull(): string|(\Stringable&TranslatableInterface)
+    public function getFull(): \Stringable&TranslatableInterface
     {
         if ($this->name === null) {
             if ($this->extension) {
@@ -85,7 +85,24 @@ final class FileName implements FileNameInterface
             }
         }
 
-        return $this->name . ($this->extension !== null ? '.' . $this->extension : '');
+        if ($this->extension) {
+            return new TranslatableMessage(
+                $this->name . '.' . $this->extension,
+                '{name}.{extension}',
+                [
+                    '{name}' => $this->name,
+                    '{extension}' => $this->extension,
+                ]
+            );
+        } else {
+            return new TranslatableMessage(
+                $this->name,
+                '{name}',
+                [
+                    '{name}' => $this->name,
+                ]
+            );
+        }
     }
 
     public function setFull(string $name): void
@@ -93,13 +110,19 @@ final class FileName implements FileNameInterface
         $this->parse($name);
     }
 
-    public function getBase(): string|(\Stringable&TranslatableInterface)
+    public function getBase(): \Stringable&TranslatableInterface
     {
         if ($this->name === null) {
             return new TranslatableMessage('Untitled', 'Untitled');
+        } else {
+            return new TranslatableMessage(
+                $this->name,
+                '{name}',
+                [
+                    '{name}' => $this->name,
+                ]
+            );
         }
-
-        return $this->name;
     }
 
     public function setBase(string $name): void

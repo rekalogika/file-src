@@ -23,7 +23,7 @@ interface FileNameInterface extends \Stringable, TranslatableInterface
     /**
      * The full filename, with extension.
      */
-    public function getFull(): string|(\Stringable&TranslatableInterface);
+    public function getFull(): \Stringable&TranslatableInterface;
 
     /**
      * Set the full filename, with extension.
@@ -33,7 +33,7 @@ interface FileNameInterface extends \Stringable, TranslatableInterface
     /**
      * The base of the filename, without extension.
      */
-    public function getBase(): string|(\Stringable&TranslatableInterface);
+    public function getBase(): \Stringable&TranslatableInterface;
 
     /**
      * Set the base of the filename, without extension.

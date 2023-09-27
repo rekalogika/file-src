@@ -52,5 +52,5 @@ interface FileTypeInterface extends \Stringable
     /**
      * Description of the type
      */
-    public function getDescription(): string|(\Stringable&TranslatableInterface);
+    public function getDescription(): \Stringable&TranslatableInterface;
 }

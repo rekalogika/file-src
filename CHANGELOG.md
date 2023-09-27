@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.0
+
+* Change translated return type from `string|(\Stringable&TranslatableInterface)` to `\Stringable&TranslatableInterface`
+
 ## 1.0.1
 
 * Fix translation directory location

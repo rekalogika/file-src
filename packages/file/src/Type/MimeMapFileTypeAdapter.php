@@ -79,10 +79,16 @@ final class MimeMapFileTypeAdapter implements FileTypeInterface
         }
     }
 
-    public function getDescription(): string|(\Stringable&TranslatableInterface)
+    public function getDescription(): \Stringable&TranslatableInterface
     {
         try {
-            return $this->getParsed()->getDescription();
+            return new TranslatableMessage(
+                $this->getParsed()->getDescription(),
+                '{name}',
+                [
+                    '{name}' => $this->getParsed()->getDescription(),
+                ],
+            );
         } catch (MappingException) {
             return new TranslatableMessage(
                 sprintf('Unknown file type (%s)', $this->type),

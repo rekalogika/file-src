@@ -21,8 +21,8 @@ class FileNameTest extends TestCase
     public function testFileName(): void
     {
         $fileName = new FileName('test.txt');
-        $this->assertSame('test.txt', $fileName->getFull());
-        $this->assertSame('test', $fileName->getBase());
+        $this->assertSame('test.txt', (string) $fileName->getFull());
+        $this->assertSame('test', (string) $fileName->getBase());
         $this->assertSame('txt', $fileName->getExtension());
         $this->assertSame('test.txt', (string) $fileName);
         $this->assertTrue($fileName->hasExtension());
@@ -31,8 +31,8 @@ class FileNameTest extends TestCase
     public function testWithoutExtension(): void
     {
         $fileName = new FileName('test');
-        $this->assertSame('test', $fileName->getFull());
-        $this->assertSame('test', $fileName->getBase());
+        $this->assertSame('test', (string) $fileName->getFull());
+        $this->assertSame('test', (string) $fileName->getBase());
         $this->assertNull($fileName->getExtension());
         $this->assertSame('test', (string) $fileName);
         $this->assertFalse($fileName->hasExtension());
@@ -41,8 +41,8 @@ class FileNameTest extends TestCase
     public function testWithPath(): void
     {
         $fileName = new FileName('path/to/test.txt');
-        $this->assertSame('test.txt', $fileName->getFull());
-        $this->assertSame('test', $fileName->getBase());
+        $this->assertSame('test.txt', (string) $fileName->getFull());
+        $this->assertSame('test', (string) $fileName->getBase());
         $this->assertSame('txt', $fileName->getExtension());
         $this->assertSame('test.txt', (string) $fileName);
         $this->assertTrue($fileName->hasExtension());
