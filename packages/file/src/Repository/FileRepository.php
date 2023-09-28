@@ -27,7 +27,7 @@ use Rekalogika\File\Contracts\MetadataAwareFilesystemReader;
 use Rekalogika\File\Contracts\MetadataAwareFilesystemWriter;
 use Rekalogika\File\Exception\FilesystemRepository\FilesystemNotFoundException;
 use Rekalogika\File\File;
-use Rekalogika\File\Metadata\RawMetadata;
+use Rekalogika\File\RawMetadata;
 use Rekalogika\File\MetadataGenerator\MetadataGeneratorInterface;
 use Rekalogika\File\TemporaryFile;
 

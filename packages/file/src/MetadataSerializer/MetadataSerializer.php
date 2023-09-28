@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Rekalogika\File\MetadataSerializer;
 
 use Rekalogika\Contracts\File\RawMetadataInterface;
-use Rekalogika\File\Metadata\RawMetadata;
-use Rekalogika\File\Metadata\Metadata;
+use Rekalogika\File\RawMetadata;
+use Rekalogika\Domain\File\Metadata\Constants;
 
 class MetadataSerializer implements MetadataSerializerInterface
 {
@@ -68,7 +68,7 @@ class MetadataSerializer implements MetadataSerializerInterface
 
             switch ($key) {
                 case 'disposition':
-                    $newArray[Metadata::HTTP_DISPOSITION] = (string) $value;
+                    $newArray[Constants::HTTP_DISPOSITION] = (string) $value;
                     break;
 
                 case 'file-name':
@@ -76,18 +76,18 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_string($file) && !is_null($file)) {
                         $file = null;
                     }
-                    $newArray[Metadata::FILE_NAME] = $file;
+                    $newArray[Constants::FILE_NAME] = $file;
                     break;
 
                 case 'content-length':
                     if (!is_int($value)) {
                         continue 2;
                     }
-                    $newArray[Metadata::FILE_SIZE] = $value;
+                    $newArray[Constants::FILE_SIZE] = $value;
                     break;
 
                 case 'content-type':
-                    $newArray[Metadata::FILE_TYPE] = (string) $value;
+                    $newArray[Constants::FILE_TYPE] = (string) $value;
                     break;
 
                 case 'last-modified':
@@ -95,21 +95,21 @@ class MetadataSerializer implements MetadataSerializerInterface
                         continue 2;
                     }
                     $datetime = new \DateTimeImmutable($value);
-                    $newArray[Metadata::FILE_MODIFICATION_TIME] = (int) $datetime->format('U');
+                    $newArray[Constants::FILE_MODIFICATION_TIME] = (int) $datetime->format('U');
 
                     // no break
                 case 'width':
                     if (!is_int($value)) {
                         continue 2;
                     }
-                    $newArray[Metadata::MEDIA_WIDTH] = $value;
+                    $newArray[Constants::MEDIA_WIDTH] = $value;
                     break;
 
                 case 'height':
                     if (!is_int($value)) {
                         continue 2;
                     }
-                    $newArray[Metadata::MEDIA_HEIGHT] = $value;
+                    $newArray[Constants::MEDIA_HEIGHT] = $value;
                     break;
             }
         }

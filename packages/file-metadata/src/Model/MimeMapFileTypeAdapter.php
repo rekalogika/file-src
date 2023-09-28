@@ -11,13 +11,12 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Type;
+namespace Rekalogika\Domain\File\Metadata\Model;
 
 use FileEye\MimeMap\MalformedTypeException;
 use FileEye\MimeMap\MappingException;
 use FileEye\MimeMap\Type;
 use Rekalogika\Contracts\File\FileTypeInterface;
-use Rekalogika\File\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatableInterface;
 
 final class MimeMapFileTypeAdapter implements FileTypeInterface

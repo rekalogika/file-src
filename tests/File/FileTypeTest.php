@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Tests\File;
 
 use PHPUnit\Framework\TestCase;
-use Rekalogika\File\Type\MimeMapFileTypeAdapter;
+use Rekalogika\Domain\File\Metadata\Model\MimeMapFileTypeAdapter;
 use Symfony\Contracts\Translation\TranslatableInterface;
 
 class FileTypeTest extends TestCase

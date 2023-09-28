@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Tests\File;
 
 use PHPUnit\Framework\TestCase;
-use Rekalogika\File\Name\FileName;
+use Rekalogika\Domain\File\Metadata\Model\FileName;
 
 class FileNameTest extends TestCase
 {

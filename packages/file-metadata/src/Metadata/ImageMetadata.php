@@ -11,20 +11,19 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Metadata;
+namespace Rekalogika\Domain\File\Metadata\Metadata;
 
-use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\Metadata\ImageMetadataInterface;
 use Rekalogika\Contracts\File\RawMetadataInterface;
+use Rekalogika\Domain\File\Metadata\Constants;
 
 final class ImageMetadata extends AbstractMetadata implements
     ImageMetadataInterface
 {
     public static function create(
-        FileInterface $file,
         RawMetadataInterface $metadata
     ): ?static {
-        if (!$metadata->tryGet(Metadata::MEDIA_WIDTH)) {
+        if (!$metadata->tryGet(Constants::MEDIA_WIDTH)) {
             return null;
         }
 
@@ -38,12 +37,12 @@ final class ImageMetadata extends AbstractMetadata implements
 
     public function getWidth(): int
     {
-        return (int) $this->metadata->tryGet(Metadata::MEDIA_WIDTH);
+        return (int) $this->metadata->tryGet(Constants::MEDIA_WIDTH);
     }
 
     public function getHeight(): int
     {
-        return (int) $this->metadata->tryGet(Metadata::MEDIA_HEIGHT);
+        return (int) $this->metadata->tryGet(Constants::MEDIA_HEIGHT);
     }
 
     public function getAspectRatio(): float

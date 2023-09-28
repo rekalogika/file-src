@@ -16,8 +16,8 @@ namespace Rekalogika\File\Tests\File;
 use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\File\File;
-use Rekalogika\File\Metadata\RawMetadata;
-use Rekalogika\File\Metadata\Metadata;
+use Rekalogika\File\RawMetadata;
+use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\TemporaryFile;
 
 class FileTest extends TestCase
@@ -127,7 +127,7 @@ class FileTest extends TestCase
             type: 'image/png',
         );
 
-        $file->get(RawMetadataInterface::class)->set(Metadata::FILE_NAME, 'foo');
+        $file->get(RawMetadataInterface::class)->set(Constants::FILE_NAME, 'foo');
 
         $this->assertFileInterface(
             file: $file,

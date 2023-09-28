@@ -17,7 +17,7 @@ use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileMetadataInterface;
 use Rekalogika\Contracts\File\Metadata\ImageMetadataInterface;
 use Rekalogika\Contracts\File\RawMetadataInterface;
-use Rekalogika\File\Metadata\Metadata;
+use Rekalogika\Domain\File\Metadata\Constants;
 
 trait FileTestTrait
 {
@@ -91,23 +91,23 @@ trait FileTestTrait
         // metadata tests
         $metadata = $file->get(RawMetadataInterface::class);
 
-        $this->assertSame($metadata->get(Metadata::FILE_SIZE), \strlen($content));
+        $this->assertSame($metadata->get(Constants::FILE_SIZE), \strlen($content));
         $this->assertSame($file->get(FileMetadataInterface::class)->getSize(), \strlen($content));
 
-        $this->assertSame($metadata->get(Metadata::FILE_TYPE), $type);
+        $this->assertSame($metadata->get(Constants::FILE_TYPE), $type);
         $this->assertSame((string) $file->get(FileMetadataInterface::class)->getType(), $type);
 
-        $metadataLastModified = $metadata->get(Metadata::FILE_MODIFICATION_TIME);
+        $metadataLastModified = $metadata->get(Constants::FILE_MODIFICATION_TIME);
         $this->assertTrue(is_int($metadataLastModified));
         $this->assertSame(
             $file->get(FileMetadataInterface::class)->getModificationTime()->getTimestamp(),
-            $metadata->get(Metadata::FILE_MODIFICATION_TIME)
+            $metadata->get(Constants::FILE_MODIFICATION_TIME)
         );
 
         // width and height tests
         if ($width !== null && $height !== null) {
-            $metaHeight = $metadata->get(Metadata::MEDIA_HEIGHT);
-            $metaWidth = $metadata->get(Metadata::MEDIA_WIDTH);
+            $metaHeight = $metadata->get(Constants::MEDIA_HEIGHT);
+            $metaWidth = $metadata->get(Constants::MEDIA_WIDTH);
 
             $this->assertSame($metaHeight, $height);
             $this->assertSame($metaWidth, $width);

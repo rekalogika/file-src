@@ -22,9 +22,9 @@ use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToRetrieveMetadata;
 use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\File\Contracts\MetadataAwareFilesystemOperator;
-use Rekalogika\File\Metadata\RawMetadata;
+use Rekalogika\File\RawMetadata;
 use Rekalogika\File\MetadataGenerator\MetadataGeneratorInterface;
-use Rekalogika\File\Metadata\Metadata;
+use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\MetadataSerializer\MetadataSerializerInterface;
 
 /**
@@ -134,7 +134,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         try {
             $metadata = [
                 ...$metadata,
-                Metadata::FILE_SIZE => $this->fileSize($location),
+                Constants::FILE_SIZE => $this->fileSize($location),
             ];
         } catch (UnableToRetrieveMetadata) {
         }
@@ -193,7 +193,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         $this->metadataGenerator
             ->generateMetadataFromString($rawMetadata, $contents);
 
-        $rawMetadata->set(Metadata::FILE_MODIFICATION_TIME, time());
+        $rawMetadata->set(Constants::FILE_MODIFICATION_TIME, time());
 
         $this->getWrapped()->write($location, $contents);
         $this->saveMetadata($location, $rawMetadata);
@@ -235,12 +235,12 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
 
         $pos = ftell($contents);
         if ($pos !== false) {
-            $rawMetadata->set(Metadata::FILE_SIZE, $pos);
+            $rawMetadata->set(Constants::FILE_SIZE, $pos);
         } else {
-            $rawMetadata->set(Metadata::FILE_SIZE, $this->fileSize($location));
+            $rawMetadata->set(Constants::FILE_SIZE, $this->fileSize($location));
         }
 
-        $rawMetadata->set(Metadata::FILE_MODIFICATION_TIME, time());
+        $rawMetadata->set(Constants::FILE_MODIFICATION_TIME, time());
 
         $this->saveMetadata($location, $rawMetadata);
     }

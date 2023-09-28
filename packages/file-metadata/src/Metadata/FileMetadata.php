@@ -11,22 +11,19 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Metadata;
+namespace Rekalogika\Domain\File\Metadata\Metadata;
 
-use Rekalogika\Contracts\File\Exception\MetadataNotFoundException;
-use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileMetadataInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
 use Rekalogika\Contracts\File\FileTypeInterface;
 use Rekalogika\Contracts\File\RawMetadataInterface;
-use Rekalogika\File\Type\MimeMapFileTypeAdapter;
-use Rekalogika\File\Metadata\Metadata;
-use Rekalogika\File\Name\FileName;
+use Rekalogika\Domain\File\Metadata\Model\MimeMapFileTypeAdapter;
+use Rekalogika\Domain\File\Metadata\Constants;
+use Rekalogika\Domain\File\Metadata\Model\FileName;
 
 final class FileMetadata extends AbstractMetadata implements FileMetadataInterface
 {
     public static function create(
-        FileInterface $file,
         RawMetadataInterface $metadata
     ): static {
         return new static($metadata);
@@ -39,7 +36,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 
     public function getName(): FileNameInterface
     {
-        $result = $this->metadata->tryGet(Metadata::FILE_NAME);
+        $result = $this->metadata->tryGet(Constants::FILE_NAME);
 
         if ($result === null) {
             return new FileName(null, $this->getType()->getExtension());
@@ -51,7 +48,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
     public function setName(?string $fileName): void
     {
         if (null === $fileName) {
-            $this->metadata->delete(Metadata::FILE_NAME);
+            $this->metadata->delete(Constants::FILE_NAME);
             return;
         }
 
@@ -65,12 +62,12 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
             }
         }
 
-        $this->metadata->set(Metadata::FILE_NAME, $fileName);
+        $this->metadata->set(Constants::FILE_NAME, $fileName);
     }
 
     public function getSize(): int
     {
-        $size = $this->metadata->tryGet(Metadata::FILE_SIZE) ?? 0;
+        $size = $this->metadata->tryGet(Constants::FILE_SIZE) ?? 0;
 
         if (!is_int($size)) {
             $size = (int) $size;
@@ -85,7 +82,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 
     public function getType(): FileTypeInterface
     {
-        $type = (string) ($this->metadata->tryGet(Metadata::FILE_TYPE)
+        $type = (string) ($this->metadata->tryGet(Constants::FILE_TYPE)
             ?? 'application/octet-stream');
 
         return new MimeMapFileTypeAdapter($type);
@@ -93,18 +90,18 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 
     public function setType(string $type): void
     {
-        $this->metadata->set(Metadata::FILE_TYPE, $type);
+        $this->metadata->set(Constants::FILE_TYPE, $type);
     }
 
     public function getModificationTime(): \DateTimeInterface
     {
-        $result = $this->metadata->tryGet(Metadata::FILE_MODIFICATION_TIME);
+        $result = $this->metadata->tryGet(Constants::FILE_MODIFICATION_TIME);
 
         // if the metadata is not set, we set it to the current time, and return it
         if ($result === null) {
             $modificationTime = new \DateTimeImmutable();
             $this->metadata->set(
-                Metadata::FILE_MODIFICATION_TIME,
+                Constants::FILE_MODIFICATION_TIME,
                 $modificationTime->getTimestamp()
             );
 
@@ -116,7 +113,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
         if ($result === false) {
             $modificationTime = new \DateTimeImmutable();
             $this->metadata->set(
-                Metadata::FILE_MODIFICATION_TIME,
+                Constants::FILE_MODIFICATION_TIME,
                 $modificationTime->getTimestamp()
             );
 
