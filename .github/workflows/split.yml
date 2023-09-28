@@ -29,6 +29,9 @@ jobs:
                         local_path: 'file-association-contracts'
                         split_repository: 'file-association-contracts'
                     -
+                        local_path: 'file-association-entity'
+                        split_repository: 'file-association-entity'
+                    -
                         local_path: 'file-bundle'
                         split_repository: 'file-bundle'
                     -
@@ -40,6 +43,9 @@ jobs:
                     -
                         local_path: 'file-image'
                         split_repository: 'file-image'
+                    -
+                        local_path: 'file-metadata'
+                        split_repository: 'file-metadata'
                     -
                         local_path: 'file-metadata-contracts'
                         split_repository: 'file-metadata-contracts'
