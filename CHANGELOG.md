@@ -2,9 +2,7 @@
 
 ## 1.2.0
 
-* Remove remnant
-* Tag `FileNotFoundException` with `WithHttpStatus` to get automatic 404 status
-  code.
+* Remove remnant.
 
 ## 1.1.0
 
