@@ -1,13 +1,12 @@
 # rekalogika/file-association-entity
 
-Various helpers
-
-## Features
-
+Various utilities for handling files inside domain entities. At the moment, it
+contains a Doctrine embeddable class to replicate file metadata in the entity,
+and decorators for the purpose.
 
 ## Documentation
 
-[rekalogika.dev/file](https://rekalogika.dev/file)
+[rekalogika.dev/file-bundle](https://rekalogika.dev/file-bundle)
 
 ## License
 

@@ -1,7 +1,7 @@
 {
     "name": "rekalogika/file-association-entity",
-    "description": "Various utilities for handling files in domain entities.",
-    "homepage": "https://rekalogika.dev/file",
+    "description": "Various utilities for handling files inside domain entities.",
+    "homepage": "https://rekalogika.dev/file-bundle",
     "type": "library",
     "license": "MIT",
     "keywords": [
