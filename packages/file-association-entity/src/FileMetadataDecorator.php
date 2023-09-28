@@ -13,11 +13,58 @@ declare(strict_types=1);
 
 namespace Rekalogika\Domain\File\Association\Entity;
 
-use Rekalogika\Contracts\File\FileInterface;
-use Rekalogika\Contracts\File\FileMetadataInterface;
-use Rekalogika\Contracts\File\Trait\FileDecoratorTrait;
+use Rekalogika\Contracts\File\RawMetadataInterface;
 
-class FileMetadataDecorator implements FileMetadataInterface
+/**
+ * @implements \IteratorAggregate<string,int|string|bool|null>
+ */
+class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggregate
 {
+    /**
+     * @param RawMetadataInterface $embeddedMetadata Metadata embedded in entities
+     * @param RawMetadataInterface $fileMetadata Metadata from the real file
+     */
+    public function __construct(
+        private RawMetadataInterface $embeddedMetadata,
+        private RawMetadataInterface $fileMetadata,
+    ) {
+    }
 
+    public function getIterator(): \Traversable
+    {
+        yield from $this->embeddedMetadata;
+    }
+
+    public function get(string $key): int|string|bool|null
+    {
+        return $this->embeddedMetadata->get($key);
+    }
+
+    public function tryGet(string $key): int|string|bool|null
+    {
+        return $this->embeddedMetadata->tryGet($key);
+    }
+
+    public function set(string $key, int|string|bool|null $value): void
+    {
+        $this->embeddedMetadata->set($key, $value);
+        $this->fileMetadata->set($key, $value);
+    }
+
+    public function delete(string $key): void
+    {
+        $this->embeddedMetadata->delete($key);
+        $this->fileMetadata->delete($key);
+    }
+
+    public function merge(iterable $metadata): void
+    {
+        $this->embeddedMetadata->merge($metadata);
+        $this->fileMetadata->merge($metadata);
+    }
+
+    public function count(): int
+    {
+        return $this->embeddedMetadata->count();
+    }
 }

@@ -18,6 +18,8 @@ use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\Domain\File\Metadata\Constants;
 
 /**
+ * A Doctrine embeddable designed to store file metadata inside entities.
+ *
  * @implements \IteratorAggregate<string,int|string|bool|null>
  */
 class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
@@ -33,6 +35,17 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
      * @var array<string,int|string|bool|null>
      */
     private array $other = [];
+
+    public function clear(): void
+    {
+        $this->name = null;
+        $this->size = null;
+        $this->type = null;
+        $this->modificationTime = null;
+        $this->width = null;
+        $this->height = null;
+        $this->other = [];
+    }
 
     public function getIterator(): \Traversable
     {
@@ -75,14 +88,14 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
     public function set(string $key, int|string|bool|null $value): void
     {
         match ($key) {
-            Constants::FILE_NAME => $this->name = (string) $value,
+            Constants::FILE_NAME => $this->name = $value !== null ? (string) $value : null,
             Constants::FILE_SIZE => $this->size = (int) $value,
-            Constants::FILE_TYPE => $this->type = (string) $value,
+            Constants::FILE_TYPE => $this->type = $value !== null ? (string) $value : null,
             Constants::FILE_MODIFICATION_TIME => $this->modificationTime = $value
                 ? new \DateTimeImmutable('@' . $value)
                 : null,
-            Constants::MEDIA_WIDTH => $this->width = (int) $value,
-            Constants::MEDIA_HEIGHT => $this->height = (int) $value,
+            Constants::MEDIA_WIDTH => $this->width = $value !== null ? (int) $value : null,
+            Constants::MEDIA_HEIGHT => $this->height = $value !== null ? (int) $value : null,
             default => $this->other[$key] = $value,
         };
     }

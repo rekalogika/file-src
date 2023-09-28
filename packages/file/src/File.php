@@ -277,7 +277,7 @@ class File implements FileInterface
         }
 
         /** @psalm-suppress MixedReturnStatement */
-        return (new MetadataFactory($this->getRawMetadata()))->get($id);
+        return MetadataFactory::create($this->getRawMetadata())->get($id);
     }
 
     public function flush(): void

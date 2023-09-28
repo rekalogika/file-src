@@ -24,7 +24,12 @@ use Rekalogika\Domain\File\Metadata\Metadata\ImageMetadata;
 
 final class MetadataFactory
 {
-    public function __construct(
+    public static function create(RawMetadataInterface $metadata): self
+    {
+        return new self($metadata);
+    }
+
+    private function __construct(
         private RawMetadataInterface $metadata
     ) {
     }

@@ -14,15 +14,44 @@ declare(strict_types=1);
 namespace Rekalogika\Domain\File\Association\Entity;
 
 use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\Contracts\File\Trait\FileDecoratorTrait;
+use Rekalogika\Domain\File\Metadata\MetadataFactory;
 
 class FileDecorator implements FileInterface
 {
     use FileDecoratorTrait;
 
-    public function __construct(
+    public static function getFile(
+        ?FileInterface $file,
+        EmbeddedMetadata $metadata
+    ): ?self {
+        if (null === $file) {
+            return null;
+        }
+
+        return new self($file, $metadata);
+    }
+
+    public static function setFile(
+        ?FileInterface $input,
+        ?FileInterface &$file,
+        EmbeddedMetadata $metadata
+    ): void {
+        if ($input === null) {
+            $file = null;
+            $metadata->clear();
+
+            return;
+        }
+
+        $file = $input;
+        $metadata->merge($input->get(RawMetadataInterface::class));
+    }
+
+    private function __construct(
         private FileInterface $file,
-        private EmbeddedMetadata $metadata
+        private RawMetadataInterface $metadata
     ) {
     }
 
@@ -33,7 +62,15 @@ class FileDecorator implements FileInterface
 
     public function get(string $id)
     {
+        if ($id == RawMetadataInterface::class) {
+            return new FileMetadataDecorator(
+                $this->metadata,
+                $this->file->get(RawMetadataInterface::class),
+            );
+        }
+
         /** @psalm-suppress MixedReturnStatement */
-        return $this->file->get($id);
+        return MetadataFactory::create($this->get(RawMetadataInterface::class))
+            ->get($id);
     }
 }
