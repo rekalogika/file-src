@@ -11,18 +11,25 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Metadata;
+namespace Rekalogika\Domain\File\Metadata;
 
-use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileMetadataInterface;
 use Rekalogika\Contracts\File\Metadata\HttpMetadataInterface;
 use Rekalogika\Contracts\File\Metadata\ImageMetadataInterface;
 use Rekalogika\Contracts\File\RawMetadataInterface;
+use Rekalogika\Domain\File\Metadata\Metadata\AbstractMetadata;
+use Rekalogika\Domain\File\Metadata\Metadata\FileMetadata;
+use Rekalogika\Domain\File\Metadata\Metadata\HttpMetadata;
+use Rekalogika\Domain\File\Metadata\Metadata\ImageMetadata;
 
 final class MetadataFactory
 {
-    public function __construct(
-        private FileInterface $file,
+    public static function create(RawMetadataInterface $metadata): self
+    {
+        return new self($metadata);
+    }
+
+    private function __construct(
         private RawMetadataInterface $metadata
     ) {
     }
@@ -69,7 +76,7 @@ final class MetadataFactory
                     return null;
                 }
 
-                return $class::create($this->file, $this->metadata);
+                return $class::create($this->metadata);
         }
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "rekalogika/file-association-entity",
-    "description": "Handles the association between Doctrine entities and files using the rekalogika/file framework, including from file uploads.",
+    "description": "Various utilities for handling files in domain entities.",
     "homepage": "https://rekalogika.dev/file",
     "type": "library",
     "license": "MIT",
@@ -26,6 +26,12 @@
         }
     },
     "require": {
-        "rekalogika/file-contracts": "^1.3"
+        "rekalogika/file-contracts": "^1.3",
+        "rekalogika/file-metadata": "^1.3"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.3.x-dev"
+        }
     }
 }

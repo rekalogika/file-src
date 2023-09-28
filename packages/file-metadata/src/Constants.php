@@ -11,14 +11,14 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Metadata;
+namespace Rekalogika\Domain\File\Metadata;
 
 /**
  * List of all the supported metadata tags
  *
  * @internal
  */
-class Metadata
+class Constants
 {
     public const HTTP_CACHE_CONTROL = 'http.cacheControl';
     public const HTTP_DISPOSITION = 'http._disposition';

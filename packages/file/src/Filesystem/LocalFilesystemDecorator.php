@@ -17,8 +17,8 @@ use League\Flysystem\DirectoryListing;
 use League\Flysystem\FilesystemOperator;
 use League\Flysystem\UnableToRetrieveMetadata;
 use Rekalogika\File\Contracts\MetadataAwareFilesystemOperator;
-use Rekalogika\File\Metadata\RawMetadata;
-use Rekalogika\File\Metadata\Metadata;
+use Rekalogika\File\RawMetadata;
+use Rekalogika\Domain\File\Metadata\Constants;
 
 class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
 {
@@ -75,19 +75,19 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     public function getMetadata(string $location): RawMetadata
     {
         $metadata = new RawMetadata();
-        $metadata->set(Metadata::FILE_NAME, pathinfo($location, PATHINFO_BASENAME));
-        $metadata->set(Metadata::FILE_SIZE, $this->fileSize($location));
-        $metadata->set(Metadata::FILE_MODIFICATION_TIME, $this->lastModified($location));
-        $metadata->set(Metadata::FILE_TYPE, $this->mimeType($location));
+        $metadata->set(Constants::FILE_NAME, pathinfo($location, PATHINFO_BASENAME));
+        $metadata->set(Constants::FILE_SIZE, $this->fileSize($location));
+        $metadata->set(Constants::FILE_MODIFICATION_TIME, $this->lastModified($location));
+        $metadata->set(Constants::FILE_TYPE, $this->mimeType($location));
 
         $imagesize = $this->getImageSize($location);
 
         if ($imagesize[0] !== null) {
-            $metadata->set(Metadata::MEDIA_WIDTH, $imagesize[0]);
+            $metadata->set(Constants::MEDIA_WIDTH, $imagesize[0]);
         }
 
         if ($imagesize[1] !== null) {
-            $metadata->set(Metadata::MEDIA_HEIGHT, $imagesize[1]);
+            $metadata->set(Constants::MEDIA_HEIGHT, $imagesize[1]);
         }
 
         return $metadata;

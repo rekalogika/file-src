@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\FilePointer;
-use Rekalogika\File\Metadata\Metadata;
+use Rekalogika\Domain\File\Metadata\Constants;
 
 class FileRepositoryTest extends TestCase
 {
@@ -36,7 +36,7 @@ class FileRepositoryTest extends TestCase
 
         // write
         $file = $this->fileRepository->createFromString($pointer, 'content', [
-            Metadata::FILE_NAME => 'test.txt',
+            Constants::FILE_NAME => 'test.txt',
         ]);
 
         $this->assertFileInterface(
@@ -72,7 +72,7 @@ class FileRepositoryTest extends TestCase
         $this->assertNotFalse($stream);
 
         $fileFromStream = $this->fileRepository->createFromStream($pointer, $stream, [
-            Metadata::FILE_NAME => 'test.txt',
+            Constants::FILE_NAME => 'test.txt',
         ]);
 
         $this->assertFileInterface(
@@ -92,7 +92,7 @@ class FileRepositoryTest extends TestCase
         $localFile = __DIR__ . '/../Resources/localFile.txt';
 
         $fileFromLocalFile = $this->fileRepository->createFromLocalFile($pointer, $localFile, [
-            Metadata::FILE_NAME => 'test.txt',
+            Constants::FILE_NAME => 'test.txt',
         ]);
 
         $this->assertFileInterface(
@@ -111,7 +111,7 @@ class FileRepositoryTest extends TestCase
 
         // write
         $file = $this->fileRepository->createFromString($pointer, 'content', [
-            Metadata::FILE_NAME => 'test.txt',
+            Constants::FILE_NAME => 'test.txt',
         ]);
 
         $this->assertFileInterface(
@@ -138,7 +138,7 @@ class FileRepositoryTest extends TestCase
 
         // write
         $file = $this->fileRepository->createFromString($pointer, 'content', [
-            Metadata::FILE_NAME => 'test.txt',
+            Constants::FILE_NAME => 'test.txt',
         ]);
 
         $this->assertFileInterface(
@@ -171,7 +171,7 @@ class FileRepositoryTest extends TestCase
 
         // write
         $file = $this->fileRepository->createFromString($pointer, 'content', [
-            Metadata::FILE_NAME => 'test.txt',
+            Constants::FILE_NAME => 'test.txt',
         ]);
 
         $this->assertFileInterface(
@@ -204,7 +204,7 @@ class FileRepositoryTest extends TestCase
 
         // write
         $file = $this->fileRepository->createFromString($pointer, 'content', [
-            Metadata::FILE_NAME => 'test.txt',
+            Constants::FILE_NAME => 'test.txt',
         ]);
 
         $this->assertFileInterface(
@@ -243,7 +243,7 @@ class FileRepositoryTest extends TestCase
 
         // write
         $file = $this->fileRepository->createFromString($pointer, 'content', [
-            Metadata::FILE_NAME => 'test.txt',
+            Constants::FILE_NAME => 'test.txt',
         ]);
 
         $this->assertFileInterface(

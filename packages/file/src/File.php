@@ -21,14 +21,15 @@ use Rekalogika\Contracts\File\Exception\File\FatalErrorException;
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
+use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\Contracts\File\Trait\EqualityTrait;
 use Rekalogika\Contracts\File\Trait\MetadataTrait;
 use Rekalogika\File\Contracts\MetadataAwareFilesystemReader;
 use Rekalogika\File\Contracts\MetadataAwareFilesystemWriter;
 use Rekalogika\File\FilePointer;
-use Rekalogika\File\Metadata\Metadata;
-use Rekalogika\File\Metadata\MetadataFactory;
-use Rekalogika\File\Metadata\RawMetadata;
+use Rekalogika\Domain\File\Metadata\Constants;
+use Rekalogika\Domain\File\Metadata\MetadataFactory;
+use Rekalogika\File\RawMetadata;
 use Rekalogika\File\Repository\FilesystemRepository;
 
 class File implements FileInterface
@@ -134,14 +135,14 @@ class File implements FileInterface
 
         $oldFileName = null;
         if ($this->isLocalFilesystem()) {
-            $oldFileName = $this->getRawMetadata()->tryGet(Metadata::FILE_NAME);
+            $oldFileName = $this->getRawMetadata()->tryGet(Constants::FILE_NAME);
         }
 
         $this->filesystem->write($this->key, $contents);
         $this->metadataCache = null;
 
         if ($this->isLocalFilesystem()) {
-            $this->getRawMetadata()->set(Metadata::FILE_NAME, $oldFileName);
+            $this->getRawMetadata()->set(Constants::FILE_NAME, $oldFileName);
         }
     }
 
@@ -149,7 +150,7 @@ class File implements FileInterface
     {
         $oldFileName = null;
         if ($this->isLocalFilesystem()) {
-            $oldFileName = $this->getRawMetadata()->tryGet(Metadata::FILE_NAME);
+            $oldFileName = $this->getRawMetadata()->tryGet(Constants::FILE_NAME);
         }
 
         if ($stream instanceof StreamInterface) {
@@ -164,7 +165,7 @@ class File implements FileInterface
         $this->metadataCache = null;
 
         if ($this->isLocalFilesystem()) {
-            $this->getRawMetadata()->set(Metadata::FILE_NAME, $oldFileName);
+            $this->getRawMetadata()->set(Constants::FILE_NAME, $oldFileName);
         }
     }
 
@@ -269,15 +270,14 @@ class File implements FileInterface
         );
     }
 
-    private function getMetadataFactory(): MetadataFactory
-    {
-        return new MetadataFactory($this, $this->getRawMetadata());
-    }
-
     public function get(string $id)
     {
+        if ($id === RawMetadataInterface::class) {
+            return $this->getRawMetadata();
+        }
+
         /** @psalm-suppress MixedReturnStatement */
-        return $this->getMetadataFactory()->get($id);
+        return MetadataFactory::create($this->getRawMetadata())->get($id);
     }
 
     public function flush(): void

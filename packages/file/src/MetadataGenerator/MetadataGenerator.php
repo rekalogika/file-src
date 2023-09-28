@@ -18,7 +18,7 @@ use League\MimeTypeDetection\MimeTypeDetector;
 use Rekalogika\Contracts\File\Exception\File\LocalTemporaryFileException;
 use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\File\LocalTemporaryFile;
-use Rekalogika\File\Metadata\Metadata;
+use Rekalogika\Domain\File\Metadata\Constants;
 
 final class MetadataGenerator implements MetadataGeneratorInterface
 {
@@ -40,7 +40,7 @@ final class MetadataGenerator implements MetadataGeneratorInterface
             : $file;
 
         $rawMetadata->set(
-            Metadata::FILE_TYPE,
+            Constants::FILE_TYPE,
             $this->mimeTypeDetector
                 ->detectMimeTypeFromFile($path)
                 ?? 'application/octet-stream'
@@ -49,22 +49,22 @@ final class MetadataGenerator implements MetadataGeneratorInterface
         $imagesize = $this->getImageSize($path);
 
         if ($imagesize[0] !== null) {
-            $rawMetadata->set(Metadata::MEDIA_WIDTH, $imagesize[0]);
+            $rawMetadata->set(Constants::MEDIA_WIDTH, $imagesize[0]);
         } else {
-            $rawMetadata->delete(Metadata::MEDIA_WIDTH);
+            $rawMetadata->delete(Constants::MEDIA_WIDTH);
         }
 
         if ($imagesize[1] !== null) {
-            $rawMetadata->set(Metadata::MEDIA_HEIGHT, $imagesize[1]);
+            $rawMetadata->set(Constants::MEDIA_HEIGHT, $imagesize[1]);
         } else {
-            $rawMetadata->delete(Metadata::MEDIA_HEIGHT);
+            $rawMetadata->delete(Constants::MEDIA_HEIGHT);
         }
 
         if ($includeContentLength) {
             $filesize = filesize($path);
 
             if ($filesize !== false) {
-                $rawMetadata->set(Metadata::FILE_SIZE, $filesize);
+                $rawMetadata->set(Constants::FILE_SIZE, $filesize);
             }
         }
     }

@@ -11,15 +11,13 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Metadata;
+namespace Rekalogika\Domain\File\Metadata\Metadata;
 
-use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\RawMetadataInterface;
 
 abstract class AbstractMetadata
 {
     abstract public static function create(
-        FileInterface $file,
         RawMetadataInterface $metadata
     ): ?static;
 }

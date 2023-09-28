@@ -11,10 +11,9 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Name;
+namespace Rekalogika\Domain\File\Metadata\Model;
 
 use Rekalogika\Contracts\File\FileNameInterface;
-use Rekalogika\File\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

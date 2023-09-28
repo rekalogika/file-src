@@ -20,7 +20,7 @@ use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\DirectPropertyAccessor;
 use Rekalogika\File\FilePointer;
-use Rekalogika\File\Metadata\Metadata;
+use Rekalogika\Domain\File\Metadata\Constants;
 
 class ReferenceTest extends TestCase
 {
@@ -38,7 +38,7 @@ class ReferenceTest extends TestCase
         $pointer = new FilePointer('inmemory', 'writetest');
 
         $file = $this->fileRepository->createFromString($pointer, 'content', [
-            Metadata::FILE_NAME => 'test.txt',
+            Constants::FILE_NAME => 'test.txt',
         ]);
 
         $this->assertFileInterface(
@@ -92,7 +92,7 @@ class ReferenceTest extends TestCase
         $pointer = new FilePointer('inmemory', 'writetest');
 
         $file = $this->fileRepository->createFromString($pointer, 'content', [
-            Metadata::FILE_NAME => 'test.txt',
+            Constants::FILE_NAME => 'test.txt',
         ]);
 
         $this->assertFileInterface(

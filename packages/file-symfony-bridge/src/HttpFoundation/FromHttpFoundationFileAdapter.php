@@ -15,8 +15,8 @@ namespace Rekalogika\File\Bridge\Symfony\HttpFoundation;
 
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\File;
-use Rekalogika\File\Metadata\RawMetadata;
-use Rekalogika\File\Metadata\Metadata;
+use Rekalogika\File\RawMetadata;
+use Rekalogika\Domain\File\Metadata\Constants;
 use Symfony\Component\HttpFoundation\File\File as HttpFoundationFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -57,7 +57,7 @@ class FromHttpFoundationFileAdapter extends File
         $metadata = parent::getRawMetadata();
 
         if ($this->source instanceof UploadedFile) {
-            $metadata->set(Metadata::FILE_NAME, $this->source->getClientOriginalName());
+            $metadata->set(Constants::FILE_NAME, $this->source->getClientOriginalName());
         }
 
         return $this->cachedMetadata = $metadata;

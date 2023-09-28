@@ -28,7 +28,6 @@ class RekalogikaFileBundle extends Bundle
     {
         parent::build($container);
 
-        $container
-            ->addCompilerPass(new FilterPass());
+        $container->addCompilerPass(new FilterPass());
     }
 }

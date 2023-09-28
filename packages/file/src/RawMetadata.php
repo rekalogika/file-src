@@ -11,7 +11,7 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Metadata;
+namespace Rekalogika\File;
 
 use Rekalogika\Contracts\File\Exception\MetadataNotFoundException;
 use Rekalogika\Contracts\File\RawMetadataInterface;

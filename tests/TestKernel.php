@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests;
 
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\RekalogikaDirectPropertyAccessBundle;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
@@ -61,23 +62,32 @@ class TestKernel extends HttpKernelKernel
 
     public function registerBundles(): iterable
     {
+        yield new FrameworkBundle();
+        yield new DoctrineBundle();
         yield new RekalogikaDirectPropertyAccessBundle();
         yield new RekalogikaReconstitutorBundle();
         yield new RekalogikaFileBundle();
         yield new RekalogikaTemporaryUrlBundle();
         yield new RekalogikaPsr16SimpleCacheBundle();
-        yield new FrameworkBundle();
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(function (ContainerBuilder $container) {
-            $container->loadFromExtension('rekalogika_file', $this->config);
-
             // silence Symfony 6.1 deprecation warning
             $container->loadFromExtension('framework', [
                 'http_method_override' => false
             ]);
+
+            $container->loadFromExtension('doctrine', [
+                'dbal' => [
+                    'driver' => 'pdo_sqlite',
+                    'memory' => true,
+                    'charset' => 'UTF8',
+                ],
+            ]);
+
+            $container->loadFromExtension('rekalogika_file', $this->config);
         });
     }
 
