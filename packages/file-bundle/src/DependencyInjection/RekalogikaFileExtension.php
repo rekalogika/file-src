@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Bundle\DependencyInjection;
 
+use Rekalogika\Domain\File\Association\Entity\EmbeddedMetadata;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
@@ -27,10 +28,11 @@ use Rekalogika\File\Tests\TestKernel;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-class RekalogikaFileExtension extends Extension
+class RekalogikaFileExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -116,5 +118,38 @@ class RekalogikaFileExtension extends Extension
         $container
             ->registerForAutoconfiguration(ObjectIdResolverInterface::class)
             ->addTag('rekalogika.file.association.object_id_resolver');
+    }
+
+    public function prepend(ContainerBuilder $container)
+    {
+        if (
+            class_exists(EmbeddedMetadata::class)
+        ) {
+            $path = (new \ReflectionClass(EmbeddedMetadata::class))
+                ->getFileName();
+
+            if (empty($path)) {
+                throw new \RuntimeException('Unable to get path of EmbeddedMetadata class');
+            }
+
+            $configDir = realpath(dirname(dirname($path)) . '/config/doctrine');
+            if (false === $configDir) {
+                throw new \RuntimeException('Unable to get path of EmbeddedMetadata class');
+            }
+
+            $container->loadFromExtension('doctrine', [
+                'orm' => [
+                    'mappings' => [
+                        'rekalogika_file' => [
+                            'type' => 'xml',
+                            'dir' => $configDir,
+                            'prefix' => 'Rekalogika\Domain\File\Association\Entity',
+                            'is_bundle' => false,
+                            'alias' => 'RekalogikaFile',
+                        ],
+                    ],
+                ],
+            ]);
+        }
     }
 }
