@@ -41,7 +41,7 @@ final class HttpMetadata extends AbstractMetadata implements
 
     public function getCacheControl(): ?string
     {
-        $data = $this->metadata->get(Metadata::HTTP_CACHE_CONTROL);
+        $data = $this->metadata->tryGet(Metadata::HTTP_CACHE_CONTROL);
         if ($data === null) {
             return null;
         }
@@ -61,7 +61,7 @@ final class HttpMetadata extends AbstractMetadata implements
 
     public function getDisposition(): string
     {
-        return (string) ($this->metadata->get(Metadata::HTTP_DISPOSITION) ?? 'inline');
+        return (string) ($this->metadata->tryGet(Metadata::HTTP_DISPOSITION) ?? 'inline');
     }
 
     public function setDisposition(string $disposition): void
@@ -86,14 +86,14 @@ final class HttpMetadata extends AbstractMetadata implements
 
     private function getFileName(): ?string
     {
-        $fileName = $this->metadata->get(Metadata::FILE_NAME);
+        $fileName = $this->metadata->tryGet(Metadata::FILE_NAME);
 
         return $fileName === null ? null : (string) $fileName;
     }
 
     private function getContentLength(): ?string
     {
-        $contentLength = $this->metadata->get(Metadata::FILE_SIZE);
+        $contentLength = $this->metadata->tryGet(Metadata::FILE_SIZE);
         if ($contentLength === null) {
             return null;
         }
@@ -108,12 +108,12 @@ final class HttpMetadata extends AbstractMetadata implements
 
     private function getContentType(): string
     {
-        return (string) ($this->metadata->get(Metadata::FILE_TYPE) ?? 'application/octet-stream');
+        return (string) ($this->metadata->tryGet(Metadata::FILE_TYPE) ?? 'application/octet-stream');
     }
 
     private function getLastModified(): ?string
     {
-        $lastModified = $this->metadata->get(Metadata::FILE_MODIFICATION_TIME);
+        $lastModified = $this->metadata->tryGet(Metadata::FILE_MODIFICATION_TIME);
         $lastModified = \DateTimeImmutable::createFromFormat('U', (string) $lastModified);
 
         return $lastModified === false ? null : $lastModified->format(\DateTimeInterface::RFC7231);
@@ -121,21 +121,21 @@ final class HttpMetadata extends AbstractMetadata implements
 
     public function getETag(): ?string
     {
-        $eTag = $this->metadata->get(Metadata::HTTP_ETAG);
+        $eTag = $this->metadata->tryGet(Metadata::HTTP_ETAG);
 
         return $eTag === null ? null : (string) $eTag;
     }
 
     private function getWidth(): ?string
     {
-        $width = $this->metadata->get(Metadata::MEDIA_WIDTH);
+        $width = $this->metadata->tryGet(Metadata::MEDIA_WIDTH);
 
         return $width === null ? null : (string) $width;
     }
 
     private function getHeight(): ?string
     {
-        $height = $this->metadata->get(Metadata::MEDIA_HEIGHT);
+        $height = $this->metadata->tryGet(Metadata::MEDIA_HEIGHT);
 
         return $height === null ? null : (string) $height;
     }

@@ -134,7 +134,7 @@ class File implements FileInterface
 
         $oldFileName = null;
         if ($this->isLocalFilesystem()) {
-            $oldFileName = $this->getRawMetadata()->get(Metadata::FILE_NAME);
+            $oldFileName = $this->getRawMetadata()->tryGet(Metadata::FILE_NAME);
         }
 
         $this->filesystem->write($this->key, $contents);
@@ -149,7 +149,7 @@ class File implements FileInterface
     {
         $oldFileName = null;
         if ($this->isLocalFilesystem()) {
-            $oldFileName = $this->getRawMetadata()->get(Metadata::FILE_NAME);
+            $oldFileName = $this->getRawMetadata()->tryGet(Metadata::FILE_NAME);
         }
 
         if ($stream instanceof StreamInterface) {

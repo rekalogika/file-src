@@ -3,6 +3,8 @@
 ## 1.2.0
 
 * Remove remnant.
+* Change `RawMetadataInterface::get()` to throw `MetadataNotFoundException` if the key is not found.
+* Add `RawMetadataInterface::tryGet()` to return `null` if the key is not found.
 
 ## 1.1.0
 

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Metadata;
 
+use Rekalogika\Contracts\File\Exception\MetadataNotFoundException;
 use Rekalogika\Contracts\File\RawMetadataInterface;
 
 /**
@@ -41,10 +42,15 @@ class RawMetadata implements RawMetadataInterface, \IteratorAggregate
     public function get(string $key): int|string|bool|null
     {
         if (!array_key_exists($key, $this->metadata)) {
-            return null;
+            throw new MetadataNotFoundException($key);
         }
 
         return $this->metadata[$key];
+    }
+
+    public function tryGet(string $key): int|string|bool|null
+    {
+        return $this->metadata[$key] ?? null;
     }
 
     public function set(string $key, int|string|bool|null $value): void

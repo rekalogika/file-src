@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Metadata;
 
+use Rekalogika\Contracts\File\Exception\MetadataNotFoundException;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileMetadataInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
@@ -38,7 +39,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 
     public function getName(): FileNameInterface
     {
-        $result = $this->metadata->get(Metadata::FILE_NAME);
+        $result = $this->metadata->tryGet(Metadata::FILE_NAME);
 
         if ($result === null) {
             return new FileName(null, $this->getType()->getExtension());
@@ -69,7 +70,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 
     public function getSize(): int
     {
-        $size = $this->metadata->get(Metadata::FILE_SIZE) ?? 0;
+        $size = $this->metadata->tryGet(Metadata::FILE_SIZE) ?? 0;
 
         if (!is_int($size)) {
             $size = (int) $size;
@@ -84,7 +85,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 
     public function getType(): FileTypeInterface
     {
-        $type = (string) ($this->metadata->get(Metadata::FILE_TYPE)
+        $type = (string) ($this->metadata->tryGet(Metadata::FILE_TYPE)
             ?? 'application/octet-stream');
 
         return new MimeMapFileTypeAdapter($type);
@@ -97,7 +98,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 
     public function getModificationTime(): \DateTimeInterface
     {
-        $result = $this->metadata->get(Metadata::FILE_MODIFICATION_TIME);
+        $result = $this->metadata->tryGet(Metadata::FILE_MODIFICATION_TIME);
 
         // if the metadata is not set, we set it to the current time, and return it
         if ($result === null) {

@@ -24,7 +24,7 @@ final class ImageMetadata extends AbstractMetadata implements
         FileInterface $file,
         RawMetadataInterface $metadata
     ): ?static {
-        if (!$metadata->get(Metadata::MEDIA_WIDTH)) {
+        if (!$metadata->tryGet(Metadata::MEDIA_WIDTH)) {
             return null;
         }
 
@@ -38,12 +38,12 @@ final class ImageMetadata extends AbstractMetadata implements
 
     public function getWidth(): int
     {
-        return (int) $this->metadata->get(Metadata::MEDIA_WIDTH);
+        return (int) $this->metadata->tryGet(Metadata::MEDIA_WIDTH);
     }
 
     public function getHeight(): int
     {
-        return (int) $this->metadata->get(Metadata::MEDIA_HEIGHT);
+        return (int) $this->metadata->tryGet(Metadata::MEDIA_HEIGHT);
     }
 
     public function getAspectRatio(): float

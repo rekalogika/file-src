@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\Contracts\File;
 
+use Rekalogika\Contracts\File\Exception\MetadataNotFoundException;
+
 /**
  * Represent the low-level metadata structure of a file.
  *
@@ -22,8 +24,15 @@ interface RawMetadataInterface extends \Traversable, \Countable
 {
     /**
      * Gets a specific metadata.
+     *
+     * @throws MetadataNotFoundException
      */
     public function get(string $key): int|string|bool|null;
+
+    /**
+     * Gets a specific metadata. Returns null if the metadata is not found.
+     */
+    public function tryGet(string $key): int|string|bool|null;
 
     /**
      * Sets the specified metdata
