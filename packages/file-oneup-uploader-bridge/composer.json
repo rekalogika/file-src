@@ -26,5 +26,10 @@
         "oneup/uploader-bundle": "^4.0",
         "rekalogika/file-contracts": "^1.3",
         "rekalogika/file": "^1.3"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.3.x-dev"
+        }
     }
 }
