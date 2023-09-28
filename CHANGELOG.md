@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.2.0
+
+* Remove remnant
+* Tag `FileNotFoundException` with `WithHttpStatus` to get automatic 404 status
+  code.
+
 ## 1.1.0
 
 * Change translated return type from `string|(\Stringable&TranslatableInterface)` to `\Stringable&TranslatableInterface`

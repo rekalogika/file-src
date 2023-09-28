@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace Rekalogika\Contracts\File\Exception\File;
 
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\WithHttpStatus;
+
+#[WithHttpStatus(Response::HTTP_NOT_FOUND)]
 class FileNotFoundException extends FileException
 {
     public function __construct(
