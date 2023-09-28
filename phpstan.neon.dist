@@ -3,6 +3,10 @@ parameters:
     paths:
         - packages
         - tests
+    # exceptions:
+    #     check:
+    #         missingCheckedExceptionInThrows: true
+    #         tooWideThrowType: true
     ignoreErrors:
         - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children#'
 
