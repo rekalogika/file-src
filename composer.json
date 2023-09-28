@@ -88,17 +88,17 @@
         }
     },
     "replace": {
-        "rekalogika/file": "1.1.0",
-        "rekalogika/file-association": "1.1.0",
-        "rekalogika/file-association-contracts": "1.1.0",
-        "rekalogika/file-bundle": "1.1.0",
-        "rekalogika/file-contracts": "1.1.0",
-        "rekalogika/file-derivation": "1.1.0",
-        "rekalogika/file-image": "1.1.0",
-        "rekalogika/file-metadata-contracts": "1.1.0",
-        "rekalogika/file-oneup-uploader-bridge": "1.1.0",
-        "rekalogika/file-server": "1.1.0",
-        "rekalogika/file-symfony-bridge": "1.1.0"
+        "rekalogika/file": "1.2.0",
+        "rekalogika/file-association": "1.2.0",
+        "rekalogika/file-association-contracts": "1.2.0",
+        "rekalogika/file-bundle": "1.2.0",
+        "rekalogika/file-contracts": "1.2.0",
+        "rekalogika/file-derivation": "1.2.0",
+        "rekalogika/file-image": "1.2.0",
+        "rekalogika/file-metadata-contracts": "1.2.0",
+        "rekalogika/file-oneup-uploader-bridge": "1.2.0",
+        "rekalogika/file-server": "1.2.0",
+        "rekalogika/file-symfony-bridge": "1.2.0"
     },
     "config": {
         "allow-plugins": {
