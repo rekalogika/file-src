@@ -1,9 +1,11 @@
 # rekalogika/file-association-entity
 
-Various utilities for handling files inside domain entities. At the moment, it
-contains a Doctrine embeddable class to replicate file metadata in the entity,
-and decorators for the purpose.
+Utilities for handling files inside domain entities:
 
+* `EmbeddedMetadata` for embedding metadata inside Doctrine entities
+* `AbstractFile` for creating one-to-many relations with files
+* `NullFile` for handling cases in domain entities where a file must be present
+  but is missing in the storage backend.
 ## Documentation
 
 [rekalogika.dev/file-bundle](https://rekalogika.dev/file-bundle)

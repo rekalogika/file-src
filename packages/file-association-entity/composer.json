@@ -1,6 +1,6 @@
 {
     "name": "rekalogika/file-association-entity",
-    "description": "Various utilities for handling files inside domain entities.",
+    "description": "Utilities for handling files inside domain entities: EmbeddedMetadata for embedding metadata inside Doctrine entities, AbstractFile for creating one-to-many relations with files, and NullFile to handle cases in domain entities where a file must be present but is missing in the storage backend.",
     "homepage": "https://rekalogika.dev/file-bundle",
     "type": "library",
     "license": "MIT",
