@@ -1,6 +1,6 @@
 # rekalogika/file-src
 
-This is a monorepo for `rekalogika/file` and related packages.
+Monorepo for `rekalogika/file` and related packages.
 
 ## Documentation
 

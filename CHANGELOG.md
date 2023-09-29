@@ -4,7 +4,7 @@
 
 * Separate metadata classes from `rekalogika/file` to `rekalogika/file-metadata`.
 * Add `rekalogika/file-association-entity` to allow replicating metadata inside Doctrine entities.
-* Add `AbstractFile` to help creating file entities (and collection of files).
+* Add `AbstractFile` to help create file entities (and collection of files).
 * Add `NullFile` to represent a file that should exist but does not.
 ## 1.2.0
 
