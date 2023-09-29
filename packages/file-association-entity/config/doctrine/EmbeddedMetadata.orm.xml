@@ -34,7 +34,7 @@
                 nullable="true" />
         <field
                 name="other"
-                type="json_array"
+                type="json"
                 nullable="true" />
 
     </embeddable>
