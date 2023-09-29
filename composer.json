@@ -13,6 +13,7 @@
     "require": {
         "cardinalby/content-disposition": "^1.1",
         "doctrine/collections": "^2.1",
+        "doctrine/doctrine-bundle": "^2.10",
         "fileeye/mimemap": "^2.0",
         "intervention/image": "^2.5",
         "league/flysystem": "^3.16",
@@ -48,7 +49,6 @@
     },
     "require-dev": {
         "bnf/phpstan-psr-container": "^1.0",
-        "doctrine/doctrine-bundle": "^2.10",
         "ekino/phpstan-banned-code": "^1.0",
         "lctrs/psalm-psr-container-plugin": "^1.9",
         "league/flysystem-memory": "^3.16",

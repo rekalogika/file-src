@@ -22,6 +22,10 @@ class FileDecorator implements FileInterface
 {
     use FileDecoratorTrait;
 
+    //
+    // static methods
+    //
+
     public static function getFile(
         ?FileInterface $file,
         EmbeddedMetadata $metadata
@@ -46,14 +50,23 @@ class FileDecorator implements FileInterface
         }
 
         $file = $input;
+        $metadata->clear();
         $metadata->merge($input->get(RawMetadataInterface::class));
     }
+
+    //
+    // constructor
+    //
 
     private function __construct(
         private FileInterface $file,
         private RawMetadataInterface $metadata
     ) {
     }
+
+    //
+    // other methods
+    //
 
     protected function getWrapped(): FileInterface
     {
