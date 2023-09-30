@@ -15,6 +15,7 @@ namespace Rekalogika\File\Tests\FileAssociation;
 
 use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
+use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\FileAssociationManager;
 use Rekalogika\File\File;
@@ -22,6 +23,7 @@ use Rekalogika\File\TemporaryFile;
 use Rekalogika\File\Tests\File\FileTestTrait;
 use Rekalogika\File\Tests\TestKernel;
 use Rekalogika\File\Tests\Model\Entity;
+use Rekalogika\File\Tests\Model\EntityWithLazyFile;
 
 class FileAssociationManagerTest extends TestCase
 {
@@ -52,6 +54,8 @@ class FileAssociationManagerTest extends TestCase
             FileRepositoryInterface::class,
             $fileRepository
         );
+
+        $this->fileRepository = $fileRepository;
     }
 
     public function testPersistEntity(): void
@@ -157,6 +161,38 @@ class FileAssociationManagerTest extends TestCase
 
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
+
+        // remove
+        $this->fileAssociationManager?->remove($entity);
+    }
+
+
+    public function testLazyLoadEntity(): void
+    {
+        // create new entity
+        $entity = new EntityWithLazyFile('entity_id');
+        $this->assertNull($entity->getFile());
+
+        // set file
+        $newFile = TemporaryFile::createFromString('testContent');
+        $newFile->setName('newname.txt');
+        $entity->setFile($newFile);
+
+        // persist
+        $this->fileAssociationManager?->save($entity);
+        $file = $entity->getFile();
+        $this->assertInstanceOf(File::class, $file);
+
+        // clear cache
+        $this->fileRepository?->clear();
+
+        // reload
+        $entity = new EntityWithLazyFile('entity_id');
+        $this->assertNull($entity->getFile());
+        $this->fileAssociationManager?->load($entity);
+
+        $file = $entity->getFile();
+        $this->assertInstanceOf(FileProxy::class, $file);
 
         // remove
         $this->fileAssociationManager?->remove($entity);

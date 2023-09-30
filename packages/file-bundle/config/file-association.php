@@ -15,6 +15,7 @@ use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\DirectPropertyAccessor;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
+use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
@@ -23,6 +24,7 @@ use Rekalogika\File\Association\FileLocationResolver\ChainedFileLocationResolver
 use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver;
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
+use Rekalogika\File\Association\PropertyInspector\PropertyInspector;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Association\PropertyLister\ChainPropertyLister;
 use Rekalogika\File\Association\PropertyLister\FileAssociationInterfacePropertyLister;
@@ -63,6 +65,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             '$lister' => service(PropertyListerInterface::class),
             '$reader' => service(PropertyReaderInterface::class),
             '$writer' => service(PropertyWriterInterface::class),
+            '$inspector' => service(PropertyInspectorInterface::class),
             '$fileLocationResolver' => service(FileLocationResolverInterface::class),
         ]);
 
@@ -142,4 +145,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         PropertyWriterInterface::class,
         SymfonyPropertyAccessorBridge::class
     );
+
+    //
+    // property inspector
+    //
+
+    $services->set(PropertyInspectorInterface::class, PropertyInspector::class);
 };

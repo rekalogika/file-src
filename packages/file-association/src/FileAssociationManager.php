@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association;
 
-use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
@@ -28,6 +28,7 @@ final class FileAssociationManager
         private PropertyListerInterface $lister,
         private PropertyReaderInterface $reader,
         private PropertyWriterInterface $writer,
+        private PropertyInspectorInterface $inspector,
         private FileLocationResolverInterface $fileLocationResolver,
     ) {
     }
@@ -117,14 +118,25 @@ final class FileAssociationManager
         object $object,
         string $propertyName
     ): void {
+        $inspectorResult = $this->inspector->inspect($object, $propertyName);
         $filePointer = $this->fileLocationResolver
             ->getFileLocation($object, $propertyName);
 
-        try {
-            $file = $this->fileRepository->get($filePointer);
-            $this->writer->write($object, $propertyName, $file);
-        } catch (FileNotFoundException) {
-            $this->writer->write($object, $propertyName, null);
+        if ($inspectorResult->getFetch() === 'EAGER') {
+            $file = $this->fileRepository->tryGet($filePointer);
+        } elseif ($inspectorResult->getFetch() === 'LAZY') {
+            $file = $this->fileRepository->getReference($filePointer);
+        } else {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Unknown fetch mode "%s" on property "%s" of object "%s"',
+                    $inspectorResult->getFetch(),
+                    $propertyName,
+                    get_class($object)
+                )
+            );
         }
+
+        $this->writer->write($object, $propertyName, $file);
     }
 }

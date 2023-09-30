@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\Domain\File\Association\Entity;
 
 use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\Contracts\File\Trait\FileDecoratorTrait;
 use Rekalogika\Domain\File\Metadata\MetadataFactory;
@@ -30,6 +31,12 @@ class FileDecorator implements FileInterface
         ?FileInterface $file,
         EmbeddedMetadata $metadata
     ): ?self {
+        if (null === $file) {
+            return null;
+        }
+
+        $file = FileProxy::getFile($file);
+
         if (null === $file) {
             return null;
         }

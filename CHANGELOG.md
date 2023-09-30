@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.4.0
+
+* Add `PropertyInspectorInterface` in `file-association`
+* Implements lazy-loading of files in entities.
+
 ## 1.3.1
 
 * Spin off the main part of `AbstractFile` into `FileTrait` to cater to entities

@@ -17,6 +17,7 @@ use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\RekalogikaDirectPropertyAccessBundle;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
@@ -114,6 +115,7 @@ class TestKernel extends HttpKernelKernel
             SymfonyPropertyAccessorBridge::class,
             PropertyReaderInterface::class,
             PropertyWriterInterface::class,
+            PropertyInspectorInterface::class,
 
             TemporaryUrlGeneratorInterface::class,
         ];

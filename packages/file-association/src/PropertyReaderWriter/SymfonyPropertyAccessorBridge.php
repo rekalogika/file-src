@@ -35,7 +35,7 @@ class SymfonyPropertyAccessorBridge implements
     {
         try {
             $this->propertyAccessor->setValue($object, $propertyName, $value);
-        } catch (InvalidArgumentException|AccessException|UnexpectedTypeException|\TypeError $e) {
+        } catch (InvalidArgumentException | AccessException | UnexpectedTypeException | \TypeError $e) {
             throw new PropertyWriterException($object, $propertyName, $value, $e);
         }
     }
@@ -44,7 +44,7 @@ class SymfonyPropertyAccessorBridge implements
     {
         try {
             return $this->propertyAccessor->getValue($object, $propertyName);
-        } catch (InvalidArgumentException|AccessException|UnexpectedTypeException|\TypeError $e) {
+        } catch (InvalidArgumentException | AccessException | UnexpectedTypeException | \TypeError $e) {
             throw new PropertyReaderException($object, $propertyName, $e);
         }
     }

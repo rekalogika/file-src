@@ -31,6 +31,7 @@
         <MissingConstructor>
             <errorLevel type="suppress">
                 <file name="tests/File/FileRepositoryTest.php" />
+                <file name="tests/Model/EntityWithDifferentFileProperties.php" />
             </errorLevel>
         </MissingConstructor>
         <UndefinedMethod>

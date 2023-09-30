@@ -11,26 +11,32 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Association\Attribute;
+namespace Rekalogika\File\Association\Model;
 
-#[\Attribute(\Attribute::TARGET_PROPERTY)]
-class AsFileAssociation
+/**
+ * The result of a property inspection.
+ */
+final class PropertyInspectorResult
 {
-    /**
-     * @var 'EAGER'|'LAZY'
-     */
-    public readonly string $fetch;
-
     /**
      * @param 'EAGER'|'LAZY' $fetch
      */
     public function __construct(
-        string $fetch = 'EAGER',
+        private bool $nullable,
+        private string $fetch,
     ) {
         if (!in_array($fetch, ['EAGER', 'LAZY'])) {
             throw new \InvalidArgumentException('Fetch mode can only be EAGER or LAZY.');
         }
+    }
 
-        $this->fetch = $fetch;
+    public function isNullable(): bool
+    {
+        return $this->nullable;
+    }
+
+    public function getFetch(): string
+    {
+        return $this->fetch;
     }
 }
