@@ -14,30 +14,19 @@ declare(strict_types=1);
 namespace Rekalogika\Domain\File\Association\Entity;
 
 use Rekalogika\Contracts\File\FileInterface;
-use Rekalogika\Contracts\File\Trait\FileDecoratorTrait;
-use Rekalogika\File\Association\Attribute\AsFileAssociation;
 use Rekalogika\File\Association\Attribute\WithFileAssociation;
 
+/**
+ * Easily create a Doctrine entity that implements FileInterface.
+ */
 #[WithFileAssociation]
 abstract class AbstractFile implements FileInterface
 {
-    use FileDecoratorTrait;
-
-    #[AsFileAssociation]
-    private ?FileInterface $file = null;
-
-    private EmbeddedMetadata $metadata;
+    use FileTrait;
 
     public function __construct(
         FileInterface $file,
     ) {
-        $this->file = $file;
-        $this->metadata = new EmbeddedMetadata();
-        FileDecorator::setFile($file, $this->file, $this->metadata);
-    }
-
-    protected function getWrapped(): FileInterface
-    {
-        return FileDecorator::getFile($this->file, $this->metadata) ?? new NullFile();
+        $this->setWrapped($file);
     }
 }

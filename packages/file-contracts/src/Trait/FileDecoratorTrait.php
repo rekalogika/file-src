@@ -22,7 +22,7 @@ trait FileDecoratorTrait
     use EqualityTrait;
     use MetadataTrait;
 
-    abstract protected function getWrapped(): FileInterface;
+    abstract private function getWrapped(): FileInterface;
 
     public function getPointer(): FilePointerInterface
     {

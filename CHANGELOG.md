@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.1
+
+* Spin off the main part of `AbstractFile` into `FileTrait` to cater to entities
+  that have to extend another class.
+* `FileDecoratorTrait`: change `getWrapped()` visibility to private
+
 ## 1.3.0
 
 * Separate metadata classes from `rekalogika/file` to `rekalogika/file-metadata`.
