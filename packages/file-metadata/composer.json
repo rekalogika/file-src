@@ -25,13 +25,13 @@
     "require": {
         "cardinalby/content-disposition": "^1.1",
         "fileeye/mimemap": "^2.0",
-        "rekalogika/file-contracts": "^1.4",
-        "rekalogika/file-metadata-contracts": "^1.4",
+        "rekalogika/file-contracts": "^1.5",
+        "rekalogika/file-metadata-contracts": "^1.5",
         "symfony/translation-contracts": "^3.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.4-dev"
+            "dev-main": "1.5-dev"
         }
     }
 }

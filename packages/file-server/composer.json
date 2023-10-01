@@ -23,14 +23,14 @@
         }
     },
     "require": {
-        "rekalogika/file-contracts": "^1.4",
-        "rekalogika/file-symfony-bridge": "^1.4",
+        "rekalogika/file-contracts": "^1.5",
+        "rekalogika/file-symfony-bridge": "^1.5",
         "rekalogika/temporary-url-bundle": "^1.2",
         "symfony/http-foundation": "^6.2"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.4-dev"
+            "dev-main": "1.5-dev"
         }
     }
 }

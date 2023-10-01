@@ -25,12 +25,12 @@
     },
     "require": {
         "psr/http-message": "^1.0",
-        "rekalogika/file-contracts": "^1.4",
+        "rekalogika/file-contracts": "^1.5",
         "symfony/translation-contracts": "^3.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.4-dev"
+            "dev-main": "1.5-dev"
         }
     }
 }
