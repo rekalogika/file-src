@@ -26,9 +26,9 @@
         }
     },
     "require": {
-        "rekalogika/file-contracts": "^1.5",
-        "rekalogika/file-metadata": "^1.5",
-        "rekalogika/file-null": "^1.5"
+        "rekalogika/file-contracts": "^1.4.1",
+        "rekalogika/file-metadata": "^1.4.1",
+        "rekalogika/file-null": "^1.4.1"
     },
     "extra": {
         "branch-alias": {
