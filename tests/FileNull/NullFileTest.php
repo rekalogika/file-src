@@ -11,15 +11,15 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Tests\File;
+namespace Rekalogika\File\Tests\FileNull;
 
 use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
-use Rekalogika\Contracts\File\Null\NullFile;
-use Rekalogika\Contracts\File\Null\NullName;
-use Rekalogika\Contracts\File\Null\NullPointer;
-use Rekalogika\Contracts\File\Null\NullType;
+use Rekalogika\Domain\File\Null\NullFile;
+use Rekalogika\Domain\File\Null\NullName;
+use Rekalogika\Domain\File\Null\NullPointer;
+use Rekalogika\Domain\File\Null\NullType;
 use Rekalogika\File\File;
 
 class NullFileTest extends TestCase
@@ -52,7 +52,7 @@ class NullFileTest extends TestCase
     }
 
     /**
-     * @return iterable<int,array{1:FilePointerInterface|FileInterface,2:FilePointerInterface|FileInterface,0:bool}>
+     * @return iterable<int,array{0:bool,1:FilePointerInterface|FileInterface,2:FilePointerInterface|FileInterface}>
      */
     public function equalityProvider(): iterable
     {

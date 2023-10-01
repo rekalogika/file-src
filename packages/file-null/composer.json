@@ -1,0 +1,35 @@
+{
+    "name": "rekalogika/file-null",
+    "description": "Null object pattern implementation for rekalogika/file framework.",
+    "homepage": "https://rekalogika.dev/file",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "file",
+        "null-object",
+        "nullfile",
+        "null-file",
+        "null"
+    ],
+    "authors": [
+        {
+            "name": "Priyadi Iman Nurcahyo",
+            "email": "priyadi@rekalogika.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rekalogika\\Domain\\File\\Null\\": "src/"
+        }
+    },
+    "require": {
+        "php-http/discovery": "^1.15",
+        "rekalogika/file-contracts": "^1.4",
+        "symfony/translation-contracts": "^3.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.4-dev"
+        }
+    }
+}

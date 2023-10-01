@@ -11,12 +11,13 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\Contracts\File\Null;
+namespace Rekalogika\Domain\File\Null;
 
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
+use Rekalogika\Contracts\File\NullFilePointerInterface;
 
-class NullPointer implements FilePointerInterface
+class NullPointer implements NullFilePointerInterface
 {
     public function getFilesystemIdentifier(): ?string
     {

@@ -11,16 +11,22 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\Contracts\File\Null;
+namespace Rekalogika\Domain\File\Null;
 
+use Http\Discovery\Psr17Factory;
 use Psr\Http\Message\StreamInterface;
 use Rekalogika\Contracts\File\Exception\File\DerivationNotSupportedException;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
 use Rekalogika\Contracts\File\FileTypeInterface;
+use Rekalogika\Contracts\File\NullFileInterface;
 
-class NullFile implements FileInterface
+/**
+ * A null-value pattern implementation for FileInterface. Usually used in place
+ * of a null value when the file is expected to be present, but it is not.
+ */
+class NullFile extends \Exception implements NullFileInterface
 {
     public function getFilesystemIdentifier(): ?string
     {
@@ -71,7 +77,15 @@ class NullFile implements FileInterface
 
     public function getContentAsStream(): StreamInterface
     {
-        throw new \BadMethodCallException('Cannot stream the content of a null file');
+        $stream = fopen('php://memory', 'r+');
+        if ($stream === false) {
+            throw new \RuntimeException('Cannot create stream');
+        }
+
+        fwrite($stream, '');
+        rewind($stream);
+
+        return (new Psr17Factory())->createStreamFromResource($stream);
     }
 
     public function saveToLocalFile(string $path): \SplFileInfo

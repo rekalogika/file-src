@@ -4,8 +4,9 @@
 
 * Add `PropertyInspectorInterface` in `file-association`
 * Implements lazy-loading of files in entities.
-* Add `NullFile`, `NullName` and `NullType` to the contracts.
+* Create `file-null` package to hold null file objects.
 * Remove `NullFile` from `file-association-entity`.
+* Add `NullFileInterface` & `NullFilePointerInterface` to the contracts.
 
 ## 1.3.1
 

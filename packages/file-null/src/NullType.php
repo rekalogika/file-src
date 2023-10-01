@@ -11,17 +11,17 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\Contracts\File\Null;
+namespace Rekalogika\Domain\File\Null;
 
-use Rekalogika\Contracts\File\FileNameInterface;
+use Rekalogika\Contracts\File\FileTypeInterface;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class NullName implements FileNameInterface
+class NullType implements FileTypeInterface
 {
-    protected static function getName(): string
+    protected static function getTypeDescription(): string
     {
-        return 'Null';
+        return 'Null file';
     }
 
     protected static function getTranslationDomain(): string
@@ -29,47 +29,24 @@ class NullName implements FileNameInterface
         return 'rekalogika_file';
     }
 
-    public function getFull(): \Stringable&TranslatableInterface
+    public function getName(): string
     {
-        return $this->getBase();
+        return 'application/x-zerosize';
     }
 
-    public function setFull(string $name): void
+    public function getType(): string
     {
+        return 'application';
     }
 
-    public function getBase(): \Stringable&TranslatableInterface
+    public function getSubType(): string
     {
-        return new class(static::getName(), static::getTranslationDomain())
-        implements \Stringable, TranslatableInterface
-        {
-            public function __construct(
-                private string $name,
-                private string $translationDomain
-            ) {
-            }
-
-            public function __toString(): string
-            {
-                return $this->name;
-            }
-
-            public function trans(
-                TranslatorInterface $translator,
-                ?string $locale = null
-            ): string {
-                return $translator->trans(
-                    $this->name,
-                    [],
-                    $this->translationDomain,
-                    $locale
-                );
-            }
-        };
+        return 'x-zerosize';
     }
 
-    public function setBase(string $name): void
+    public function getCommonExtensions(): array
     {
+        return [];
     }
 
     public function getExtension(): ?string
@@ -77,22 +54,39 @@ class NullName implements FileNameInterface
         return null;
     }
 
-    public function setExtension(?string $extension): void
+    public function getDescription(): \Stringable&TranslatableInterface
     {
-    }
+        return new class(static::getTypeDescription(), static::getTranslationDomain())
+        implements \Stringable, TranslatableInterface
+        {
+            public function __construct(
+                private string $description,
+                private string $translationDomain
+            ) {
+            }
 
-    public function hasExtension(): bool
-    {
-        return false;
+            public function __toString(): string
+            {
+                return $this->description;
+            }
+
+            public function trans(
+                TranslatorInterface $translator,
+                ?string $locale = null
+            ): string {
+                return $translator->trans(
+                    $this->description,
+                    [],
+                    $this->translationDomain,
+                    $locale
+                );
+            }
+        };
+
     }
 
     public function __toString(): string
     {
-        return $this->getName();
-    }
-
-    public function trans(TranslatorInterface $translator, ?string $locale = null): string
-    {
-        return $this->getBase()->trans($translator, $locale);
+        return 'application/x-zerosize';
     }
 }

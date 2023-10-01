@@ -15,7 +15,7 @@ namespace Rekalogika\Domain\File\Association\Entity;
 
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileProxy;
-use Rekalogika\Contracts\File\Null\NullFile;
+use Rekalogika\Domain\File\Null\NullFile;
 use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\Contracts\File\Trait\FileDecoratorTrait;
 use Rekalogika\Domain\File\Metadata\MetadataFactory;
@@ -49,6 +49,7 @@ class FileDecorator implements FileInterface
             // any chance the caller calls `flush()`, the metadata will be
             // persisted.
             } else {
+                $metadata->clear();
                 $metadata->merge($file->get(RawMetadataInterface::class));
 
                 return new self($file, $metadata);
@@ -97,8 +98,6 @@ class FileDecorator implements FileInterface
 
     /**
      * Resynchronizes metadata from the file to the metadata stored in the entity.
-     *
-     * @return void
      */
     public static function syncMetadata(FileInterface $file): void
     {

@@ -11,17 +11,17 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\Contracts\File\Null;
+namespace Rekalogika\Domain\File\Null;
 
-use Rekalogika\Contracts\File\FileTypeInterface;
+use Rekalogika\Contracts\File\FileNameInterface;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class NullType implements FileTypeInterface
+class NullName implements FileNameInterface
 {
-    protected static function getTypeDescription(): string
+    protected static function getName(): string
     {
-        return 'Null file';
+        return 'Null';
     }
 
     protected static function getTranslationDomain(): string
@@ -29,45 +29,29 @@ class NullType implements FileTypeInterface
         return 'rekalogika_file';
     }
 
-    public function getName(): string
+    public function getFull(): \Stringable&TranslatableInterface
     {
-        return 'application/x-zerosize';
+        return $this->getBase();
     }
 
-    public function getType(): string
+    public function setFull(string $name): void
     {
-        return 'application';
     }
 
-    public function getSubType(): string
+    public function getBase(): \Stringable&TranslatableInterface
     {
-        return 'x-zerosize';
-    }
-
-    public function getCommonExtensions(): array
-    {
-        return [];
-    }
-
-    public function getExtension(): ?string
-    {
-        return null;
-    }
-
-    public function getDescription(): \Stringable&TranslatableInterface
-    {
-        return new class(static::getTypeDescription(), static::getTranslationDomain())
+        return new class(static::getName(), static::getTranslationDomain())
         implements \Stringable, TranslatableInterface
         {
             public function __construct(
-                private string $description,
+                private string $name,
                 private string $translationDomain
             ) {
             }
 
             public function __toString(): string
             {
-                return $this->description;
+                return $this->name;
             }
 
             public function trans(
@@ -75,18 +59,40 @@ class NullType implements FileTypeInterface
                 ?string $locale = null
             ): string {
                 return $translator->trans(
-                    $this->description,
+                    $this->name,
                     [],
                     $this->translationDomain,
                     $locale
                 );
             }
         };
+    }
 
+    public function setBase(string $name): void
+    {
+    }
+
+    public function getExtension(): ?string
+    {
+        return null;
+    }
+
+    public function setExtension(?string $extension): void
+    {
+    }
+
+    public function hasExtension(): bool
+    {
+        return false;
     }
 
     public function __toString(): string
     {
-        return 'application/x-zerosize';
+        return $this->getName();
+    }
+
+    public function trans(TranslatorInterface $translator, ?string $locale = null): string
+    {
+        return $this->getBase()->trans($translator, $locale);
     }
 }

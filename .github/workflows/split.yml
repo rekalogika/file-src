@@ -51,6 +51,9 @@ jobs:
                         local_path: 'file-metadata-contracts'
                         split_repository: 'file-metadata-contracts'
                     -
+                        local_path: 'file-null'
+                        split_repository: 'file-null'
+                    -
                         local_path: 'file-oneup-uploader-bridge'
                         split_repository: 'file-oneup-uploader-bridge'
                     -
