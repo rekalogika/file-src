@@ -31,7 +31,7 @@ class FileDecorator implements FileInterface
     public static function getFile(
         ?FileInterface $file,
         EmbeddedMetadata $metadata
-    ): ?self {
+    ): ?FileInterface {
         if ($metadata->isFilePresent() === false) {
             // metadata says the file does not exist, and the file does not
             // exists, too. so we return null
@@ -57,9 +57,10 @@ class FileDecorator implements FileInterface
         }
 
         // metadata indicates the file should exist, but it is not. therefore,
-        // we use NullFile to represent the missing file.
+        // we return NullFile to represent the missing file, without decoration
+        // so that the caller will be aware that the file is missing.
         if (null === $file) {
-            $file = new NullFile();
+            return new NullFile();
         }
 
         return new self($file, $metadata);
