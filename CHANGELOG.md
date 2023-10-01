@@ -5,6 +5,8 @@
 * Add `FileDecorator::setFileMandatory()` to deal with non-nullable file
   properties in entities.
 * Make file properties in `FileTrait` non-nullable.
+* `PropertyInspector`: fix bug where the property inspector would not find
+  private properties in parent classes.
 ## 1.4.0
 
 * Add `PropertyInspectorInterface` in `file-association`

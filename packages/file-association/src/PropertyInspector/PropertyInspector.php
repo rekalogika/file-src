@@ -15,6 +15,7 @@ namespace Rekalogika\File\Association\PropertyInspector;
 
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
 use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
+use Rekalogika\File\Association\Exception\PropertyInspector\MissingPropertyException;
 use Rekalogika\File\Association\Model\PropertyInspectorResult;
 
 class PropertyInspector implements PropertyInspectorInterface
@@ -33,7 +34,24 @@ class PropertyInspector implements PropertyInspectorInterface
         }
 
         $reflectionClass = new \ReflectionClass($object);
-        $reflectionProperty = $reflectionClass->getProperty($propertyName);
+        $reflectionProperty = null;
+
+        while ($reflectionClass instanceof \ReflectionClass) {
+            if ($reflectionClass->hasProperty($propertyName)) {
+                $reflectionProperty = $reflectionClass->getProperty($propertyName);
+                break;
+            }
+
+            $reflectionClass = $reflectionClass->getParentClass();
+        }
+
+        if (!$reflectionProperty instanceof \ReflectionProperty) {
+            throw new MissingPropertyException(
+                propertyName: $propertyName,
+                object: $object,
+            );
+        }
+
         $reflectionType = $reflectionProperty->getType();
         $mandatory = !($reflectionType?->allowsNull() ?? true);
 
