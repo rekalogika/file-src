@@ -36,6 +36,16 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
      */
     private array $other = [];
 
+    /**
+     * Indicates if the file is present. It is assumed that a file is present
+     * if the type is not null. It should be at least application/octet-stream
+     * if the file exists.
+     */
+    public function isFilePresent(): bool
+    {
+        return $this->type !== null;
+    }
+
     public function clear(): void
     {
         $this->name = null;
