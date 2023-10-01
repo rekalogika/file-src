@@ -22,7 +22,7 @@ final class PropertyInspectorResult
      * @param 'EAGER'|'LAZY' $fetch
      */
     public function __construct(
-        private bool $nullable,
+        private bool $mandatory,
         private string $fetch,
     ) {
         if (!in_array($fetch, ['EAGER', 'LAZY'])) {
@@ -30,9 +30,9 @@ final class PropertyInspectorResult
         }
     }
 
-    public function isNullable(): bool
+    public function isMandatory(): bool
     {
-        return $this->nullable;
+        return $this->mandatory;
     }
 
     public function getFetch(): string

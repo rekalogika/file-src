@@ -21,7 +21,7 @@
             <errorLevel type="suppress">
                 <directory name="packages/file-symfony-bridge/src/Constraints/" />
                 <file name="packages/file-symfony-bridge/src/HttpFoundation/FileResponse.php" />
-                <file name="tests/Model/EntityWithNonNullableFile.php" />
+                <file name="tests/Model/EntityWithMandatoryFile.php" />
             </errorLevel>
         </PropertyNotSetInConstructor>
         <RedundantPropertyInitializationCheck>

@@ -20,16 +20,16 @@ use stdClass;
 class EntityWithDifferentFileProperties
 {
     #[AsFileAssociation(fetch: 'EAGER')]
-    protected ?FileInterface $nullableEager = null;
+    protected ?FileInterface $mandatoryEager = null;
 
     #[AsFileAssociation(fetch: 'EAGER')]
-    protected FileInterface $notNullableEager;
+    protected FileInterface $notMandatoryEager;
 
     #[AsFileAssociation(fetch: 'LAZY')]
-    protected ?FileInterface $nullableLazy = null;
+    protected ?FileInterface $mandatoryLazy = null;
 
     #[AsFileAssociation(fetch: 'LAZY')]
-    protected FileInterface $notNullableLazy;
+    protected FileInterface $notMandatoryLazy;
 
     #[AsFileAssociation]
     protected stdClass $nonFileProperty;

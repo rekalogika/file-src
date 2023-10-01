@@ -27,7 +27,7 @@ use Rekalogika\File\Tests\File\FileTestTrait;
 use Rekalogika\File\Tests\TestKernel;
 use Rekalogika\File\Tests\Model\Entity;
 use Rekalogika\File\Tests\Model\EntityWithLazyFile;
-use Rekalogika\File\Tests\Model\EntityWithNonNullableFile;
+use Rekalogika\File\Tests\Model\EntityWithMandatoryFile;
 
 class FileAssociationManagerTest extends TestCase
 {
@@ -206,7 +206,7 @@ class FileAssociationManagerTest extends TestCase
     {
         // create new entity
         $file = TemporaryFile::createFromString('testContent');
-        $entity = new EntityWithNonNullableFile('entity_id');
+        $entity = new EntityWithMandatoryFile('entity_id');
         $entity->setFile($file);
 
         // persist
@@ -218,7 +218,7 @@ class FileAssociationManagerTest extends TestCase
         $this->fileRepository?->clear();
 
         // reload
-        $entity = new EntityWithNonNullableFile('entity_id');
+        $entity = new EntityWithMandatoryFile('entity_id');
         $this->fileAssociationManager?->load($entity);
 
         $file = $entity->getFile();
@@ -228,7 +228,7 @@ class FileAssociationManagerTest extends TestCase
         $this->fileAssociationManager?->remove($entity);
 
         // reload again
-        $entity = new EntityWithNonNullableFile('entity_id');
+        $entity = new EntityWithMandatoryFile('entity_id');
         $this->fileAssociationManager?->load($entity);
 
         $file = $entity->getFile();

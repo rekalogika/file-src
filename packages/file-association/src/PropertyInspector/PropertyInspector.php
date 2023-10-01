@@ -35,14 +35,14 @@ class PropertyInspector implements PropertyInspectorInterface
         $reflectionClass = new \ReflectionClass($object);
         $reflectionProperty = $reflectionClass->getProperty($propertyName);
         $reflectionType = $reflectionProperty->getType();
-        $nullable = $reflectionType?->allowsNull() ?? true;
+        $mandatory = !($reflectionType?->allowsNull() ?? true);
 
         $attributes = $reflectionProperty
             ->getAttributes(AsFileAssociation::class);
 
         if (count($attributes) === 0) {
             return $this->cache[$cacheKey] = new PropertyInspectorResult(
-                nullable: $nullable,
+                mandatory: $mandatory,
                 fetch: 'EAGER',
             );
         }
@@ -54,7 +54,7 @@ class PropertyInspector implements PropertyInspectorInterface
         }
 
         return $this->cache[$cacheKey] = new PropertyInspectorResult(
-            nullable: $nullable,
+            mandatory: $mandatory,
             fetch: $attribute->fetch,
         );
     }

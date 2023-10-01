@@ -126,7 +126,7 @@ final class FileAssociationManager
         if ($inspectorResult->getFetch() === 'EAGER') {
             $file = $this->fileRepository->tryGet($filePointer);
 
-            if ($file === null && !$inspectorResult->isNullable()) {
+            if ($file === null && $inspectorResult->isMandatory()) {
                 $file = new MissingFile(
                     $filePointer->getFilesystemIdentifier(),
                     $filePointer->getKey()
