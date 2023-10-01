@@ -22,6 +22,7 @@
                 <directory name="packages/file-symfony-bridge/src/Constraints/" />
                 <file name="packages/file-symfony-bridge/src/HttpFoundation/FileResponse.php" />
                 <file name="tests/Model/EntityWithMandatoryFile.php" />
+                <file name="tests/Model/EntityExtendingAbstractFile.php" />
             </errorLevel>
         </PropertyNotSetInConstructor>
         <RedundantPropertyInitializationCheck>

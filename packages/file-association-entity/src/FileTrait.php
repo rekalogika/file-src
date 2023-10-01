@@ -32,7 +32,7 @@ trait FileTrait
     use FileDecoratorTrait;
 
     #[AsFileAssociation]
-    private ?FileInterface $file = null;
+    private FileInterface $file;
 
     #[Embedded()]
     private ?EmbeddedMetadata $metadata = null;
@@ -44,7 +44,8 @@ trait FileTrait
 
     private function setWrapped(FileInterface $file): void
     {
-        FileDecorator::setFile($file, $this->file, $this->getMetadata());
+        $this->file = new NullFile(); // needs this for the next line to work
+        FileDecorator::setFileMandatory($file, $this->file, $this->getMetadata());
     }
 
     private function getWrapped(): FileInterface

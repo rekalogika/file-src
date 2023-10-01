@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.4.1
+
+* Add `FileDecorator::setFileMandatory()` to deal with non-nullable file
+  properties in entities.
+* Make file properties in `FileTrait` non-nullable.
 ## 1.4.0
 
 * Add `PropertyInspectorInterface` in `file-association`

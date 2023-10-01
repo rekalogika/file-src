@@ -83,6 +83,16 @@ class FileDecorator implements FileInterface
         $metadata->merge($input->get(RawMetadataInterface::class));
     }
 
+    public static function setFileMandatory(
+        FileInterface $input,
+        FileInterface &$file,
+        EmbeddedMetadata $metadata
+    ): void {
+        $metadata->clear();
+        $file = $input;
+        $metadata->merge($input->get(RawMetadataInterface::class));
+    }
+
     //
     // constructor
     //
