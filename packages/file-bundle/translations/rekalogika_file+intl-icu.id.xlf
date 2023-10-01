@@ -55,5 +55,17 @@
         <target>Berkas yang tidak sah</target>
       </segment>
     </unit>
+    <unit id="missing" name="Missing">
+      <segment>
+        <source>(missing)</source>
+        <target>(hilang)</target>
+      </segment>
+    </unit>
+    <unit id="missing-file" name="The file is missing">
+      <segment>
+        <source>The file is missing in the storage media</source>
+        <target>Berkas ini tak ditemukan di media penyimpanan</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

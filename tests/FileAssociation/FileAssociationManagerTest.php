@@ -13,17 +13,21 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\FileAssociation;
 
+use Error;
 use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
+use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\FileAssociationManager;
+use Rekalogika\File\Association\Model\MissingFile;
 use Rekalogika\File\File;
 use Rekalogika\File\TemporaryFile;
 use Rekalogika\File\Tests\File\FileTestTrait;
 use Rekalogika\File\Tests\TestKernel;
 use Rekalogika\File\Tests\Model\Entity;
 use Rekalogika\File\Tests\Model\EntityWithLazyFile;
+use Rekalogika\File\Tests\Model\EntityWithNonNullableFile;
 
 class FileAssociationManagerTest extends TestCase
 {
@@ -196,5 +200,38 @@ class FileAssociationManagerTest extends TestCase
 
         // remove
         $this->fileAssociationManager?->remove($entity);
+    }
+
+    public function testEntityWithNonNullableFile(): void
+    {
+        // create new entity
+        $file = TemporaryFile::createFromString('testContent');
+        $entity = new EntityWithNonNullableFile('entity_id');
+        $entity->setFile($file);
+
+        // persist
+        $this->fileAssociationManager?->save($entity);
+        $file = $entity->getFile();
+        $this->assertInstanceOf(File::class, $file);
+
+        // clear cache
+        $this->fileRepository?->clear();
+
+        // reload
+        $entity = new EntityWithNonNullableFile('entity_id');
+        $this->fileAssociationManager?->load($entity);
+
+        $file = $entity->getFile();
+        $this->assertInstanceOf(File::class, $file);
+
+        // remove
+        $this->fileAssociationManager?->remove($entity);
+
+        // reload again
+        $entity = new EntityWithNonNullableFile('entity_id');
+        $this->fileAssociationManager?->load($entity);
+
+        $file = $entity->getFile();
+        $this->assertInstanceOf(MissingFile::class, $file);
     }
 }

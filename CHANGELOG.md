@@ -7,6 +7,8 @@
 * Create `file-null` package to hold null file objects.
 * Remove `NullFile` from `file-association-entity`.
 * Add `NullFileInterface` & `NullFilePointerInterface` to the contracts.
+* If the file property in an entity is not nullable, substitute it with a
+  `MissingFile` object.
 
 ## 1.3.1
 

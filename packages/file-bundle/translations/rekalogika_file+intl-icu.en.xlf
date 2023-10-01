@@ -55,5 +55,17 @@
         <target>Invalid file</target>
       </segment>
     </unit>
+    <unit id="missing" name="Missing">
+      <segment>
+        <source>(missing)</source>
+        <target>(missing)</target>
+      </segment>
+    </unit>
+    <unit id="missing-file" name="The file is missing">
+      <segment>
+        <source>The file is missing in the storage media</source>
+        <target>The file is missing in the storage media</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

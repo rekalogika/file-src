@@ -20,6 +20,7 @@ use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
+use Rekalogika\File\Association\Model\MissingFile;
 
 final class FileAssociationManager
 {
@@ -124,6 +125,13 @@ final class FileAssociationManager
 
         if ($inspectorResult->getFetch() === 'EAGER') {
             $file = $this->fileRepository->tryGet($filePointer);
+
+            if ($file === null && !$inspectorResult->isNullable()) {
+                $file = new MissingFile(
+                    $filePointer->getFilesystemIdentifier(),
+                    $filePointer->getKey()
+                );
+            }
         } elseif ($inspectorResult->getFetch() === 'LAZY') {
             $file = $this->fileRepository->getReference($filePointer);
         } else {
