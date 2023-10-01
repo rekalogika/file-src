@@ -31,5 +31,17 @@
         <target>Unknown file type ({type})</target>
       </segment>
     </unit>
+    <unit id="null" name="Null">
+      <segment>
+        <source>Null</source>
+        <target>Null</target>
+      </segment>
+    </unit>
+    <unit id="null-file" name="Null file">
+      <segment>
+        <source>Null file</source>
+        <target>Null file</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

@@ -31,5 +31,18 @@
         <target>Jenis berkas tak diketahui ({type})</target>
       </segment>
     </unit>
+    <unit id="null" name="Null">
+      <segment>
+        <source>Null</source>
+        <target>Tidak sah</target>
+      </segment>
+    </unit>
+    <unit id="null-file" name="Null file">
+      <segment>
+        <source>Null file</source>
+        <target>Berkas yang tidak sah</target>
+      </segment>
+    </unit>
+
   </file>
 </xliff>

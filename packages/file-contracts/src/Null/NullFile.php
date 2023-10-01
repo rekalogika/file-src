@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Rekalogika\Contracts\File\Null;
 
 use Psr\Http\Message\StreamInterface;
-use DateTimeInterface;
 use Rekalogika\Contracts\File\Exception\File\DerivationNotSupportedException;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
@@ -35,28 +34,7 @@ class NullFile implements FileInterface
 
     public function getPointer(): FilePointerInterface
     {
-        return new class implements FilePointerInterface
-        {
-            public function getFilesystemIdentifier(): ?string
-            {
-                return null;
-            }
-
-            public function getKey(): string
-            {
-                return '/dev/null';
-            }
-
-            public function isEqualTo(FileInterface|FilePointerInterface $other): bool
-            {
-                return false;
-            }
-
-            public function isSameFilesystem(FileInterface|FilePointerInterface $other): bool
-            {
-                return false;
-            }
-        };
+        return new NullPointer();
     }
 
     public function isEqualTo(FileInterface|FilePointerInterface $other): bool
@@ -120,7 +98,7 @@ class NullFile implements FileInterface
         return 0;
     }
 
-    public function getLastModified(): DateTimeInterface
+    public function getLastModified(): \DateTimeInterface
     {
         return new \DateTimeImmutable();
     }

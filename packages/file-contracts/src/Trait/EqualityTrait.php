@@ -15,6 +15,8 @@ namespace Rekalogika\Contracts\File\Trait;
 
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
+use Rekalogika\Contracts\File\Null\NullFile;
+use Rekalogika\Contracts\File\Null\NullPointer;
 
 trait EqualityTrait
 {
@@ -23,12 +25,16 @@ trait EqualityTrait
 
     public function isEqualTo(FilePointerInterface|FileInterface $other): bool
     {
-        return $this->isSameFilesystem($other)
+        return !$other instanceof NullFile
+            && !$other instanceof NullPointer
+            && $this->isSameFilesystem($other)
             && $this->getKey() === $other->getKey();
     }
 
     public function isSameFilesystem(FilePointerInterface|FileInterface $other): bool
     {
-        return $this->getFilesystemIdentifier() === $other->getFilesystemIdentifier();
+        return !$other instanceof NullFile
+            && !$other instanceof NullPointer
+            && $this->getFilesystemIdentifier() === $other->getFilesystemIdentifier();
     }
 }

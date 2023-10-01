@@ -19,6 +19,16 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NullName implements FileNameInterface
 {
+    protected static function getName(): string
+    {
+        return 'Null';
+    }
+
+    protected static function getTranslationDomain(): string
+    {
+        return 'rekalogika_file';
+    }
+
     public function getFull(): \Stringable&TranslatableInterface
     {
         return $this->getBase();
@@ -30,10 +40,18 @@ class NullName implements FileNameInterface
 
     public function getBase(): \Stringable&TranslatableInterface
     {
-        return new class implements \Stringable, TranslatableInterface {
+        return new class(static::getName(), static::getTranslationDomain())
+        implements \Stringable, TranslatableInterface
+        {
+            public function __construct(
+                private string $name,
+                private string $translationDomain
+            ) {
+            }
+
             public function __toString(): string
             {
-                return 'Null';
+                return $this->name;
             }
 
             public function trans(
@@ -41,9 +59,9 @@ class NullName implements FileNameInterface
                 ?string $locale = null
             ): string {
                 return $translator->trans(
-                    'Null',
+                    $this->name,
                     [],
-                    'rekalogika_file',
+                    $this->translationDomain,
                     $locale
                 );
             }
@@ -70,7 +88,7 @@ class NullName implements FileNameInterface
 
     public function __toString(): string
     {
-        return 'Null';
+        return $this->getName();
     }
 
     public function trans(TranslatorInterface $translator, ?string $locale = null): string

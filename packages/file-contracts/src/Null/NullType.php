@@ -19,6 +19,16 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NullType implements FileTypeInterface
 {
+    protected static function getTypeDescription(): string
+    {
+        return 'Null file';
+    }
+
+    protected static function getTranslationDomain(): string
+    {
+        return 'rekalogika_file';
+    }
+
     public function getName(): string
     {
         return 'application/x-zerosize';
@@ -46,10 +56,18 @@ class NullType implements FileTypeInterface
 
     public function getDescription(): \Stringable&TranslatableInterface
     {
-        return new class implements \Stringable, TranslatableInterface {
+        return new class(static::getTypeDescription(), static::getTranslationDomain())
+        implements \Stringable, TranslatableInterface
+        {
+            public function __construct(
+                private string $description,
+                private string $translationDomain
+            ) {
+            }
+
             public function __toString(): string
             {
-                return 'Null file';
+                return $this->description;
             }
 
             public function trans(
@@ -57,13 +75,14 @@ class NullType implements FileTypeInterface
                 ?string $locale = null
             ): string {
                 return $translator->trans(
-                    'Null file',
+                    $this->description,
                     [],
-                    'rekalogika_file',
+                    $this->translationDomain,
                     $locale
                 );
             }
         };
+
     }
 
     public function __toString(): string

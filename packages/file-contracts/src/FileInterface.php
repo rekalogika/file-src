@@ -40,12 +40,14 @@ interface FileInterface
     public function getPointer(): FilePointerInterface;
 
     /**
-     * Determines if the file or pointer refers to the same file.
+     * Determines if the file or pointer refers to the same file. Implementors
+     * should use `EqualityTrait` instead of implementing manually.
      */
     public function isEqualTo(self|FilePointerInterface $other): bool;
 
     /**
      * Determines if the pointer is on the same filesystem as the other pointer.
+     * Implementors should use `EqualityTrait` instead of implementing manually.
      */
     public function isSameFilesystem(self|FilePointerInterface $other): bool;
 
