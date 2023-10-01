@@ -15,18 +15,13 @@ namespace Rekalogika\Domain\File\Null;
 
 use Rekalogika\Contracts\File\FileTypeInterface;
 use Symfony\Contracts\Translation\TranslatableInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NullType implements FileTypeInterface
 {
-    protected static function getTypeDescription(): string
-    {
-        return 'Null file';
-    }
-
-    protected static function getTranslationDomain(): string
-    {
-        return 'rekalogika_file';
+    public function __construct(
+        private string $description,
+        private string $translationDomain
+    ) {
     }
 
     public function getName(): string
@@ -56,33 +51,10 @@ class NullType implements FileTypeInterface
 
     public function getDescription(): \Stringable&TranslatableInterface
     {
-        return new class(static::getTypeDescription(), static::getTranslationDomain())
-        implements \Stringable, TranslatableInterface
-        {
-            public function __construct(
-                private string $description,
-                private string $translationDomain
-            ) {
-            }
-
-            public function __toString(): string
-            {
-                return $this->description;
-            }
-
-            public function trans(
-                TranslatorInterface $translator,
-                ?string $locale = null
-            ): string {
-                return $translator->trans(
-                    $this->description,
-                    [],
-                    $this->translationDomain,
-                    $locale
-                );
-            }
-        };
-
+        return new TranslatableMessage(
+            $this->description,
+            $this->translationDomain
+        );
     }
 
     public function __toString(): string

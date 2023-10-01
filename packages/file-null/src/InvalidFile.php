@@ -18,9 +18,9 @@ use Rekalogika\Contracts\File\FileTypeInterface;
 use Rekalogika\Contracts\File\NullFileInterface;
 
 /**
- * A null-value pattern implementation for FileInterface.
+ * A null file object that is also an exception
  */
-class NullFile implements NullFileInterface
+class InvalidFile extends \Exception implements NullFileInterface
 {
     use NullFileTrait;
 
@@ -42,11 +42,11 @@ class NullFile implements NullFileInterface
 
     public function getName(): FileNameInterface
     {
-        return new NullName('Null', 'rekalogika_file');
+        return new NullName('Invalid', 'rekalogika_file');
     }
 
     public function getType(): FileTypeInterface
     {
-        return new NullType('Null file', 'rekalogika_file');
+        return new NullType('Invalid file', 'rekalogika_file');
     }
 }

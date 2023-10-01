@@ -43,6 +43,17 @@
         <target>Berkas yang tidak sah</target>
       </segment>
     </unit>
-
+    <unit id="invalid" name="Invalid">
+      <segment>
+        <source>Invalid</source>
+        <target>Tidak sah</target>
+      </segment>
+    </unit>
+    <unit id="invalid-file" name="Invalid file">
+      <segment>
+        <source>Invalid file</source>
+        <target>Berkas yang tidak sah</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

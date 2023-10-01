@@ -43,5 +43,17 @@
         <target>Null file</target>
       </segment>
     </unit>
+    <unit id="invalid" name="Invalid">
+      <segment>
+        <source>Invalid</source>
+        <target>Invalid</target>
+      </segment>
+    </unit>
+    <unit id="invalid-file" name="Invalid file">
+      <segment>
+        <source>Invalid file</source>
+        <target>Invalid file</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
