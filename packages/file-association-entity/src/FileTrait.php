@@ -15,6 +15,7 @@ namespace Rekalogika\Domain\File\Association\Entity;
 
 use Doctrine\ORM\Mapping\Embedded;
 use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\Contracts\File\Null\NullFile;
 use Rekalogika\Contracts\File\Trait\FileDecoratorTrait;
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
 

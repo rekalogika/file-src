@@ -11,27 +11,18 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\Domain\File\Association\Entity;
+namespace Rekalogika\Contracts\File\Null;
 
-use Http\Discovery\Psr17Factory;
 use Psr\Http\Message\StreamInterface;
+use DateTimeInterface;
+use Rekalogika\Contracts\File\Exception\File\DerivationNotSupportedException;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
-use Rekalogika\Contracts\File\RawMetadataInterface;
-use Rekalogika\Contracts\File\Trait\EqualityTrait;
-use Rekalogika\Contracts\File\Trait\MetadataTrait;
-use Rekalogika\Domain\File\Metadata\MetadataFactory;
+use Rekalogika\Contracts\File\FileNameInterface;
+use Rekalogika\Contracts\File\FileTypeInterface;
 
-/**
- * Null file is a file that does not exist. It is used in place of a null value
- * when the file should be present but is not. It avoids a fatal error in such
- * cases, while allowing the programmer or system administrator to know about
- * the problem.
- */
-final class NullFile implements FileInterface
+class NullFile implements FileInterface
 {
-    use MetadataTrait;
-
     public function getFilesystemIdentifier(): ?string
     {
         return null;
@@ -46,8 +37,6 @@ final class NullFile implements FileInterface
     {
         return new class implements FilePointerInterface
         {
-            use EqualityTrait;
-
             public function getFilesystemIdentifier(): ?string
             {
                 return null;
@@ -56,6 +45,16 @@ final class NullFile implements FileInterface
             public function getKey(): string
             {
                 return '/dev/null';
+            }
+
+            public function isEqualTo(FileInterface|FilePointerInterface $other): bool
+            {
+                return false;
+            }
+
+            public function isSameFilesystem(FileInterface|FilePointerInterface $other): bool
+            {
+                return false;
             }
         };
     }
@@ -70,14 +69,21 @@ final class NullFile implements FileInterface
         return false;
     }
 
+    public function getName(): FileNameInterface
+    {
+        return new NullName;
+    }
+
+    public function setName(?string $fileName): void
+    {
+    }
+
     public function setContent(string $contents): void
     {
-        throw new \LogicException('Cannot set the content of a null file');
     }
 
     public function setContentFromStream(mixed $stream): void
     {
-        throw new \LogicException('Cannot set the content of a null file');
     }
 
     public function getContent(): string
@@ -87,40 +93,46 @@ final class NullFile implements FileInterface
 
     public function getContentAsStream(): StreamInterface
     {
-        $stream = fopen('php://memory', 'r+');
-        if ($stream === false) {
-            throw new \RuntimeException('Cannot create stream');
-        }
-
-        fwrite($stream, '');
-        rewind($stream);
-
-        return (new Psr17Factory())->createStreamFromResource($stream);
+        throw new \BadMethodCallException('Cannot stream the content of a null file');
     }
 
     public function saveToLocalFile(string $path): \SplFileInfo
     {
-        throw new \LogicException('Cannot save from a null file');
+        return new \SplFileInfo('/dev/null');
     }
 
     public function createLocalTemporaryFile(): \SplFileInfo
     {
-        throw new \LogicException('Cannot create a temporary file from a null file');
+        return new \SplFileInfo('/dev/null');
+    }
+
+    public function getType(): FileTypeInterface
+    {
+        return new NullType;
+    }
+
+    public function setType(string $type): void
+    {
+    }
+
+    public function getSize(): int
+    {
+        return 0;
+    }
+
+    public function getLastModified(): DateTimeInterface
+    {
+        return new \DateTimeImmutable();
     }
 
     public function getDerivation(string $derivationId): FilePointerInterface
     {
-        throw new \LogicException('Cannot derive a null file');
+        throw new DerivationNotSupportedException('Cannot derive from a null file');
     }
 
     public function get(string $id)
     {
-        if ($id == RawMetadataInterface::class) {
-            return new NullFileMetadata();
-        }
-
-        /** @psalm-suppress MixedReturnStatement */
-        return MetadataFactory::create(new NullFileMetadata())->get($id);
+        return null;
     }
 
     public function flush(): void
