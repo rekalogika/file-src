@@ -11,6 +11,7 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
+use Doctrine\Persistence\ManagerRegistry;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\DirectPropertyAccessor;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
@@ -24,6 +25,7 @@ use Rekalogika\File\Association\FileLocationResolver\ChainedFileLocationResolver
 use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver;
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
+use Rekalogika\File\Association\ObjectIdResolver\DoctrineObjectIdResolver;
 use Rekalogika\File\Association\PropertyInspector\PropertyInspector;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Association\PropertyLister\ChainPropertyLister;
@@ -87,6 +89,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('rekalogika.file.association.object_id_resolver', [
             'priority' => -1000,
         ]);
+
+    if (class_exists(ManagerRegistry::class)) {
+        $services->set(DoctrineObjectIdResolver::class)
+            ->args([
+                service(ManagerRegistry::class),
+            ])
+            ->tag('rekalogika.file.association.object_id_resolver', [
+                'priority' => -999,
+            ]);
+    }
 
     //
     // file location resolver

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.4.2
+
+* Add `DoctrineObjectIdResolver` for a more universal object id resolver.
+
 ## 1.4.1
 
 * Add `FileDecorator::setFileMandatory()` to deal with non-nullable file
