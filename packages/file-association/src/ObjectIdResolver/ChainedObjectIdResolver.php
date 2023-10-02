@@ -20,20 +20,34 @@ use Rekalogika\File\Association\Exception\ObjectIdResolver\ObjectIdResolverExcep
 class ChainedObjectIdResolver implements ObjectIdResolverInterface
 {
     /**
+     * @var \WeakMap<object,string>
+     */
+    private \WeakMap $cache;
+
+    /**
      * @param iterable<ObjectIdResolverInterface> $objectIdResolvers
      */
     public function __construct(
         private iterable $objectIdResolvers
     ) {
+        /** @var \WeakMap<object,string> */
+        $map = new \WeakMap();
+
+        $this->cache = $map;
     }
 
     public function getObjectId(object $object): string
     {
+        if (isset($this->cache[$object])) {
+            return $this->cache[$object];
+        }
+
         $exceptions = [];
 
         foreach ($this->objectIdResolvers as $objectIdResolver) {
             try {
-                return $objectIdResolver->getObjectId($object);
+                return $this->cache[$object]
+                    = $objectIdResolver->getObjectId($object);
             } catch (ObjectIdResolverException $e) {
                 $exceptions[] = $e;
             }

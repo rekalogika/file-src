@@ -3,6 +3,7 @@
 ## 1.4.2
 
 * Add `DoctrineObjectIdResolver` for a more universal object id resolver.
+* Cache object id in `ChainedObjectIdResolver`
 
 ## 1.4.1
 
