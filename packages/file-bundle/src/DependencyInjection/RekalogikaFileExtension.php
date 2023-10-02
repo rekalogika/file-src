@@ -120,7 +120,7 @@ class RekalogikaFileExtension extends Extension implements PrependExtensionInter
             ->addTag('rekalogika.file.association.object_id_resolver');
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         if (
             class_exists(EmbeddedMetadata::class)
