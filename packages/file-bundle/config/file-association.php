@@ -90,7 +90,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'priority' => -1000,
         ]);
 
-    if (class_exists(ManagerRegistry::class)) {
+    if (interface_exists(ManagerRegistry::class)) {
         $services->set(DoctrineObjectIdResolver::class)
             ->args([
                 service(ManagerRegistry::class),
