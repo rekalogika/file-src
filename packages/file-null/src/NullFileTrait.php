@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Rekalogika\Domain\File\Null;
 
 use Psr\Http\Message\StreamInterface;
-use Rekalogika\Contracts\File\Exception\File\DerivationNotSupportedException;
 use Rekalogika\Contracts\File\Exception\File\NullFileOperationException;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
@@ -24,6 +23,15 @@ use Rekalogika\Contracts\File\FilePointerInterface;
  */
 trait NullFileTrait
 {
+    private function throwException(string $message): never
+    {
+        if ($this instanceof \Throwable) {
+            throw new NullFileOperationException($message, 0, $this);
+        } else {
+            throw new NullFileOperationException($message);
+        }
+    }
+
     public function getFilesystemIdentifier(): ?string
     {
         return null;
@@ -51,42 +59,42 @@ trait NullFileTrait
 
     public function setName(?string $fileName): void
     {
-        throw new NullFileOperationException('Cannot set the name of a null file');
+        $this->throwException('Cannot set the name of a null file');
     }
 
     public function setContent(string $contents): void
     {
-        throw new NullFileOperationException('Cannot set the content of a null file');
+        $this->throwException('Cannot set the content of a null file');
     }
 
     public function setContentFromStream(mixed $stream): void
     {
-        throw new NullFileOperationException('Cannot set the content of a null file');
+        $this->throwException('Cannot set the content of a null file');
     }
 
     public function getContent(): string
     {
-        throw new NullFileOperationException('Cannot get the content of a null file');
+        $this->throwException('Cannot get the content of a null file');
     }
 
     public function getContentAsStream(): StreamInterface
     {
-        throw new NullFileOperationException('Cannot get the content of a null file');
+        $this->throwException('Cannot get the content of a null file');
     }
 
     public function saveToLocalFile(string $path): \SplFileInfo
     {
-        throw new NullFileOperationException('Cannot save a null file');
+        $this->throwException('Cannot save a null file');
     }
 
     public function createLocalTemporaryFile(): \SplFileInfo
     {
-        throw new NullFileOperationException('Cannot create a temporary file from a null file');
+        $this->throwException('Cannot create a temporary file from a null file');
     }
 
     public function setType(string $type): void
     {
-        throw new NullFileOperationException('Cannot set the type of a null file');
+        $this->throwException('Cannot set the type of a null file');
     }
 
     /**
@@ -104,7 +112,7 @@ trait NullFileTrait
 
     public function getDerivation(string $derivationId): FilePointerInterface
     {
-        throw new DerivationNotSupportedException('Cannot derive from a null file');
+        $this->throwException('Cannot derive from a null file');
     }
 
     public function get(string $id)
