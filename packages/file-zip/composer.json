@@ -1,13 +1,18 @@
 {
-    "name": "rekalogika/file-derivation",
-    "description": "Provides an abstract class to streamline the creation of filters using the file derivation feature of the rekalogika/file framework.",
+    "name": "rekalogika/file-zip",
+    "description": "Streams a collection of files as a zip file to the client",
     "homepage": "https://rekalogika.dev/file-bundle",
-    "type": "library",
     "license": "MIT",
+    "type": "library",
     "keywords": [
         "file",
-        "derivation",
-        "filter"
+        "symfony",
+        "zipstream",
+        "zip",
+        "archive",
+        "download",
+        "stream",
+        "http"
     ],
     "authors": [
         {
@@ -17,11 +22,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Rekalogika\\File\\Derivation\\": "src/"
+            "Rekalogika\\File\\Zip\\": "src/"
         }
     },
     "require": {
-        "rekalogika/file-contracts": "^1.4.3"
+        "rekalogika/file-contracts": "^1.4.3",
+        "maennchen/zipstream-php": "^3.1"
     },
     "extra": {
         "branch-alias": {

@@ -19,6 +19,7 @@
         "league/flysystem": "^3.16",
         "league/flysystem-local": "^3.16",
         "league/mime-type-detection": "^1.0.0",
+        "maennchen/zipstream-php": "^3.1",
         "nyholm/psr7": "^1.8",
         "oneup/uploader-bundle": "^4.0",
         "php": "^8.1",
@@ -83,7 +84,8 @@
             "Rekalogika\\File\\Bundle\\": "packages/file-bundle/src/",
             "Rekalogika\\File\\Derivation\\": "packages/file-derivation/src/",
             "Rekalogika\\File\\Image\\": "packages/file-image/src/",
-            "Rekalogika\\File\\Server\\": "packages/file-server/src/"
+            "Rekalogika\\File\\Server\\": "packages/file-server/src/",
+            "Rekalogika\\File\\Zip\\": "packages/file-zip/src/"
         }
     },
     "autoload-dev": {
@@ -92,20 +94,21 @@
         }
     },
     "replace": {
-        "rekalogika/file": "1.4.2",
-        "rekalogika/file-association": "1.4.2",
-        "rekalogika/file-association-contracts": "1.4.2",
-        "rekalogika/file-association-entity": "1.4.2",
-        "rekalogika/file-bundle": "1.4.2",
-        "rekalogika/file-contracts": "1.4.2",
-        "rekalogika/file-derivation": "1.4.2",
-        "rekalogika/file-image": "1.4.2",
-        "rekalogika/file-metadata": "1.4.2",
-        "rekalogika/file-metadata-contracts": "1.4.2",
-        "rekalogika/file-null": "1.4.2",
-        "rekalogika/file-oneup-uploader-bridge": "1.4.2",
-        "rekalogika/file-server": "1.4.2",
-        "rekalogika/file-symfony-bridge": "1.4.2"
+        "rekalogika/file": "1.4.3",
+        "rekalogika/file-association": "1.4.3",
+        "rekalogika/file-association-contracts": "1.4.3",
+        "rekalogika/file-association-entity": "1.4.3",
+        "rekalogika/file-bundle": "1.4.3",
+        "rekalogika/file-contracts": "1.4.3",
+        "rekalogika/file-derivation": "1.4.3",
+        "rekalogika/file-image": "1.4.3",
+        "rekalogika/file-metadata": "1.4.3",
+        "rekalogika/file-metadata-contracts": "1.4.3",
+        "rekalogika/file-null": "1.4.3",
+        "rekalogika/file-oneup-uploader-bridge": "1.4.3",
+        "rekalogika/file-server": "1.4.3",
+        "rekalogika/file-symfony-bridge": "1.4.3",
+        "rekalogika/file-zip": "1.4.3"
     },
     "config": {
         "allow-plugins": {
