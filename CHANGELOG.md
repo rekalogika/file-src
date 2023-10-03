@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.4.3
+
+* Simplify exception handling in `NullFileTrait`
+* Fix "uncaught exception" if the `$other` field is null in the database.
+
 ## 1.4.2
 
 * Add `DoctrineObjectIdResolver` for a more universal object id resolver.

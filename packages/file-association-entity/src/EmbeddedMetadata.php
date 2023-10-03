@@ -34,7 +34,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
     /**
      * @var array<string,int|string|bool|null>
      */
-    private array $other = [];
+    private ?array $other = [];
 
     /**
      * Indicates if the file is present. It is assumed that a file is present
@@ -44,6 +44,49 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
     public function isFilePresent(): bool
     {
         return $this->type !== null;
+    }
+
+    private function unsetOther(string $key): void
+    {
+        if ($this->other === null) {
+            $this->other = [];
+        }
+
+        unset($this->other[$key]);
+    }
+
+    private function setOther(string $key, int|string|bool|null $value): void
+    {
+        if ($this->other === null) {
+            $this->other = [];
+        }
+
+        $this->other[$key] = $value;
+    }
+
+    private function getOther(string $key): int|string|bool|null
+    {
+        if ($this->other === null) {
+            $this->other = [];
+        }
+
+        if (!array_key_exists($key, $this->other)) {
+            throw new MetadataNotFoundException($key);
+        }
+
+        return $this->other[$key];
+    }
+
+    /**
+     * @return array<string,int|string|bool|null>
+     */
+    private function getOthers(): array
+    {
+        if ($this->other === null) {
+            $this->other = [];
+        }
+
+        return $this->other;
     }
 
     public function clear(): void
@@ -68,7 +111,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         yield Constants::MEDIA_WIDTH => $this->width;
         yield Constants::MEDIA_HEIGHT => $this->height;
 
-        yield from $this->other;
+        yield from $this->getOthers();
     }
 
     public function get(string $key): int|string|bool|null
@@ -82,7 +125,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
                 : null,
             Constants::MEDIA_WIDTH => $this->width,
             Constants::MEDIA_HEIGHT => $this->height,
-            default => $this->other[$key] ?? throw new MetadataNotFoundException($key),
+            default => $this->getOther($key),
         };
     }
 
@@ -106,7 +149,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
                 : null,
             Constants::MEDIA_WIDTH => $this->width = $value !== null ? (int) $value : null,
             Constants::MEDIA_HEIGHT => $this->height = $value !== null ? (int) $value : null,
-            default => $this->other[$key] = $value,
+            default => $this->setOther($key, $value),
         };
     }
 
@@ -119,13 +162,8 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
             Constants::FILE_MODIFICATION_TIME => $this->modificationTime = null,
             Constants::MEDIA_WIDTH => $this->width = null,
             Constants::MEDIA_HEIGHT => $this->height = null,
-            default => $this->unset($key)
+            default => $this->unsetOther($key)
         };
-    }
-
-    private function unset(string $key): void
-    {
-        unset($this->other[$key]);
     }
 
     public function merge(iterable $metadata): void
@@ -137,6 +175,6 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
 
     public function count(): int
     {
-        return count($this->other) + 6;
+        return count($this->getOthers()) + 6;
     }
 }
