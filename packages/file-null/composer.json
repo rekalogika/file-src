@@ -25,7 +25,7 @@
     },
     "require": {
         "psr/http-message": "^1.0",
-        "rekalogika/file-contracts": "^1.4.3",
+        "rekalogika/file-contracts": "^1.5",
         "symfony/translation-contracts": "^3.0"
     },
     "extra": {
