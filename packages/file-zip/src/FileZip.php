@@ -34,8 +34,11 @@ final class FileZip
         $outputStream = null,
         bool $sendHttpHeaders = true,
     ): void {
+        $name = $directory->getName();
+        $name->setExtension('zip');
+
         $zip = new ZipStream(
-            outputName: $directory->getName()->trans($this->translator),
+            outputName: $name->trans($this->translator),
             contentType: 'application/zip',
             outputStream: $outputStream,
             sendHttpHeaders: $sendHttpHeaders,
