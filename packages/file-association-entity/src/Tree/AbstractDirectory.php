@@ -25,20 +25,23 @@ use Rekalogika\Domain\File\Metadata\Model\FileName;
  * Directory in a tree
  *
  * @implements Collection<int,AbstractNode>
+ * @implements \IteratorAggregate<int,AbstractNode>
  */
 class AbstractDirectory extends AbstractNode implements
     DirectoryInterface,
-    Collection
+    Collection,
+    \IteratorAggregate
 {
     /**
      * @use CollectionDecoratorTrait<int,AbstractNode>
-     */
-    use CollectionDecoratorTrait;
-
-    /**
      * @use ArrayAccessDecoratorDxTrait<int,AbstractNode>
      */
-    use ArrayAccessDecoratorDxTrait;
+    use CollectionDecoratorTrait, ArrayAccessDecoratorDxTrait {
+        ArrayAccessDecoratorDxTrait::offsetExists insteadof CollectionDecoratorTrait;
+        ArrayAccessDecoratorDxTrait::offsetGet insteadof CollectionDecoratorTrait;
+        ArrayAccessDecoratorDxTrait::offsetSet insteadof CollectionDecoratorTrait;
+        ArrayAccessDecoratorDxTrait::offsetUnset insteadof CollectionDecoratorTrait;
+    }
 
     private ?string $name = null;
 
