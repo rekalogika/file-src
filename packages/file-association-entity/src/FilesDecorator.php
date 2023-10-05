@@ -24,17 +24,20 @@ use Rekalogika\Domain\File\Metadata\Model\FileName;
  * Decorates a Collection<FileInterface> to be a FilesInterface, so the caller
  * can easily know that the collection contains files.
  *
- * @implements Collection<array-key,FileInterface>
+ * @template TKey of array-key
+ * @template T of FileInterface
+ * @implements Collection<TKey,T>
+ * @implements FilesInterface<TKey,T>
  */
 final class FilesDecorator implements Collection, FilesInterface
 {
     /**
-     * @use CollectionDecoratorTrait<array-key,FileInterface>
+     * @use CollectionDecoratorTrait<TKey,T>
      */
     use CollectionDecoratorTrait;
 
     /**
-     * @param Collection<array-key,FileInterface> $files
+     * @param Collection<TKey,T> $files
      */
     public function __construct(
         private Collection $files,
@@ -43,7 +46,7 @@ final class FilesDecorator implements Collection, FilesInterface
     }
 
     /**
-     * @return Collection<array-key,FileInterface>
+     * @return Collection<TKey,T>
      */
     protected function getWrapped(): Collection
     {

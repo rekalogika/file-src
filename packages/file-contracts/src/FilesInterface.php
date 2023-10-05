@@ -18,7 +18,9 @@ use Symfony\Contracts\Translation\TranslatableInterface;
 /**
  * Represents a container containing instances of FileInterface
  *
- * @extends \Traversable<array-key,FileInterface>
+ * @template TKey of array-key
+ * @template T of FileInterface
+ * @extends \Traversable<TKey,T>
  */
 interface FilesInterface extends
     \Traversable,
