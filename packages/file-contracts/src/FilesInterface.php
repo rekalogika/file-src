@@ -30,5 +30,5 @@ interface FilesInterface extends
      * The name for this set of files, will be used as the name of the
      * downloaded folder or archive file, etc.
      */
-    public function getName(): \Stringable&TranslatableInterface;
+    public function getName(): FileNameInterface;
 }
