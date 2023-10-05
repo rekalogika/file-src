@@ -52,6 +52,11 @@
                 <file name="packages/file-zip/src/ZipDirectory.php" />
             </errorLevel>
         </MixedAssignment>
+        <UndefinedAttributeClass>
+            <errorLevel type="suppress">
+                <referencedClass name="Override"/>
+            </errorLevel>
+        </UndefinedAttributeClass>
     </issueHandlers>
 
     <plugins>
