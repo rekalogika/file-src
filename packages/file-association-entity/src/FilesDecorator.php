@@ -16,7 +16,9 @@ namespace Rekalogika\Domain\File\Association\Entity;
 use Doctrine\Common\Collections\Collection;
 use Rekalogika\Collections\Decorator\Trait\CollectionDecoratorTrait;
 use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\Contracts\File\FileNameInterface;
 use Rekalogika\Contracts\File\FilesInterface;
+use Rekalogika\Domain\File\Metadata\Model\FileName;
 
 /**
  * Decorates a Collection<FileInterface> to be a FilesInterface, so the caller
@@ -34,8 +36,10 @@ final class FilesDecorator implements Collection, FilesInterface
     /**
      * @param Collection<array-key,FileInterface> $files
      */
-    public function __construct(private Collection $files)
-    {
+    public function __construct(
+        private Collection $files,
+        private ?string $name = null
+    ) {
     }
 
     /**
@@ -44,5 +48,10 @@ final class FilesDecorator implements Collection, FilesInterface
     protected function getWrapped(): Collection
     {
         return $this->files;
+    }
+
+    public function getName(): FileNameInterface
+    {
+        return new FileName($this->name);
     }
 }
