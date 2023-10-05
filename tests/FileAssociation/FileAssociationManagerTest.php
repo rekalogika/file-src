@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\FileAssociation;
 
-use Error;
 use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
-use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\FileAssociationManager;

@@ -14,28 +14,21 @@ declare(strict_types=1);
 namespace Rekalogika\File\Zip;
 
 use Psr\Http\Message\StreamInterface;
+use Rekalogika\Contracts\File\Tree\DirectoryInterface;
 use ZipStream\ZipStream;
 
 final class FileZip
 {
-    private ZipDirectory $zipDirectory;
-
-    public function __construct(?ZipDirectory $zipDirectory = null)
+    public function __construct(private ZipDirectory $zipDirectory)
     {
-        if (null === $zipDirectory) {
-            $zipDirectory = new ZipDirectory();
-        }
-
-        $this->zipDirectory = $zipDirectory;
     }
 
     /**
-     * @param iterable<mixed,mixed> $files
      * @param resource|StreamInterface|null $outputStream
      */
-    public function zipFiles(
+    public function streamZip(
         string $fileName,
-        iterable $files,
+        DirectoryInterface $directory,
         $outputStream = null,
         bool $sendHttpHeaders = true,
     ): void {
@@ -48,8 +41,9 @@ final class FileZip
 
         $this->zipDirectory->with(
             zip: $zip,
+            directory: $directory,
             directoryName: '',
-            files: $files
+            parent: null,
         )->process();
 
         $zip->finish();

@@ -18,7 +18,7 @@ use Rekalogika\Contracts\File\FileNameInterface;
 /**
  * Represents a directory in a tree
  *
- * @extends \Traversable<array-key,FileNodeInterface|DirectoryInterface>
+ * @extends \Traversable<array-key,NodeInterface>
  */
 interface DirectoryInterface extends
     \Traversable,

@@ -32,6 +32,8 @@ use Rekalogika\File\Association\Reconstitutor\AttributeReconstitutor;
 use Rekalogika\File\Association\Reconstitutor\InterfaceReconstitutor;
 use Rekalogika\File\Bundle\RekalogikaFileBundle;
 use Rekalogika\File\Image\ImageResizer;
+use Rekalogika\File\Zip\FileZip;
+use Rekalogika\File\Zip\ZipDirectory;
 use Rekalogika\Psr16SimpleCacheBundle\RekalogikaPsr16SimpleCacheBundle;
 use Rekalogika\Reconstitutor\RekalogikaReconstitutorBundle;
 use Rekalogika\TemporaryUrl\RekalogikaTemporaryUrlBundle;
@@ -118,6 +120,9 @@ class TestKernel extends HttpKernelKernel
             PropertyInspectorInterface::class,
 
             TemporaryUrlGeneratorInterface::class,
+
+            FileZip::class,
+            ZipDirectory::class,
         ];
     }
 }

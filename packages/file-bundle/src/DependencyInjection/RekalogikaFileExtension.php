@@ -18,13 +18,13 @@ use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\FileAssociationManager;
-use Rekalogika\File\Bridge\Symfony\HttpFoundation\FromHttpFoundationFileAdapter;
 use Rekalogika\File\Bundle\DefaultFilesystemFactory;
 use Rekalogika\File\FileFactory;
 use Rekalogika\File\Derivation\Filter\FileFilterInterface;
 use Rekalogika\File\Image\ImageResizer;
 use Rekalogika\File\Server\FileInterfaceResourceServer;
 use Rekalogika\File\Tests\TestKernel;
+use Rekalogika\File\Zip\FileZip;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -58,6 +58,10 @@ class RekalogikaFileExtension extends Extension implements PrependExtensionInter
 
         if (class_exists(FileInterfaceResourceServer::class)) {
             $loader->load('file-server.php');
+        }
+
+        if (class_exists(FileZip::class)) {
+            $loader->load('file-zip.php');
         }
 
         //

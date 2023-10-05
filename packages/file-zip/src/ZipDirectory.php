@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Rekalogika\File\Zip;
 
 use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\Contracts\File\FilePointerInterface;
+use Rekalogika\Contracts\File\FileRepositoryInterface;
+use Rekalogika\Contracts\File\Tree\DirectoryInterface;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use ZipStream\ZipStream;
@@ -23,68 +26,53 @@ use ZipStream\ZipStream;
  */
 final class ZipDirectory
 {
-    private ZipStream $zip;
-    private string $prefix = '';
-
     /**
      * @var array<array-key,int>
      */
     private array $filename = [];
 
-    /**
-     * @var iterable<mixed,mixed> $files
-     */
-    private iterable $files = [];
+    private ZipStream $zip;
+    private DirectoryInterface $directory;
+    private string $directoryName = '';
+    private ?self $parent;
+    private ?string $directoryPathCache = null;
 
     public function __construct(
+        private FileRepositoryInterface $fileRepository,
         private ?TranslatorInterface $translator = null,
     ) {
     }
 
-    /**
-     * @param iterable<mixed,mixed> $files
-     */
     public function with(
         ZipStream $zip,
+        DirectoryInterface $directory,
         string $directoryName,
-        iterable $files,
+        ?self $parent,
     ): static {
-        if ($directoryName && !ctype_alpha($directoryName)) {
-            throw new \InvalidArgumentException(
-                'Directory name must be alpha characters only.'
-            );
-        }
-
         $clone = clone $this;
-
-        if ($directoryName != '') {
-            $clone->prefix = $directoryName . '/';
-        } else {
-            $clone->prefix = '';
-        }
-
         $clone->zip = $zip;
-        $clone->files = $files;
+        $clone->directory = $directory;
         $clone->filename = [];
+        $clone->directoryName = $directoryName;
+        $clone->parent = $parent;
+        $clone->directoryPathCache = null;
 
         return $clone;
     }
 
     public function process(): void
     {
-        foreach ($this->files as $key => $member) {
-            if ($member instanceof FileInterface) {
-                $this->processFile($member);
-            } elseif (\is_iterable($member)) {
-                if (!is_string($key)) {
+        foreach ($this->directory as $node) {
+            if ($node instanceof FilePointerInterface) {
+                $file = $this->fileRepository->tryGet($node);
+                if (!$file) {
                     continue;
                 }
-
-                $this->with(
-                    zip: $this->zip,
-                    directoryName: $key,
-                    files: $member,
-                )->process();
+                $this->processFile($file);
+            } elseif ($node instanceof FileInterface) {
+                $this->processFile($node);
+            } elseif ($node instanceof DirectoryInterface) {
+                $this->processDirectory($node);
             }
         }
     }
@@ -98,7 +86,17 @@ final class ZipDirectory
         );
     }
 
-    private function getFileName(FileInterface $file): string
+    private function processDirectory(DirectoryInterface $directory): void
+    {
+        $this->with(
+            zip: $this->zip,
+            directory: $directory,
+            directoryName: $this->getFileName($directory),
+            parent: $this,
+        )->process();
+    }
+
+    private function getFileName(FileInterface|DirectoryInterface $file): string
     {
         $filename = $this->translate($file->getName()->getBase());
         $extension = $file->getName()->getExtension();
@@ -116,7 +114,31 @@ final class ZipDirectory
             $this->filename[$filename] = 0;
         }
 
-        return $this->prefix . $filename . $extension;
+        return $this->getDirectoryPath() . $filename . $extension;
+    }
+
+    public function getDirectoryPath(): string
+    {
+        if ($this->directoryPathCache !== null) {
+            return $this->directoryPathCache;
+        }
+
+        if ($this->parent) {
+            $result = sprintf(
+                '%s/%s/',
+                $this->parent->getDirectoryPath(),
+                $this->directoryName
+            );
+        } else {
+            $result = $this->directoryName . '/';
+        }
+
+        // trim slash at the beginning
+        if (str_starts_with($result, '/')) {
+            $result = substr($result, 1);
+        }
+
+        return $this->directoryPathCache = $result;
     }
 
     private function translate(TranslatableInterface&\Stringable $message): string

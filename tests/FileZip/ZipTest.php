@@ -14,11 +14,54 @@ declare(strict_types=1);
 namespace Rekalogika\File\Tests\FileZip;
 
 use PHPUnit\Framework\TestCase;
-use Rekalogika\File\TemporaryFile;
+use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\Contracts\File\FileRepositoryInterface;
+use Rekalogika\File\FilePointer;
+use Rekalogika\File\Tests\TestKernel;
 use Rekalogika\File\Zip\FileZip;
+use Rekalogika\File\Zip\Model\Directory;
 
 class ZipTest extends TestCase
 {
+    private ?FileRepositoryInterface $fileRepository = null;
+    private ?FileZip $fileZip = null;
+
+    public function setUp(): void
+    {
+        $kernel = new TestKernel();
+        $kernel->boot();
+        $container = $kernel->getContainer();
+
+        $fileRepository = $container
+            ->get('test.' . FileRepositoryInterface::class);
+
+        $this->assertInstanceOf(
+            FileRepositoryInterface::class,
+            $fileRepository
+        );
+
+        $this->fileRepository = $fileRepository;
+
+        $fileZip = $container
+            ->get('test.' . FileZip::class);
+
+        $this->assertInstanceOf(
+            FileZip::class,
+            $fileZip
+        );
+
+        $this->fileZip = $fileZip;
+    }
+
+    private function createFile(string $key, string $content): FileInterface
+    {
+        $pointer = new FilePointer('default', $key);
+        $file = $this->fileRepository?->createFromString($pointer, $content);
+        $this->assertInstanceOf(FileInterface::class, $file);
+
+        return $file;
+    }
+
     public function testZip(): void
     {
         $temporaryFile = tempnam(sys_get_temp_dir(), 'zip');
@@ -26,13 +69,13 @@ class ZipTest extends TestCase
         $output = fopen($temporaryFile, 'wb');
         $this->assertNotFalse($output);
 
-        $file1 = TemporaryFile::createFromString('file1');
-        $file2 = TemporaryFile::createFromString('file2');
-        $file3 = TemporaryFile::createFromString('file3');
-        $file3a = TemporaryFile::createFromString('file3a');
-        $fileInSubDir1 = TemporaryFile::createFromString('fileInSubDir1');
-        $fileInSubDir2 = TemporaryFile::createFromString('fileInSubDir2');
-        $fileInSubDir2a = TemporaryFile::createFromString('fileInSubDir2a');
+        $file1 = $this->createFile('file1', 'file1');
+        $file2 = $this->createFile('file2', 'file2');
+        $file3 = $this->createFile('file3', 'file3');
+        $file3a = $this->createFile('file3a', 'file3a');
+        $fileInSubDir1 = $this->createFile('fileInSubDir1', 'fileInSubDir1');
+        $fileInSubDir2 = $this->createFile('fileInSubDir2', 'fileInSubDir2');
+        $fileInSubDir2a = $this->createFile('fileInSubDir2a', 'fileInSubDir2a');
 
         $file1->setName('file1.txt');
         $file2->setName('file2.txt');
@@ -42,20 +85,19 @@ class ZipTest extends TestCase
         $fileInSubDir2->setName('fileInSubDir2.txt');
         $fileInSubDir2a->setName('fileInSubDir2.txt');
 
-        $zip = new FileZip();
-        $zip->zipFiles(
+        $rootDirectory = new Directory;
+        $rootDirectory->addPointer($file1->getPointer());
+        $rootDirectory->addPointer($file2->getPointer());
+        $rootDirectory->addPointer($file3->getPointer());
+        $rootDirectory->addPointer($file3a->getPointer());
+        $subdir = $rootDirectory->createDirectory('subdir');
+        $subdir->addPointer($fileInSubDir1->getPointer());
+        $subdir->addPointer($fileInSubDir2->getPointer());
+        $subdir->addPointer($fileInSubDir2a->getPointer());
+
+        $this->fileZip?->streamZip(
             fileName: 'test.zip',
-            files: [
-                $file1,
-                $file2,
-                $file3,
-                $file3a,
-                'subdir' => [
-                    $fileInSubDir1,
-                    $fileInSubDir2,
-                    $fileInSubDir2a,
-                ]
-            ],
+            directory: $rootDirectory,
             outputStream: $output,
             sendHttpHeaders: false,
         );
