@@ -29,6 +29,7 @@
         "rekalogika/file-contracts": "^1.5",
         "rekalogika/file-metadata": "^1.5",
         "rekalogika/file-null": "^1.5",
+        "rekalogika/file-tree-contracts": "^1.5",
         "rekalogika/doctrine-collections-decorator": "^1.0"
     },
     "extra": {
