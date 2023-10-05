@@ -16,12 +16,8 @@ namespace Rekalogika\Contracts\File\Tree;
 use Rekalogika\Contracts\File\FilePointerInterface;
 
 /**
- * Represents a file pointer in a tree
+ * Represents a file in a tree
  */
-interface FilePointerNodeInterface extends NodeInterface, FilePointerInterface
+interface FilePointerNodeInterface extends FilePointerInterface, NodeInterface
 {
-    /**
-     * Gets the directory containing the file pointer
-     */
-    public function getDirectory(): DirectoryInterface;
 }

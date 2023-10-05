@@ -18,10 +18,6 @@ use Rekalogika\Contracts\File\FileInterface;
 /**
  * Represents a file in a tree
  */
-interface FileNodeInterface extends NodeInterface, FileInterface
+interface FileNodeInterface extends FileInterface, NodeInterface
 {
-    /**
-     * Gets the directory containing the file
-     */
-    public function getDirectory(): DirectoryInterface;
 }

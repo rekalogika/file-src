@@ -18,27 +18,15 @@ use Rekalogika\Contracts\File\FileNameInterface;
 /**
  * Represents a directory in a tree
  *
- * @extends \Traversable<int,NodeInterface>
- * @extends \ArrayAccess<int,NodeInterface>
+ * @extends \Traversable<array-key,FileNodeInterface|DirectoryInterface>
  */
 interface DirectoryInterface extends
-    NodeInterface,
     \Traversable,
-    \ArrayAccess,
-    \Countable
+    \Countable,
+    NodeInterface
 {
-    /**
-     * Gets the parent directory
-     */
-    public function getDirectory(): ?DirectoryInterface;
-
     /**
      * Gets the directory name.
      */
     public function getName(): FileNameInterface;
-
-    /**
-     * Sets the directory name.
-     */
-    public function setName(?string $name): void;
 }

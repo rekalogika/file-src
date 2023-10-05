@@ -18,4 +18,8 @@ namespace Rekalogika\Contracts\File\Tree;
  */
 interface NodeInterface
 {
+    /**
+     * Gets the containing directory
+     */
+    public function getContainingDirectory(): ?DirectoryInterface;
 }

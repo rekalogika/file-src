@@ -11,15 +11,15 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\Domain\File\Association\Entity\Tree;
-
-use Rekalogika\Contracts\File\Tree\DirectoryInterface;
-use Rekalogika\Contracts\File\Tree\NodeInterface;
+namespace Rekalogika\Contracts\File;
 
 /**
- * A node in a tree
+ * Represents a container containing instances of FileInterface
+ *
+ * @extends \Traversable<array-key,FileInterface>
  */
-abstract class AbstractNode implements NodeInterface
+interface FilesInterface extends
+    \Traversable,
+    \Countable
 {
-    protected ?DirectoryInterface $directory = null;
 }
