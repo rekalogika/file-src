@@ -15,25 +15,27 @@ namespace Rekalogika\File\Zip;
 
 use Psr\Http\Message\StreamInterface;
 use Rekalogika\Contracts\File\Tree\DirectoryInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use ZipStream\ZipStream;
 
 final class FileZip
 {
-    public function __construct(private ZipDirectory $zipDirectory)
-    {
+    public function __construct(
+        private ZipDirectory $zipDirectory,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**
      * @param resource|StreamInterface|null $outputStream
      */
     public function streamZip(
-        string $fileName,
         DirectoryInterface $directory,
         $outputStream = null,
         bool $sendHttpHeaders = true,
     ): void {
         $zip = new ZipStream(
-            outputName: $fileName,
+            outputName: $directory->getName()->trans($this->translator),
             contentType: 'application/zip',
             outputStream: $outputStream,
             sendHttpHeaders: $sendHttpHeaders,

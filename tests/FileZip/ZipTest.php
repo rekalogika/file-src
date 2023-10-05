@@ -85,7 +85,7 @@ class ZipTest extends TestCase
         $fileInSubDir2->setName('fileInSubDir2.txt');
         $fileInSubDir2a->setName('fileInSubDir2.txt');
 
-        $rootDirectory = new Directory;
+        $rootDirectory = new Directory('test.zip');
         $rootDirectory->addPointer($file1->getPointer());
         $rootDirectory->addPointer($file2->getPointer());
         $rootDirectory->addPointer($file3->getPointer());
@@ -96,7 +96,6 @@ class ZipTest extends TestCase
         $subdir->addPointer($fileInSubDir2a->getPointer());
 
         $this->fileZip?->streamZip(
-            fileName: 'test.zip',
             directory: $rootDirectory,
             outputStream: $output,
             sendHttpHeaders: false,

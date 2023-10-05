@@ -3,9 +3,8 @@
 ## 1.5.0
 
 * Interfaces to implement a tree-like structure for `FileInterface`
-* Abstract classes for creating a tree-like structure for files.
-* Decorator to convert a normal collection of files into a pseudo-tree-like
   structure.
+* Add `FilesInterface` to represent a collection of files.
 * Zip-streaming of collection of files.
 
 ## 1.4.3
