@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.5.0
+
+* Interfaces to implement a tree-like structure for `FileInterface`
+* Abstract classes for creating a tree-like structure for files.
+* Decorator to convert a normal collection of files into a pseudo-tree-like
+  structure.
+* Zip-streaming of collection of files.
+
 ## 1.4.3
 
 * Simplify exception handling in `NullFileTrait`
