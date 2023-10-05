@@ -13,18 +13,17 @@ declare(strict_types=1);
 
 namespace Rekalogika\Contracts\File\Tree;
 
+use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
 
 /**
  * Represents a directory in a tree
  *
  * @extends \Traversable<int,NodeInterface>
- * @extends \ArrayAccess<int,NodeInterface>
  */
 interface DirectoryInterface extends
     NodeInterface,
     \Traversable,
-    \ArrayAccess,
     \Countable
 {
     /**
@@ -41,4 +40,29 @@ interface DirectoryInterface extends
      * Sets the directory name.
      */
     public function setName(?string $name): void;
+
+    /**
+     * Adds a file
+     */
+    public function addFile(FileInterface $file): void;
+
+    /**
+     * Removes a file
+     */
+    public function removeFile(FileNodeInterface $file): void;
+
+    /**
+     * Creates a directory
+     */
+    public function createDirectory(string $name): DirectoryInterface;
+
+    /**
+     * Removes a directory
+     */
+    public function removeDirectory(DirectoryInterface $directory): void;
+
+    /**
+     * Checks if a file or directory is in the directory
+     */
+    public function contains(NodeInterface $file): bool;
 }

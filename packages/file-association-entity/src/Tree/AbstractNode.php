@@ -21,5 +21,4 @@ use Rekalogika\Contracts\File\Tree\NodeInterface;
  */
 abstract class AbstractNode implements NodeInterface
 {
-    protected ?DirectoryInterface $directory = null;
 }

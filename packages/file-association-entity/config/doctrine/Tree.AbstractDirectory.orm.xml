@@ -7,6 +7,8 @@
 
     <mapped-superclass name="Rekalogika\Domain\File\Association\Entity\Tree\AbstractDirectory">
 
+        <field name="name" type="string" />
+
         <!--
         <one-to-many
                 field="entries"
