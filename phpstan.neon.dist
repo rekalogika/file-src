@@ -9,6 +9,9 @@ parameters:
     #         tooWideThrowType: true
     ignoreErrors:
         - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children#'
+        -
+            message: '#Attribute class Override does not exist#'
+            reportUnmatched: false
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
