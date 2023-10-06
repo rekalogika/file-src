@@ -17,8 +17,8 @@ use League\MimeTypeDetection\FinfoMimeTypeDetector;
 use League\MimeTypeDetection\MimeTypeDetector;
 use Rekalogika\Contracts\File\Exception\File\LocalTemporaryFileException;
 use Rekalogika\Contracts\File\RawMetadataInterface;
-use Rekalogika\File\LocalTemporaryFile;
 use Rekalogika\Domain\File\Metadata\Constants;
+use Rekalogika\File\LocalTemporaryFile;
 
 final class MetadataGenerator implements MetadataGeneratorInterface
 {

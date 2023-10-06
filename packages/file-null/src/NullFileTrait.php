@@ -27,9 +27,9 @@ trait NullFileTrait
     {
         if ($this instanceof \Throwable) {
             throw new NullFileOperationException($message, 0, $this);
-        } else {
-            throw new NullFileOperationException($message);
         }
+        throw new NullFileOperationException($message);
+
     }
 
     public function getFilesystemIdentifier(): ?string

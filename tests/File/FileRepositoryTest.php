@@ -16,8 +16,8 @@ namespace Rekalogika\File\Tests\File;
 use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
-use Rekalogika\File\FilePointer;
 use Rekalogika\Domain\File\Metadata\Constants;
+use Rekalogika\File\FilePointer;
 
 class FileRepositoryTest extends TestCase
 {

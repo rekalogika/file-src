@@ -17,7 +17,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Rekalogika\File\File;
 use Rekalogika\File\FilePointer;
-use Rekalogika\File\TemporaryFile;
 use Rekalogika\File\Tests\TestKernel;
 use Rekalogika\TemporaryUrl\TemporaryUrlGeneratorInterface;
 

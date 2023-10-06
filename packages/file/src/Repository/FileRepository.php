@@ -17,8 +17,8 @@ use League\Flysystem\FilesystemOperator;
 use Psr\Http\Message\StreamInterface;
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
 use Rekalogika\Contracts\File\Exception\FileRepository\AdHocFilesystemException;
-use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\Contracts\File\RawMetadataInterface;
@@ -27,8 +27,8 @@ use Rekalogika\File\Contracts\MetadataAwareFilesystemReader;
 use Rekalogika\File\Contracts\MetadataAwareFilesystemWriter;
 use Rekalogika\File\Exception\FilesystemRepository\FilesystemNotFoundException;
 use Rekalogika\File\File;
-use Rekalogika\File\RawMetadata;
 use Rekalogika\File\MetadataGenerator\MetadataGeneratorInterface;
+use Rekalogika\File\RawMetadata;
 use Rekalogika\File\TemporaryFile;
 
 class FileRepository implements FileRepositoryInterface
@@ -61,9 +61,9 @@ class FileRepository implements FileRepositoryInterface
         } catch (FilesystemNotFoundException $e) {
             if ($file instanceof FileInterface) {
                 throw new AdHocFilesystemException($file, $e);
-            } else {
-                throw $e;
             }
+            throw $e;
+
         }
     }
 
@@ -144,13 +144,13 @@ class FileRepository implements FileRepositoryInterface
             return $this->fileCache[$hash] = new File(
                 $filePointer->getKey(),
             );
-        } else {
-            return $this->fileCache[$hash] = new File(
-                $filePointer->getKey(),
-                $this->getFilesystemFromPointerOrFile($filePointer),
-                $filePointer->getFilesystemIdentifier(),
-            );
         }
+        return $this->fileCache[$hash] = new File(
+            $filePointer->getKey(),
+            $this->getFilesystemFromPointerOrFile($filePointer),
+            $filePointer->getFilesystemIdentifier(),
+        );
+
     }
 
     public function tryGet(FilePointerInterface $filePointer): ?FileInterface

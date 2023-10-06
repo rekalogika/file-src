@@ -16,9 +16,9 @@ namespace Rekalogika\File\Filesystem;
 use League\Flysystem\DirectoryListing;
 use League\Flysystem\FilesystemOperator;
 use League\Flysystem\UnableToRetrieveMetadata;
+use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\Contracts\MetadataAwareFilesystemOperator;
 use Rekalogika\File\RawMetadata;
-use Rekalogika\Domain\File\Metadata\Constants;
 
 class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
 {

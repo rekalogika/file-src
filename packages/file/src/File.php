@@ -24,12 +24,10 @@ use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\Contracts\File\Trait\EqualityTrait;
 use Rekalogika\Contracts\File\Trait\MetadataTrait;
-use Rekalogika\File\Contracts\MetadataAwareFilesystemReader;
-use Rekalogika\File\Contracts\MetadataAwareFilesystemWriter;
-use Rekalogika\File\FilePointer;
 use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\Domain\File\Metadata\MetadataFactory;
-use Rekalogika\File\RawMetadata;
+use Rekalogika\File\Contracts\MetadataAwareFilesystemReader;
+use Rekalogika\File\Contracts\MetadataAwareFilesystemWriter;
 use Rekalogika\File\Repository\FilesystemRepository;
 
 class File implements FileInterface

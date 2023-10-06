@@ -21,8 +21,8 @@ class PropertyInspectorTest extends TestCase
 {
     public function testPropertyInspector(): void
     {
-        $inspector = new PropertyInspector;
-        $object = new EntityWithDifferentFileProperties;
+        $inspector = new PropertyInspector();
+        $object = new EntityWithDifferentFileProperties();
 
         $result = $inspector->inspect($object, 'mandatoryEager');
         $this->assertFalse($result->isMandatory());

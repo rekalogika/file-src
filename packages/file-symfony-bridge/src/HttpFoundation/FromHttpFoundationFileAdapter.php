@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Rekalogika\File\Bridge\Symfony\HttpFoundation;
 
 use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\File;
 use Rekalogika\File\RawMetadata;
-use Rekalogika\Domain\File\Metadata\Constants;
 use Symfony\Component\HttpFoundation\File\File as HttpFoundationFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

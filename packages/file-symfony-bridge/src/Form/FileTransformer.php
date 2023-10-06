@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Rekalogika\File\Bridge\Symfony\Form;
 
 use Rekalogika\Contracts\File\FileInterface;
-use Rekalogika\File\FileAdapter;
 use Rekalogika\File\Bridge\Symfony\HttpFoundation\ToHttpFoundationFileAdapter;
+use Rekalogika\File\FileAdapter;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\HttpFoundation\File\File;

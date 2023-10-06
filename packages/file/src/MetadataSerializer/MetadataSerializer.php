@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Rekalogika\File\MetadataSerializer;
 
 use Rekalogika\Contracts\File\RawMetadataInterface;
-use Rekalogika\File\RawMetadata;
 use Rekalogika\Domain\File\Metadata\Constants;
+use Rekalogika\File\RawMetadata;
 
 class MetadataSerializer implements MetadataSerializerInterface
 {

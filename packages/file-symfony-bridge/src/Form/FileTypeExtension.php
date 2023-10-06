@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Bridge\Symfony\Form;
 
-use Rekalogika\File\Bridge\Symfony\Form\FileTransformer;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;

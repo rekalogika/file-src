@@ -116,8 +116,8 @@ abstract class AbstractFileFilter implements FileFilterInterface
 
         if ($result->isEqualTo($derivationFilePointer)) {
             return $result;
-        } else {
-            return $this->fileRepository->copy($result, $derivationFilePointer);
         }
+        return $this->fileRepository->copy($result, $derivationFilePointer);
+
     }
 }

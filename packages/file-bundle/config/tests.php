@@ -12,8 +12,8 @@ declare(strict_types=1);
  */
 
 use League\Flysystem\FilesystemOperator;
-use Rekalogika\File\Tests\TestKernel;
 use Rekalogika\File\Tests\Factory;
+use Rekalogika\File\Tests\TestKernel;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 

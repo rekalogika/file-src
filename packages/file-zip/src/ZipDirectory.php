@@ -159,8 +159,8 @@ final class ZipDirectory
     {
         if ($this->translator) {
             return $message->trans($this->translator, $this->translator->getLocale());
-        } else {
-            return (string) $message;
         }
+        return (string) $message;
+
     }
 }

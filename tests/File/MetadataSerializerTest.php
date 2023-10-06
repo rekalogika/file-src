@@ -16,8 +16,8 @@ namespace Rekalogika\File\Tests\File;
 use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\File\File;
-use Rekalogika\File\RawMetadata;
 use Rekalogika\File\MetadataSerializer\MetadataSerializer;
+use Rekalogika\File\RawMetadata;
 
 class MetadataSerializerTest extends TestCase
 {

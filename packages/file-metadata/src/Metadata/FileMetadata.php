@@ -17,9 +17,9 @@ use Rekalogika\Contracts\File\FileMetadataInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
 use Rekalogika\Contracts\File\FileTypeInterface;
 use Rekalogika\Contracts\File\RawMetadataInterface;
-use Rekalogika\Domain\File\Metadata\Model\MimeMapFileTypeAdapter;
 use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\Domain\File\Metadata\Model\FileName;
+use Rekalogika\Domain\File\Metadata\Model\MimeMapFileTypeAdapter;
 
 final class FileMetadata extends AbstractMetadata implements FileMetadataInterface
 {
@@ -40,9 +40,9 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 
         if ($result === null) {
             return new FileName(null, $this->getType()->getExtension());
-        } else {
-            return new FileName((string) $result);
         }
+        return new FileName((string) $result);
+
     }
 
     public function setName(?string $fileName): void

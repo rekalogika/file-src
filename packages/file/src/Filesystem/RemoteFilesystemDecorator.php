@@ -21,11 +21,11 @@ use League\Flysystem\UnableToDeleteFile;
 use League\Flysystem\UnableToReadFile;
 use League\Flysystem\UnableToRetrieveMetadata;
 use Rekalogika\Contracts\File\RawMetadataInterface;
-use Rekalogika\File\Contracts\MetadataAwareFilesystemOperator;
-use Rekalogika\File\RawMetadata;
-use Rekalogika\File\MetadataGenerator\MetadataGeneratorInterface;
 use Rekalogika\Domain\File\Metadata\Constants;
+use Rekalogika\File\Contracts\MetadataAwareFilesystemOperator;
+use Rekalogika\File\MetadataGenerator\MetadataGeneratorInterface;
 use Rekalogika\File\MetadataSerializer\MetadataSerializerInterface;
+use Rekalogika\File\RawMetadata;
 
 /**
  * A decorator for Flysystem Operators that stores and caches metadata in a
@@ -184,7 +184,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         array $config = []
     ): void {
         $rawMetadata = $this->getMetadataFromSidecarFile($location)
-            ?? new RawMetadata;
+            ?? new RawMetadata();
 
         /** @var array<string,string|int|bool|null> */
         $additionalMetadata = $config['metadata'] ?? [];

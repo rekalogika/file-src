@@ -48,9 +48,9 @@ final class FileName implements FileNameInterface
         if ($this->name === null) {
             if ($this->extension) {
                 return 'Untitled.' . $this->extension;
-            } else {
-                return 'Untitled';
             }
+            return 'Untitled';
+
         }
 
         return (string) $this->getFull();
@@ -79,9 +79,9 @@ final class FileName implements FileNameInterface
                         '{extension}' => $this->extension,
                     ]
                 );
-            } else {
-                return new TranslatableMessage('Untitled', 'Untitled');
             }
+            return new TranslatableMessage('Untitled', 'Untitled');
+
         }
 
         if ($this->extension) {
@@ -93,15 +93,15 @@ final class FileName implements FileNameInterface
                     '{extension}' => $this->extension,
                 ]
             );
-        } else {
-            return new TranslatableMessage(
-                $this->name,
-                '{name}',
-                [
-                    '{name}' => $this->name,
-                ]
-            );
         }
+        return new TranslatableMessage(
+            $this->name,
+            '{name}',
+            [
+                '{name}' => $this->name,
+            ]
+        );
+
     }
 
     public function setFull(string $name): void
@@ -113,15 +113,15 @@ final class FileName implements FileNameInterface
     {
         if ($this->name === null) {
             return new TranslatableMessage('Untitled', 'Untitled');
-        } else {
-            return new TranslatableMessage(
-                $this->name,
-                '{name}',
-                [
-                    '{name}' => $this->name,
-                ]
-            );
         }
+        return new TranslatableMessage(
+            $this->name,
+            '{name}',
+            [
+                '{name}' => $this->name,
+            ]
+        );
+
     }
 
     public function setBase(string $name): void

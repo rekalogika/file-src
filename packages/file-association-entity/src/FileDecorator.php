@@ -15,10 +15,10 @@ namespace Rekalogika\Domain\File\Association\Entity;
 
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileProxy;
-use Rekalogika\Domain\File\Null\NullFile;
 use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\Contracts\File\Trait\FileDecoratorTrait;
 use Rekalogika\Domain\File\Metadata\MetadataFactory;
+use Rekalogika\Domain\File\Null\NullFile;
 
 class FileDecorator implements FileInterface
 {
@@ -38,22 +38,22 @@ class FileDecorator implements FileInterface
             if ($file === null) {
                 return null;
 
-            // metadata says the file does not exist, but we get a lazy-loading
-            // proxy that we don't know whether the real file exists or not. it
-            // is highly probable the real file does not exist.
+                // metadata says the file does not exist, but we get a lazy-loading
+                // proxy that we don't know whether the real file exists or not. it
+                // is highly probable the real file does not exist.
             } elseif ($file instanceof FileProxy) {
                 return null;
 
-            // metadata says the file does not exist, but the file exists.
-            // we sync the metadata to the entity and return the file. if by
-            // any chance the caller calls `flush()`, the metadata will be
-            // persisted.
-            } else {
-                $metadata->clear();
-                $metadata->merge($file->get(RawMetadataInterface::class));
-
-                return new self($file, $metadata);
+                // metadata says the file does not exist, but the file exists.
+                // we sync the metadata to the entity and return the file. if by
+                // any chance the caller calls `flush()`, the metadata will be
+                // persisted.
             }
+            $metadata->clear();
+            $metadata->merge($file->get(RawMetadataInterface::class));
+
+            return new self($file, $metadata);
+
         }
 
         // metadata indicates the file should exist, but it is not. therefore,

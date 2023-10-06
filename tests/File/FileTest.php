@@ -15,8 +15,8 @@ namespace Rekalogika\File\Tests\File;
 
 use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\RawMetadataInterface;
-use Rekalogika\File\File;
 use Rekalogika\Domain\File\Metadata\Constants;
+use Rekalogika\File\File;
 use Rekalogika\File\TemporaryFile;
 
 class FileTest extends TestCase

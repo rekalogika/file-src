@@ -18,7 +18,6 @@ use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Adapter\FromSplFileInfoAdapter;
 use Rekalogika\File\Bridge\OneupUploader\FromOneUpUploaderFileAdapter;
 use Rekalogika\File\Bridge\Symfony\HttpFoundation\FromHttpFoundationFileAdapter;
-use Rekalogika\File\File;
 use Symfony\Component\HttpFoundation\File\File as HttpFoundationFile;
 
 /**

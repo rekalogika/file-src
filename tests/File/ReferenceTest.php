@@ -19,8 +19,8 @@ use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\DirectPropertyAccessor;
-use Rekalogika\File\FilePointer;
 use Rekalogika\Domain\File\Metadata\Constants;
+use Rekalogika\File\FilePointer;
 
 class ReferenceTest extends TestCase
 {

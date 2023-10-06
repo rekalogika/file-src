@@ -15,9 +15,9 @@ namespace Rekalogika\Domain\File\Association\Entity;
 
 use Doctrine\Common\Collections\ReadableCollection;
 use Rekalogika\Collections\Decorator\Trait\ReadableCollectionDecoratorTrait;
+use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
-use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\Domain\File\Metadata\Model\FileName;
 
 /**

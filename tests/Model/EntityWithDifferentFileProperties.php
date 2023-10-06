@@ -15,7 +15,6 @@ namespace Rekalogika\File\Tests\Model;
 
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
-use stdClass;
 
 class EntityWithDifferentFileProperties
 {
@@ -32,7 +31,7 @@ class EntityWithDifferentFileProperties
     protected FileInterface $notMandatoryLazy;
 
     #[AsFileAssociation]
-    protected stdClass $nonFileProperty;
+    protected \stdClass $nonFileProperty;
 
     protected FileInterface $fileWithoutAttribute;
 }

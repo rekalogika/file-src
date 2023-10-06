@@ -22,10 +22,10 @@ use Rekalogika\File\Association\Model\MissingFile;
 use Rekalogika\File\File;
 use Rekalogika\File\TemporaryFile;
 use Rekalogika\File\Tests\File\FileTestTrait;
-use Rekalogika\File\Tests\TestKernel;
 use Rekalogika\File\Tests\Model\Entity;
 use Rekalogika\File\Tests\Model\EntityWithLazyFile;
 use Rekalogika\File\Tests\Model\EntityWithMandatoryFile;
+use Rekalogika\File\Tests\TestKernel;
 
 class FileAssociationManagerTest extends TestCase
 {
