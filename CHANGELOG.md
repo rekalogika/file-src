@@ -4,6 +4,9 @@
 
 * Add `ReadableFileCollection`. Rename `FileCollectionDecorator` to
   `FileCollection`.
+* Add `Directory`, which is an ultra-simple implementation of
+  `DirectoryInterface`.
+* Add `FileZip::createZipResponse()`
 
 ## 1.5.1
 

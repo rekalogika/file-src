@@ -49,10 +49,6 @@ final class DirectoryResourceServer
     #[AsTemporaryUrlServer]
     public function respond(Directory $directory): Response
     {
-        $response = new StreamedResponse(function () use ($directory) {
-            $this->fileZip->streamZip($directory);
-        });
-
-        return $response;
+        return $this->fileZip->createZipResponse($directory);
     }
 }

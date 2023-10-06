@@ -1,6 +1,6 @@
 {
     "name": "rekalogika/file-zip",
-    "description": "Streams a collection of files as a zip file to the client",
+    "description": "Streams a collection of files as a ZIP file to the client",
     "homepage": "https://rekalogika.dev/file-bundle",
     "license": "MIT",
     "type": "library",
