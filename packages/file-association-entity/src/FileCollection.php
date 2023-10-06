@@ -21,7 +21,7 @@ use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\Domain\File\Metadata\Model\FileName;
 
 /**
- * Decorates a Collection<FileInterface> so that it will also be a
+ * Decorates a Collection<FileInterface> so that it will also be an instance of
  * DirectoryInterface. The caller will be able to easily know that the
  * collection contains files. Designed to be used inside Doctrine entities.
  *
@@ -30,7 +30,7 @@ use Rekalogika\Domain\File\Metadata\Model\FileName;
  * @implements Collection<TKey,T>
  * @implements DirectoryInterface<TKey,T>
  */
-final class FileCollectionDecorator implements Collection, DirectoryInterface
+final class FileCollection implements Collection, DirectoryInterface
 {
     /**
      * @use CollectionDecoratorTrait<TKey,T>

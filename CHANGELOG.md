@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.5.2
+
+* Add `ReadableFileCollection`. Rename `FileCollectionDecorator` to
+  `FileCollection`.
+
 ## 1.5.1
 
 * Rename `FilesCollection` to `FileCollectionDecorator`
