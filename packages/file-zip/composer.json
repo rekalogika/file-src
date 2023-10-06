@@ -27,8 +27,8 @@
     },
     "require": {
         "psr/http-message": "^1.0",
-        "rekalogika/file-contracts": "^1.6",
-        "rekalogika/file-metadata": "^1.6",
+        "rekalogika/file-contracts": "^1.5.3",
+        "rekalogika/file-metadata": "^1.5.3",
         "rekalogika/temporary-url-bundle": "^1.2",
         "maennchen/zipstream-php": "^3.1",
         "symfony/http-foundation": "^6.2",
