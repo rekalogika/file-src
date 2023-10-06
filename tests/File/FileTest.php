@@ -126,7 +126,7 @@ class FileTest extends TestCase
             type: 'image/png',
         );
 
-        $file->get(RawMetadataInterface::class)->set(Constants::FILE_NAME, 'foo');
+        $file->get(RawMetadataInterface::class)?->set(Constants::FILE_NAME, 'foo');
 
         $this->assertFileInterface(
             file: $file,

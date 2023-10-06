@@ -19,6 +19,7 @@ use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\Contracts\File\Trait\FileDecoratorTrait;
 use Rekalogika\Domain\File\Metadata\MetadataFactory;
 use Rekalogika\Domain\File\Null\NullFile;
+use Rekalogika\File\RawMetadata;
 
 class FileDecorator implements FileInterface
 {
@@ -50,10 +51,9 @@ class FileDecorator implements FileInterface
                 // persisted.
             }
             $metadata->clear();
-            $metadata->merge($file->get(RawMetadataInterface::class));
+            $metadata->merge($file->get(RawMetadataInterface::class) ?? []);
 
             return new self($file, $metadata);
-
         }
 
         // metadata indicates the file should exist, but it is not. therefore,
@@ -80,7 +80,7 @@ class FileDecorator implements FileInterface
         }
 
         $file = $input;
-        $metadata->merge($input->get(RawMetadataInterface::class));
+        $metadata->merge($input->get(RawMetadataInterface::class) ?? []);
     }
 
     public static function setFileMandatory(
@@ -90,7 +90,7 @@ class FileDecorator implements FileInterface
     ): void {
         $metadata->clear();
         $file = $input;
-        $metadata->merge($input->get(RawMetadataInterface::class));
+        $metadata->merge($input->get(RawMetadataInterface::class) ?? []);
     }
 
     //
@@ -120,7 +120,7 @@ class FileDecorator implements FileInterface
 
         $file->metadata->clear();
         $file->metadata->merge(
-            $file->file->get(RawMetadataInterface::class)
+            $file->file->get(RawMetadataInterface::class) ?? []
         );
     }
 
@@ -135,12 +135,14 @@ class FileDecorator implements FileInterface
         if ($id == RawMetadataInterface::class) {
             return new FileMetadataDecorator(
                 $this->metadata,
-                $this->file->get(RawMetadataInterface::class),
+                $this->file->get(RawMetadataInterface::class) ?? new RawMetadata(),
             );
         }
 
         /** @psalm-suppress MixedReturnStatement */
-        return MetadataFactory::create($this->get(RawMetadataInterface::class))
+        return MetadataFactory::create(
+            $this->get(RawMetadataInterface::class) ?? new RawMetadata()
+        )
             ->get($id);
     }
 }

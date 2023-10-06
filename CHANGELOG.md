@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.5.3
+
+* `file-bundle` now suggests `file-zip`.
+* Fix type hint for `FileInterface::get()`
+
 ## 1.5.2
 
 * Add `ReadableFileCollection`. Rename `FileCollectionDecorator` to

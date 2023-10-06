@@ -90,17 +90,21 @@ trait FileTestTrait
 
         // metadata tests
         $metadata = $file->get(RawMetadataInterface::class);
+        $this->assertNotNull($metadata);
 
         $this->assertSame($metadata->get(Constants::FILE_SIZE), \strlen($content));
-        $this->assertSame($file->get(FileMetadataInterface::class)->getSize(), \strlen($content));
+        $this->assertSame($file->get(FileMetadataInterface::class)?->getSize(), \strlen($content));
 
         $this->assertSame($metadata->get(Constants::FILE_TYPE), $type);
-        $this->assertSame((string) $file->get(FileMetadataInterface::class)->getType(), $type);
+
+        $fileMetadata =  $file->get(FileMetadataInterface::class);
+        $this->assertNotNull($fileMetadata);
+        $this->assertSame((string) $fileMetadata->getType(), $type);
 
         $metadataLastModified = $metadata->get(Constants::FILE_MODIFICATION_TIME);
         $this->assertTrue(is_int($metadataLastModified));
         $this->assertSame(
-            $file->get(FileMetadataInterface::class)->getModificationTime()->getTimestamp(),
+            $fileMetadata->getModificationTime()->getTimestamp(),
             $metadata->get(Constants::FILE_MODIFICATION_TIME)
         );
 
@@ -112,8 +116,11 @@ trait FileTestTrait
             $this->assertSame($metaHeight, $height);
             $this->assertSame($metaWidth, $width);
 
-            $this->assertSame($file->get(ImageMetadataInterface::class)->getHeight(), $height);
-            $this->assertSame($file->get(ImageMetadataInterface::class)->getWidth(), $width);
+            $imageMetadata = $file->get(ImageMetadataInterface::class);
+            $this->assertNotNull($imageMetadata);
+
+            $this->assertSame($imageMetadata->getHeight(), $height);
+            $this->assertSame($imageMetadata->getWidth(), $width);
         }
     }
 }

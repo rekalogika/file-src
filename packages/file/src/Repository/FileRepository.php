@@ -177,7 +177,18 @@ class FileRepository implements FileRepositoryInterface
         FilePointerInterface|FileInterface $file
     ): RawMetadataInterface {
         if ($file instanceof FileInterface) {
-            return $file->get(RawMetadataInterface::class);
+            $metadata = $file->get(RawMetadataInterface::class);
+
+            if (!$metadata) {
+                throw new \InvalidArgumentException(
+                    sprintf(
+                        'File "%s" does not have metadata',
+                        $file->getKey()
+                    )
+                );
+            }
+
+            return $metadata;
         }
 
         $filesystem = $this->getFilesystemFromPointerOrFile($file);

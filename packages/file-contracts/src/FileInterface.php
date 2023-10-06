@@ -127,7 +127,7 @@ interface FileInterface extends NodeInterface
      *
      * @template T of object
      * @param class-string<T>|string $id
-     * @return ($id is class-string<T> ? T : mixed)
+     * @return ($id is class-string<T> ? T|null : mixed)
      */
     public function get(string $id);
 

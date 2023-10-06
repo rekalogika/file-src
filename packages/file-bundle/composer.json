@@ -41,7 +41,8 @@
         "rekalogika/file-image": "Allows easy resizing image",
         "rekalogika/file-association": "Attach files to entities",
         "rekalogika/file-server": "Temporary URL generator for FileInterface",
-        "rekalogika/file-symfony-bridge": "Adapters for Symfony components"
+        "rekalogika/file-symfony-bridge": "Adapters for Symfony components",
+        "rekalogika/file-zip": "Stream files to web browsers as a ZIP archive"
     },
     "extra": {
         "branch-alias": {

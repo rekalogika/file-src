@@ -30,7 +30,7 @@ class FileResponse extends StreamedResponse
         ?string $disposition = null,
     ) {
         $headersFromMetadata = $file->get(HttpMetadataInterface::class)
-            ->getHeaders($disposition);
+            ?->getHeaders($disposition) ?? [];
 
         if ($headersFromMetadata instanceof \Traversable) {
             $headersFromMetadata = \iterator_to_array($headersFromMetadata);
