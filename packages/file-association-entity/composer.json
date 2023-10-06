@@ -27,14 +27,14 @@
     },
     "require": {
         "doctrine/collections": "^2.0",
-        "rekalogika/file-contracts": "^1.5",
-        "rekalogika/file-metadata": "^1.5",
-        "rekalogika/file-null": "^1.5",
+        "rekalogika/file-contracts": "^1.6",
+        "rekalogika/file-metadata": "^1.6",
+        "rekalogika/file-null": "^1.6",
         "rekalogika/doctrine-collections-decorator": "^1.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.5-dev"
+            "dev-main": "1.6-dev"
         }
     }
 }

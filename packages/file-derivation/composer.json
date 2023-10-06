@@ -21,11 +21,11 @@
         }
     },
     "require": {
-        "rekalogika/file-contracts": "^1.5"
+        "rekalogika/file-contracts": "^1.6"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.5-dev"
+            "dev-main": "1.6-dev"
         }
     }
 }
