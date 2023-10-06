@@ -63,9 +63,6 @@ jobs:
                         local_path: 'file-symfony-bridge'
                         split_repository: 'file-symfony-bridge'
                     -
-                        local_path: 'file-tree-contracts'
-                        split_repository: 'file-tree-contracts'
-                    -
                         local_path: 'file-zip'
                         split_repository: 'file-zip'
 
