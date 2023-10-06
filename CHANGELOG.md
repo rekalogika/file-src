@@ -1,10 +1,14 @@
 # CHANGELOG
 
+## 1.5.1
+
+* Rename `FilesCollection` to `FileCollectionDecorator`
+
 ## 1.5.0
 
 * Interfaces to implement a tree-like structure for `FileInterface` and
   `FilePointerInterface`. Add `NodeInterface` & `DirectoryInterface`. Should
-  still be backwards compatible.
+  still be backward compatible.
 * Zip-streaming of `DirectoryInterface`.
 
 ## 1.4.3
