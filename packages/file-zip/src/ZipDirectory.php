@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Zip;
 
+use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
-use Rekalogika\Contracts\File\Tree\DirectoryInterface;
+use Rekalogika\Contracts\File\NodeInterface;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use ZipStream\ZipStream;
@@ -32,6 +33,10 @@ final class ZipDirectory
     private array $filename = [];
 
     private ZipStream $zip;
+
+    /**
+     * @var DirectoryInterface<array-key,NodeInterface>
+     */
     private DirectoryInterface $directory;
     private string $directoryName = '';
     private ?self $parent;
@@ -43,6 +48,9 @@ final class ZipDirectory
     ) {
     }
 
+    /**
+     * @param DirectoryInterface<array-key,NodeInterface> $directory
+     */
     public function with(
         ZipStream $zip,
         DirectoryInterface $directory,
@@ -86,6 +94,9 @@ final class ZipDirectory
         );
     }
 
+    /**
+     * @param DirectoryInterface<array-key,NodeInterface> $directory
+     */
     private function processDirectory(DirectoryInterface $directory): void
     {
         $this->with(
@@ -96,6 +107,9 @@ final class ZipDirectory
         )->process();
     }
 
+    /**
+     * @param DirectoryInterface<array-key,NodeInterface>|FileInterface $file
+     */
     private function getFileName(FileInterface|DirectoryInterface $file): string
     {
         $filename = $this->translate($file->getName()->getBase());

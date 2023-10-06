@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Rekalogika\File\Zip;
 
 use Psr\Http\Message\StreamInterface;
-use Rekalogika\Contracts\File\Tree\DirectoryInterface;
+use Rekalogika\Contracts\File\DirectoryInterface;
+use Rekalogika\Contracts\File\NodeInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use ZipStream\ZipStream;
 
@@ -27,6 +28,7 @@ final class FileZip
     }
 
     /**
+     * @param DirectoryInterface<array-key,NodeInterface> $directory
      * @param resource|StreamInterface|null $outputStream
      */
     public function streamZip(

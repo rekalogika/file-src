@@ -2,10 +2,10 @@
 
 ## 1.5.0
 
-* Interfaces to implement a tree-like structure for `FileInterface`
-  structure.
-* Add `FilesInterface` to represent a collection of files.
-* Zip-streaming of collection of files.
+* Interfaces to implement a tree-like structure for `FileInterface` and
+  `FilePointerInterface`. Add `NodeInterface` & `DirectoryInterface`. Should
+  still be backwards compatible.
+* Zip-streaming of `DirectoryInterface`.
 
 ## 1.4.3
 

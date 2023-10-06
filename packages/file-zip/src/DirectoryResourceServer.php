@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Zip;
 
 use Rekalogika\Contracts\File\FileInterface;
-use Rekalogika\Contracts\File\FilesInterface;
+use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\File\Zip\Model\Directory;
 use Rekalogika\TemporaryUrl\Attribute\AsTemporaryUrlResourceTransformer;
 use Rekalogika\TemporaryUrl\Attribute\AsTemporaryUrlServer;
@@ -31,10 +31,10 @@ final class DirectoryResourceServer
     }
 
     /**
-     * @param FilesInterface<array-key,FileInterface> $files
+     * @param DirectoryInterface<array-key,FileInterface> $files
      */
     #[AsTemporaryUrlResourceTransformer]
-    public function transform(FilesInterface $files): Directory
+    public function transform(DirectoryInterface $files): Directory
     {
         $name = $files->getName()->trans($this->translator);
         $directory = new Directory($name);

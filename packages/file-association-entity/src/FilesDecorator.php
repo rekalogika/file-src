@@ -17,19 +17,20 @@ use Doctrine\Common\Collections\Collection;
 use Rekalogika\Collections\Decorator\Trait\CollectionDecoratorTrait;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
-use Rekalogika\Contracts\File\FilesInterface;
+use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\Domain\File\Metadata\Model\FileName;
 
 /**
- * Decorates a Collection<FileInterface> to be a FilesInterface, so the caller
- * can easily know that the collection contains files.
+ * Decorates a Collection<FileInterface> to be a DirectoryInterface, so the
+ * caller can easily know that the collection contains files. Designed to be
+ * used inside Doctrine entities.
  *
  * @template TKey of array-key
  * @template T of FileInterface
  * @implements Collection<TKey,T>
- * @implements FilesInterface<TKey,T>
+ * @implements DirectoryInterface<TKey,T>
  */
-final class FilesDecorator implements Collection, FilesInterface
+final class FilesDecorator implements Collection, DirectoryInterface
 {
     /**
      * @use CollectionDecoratorTrait<TKey,T>

@@ -11,22 +11,24 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\Contracts\File\Tree;
-
-use Rekalogika\Contracts\File\FileNameInterface;
+namespace Rekalogika\Contracts\File;
 
 /**
- * Represents a directory in a tree
+ * Represents a directory, which is a collection of files, file pointers, and
+ * other directories.
  *
- * @extends \Traversable<array-key,NodeInterface>
+ * @template TKey of array-key
+ * @template T of NodeInterface
+ * @extends \Traversable<TKey,T>
  */
 interface DirectoryInterface extends
+    NodeInterface,
     \Traversable,
-    \Countable,
-    NodeInterface
+    \Countable
 {
     /**
-     * Gets the directory name.
+     * The name for this set of files, will be used as the name of the
+     * downloaded folder or archive file, etc.
      */
     public function getName(): FileNameInterface;
 }

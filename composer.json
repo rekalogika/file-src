@@ -12,7 +12,7 @@
     ],
     "require": {
         "cardinalby/content-disposition": "^1.1",
-        "doctrine/collections": "^2.1",
+        "doctrine/collections": "^2.0",
         "doctrine/doctrine-bundle": "^2.10",
         "fileeye/mimemap": "^2.0",
         "intervention/image": "^2.5",

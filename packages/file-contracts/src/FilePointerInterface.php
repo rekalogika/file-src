@@ -16,7 +16,7 @@ namespace Rekalogika\Contracts\File;
 /**
  * Pointer to a file
  */
-interface FilePointerInterface
+interface FilePointerInterface extends NodeInterface
 {
     /**
      * Identifies the filesystem that the file is stored on. Null means that

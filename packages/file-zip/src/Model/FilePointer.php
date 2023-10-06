@@ -15,10 +15,8 @@ namespace Rekalogika\File\Zip\Model;
 
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\Trait\EqualityTrait;
-use Rekalogika\Contracts\File\Tree\DirectoryInterface;
-use Rekalogika\Contracts\File\Tree\FilePointerNodeInterface;
 
-final class FilePointer implements FilePointerNodeInterface
+final class FilePointer implements FilePointerInterface
 {
     use EqualityTrait;
 
@@ -50,7 +48,7 @@ final class FilePointer implements FilePointerNodeInterface
         return $this->key;
     }
 
-    public function getContainingDirectory(): ?DirectoryInterface
+    public function getContainingDirectory(): ?Directory
     {
         return $this->directory;
     }

@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Zip\Model;
 
+use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
-use Rekalogika\Contracts\File\Tree\DirectoryInterface;
-use Rekalogika\Contracts\File\Tree\NodeInterface;
+use Rekalogika\Contracts\File\NodeInterface;
 use Rekalogika\Domain\File\Metadata\Model\FileName;
 
 /**
- * @implements \IteratorAggregate<int,NodeInterface>
+ * @implements \IteratorAggregate<array-key,NodeInterface>
+ * @implements DirectoryInterface<array-key,NodeInterface>
  */
 final class Directory implements DirectoryInterface, \IteratorAggregate
 {
@@ -53,8 +54,7 @@ final class Directory implements DirectoryInterface, \IteratorAggregate
         return count($this->entries);
     }
 
-    #[\Override]
-    public function getContainingDirectory(): ?DirectoryInterface
+    public function getContainingDirectory(): ?Directory
     {
         return $this->parent;
     }

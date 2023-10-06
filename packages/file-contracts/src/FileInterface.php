@@ -19,7 +19,7 @@ use Rekalogika\Contracts\File\Exception\File\DerivationNotSupportedException;
 /**
  * Represents a file in the system.
  */
-interface FileInterface
+interface FileInterface extends NodeInterface
 {
     /**
      * Identifies the filesystem that the file is stored on. Null means that

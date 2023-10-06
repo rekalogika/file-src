@@ -11,15 +11,11 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\Contracts\File\Tree;
+namespace Rekalogika\Contracts\File;
 
 /**
- * Represents a file or directory in a tree
+ * Represents a file, a file pointer, or directory
  */
 interface NodeInterface
 {
-    /**
-     * Gets the containing directory
-     */
-    public function getContainingDirectory(): ?DirectoryInterface;
 }

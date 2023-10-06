@@ -1,9 +1,7 @@
-# rekalogika/file-tree-contracts
+# (obsolete) rekalogika/file-tree-contracts
 
-Abstraction of the tree of directories and files. Designed to add a hierarchical
-structure on top of the flat organization of files provided by the
-`rekalogika/file-contracts` package.
-
+The functionality of this package has been moved to the `rekalogika/file`
+package.
 ## Documentation
 
 [rekalogika.dev/file](https://rekalogika.dev/file)
