@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\Domain\File\Association\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Rekalogika\Collections\Decorator\Trait\CollectionDecoratorTrait;
+use Rekalogika\Collections\Decorator\Decorator\CollectionDecorator;
 use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
@@ -27,31 +27,20 @@ use Rekalogika\Domain\File\Metadata\Model\FileName;
  *
  * @template TKey of array-key
  * @template T of FileInterface
- * @implements Collection<TKey,T>
+ * @extends CollectionDecorator<TKey,T>
  * @implements DirectoryInterface<TKey,T>
  */
-final class FileCollection implements Collection, DirectoryInterface
+final class FileCollection extends CollectionDecorator
+implements DirectoryInterface
 {
-    /**
-     * @use CollectionDecoratorTrait<TKey,T>
-     */
-    use CollectionDecoratorTrait;
-
     /**
      * @param Collection<TKey,T> $files
      */
     public function __construct(
-        private Collection $files,
+        Collection $files,
         private ?string $name = null
     ) {
-    }
-
-    /**
-     * @return Collection<TKey,T>
-     */
-    protected function getWrapped(): Collection
-    {
-        return $this->files;
+        parent::__construct($files);
     }
 
     public function getName(): FileNameInterface

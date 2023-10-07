@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.5.4
+
+* Update doctrine-collections-decorator to 2.0
+
 ## 1.5.3
 
 * `file-bundle` now suggests `file-zip`.

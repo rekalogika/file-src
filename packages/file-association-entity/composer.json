@@ -30,7 +30,7 @@
         "rekalogika/file-contracts": "^1.6",
         "rekalogika/file-metadata": "^1.6",
         "rekalogika/file-null": "^1.6",
-        "rekalogika/doctrine-collections-decorator": "^1.0"
+        "rekalogika/doctrine-collections-decorator": "^2.0"
     },
     "extra": {
         "branch-alias": {
