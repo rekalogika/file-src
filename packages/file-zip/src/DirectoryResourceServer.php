@@ -35,7 +35,9 @@ final class DirectoryResourceServer
     #[AsTemporaryUrlResourceTransformer]
     public function transform(DirectoryInterface $files): Directory
     {
-        $name = $files->getName()->trans($this->translator);
+        $name = $files->getName();
+        $name->setExtension('zip');
+        $name = $name->trans($this->translator);
         $directory = new Directory($name);
 
         foreach ($files as $file) {

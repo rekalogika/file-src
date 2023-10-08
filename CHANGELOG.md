@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.5.6
+
+* Fix passing translation in ZIP file name.
+
 ## 1.5.5
 
 * `FileCollection` and `ReadableFileCollection` now accept a translated name.
