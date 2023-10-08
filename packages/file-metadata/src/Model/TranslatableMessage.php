@@ -22,7 +22,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class TranslatableMessage implements TranslatableInterface, \Stringable
 {
     /**
-     * @param array<string,string> $parameters
+     * @param array<string,string|TranslatableInterface> $parameters
      */
     public function __construct(
         private string $stringName,
