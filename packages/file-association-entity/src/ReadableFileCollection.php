@@ -19,6 +19,8 @@ use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
 use Rekalogika\Domain\File\Metadata\Model\FileName;
+use Rekalogika\Domain\File\Metadata\Model\TranslatableFileName;
+use Symfony\Contracts\Translation\TranslatableInterface;
 
 /**
  * Decorates a ReadableCollection<FileInterface> so that it will also be an
@@ -38,13 +40,17 @@ implements DirectoryInterface
      */
     public function __construct(
         ReadableCollection $files,
-        private ?string $name = null
+        private null|string|(TranslatableInterface&\Stringable) $name = null
     ) {
         parent::__construct($files);
     }
 
     public function getName(): FileNameInterface
     {
-        return new FileName($this->name);
+        if ($this->name instanceof TranslatableInterface) {
+            return new TranslatableFileName($this->name);
+        } else {
+            return new FileName($this->name);
+        }
     }
 }

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.5.5
+
+* `FileCollection` and `ReadableFileCollection` now accept a translated name.
+* Add `TranslatableFileName`
+
 ## 1.5.4
 
 * Update doctrine-collections-decorator to 2.0
