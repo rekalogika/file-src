@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.6.0
+
+* Add FilePond form type.
+
 ## 1.5.6
 
 * Fix passing translation in ZIP file name.

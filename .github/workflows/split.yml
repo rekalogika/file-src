@@ -42,6 +42,9 @@ jobs:
                         local_path: 'file-derivation'
                         split_repository: 'file-derivation'
                     -
+                        local_path: 'file-filepond'
+                        split_repository: 'file-filepond'
+                    -
                         local_path: 'file-image'
                         split_repository: 'file-image'
                     -

@@ -1,0 +1,15 @@
+{% block rekalogika_file_filepond_widget %}
+    <div data-controller="rekalogika--file-filepond--filepond">
+        {% if data %}
+            <data
+                {% if data.get('imageMetadata') %}
+                    data-href="{{ data|image_resize(1024)|temporary_url }}"
+                {% endif %}
+                data-name="{{ data.name.full|trans }}"
+                data-size="{{ data.size }}"
+                data-type="{{ data.type.name }}"
+            ></data>
+        {% endif %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
