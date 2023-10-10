@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace Rekalogika\File\Bridge\FilePond;
 
 use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\File\Bridge\Symfony\HttpFoundation\FromHttpFoundationFileAdapter;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -35,23 +37,33 @@ class FilePondType extends FileType
 
         $builder
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
-                /** @var null|string */
+                /** @var null|string|UploadedFile|FileInterface */
                 $data = $event->getData();
+                if ($data instanceof UploadedFile) {
+                    $data = FromHttpFoundationFileAdapter::adapt($data);
+                }
 
                 // if the client sent NOT_DELETED_SENTINEL, it means the user
                 // didn't remove the preview image from the filepond field. so,
                 // we set the data from the existing value.
 
-                if ($data == self::NOT_DELETED_SENTINEL) { // the image is not deleted by the user
+                if (
+                    (is_string($data) && $data == self::NOT_DELETED_SENTINEL)
+                    ||
+                    ($data instanceof FileInterface
+                        && $data->getSize() == strlen(self::NOT_DELETED_SENTINEL)
+                        && $data->getContent() == self::NOT_DELETED_SENTINEL)
+                ) {
                     $event->setData($event->getForm()->getData());
                     return;
                 }
 
-                // the client didn't send any data, most probably because they
-                // removed the preview image from the upload box. if
-                // 'remove_on_null' is off, we set the data using the existing
-                // data. if 'remove_on_null' is on, then the data remains null,
-                // and the existing file (if exists) will be removed by doctrine
+                // the client did not send any data, because they file did not
+                // exist in the first place, or because the user has removed the
+                // preview image from the upload box. if 'remove_on_null' is
+                // off, we set the data using the existing data. if
+                // 'remove_on_null' is on, then the data remains null, and the
+                // existing file (if exists) will be removed by doctrine
 
                 if (!$data) {
                     if (!$options['remove_on_null']) {
@@ -62,8 +74,11 @@ class FilePondType extends FileType
 
                 // save the file, and add it as our data
 
-                $file = FilePondFileEncodeAdapter::adapt($data);
-                $event->setData($file);
+                if (is_string($data)) {
+                    $data = FilePondFileEncodeAdapter::adapt($data);
+                }
+
+                $event->setData($data);
             });
     }
 

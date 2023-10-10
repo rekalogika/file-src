@@ -113,8 +113,8 @@ var _default = exports["default"] = /*#__PURE__*/function (_Controller) {
         _iterator2.f();
       }
       FilePond.create(input, {
-        files: files,
-        credits: false
+        storeAsFile: true,
+        files: files
       });
     }
   }]);

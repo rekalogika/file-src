@@ -88,10 +88,9 @@ export default class extends Controller {
         }
 
         FilePond.create(input, {
+            storeAsFile: true,
             files: files,
-            credits: false
         })
-
     }
 }
 
