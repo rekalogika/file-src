@@ -24,12 +24,12 @@
     },
     "require": {
         "oneup/uploader-bundle": "^4.0",
-        "rekalogika/file-contracts": "^1.6",
-        "rekalogika/file": "^1.6"
+        "rekalogika/file-contracts": "^1.7",
+        "rekalogika/file": "^1.7"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.6-dev"
+            "dev-main": "1.7-dev"
         }
     }
 }
