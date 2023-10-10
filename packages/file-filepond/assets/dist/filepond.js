@@ -32,9 +32,42 @@ require("filepond/dist/filepond.min.css");
 require("filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css");
 require("filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css");
 require("filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css");
+var _arAr = _interopRequireDefault(require("filepond/locale/ar-ar.js"));
+var _csCz = _interopRequireDefault(require("filepond/locale/cs-cz.js"));
+var _daDk = _interopRequireDefault(require("filepond/locale/da-dk.js"));
+var _deDe = _interopRequireDefault(require("filepond/locale/de-de.js"));
+var _elEl = _interopRequireDefault(require("filepond/locale/el-el.js"));
+var _enEn = _interopRequireDefault(require("filepond/locale/en-en.js"));
+var _esEs = _interopRequireDefault(require("filepond/locale/es-es.js"));
+var _fa_ir = _interopRequireDefault(require("filepond/locale/fa_ir.js"));
+var _fiFi = _interopRequireDefault(require("filepond/locale/fi-fi.js"));
+var _frFr = _interopRequireDefault(require("filepond/locale/fr-fr.js"));
+var _heHe = _interopRequireDefault(require("filepond/locale/he-he.js"));
+var _hrHr = _interopRequireDefault(require("filepond/locale/hr-hr.js"));
+var _huHu = _interopRequireDefault(require("filepond/locale/hu-hu.js"));
+var _idId = _interopRequireDefault(require("filepond/locale/id-id.js"));
+var _itIt = _interopRequireDefault(require("filepond/locale/it-it.js"));
+var _jaJa = _interopRequireDefault(require("filepond/locale/ja-ja.js"));
+var _ltLt = _interopRequireDefault(require("filepond/locale/lt-lt.js"));
+var _nlNl = _interopRequireDefault(require("filepond/locale/nl-nl.js"));
+var _no_nb = _interopRequireDefault(require("filepond/locale/no_nb.js"));
+var _plPl = _interopRequireDefault(require("filepond/locale/pl-pl.js"));
+var _ptBr = _interopRequireDefault(require("filepond/locale/pt-br.js"));
+var _roRo = _interopRequireDefault(require("filepond/locale/ro-ro.js"));
+var _ruRu = _interopRequireDefault(require("filepond/locale/ru-ru.js"));
+var _skSk = _interopRequireDefault(require("filepond/locale/sk-sk.js"));
+var _sv_se = _interopRequireDefault(require("filepond/locale/sv_se.js"));
+var _trTr = _interopRequireDefault(require("filepond/locale/tr-tr.js"));
+var _ukUa = _interopRequireDefault(require("filepond/locale/uk-ua.js"));
+var _viVi = _interopRequireDefault(require("filepond/locale/vi-vi.js"));
+var _zhCn = _interopRequireDefault(require("filepond/locale/zh-cn.js"));
+var _zhTw = _interopRequireDefault(require("filepond/locale/zh-tw.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
@@ -49,7 +82,56 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); } // locales
+var locales = {
+  'ar': _arAr["default"],
+  'cs': _csCz["default"],
+  'da': _daDk["default"],
+  'de': _deDe["default"],
+  'el': _elEl["default"],
+  'en': _enEn["default"],
+  'es': _esEs["default"],
+  'fa': _fa_ir["default"],
+  'fi': _fiFi["default"],
+  'fr': _frFr["default"],
+  'he': _heHe["default"],
+  'hr': _hrHr["default"],
+  'hu': _huHu["default"],
+  'id': _idId["default"],
+  'it': _itIt["default"],
+  'ja': _jaJa["default"],
+  'lt': _ltLt["default"],
+  'nl': _nlNl["default"],
+  'no': _no_nb["default"],
+  'pl': _plPl["default"],
+  'pt': _ptBr["default"],
+  'ro': _roRo["default"],
+  'ru': _ruRu["default"],
+  'sk': _skSk["default"],
+  'sv': _sv_se["default"],
+  'tr': _trTr["default"],
+  'uk': _ukUa["default"],
+  'vi': _viVi["default"],
+  'zh-cn': _zhCn["default"],
+  'zh-tw': _zhTw["default"]
+};
+function getCurrentLocale() {
+  var locale = document.getElementsByTagName("html")[0].getAttribute("lang");
+  if (!locale) {
+    locale = document.documentElement.lang;
+  }
+  if (locale.length > 2) {
+    locale = locale.replace('_', '-').toLowerCase;
+    if (locale != 'zh-cn' && locale != 'zh-tw') {
+      locale = locale.substring(0, 2);
+    }
+  }
+  if (locales[locale]) {
+    return locales[locale];
+  } else {
+    return _enEn["default"];
+  }
+}
 FilePond.registerPlugin(_filepondPluginFileEncode["default"], _filepondPluginImageExifOrientation["default"], _filepondPluginFileMetadata["default"], _filepondPluginFilePoster["default"], _filepondPluginFileValidateSize["default"], _filepondPluginFileValidateType["default"], _filepondPluginImageCrop["default"], _filepondPluginImageEdit["default"], _filepondPluginImagePreview["default"], _filepondPluginImageResize["default"], _filepondPluginImageTransform["default"], _filepondPluginImageValidateSize["default"]);
 
 /* stimulusFetch: 'lazy' */
@@ -112,10 +194,10 @@ var _default = exports["default"] = /*#__PURE__*/function (_Controller) {
       } finally {
         _iterator2.f();
       }
-      FilePond.create(input, {
+      FilePond.create(input, _objectSpread(_objectSpread({}, getCurrentLocale()), {}, {
         storeAsFile: true,
         files: files
-      });
+      }));
     }
   }]);
   return _default;
