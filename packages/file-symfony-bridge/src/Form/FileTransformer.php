@@ -38,6 +38,10 @@ class FileTransformer implements DataTransformerInterface
             return null;
         }
 
+        if ($value instanceof File) {
+            return $value;
+        }
+
         if (!$value instanceof FileInterface) {
             throw new TransformationFailedException(sprintf(
                 'Expecting "%s", but getting "%s" instead.',
@@ -59,6 +63,10 @@ class FileTransformer implements DataTransformerInterface
     {
         if ($value === null) {
             return null;
+        }
+
+        if ($value instanceof FileInterface) {
+            return $value;
         }
 
         if (!$value instanceof File) {

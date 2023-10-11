@@ -4,6 +4,9 @@
 
 * filepond: Rename `remove_on_null` to `allow_delete` for consistency with other
   form types.
+* symfony-bridge: Update `FileTransformer` to deal with situations where the
+  transformer is installed twice on the same form. For example, if
+  `FileTypeExtension` is active app-wide.
 
 ## 1.6.0
 
