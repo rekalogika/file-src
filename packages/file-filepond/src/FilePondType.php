@@ -60,13 +60,13 @@ class FilePondType extends FileType
 
                 // the client did not send any data, because they file did not
                 // exist in the first place, or because the user has removed the
-                // preview image from the upload box. if 'remove_on_null' is
+                // preview image from the upload box. if 'allow_delete' is
                 // off, we set the data using the existing data. if
-                // 'remove_on_null' is on, then the data remains null, and the
+                // 'allow_delete' is on, then the data remains null, and the
                 // existing file (if exists) will be removed by doctrine
 
                 if (!$data) {
-                    if (!$options['remove_on_null']) {
+                    if (!$options['allow_delete']) {
                         $event->setData($event->getForm()->getData());
                     }
                     return;
@@ -92,7 +92,7 @@ class FilePondType extends FileType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'remove_on_null' => false,
+            'allow_delete' => false,
             'data_class' => FileInterface::class,
         ]);
     }

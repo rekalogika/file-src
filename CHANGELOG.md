@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.6.1
+
+* filepond: Rename `remove_on_null` to `allow_delete` for consistency with other
+  form types.
+
 ## 1.6.0
 
 * Add FilePond form type.
