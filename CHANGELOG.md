@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.6.2
+
+* filepond: Now depends on `file-server`
+
 ## 1.6.1
 
 * filepond: Rename `remove_on_null` to `allow_delete` for consistency with other
