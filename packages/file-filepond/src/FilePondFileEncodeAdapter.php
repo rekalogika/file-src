@@ -61,7 +61,9 @@ class FilePondFileEncodeAdapter
     public static function adaptFromString(string $jsonInput): FileInterface
     {
         $input = \json_decode($jsonInput, true, 512, JSON_THROW_ON_ERROR);
-        assert(is_array($input));
+        if (!is_array($input)) {
+            throw new \JsonException('Expecting JSON data in object type');
+        }
 
         return self::adaptFromArray($input);
     }
