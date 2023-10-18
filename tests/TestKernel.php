@@ -77,9 +77,15 @@ class TestKernel extends HttpKernelKernel
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(function (ContainerBuilder $container) {
-            // silence Symfony 6.1 deprecation warning
             $container->loadFromExtension('framework', [
-                'http_method_override' => false
+                'http_method_override' => false,
+                'handle_all_throwables' => true,
+                'validation' => [
+                    'email_validation_mode' => 'html5',
+                ],
+                'php_errors' => [
+                    'log' => true,
+                ],
             ]);
 
             $container->loadFromExtension('doctrine', [

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.7.0
+
+* Bump deps of `symfony/form` to `^6.3.6 || ^6.4` because of important fixes
+* Update for config deprecations in preparation for Symfony 7
+
 ## 1.6.2
 
 * filepond: Now depends on `file-server`
