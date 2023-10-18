@@ -23,11 +23,12 @@ use Rekalogika\File\TemporaryFile;
  */
 class FilePondFileEncodeAdapter
 {
-    public static function adapt(string $jsonInput): FileInterface
+    /**
+     * @param array<array-key,mixed> $input
+     * @return FileInterface
+     */
+    public static function adaptFromArray(array $input): FileInterface
     {
-        $input = \json_decode($jsonInput, true, 512, JSON_THROW_ON_ERROR);
-        assert(is_array($input));
-
         $data = $input['data'] ?? null;
         if (!is_string($data)) {
             throw new \UnexpectedValueException('Invalid FilePond input. Expecting "data" containing a Base64 string.');
@@ -55,5 +56,13 @@ class FilePondFileEncodeAdapter
         $file->setType($type);
 
         return $file;
+    }
+
+    public static function adaptFromString(string $jsonInput): FileInterface
+    {
+        $input = \json_decode($jsonInput, true, 512, JSON_THROW_ON_ERROR);
+        assert(is_array($input));
+
+        return self::adaptFromArray($input);
     }
 }

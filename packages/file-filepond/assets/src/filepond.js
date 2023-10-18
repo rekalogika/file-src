@@ -154,7 +154,7 @@ export default class extends Controller {
                 // sentinel value sent to server. if this is value is sent
                 // to the server, then the user didn't remove the image from
                 // the filepond field
-                source: '__NOT_DELETED__',
+                source: child.dataset.id || '__NOT_DELETED__',
 
                 options: {
                     type: 'local',

@@ -27,8 +27,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FilePondType extends FileType
 {
-    public const NOT_DELETED_SENTINEL = '__NOT_DELETED__';
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple'] === true) {
@@ -43,39 +41,28 @@ class FilePondType extends FileType
                     $data = FromHttpFoundationFileAdapter::adapt($data);
                 }
 
-                // if the client sent NOT_DELETED_SENTINEL, it means the user
-                // didn't remove the preview image from the filepond field. so,
-                // we set the data from the existing value.
-
-                if (
-                    (is_string($data) && $data == self::NOT_DELETED_SENTINEL)
-                    ||
-                    ($data instanceof FileInterface
-                        && $data->getSize() == strlen(self::NOT_DELETED_SENTINEL)
-                        && $data->getContent() == self::NOT_DELETED_SENTINEL)
-                ) {
-                    $event->setData($event->getForm()->getData());
-                    return;
-                }
-
-                // the client did not send any data, because they file did not
-                // exist in the first place, or because the user has removed the
-                // preview image from the upload box. if 'allow_delete' is
-                // off, we set the data using the existing data. if
-                // 'allow_delete' is on, then the data remains null, and the
-                // existing file (if exists) will be removed by doctrine
-
-                if (!$data) {
+                if (\is_string($data)) {
+                    // try decoding if the client sent a base64 string
+                    try {
+                        $data = FilePondFileEncodeAdapter::adaptFromString($data);
+                    } catch (\JsonException $e) {
+                        // if the client sent a plain string, it means the user
+                        // did not delete the file that is already existing
+                        $event->setData($event->getForm()->getData());
+                        return;
+                    }
+                } elseif (!$data) {
+                    // the client did not send any data, because they file did
+                    // not exist in the first place, or because the user has
+                    // removed the preview image from the upload box. if
+                    // 'allow_delete' is off, we set the data using the existing
+                    // data. if 'allow_delete' is on, then the data remains
+                    // null, and the existing file (if exists) will be removed
+                    // by doctrine
                     if (!$options['allow_delete']) {
                         $event->setData($event->getForm()->getData());
                     }
                     return;
-                }
-
-                // save the file, and add it as our data
-
-                if (is_string($data)) {
-                    $data = FilePondFileEncodeAdapter::adapt($data);
                 }
 
                 $event->setData($data);
