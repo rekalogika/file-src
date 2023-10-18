@@ -86,6 +86,8 @@ class FilePondCollectionType extends FileType
     {
         parent::buildView($view, $form, $options);
 
+        // we force using allowFileEncode because of this bug:
+        // https://github.com/pqina/filepond/pull/941
         $view->vars['attr'] = array_merge(
             $view->vars['attr'],
             [
