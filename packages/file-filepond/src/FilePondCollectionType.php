@@ -20,6 +20,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -78,6 +80,17 @@ class FilePondCollectionType extends FileType
                 $event->setData($newData);
             })
         ;
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['attr'] = array_merge(
+            $view->vars['attr'],
+            [
+                'data-allow-file-encode' => 'true',
+                'data-store-as-file' => 'false',
+            ]
+        );
     }
 
     public function getBlockPrefix(): string
