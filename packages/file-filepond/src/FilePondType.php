@@ -23,7 +23,21 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * A FileType utilizing FilePond
+ * A FileType utilizing FilePond.
+ *
+ * FilePond supports two mode of operation:
+ * 1. Using standard multipart/form-data encoding
+ * 2. By encoding the file as a base64 string and sending it as a JSON object
+ *
+ * This class supports both modes of operation. By default it uses
+ * multipart/form-data, to use the base64 string encoding, add this attributes:
+ *
+ * ```
+ * 'attr' => [
+ *     'data-allow-file-encode' => 'true',
+ *     'data-store-as-file' => 'false',
+ * ],
+ * ```
  */
 class FilePondType extends FileType
 {
