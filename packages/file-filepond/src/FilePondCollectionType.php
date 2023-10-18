@@ -84,6 +84,8 @@ class FilePondCollectionType extends FileType
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
+        parent::buildView($view, $form, $options);
+
         $view->vars['attr'] = array_merge(
             $view->vars['attr'],
             [
