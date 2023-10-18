@@ -26,6 +26,7 @@
     },
     "require": {
         "rekalogika/file": "^1.7",
+        "rekalogika/file-association-entity": "^1.7",
         "rekalogika/file-bundle": "^1.7",
         "rekalogika/file-contracts": "^1.7",
         "rekalogika/file-image": "^1.7",

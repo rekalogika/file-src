@@ -13,3 +13,20 @@
         {{ block('form_widget_simple') }}
     </div>
 {% endblock %}
+
+{% block rekalogika_file_filepond_collection_widget %}
+    <div data-controller="rekalogika--file-filepond--filepond">
+        {% for id, entry in data %}
+            <data
+                {% if entry.get('imageMetadata') %}
+                    data-href="{{ entry|image_resize(1024)|temporary_url }}"
+                {% endif %}
+                data-id="{{ id }}"
+                data-name="{{ entry.name.full|trans }}"
+                data-size="{{ entry.size }}"
+                data-type="{{ entry.type.name }}"
+            ></data>
+        {% endfor %}
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
