@@ -26,16 +26,16 @@
         }
     },
     "require": {
-        "rekalogika/file": "^1.7",
-        "rekalogika/file-contracts": "^1.7",
-        "rekalogika/file-metadata-contracts": "^1.7",
+        "rekalogika/file": "^1.8",
+        "rekalogika/file-contracts": "^1.8",
+        "rekalogika/file-metadata-contracts": "^1.8",
         "symfony/form": "^6.2",
         "symfony/http-foundation": "^6.2",
         "symfony/validator": "^6.2"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.7-dev"
+            "dev-main": "1.8-dev"
         }
     }
 }
