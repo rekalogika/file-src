@@ -32,6 +32,10 @@ class FilePondCollectionType extends FileType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        if ($options['multiple'] !== true) {
+            throw new \InvalidArgumentException('FilePondCollectionType only accept "multiple" option');
+        }
+
         $builder
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
                 $incomingFiles = $event->getData();
