@@ -2,8 +2,14 @@
 
 ## 1.7.0
 
-* Bump deps of `symfony/form` to `^6.3.6 || ^6.4` because of important fixes
+* Bump deps of `symfony/form` to `^6.3.6 || ^6.4` because of the [necessary
+  fixes](https://github.com/symfony/symfony/pull/52021)
 * Update for config deprecations in preparation for Symfony 7
+* Add `FilePondCollectionType`.
+* Revert `symfony/form` dep to `6.2` because we are blocked by a [FilePond
+  bug](https://github.com/pqina/filepond/pull/941) anyway.
+* Force `FilePondCollectionType` to use `allowFileEncode` and disable
+  `storeAsFile` for now.
 
 ## 1.6.2
 
