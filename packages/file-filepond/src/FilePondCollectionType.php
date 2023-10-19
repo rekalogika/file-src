@@ -33,7 +33,7 @@ class FilePondCollectionType extends FileType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
                 $incomingFiles = $event->getData();
                 if (!is_array($incomingFiles)) {
                     throw new \InvalidArgumentException('Incoming files must be an array');
@@ -46,9 +46,11 @@ class FilePondCollectionType extends FileType
 
                 $newData = $entityFiles->toArray();
 
-                foreach ($newData as $key => $file) {
-                    if (!in_array((string) $key, $incomingFiles, true)) {
-                        unset($newData[$key]);
+                if ($options['allow_delete'] === true) {
+                    foreach ($newData as $key => $file) {
+                        if (!in_array((string) $key, $incomingFiles, true)) {
+                            unset($newData[$key]);
+                        }
                     }
                 }
 
