@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.7.1
+
+* Change version dependency of `psr/http-message` to `^1.0 || ^2.0`
+
 ## 1.7.0
 
 * Bump deps of `symfony/form` to `^6.3.6 || ^6.4` because of the [necessary
