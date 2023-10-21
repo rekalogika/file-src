@@ -22,14 +22,14 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 class RekalogikaFileFilePondExtension extends Extension implements
     PrependExtensionInterface
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $container
             ->setDefinition(FilePondType::class, new Definition(FilePondType::class))
             ->addTag('form.type');
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $container->prependExtensionConfig('twig', [
             'form_themes' => ['@RekalogikaFileFilePond/filepond_form_theme.html.twig']

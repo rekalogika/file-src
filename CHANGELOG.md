@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.7.2
+
+* Fix typehints
+
 ## 1.7.1
 
 * Change version dependency of `psr/http-message` to `^1.0 || ^2.0`
