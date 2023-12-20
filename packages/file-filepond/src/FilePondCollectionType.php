@@ -88,21 +88,6 @@ class FilePondCollectionType extends FileType
         ;
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options): void
-    {
-        parent::buildView($view, $form, $options);
-
-        // we force using allowFileEncode because of this bug:
-        // https://github.com/pqina/filepond/pull/941
-        $view->vars['attr'] = array_merge(
-            $view->vars['attr'],
-            [
-                'data-allow-file-encode' => 'true',
-                'data-store-as-file' => 'false',
-            ]
-        );
-    }
-
     public function getBlockPrefix(): string
     {
         return 'rekalogika_file_filepond_collection';

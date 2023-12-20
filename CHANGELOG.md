@@ -4,8 +4,10 @@
 
 * Fix typehints
 * Update Filepond JS dependencies
-* Add jfif to the common extension for image/jpeg (fix test)
+* Fix common extensions tests
 * Update psalm (fixes Override)
+* Remove allowFileEncode in FilePondCollectionType as upstream already fixed the
+  blocker
 
 ## 1.7.1
 
