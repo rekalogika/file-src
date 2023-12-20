@@ -4,6 +4,7 @@
 
 * Fix typehints
 * Update Filepond JS dependencies
+* Add jfif to the common extension for image/jpeg (fix test)
 
 ## 1.7.1
 

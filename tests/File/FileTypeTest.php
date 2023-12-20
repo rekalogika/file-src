@@ -25,7 +25,7 @@ class FileTypeTest extends TestCase
         $this->assertSame('image/jpeg', $type->getName());
         $this->assertSame('image', $type->getType());
         $this->assertSame('jpeg', $type->getSubType());
-        $this->assertSame(['jpeg', 'jpg', 'jpe'], $type->getCommonExtensions());
+        $this->assertSame(['jpeg', 'jpg', 'jpe', 'jfif'], $type->getCommonExtensions());
         $this->assertSame('jpeg', $type->getExtension());
         $this->assertSame('JPEG image', (string) $type->getDescription());
         $this->assertSame('image/jpeg', (string) $type);
