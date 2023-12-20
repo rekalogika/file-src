@@ -64,7 +64,7 @@
         "symfony/routing": "^6.2",
         "symfony/yaml": "^6.2",
         "symplify/monorepo-builder": "^11.2",
-        "vimeo/psalm": "^5.15"
+        "vimeo/psalm": "^5.18"
     },
     "autoload": {
         "psr-4": {
