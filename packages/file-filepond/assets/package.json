@@ -27,7 +27,7 @@
         "@hotwired/stimulus": "^3.0"
     },
     "dependencies": {
-        "filepond": "^4.30.4",
+        "filepond": "^4.30.5",
         "filepond-plugin-file-encode": "^2.1.11",
         "filepond-plugin-file-metadata": "^1.0.8",
         "filepond-plugin-file-poster": "^2.5.1",

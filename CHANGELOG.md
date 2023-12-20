@@ -3,6 +3,7 @@
 ## 1.7.2
 
 * Fix typehints
+* Update Filepond JS dependencies
 
 ## 1.7.1
 
