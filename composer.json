@@ -52,7 +52,7 @@
         "lctrs/psalm-psr-container-plugin": "^1.9",
         "league/flysystem-memory": "^3.16",
         "mockery/mockery": "^1.6",
-        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan": "^1.10.50",
         "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpstan/phpstan-mockery": "^1.1",
         "phpstan/phpstan-phpunit": "^1.3",
