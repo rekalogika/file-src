@@ -31,7 +31,7 @@ trait FileTrait
 {
     use FileDecoratorTrait;
 
-    #[AsFileAssociation]
+    #[AsFileAssociation(fetch: 'LAZY')]
     private FileInterface $file;
 
     #[Embedded()]
@@ -50,6 +50,10 @@ trait FileTrait
 
     private function getWrapped(): FileInterface
     {
+        if (!isset($this->file)) {
+            throw new \LogicException(sprintf('$file is not set. This might be caused by the use of `AbstractQuery::toIterable()`. If that is the case, you can: 1. stop involving "%s" in the query; 2. pre-hydrate the file entities before the query; or 3. use other means to iterate the query.', static::class));
+        }
+
         return FileDecorator::getFile($this->file, $this->getMetadata()) ?? new NullFile();
     }
 }

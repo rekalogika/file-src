@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.7.3
+
+* Use lazy-loading in `FileTrait`.
+* Add informative exception if the file is missing in `FileTrait`.
+
 ## 1.7.2
 
 * Fix typehints
