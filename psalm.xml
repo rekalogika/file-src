@@ -29,6 +29,7 @@
         <RedundantPropertyInitializationCheck>
             <errorLevel type="suppress">
                 <file name="packages/file-derivation/src/Filter/AbstractFileFilter.php" />
+                <file name="packages/file-association-entity/src/FileTrait.php" />
             </errorLevel>
         </RedundantPropertyInitializationCheck>
         <MissingConstructor>
