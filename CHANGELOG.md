@@ -4,6 +4,9 @@
 
 * Use lazy-loading in `FileTrait`.
 * Add informative exception if the file is missing in `FileTrait`.
+* Use `UnsetFile` in place of an unset file. Allows caller to get data from the
+  embedded metadata if the file is unset. Will only throw exception, i.e. if the
+  caller attempts to get the file.
 
 ## 1.7.2
 

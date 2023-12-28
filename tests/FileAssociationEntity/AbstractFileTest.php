@@ -14,6 +14,10 @@ declare(strict_types=1);
 namespace Rekalogika\File\Tests\FileAssociationEntity;
 
 use PHPUnit\Framework\TestCase;
+use Rekalogika\Domain\File\Association\Entity\AbstractFile;
+use Rekalogika\Domain\File\Association\Entity\EmbeddedMetadata;
+use Rekalogika\Domain\File\Association\Entity\UnsetFile;
+use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\TemporaryFile;
 use Rekalogika\File\Tests\File\FileTestTrait;
 use Rekalogika\File\Tests\Model\EntityExtendingAbstractFile;
@@ -47,5 +51,46 @@ class AbstractFileTest extends TestCase
             content: 'test-temporary-file',
             type: 'text/plain',
         );
+    }
+
+    /**
+     * Simulating the case where doctrine did not call the onLoad event.
+     */
+    public function testUnsetAbstractFile(): void
+    {
+        $reflection = new \ReflectionClass(EntityExtendingAbstractFile::class);
+        $entity = $reflection->newInstanceWithoutConstructor();
+        $this->expectException(UnsetFile::class);
+        $entity->getContent();
+    }
+
+    /**
+     * Simulating the case where doctrine did not call the onLoad event, but
+     * the entity has embedded metadata.
+     */
+    public function testUnsetAbstractFileHavingEmbeddedMetadata(): void
+    {
+        $reflectionClass = new \ReflectionClass(EntityExtendingAbstractFile::class);
+        $abstractFileReflection = new \ReflectionClass(AbstractFile::class);
+
+        $entity = $reflectionClass->newInstanceWithoutConstructor();
+
+        $metadata = new EmbeddedMetadata();
+        $metadata->set(Constants::FILE_NAME, 'foo.txt');
+        $metadata->set(Constants::FILE_SIZE, 123);
+        $metadata->set(Constants::FILE_TYPE, 'text/plain');
+        $metadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);
+
+        $reflectionProperty = $abstractFileReflection->getProperty('metadata');
+        $reflectionProperty->setAccessible(true);
+        $reflectionProperty->setValue($entity, $metadata);
+
+        static::assertSame('foo.txt', (string) $entity->getName()->getFull());
+        static::assertSame(123, $entity->getSize());
+        static::assertSame('text/plain', $entity->getType()->getName());
+        static::assertSame(1234567890, $entity->getLastModified()->getTimestamp());
+
+        $this->expectException(UnsetFile::class);
+        $entity->getContent();
     }
 }

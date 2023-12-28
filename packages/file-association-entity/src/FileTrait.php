@@ -21,7 +21,7 @@ use Rekalogika\File\Association\Attribute\AsFileAssociation;
 
 /**
  * Trait to help the creation of a file entity (an entity implementing
- * FileInterface). Classes using this trait is expected to:
+ * FileInterface). Classes using this trait are expected to:
  *
  * 1. Implement FileInterface
  * 2. Call setWrapped in the constructor to inject the real file
@@ -51,7 +51,7 @@ trait FileTrait
     private function getWrapped(): FileInterface
     {
         if (!isset($this->file)) {
-            throw new \LogicException(sprintf('$file is not set. This might be caused by the use of `AbstractQuery::toIterable()`. If that is the case, you can: 1. stop involving "%s" in the query; 2. pre-hydrate the file entities before the query; or 3. use other means to iterate the query.', static::class));
+            $this->file = new UnsetFile(static::class, 'file');
         }
 
         return FileDecorator::getFile($this->file, $this->getMetadata()) ?? new NullFile();

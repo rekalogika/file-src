@@ -67,5 +67,17 @@
         <target>The file is missing in the storage media</target>
       </segment>
     </unit>
+    <unit id="unset" name="Unset">
+      <segment>
+        <source>(unset)</source>
+        <target>(unset)</target>
+      </segment>
+    </unit>
+    <unit id="unset-file" name="The file is unset">
+      <segment>
+        <source>The file is unset due to an error</source>
+        <target>The file is unset due to an error</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
