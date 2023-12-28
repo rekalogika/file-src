@@ -39,9 +39,9 @@ class FileDecorator implements FileInterface
             if ($file === null) {
                 return null;
 
-                // metadata says the file does not exist, but we get a lazy-loading
-                // proxy that we don't know whether the real file exists or not. it
-                // is highly probable the real file does not exist.
+            // metadata says the file does not exist, but we get a lazy-loading
+            // proxy that we don't know whether the real file exists or not. it
+            // is highly probable the real file does not exist.
             } elseif ($file instanceof FileProxy) {
                 return null;
 

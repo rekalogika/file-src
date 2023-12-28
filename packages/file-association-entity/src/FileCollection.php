@@ -32,8 +32,7 @@ use Symfony\Contracts\Translation\TranslatableInterface;
  * @extends CollectionDecorator<TKey,T>
  * @implements DirectoryInterface<TKey,T>
  */
-final class FileCollection extends CollectionDecorator
-implements DirectoryInterface
+final class FileCollection extends CollectionDecorator implements DirectoryInterface
 {
     /**
      * @param Collection<TKey,T> $files
@@ -49,8 +48,8 @@ implements DirectoryInterface
     {
         if ($this->name instanceof TranslatableInterface) {
             return new TranslatableFileName($this->name);
-        } else {
-            return new FileName($this->name);
         }
+        return new FileName($this->name);
+
     }
 }

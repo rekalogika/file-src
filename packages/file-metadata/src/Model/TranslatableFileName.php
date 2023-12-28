@@ -49,15 +49,15 @@ final class TranslatableFileName implements FileNameInterface
                     '{extension}' => $this->extension,
                 ]
             );
-        } else {
-            return new TranslatableMessage(
-                (string) $this->base,
-                '{name}',
-                [
-                    '{name}' => $this->base,
-                ]
-            );
         }
+        return new TranslatableMessage(
+            (string) $this->base,
+            '{name}',
+            [
+                '{name}' => $this->base,
+            ]
+        );
+
     }
 
     public function setFull(string $name): void

@@ -37,8 +37,8 @@ class FileResponse extends StreamedResponse
         }
 
         $responseHeaders = [
-            ... array_change_key_case($headersFromMetadata, \CASE_LOWER),
-            ... array_change_key_case($headers, \CASE_LOWER),
+            ...array_change_key_case($headersFromMetadata, \CASE_LOWER),
+            ...array_change_key_case($headers, \CASE_LOWER),
         ];
 
         $inputStream = $file->getContentAsStream()->detach();
