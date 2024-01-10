@@ -77,7 +77,6 @@
 
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
-        <pluginClass class="Lctrs\PsalmPsrContainerPlugin\Plugin" />
         <pluginClass class="Psalm\MockeryPlugin\Plugin" />
     </plugins>
 </psalm>

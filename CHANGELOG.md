@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.8.0
+
+* Supports Symfony 7
+
 ## 1.7.3
 
 * Use lazy-loading in `FileTrait`.

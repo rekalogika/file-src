@@ -11,7 +11,7 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Tests\FileBundle;
+namespace Rekalogika\File\Tests\FileServer;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;

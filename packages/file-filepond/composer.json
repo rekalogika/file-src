@@ -33,8 +33,8 @@
         "rekalogika/file-server": "^1.8",
         "rekalogika/file-symfony-bridge": "^1.8",
         "rekalogika/temporary-url-bundle": "^1.3",
-        "symfony/form": "^6.2",
-        "symfony/options-resolver": "^6.2",
+        "symfony/form": "^6.2 || ^7.0",
+        "symfony/options-resolver": "^6.2 || ^7.0",
         "symfony/stimulus-bundle": "^2.12"
     },
     "extra": {

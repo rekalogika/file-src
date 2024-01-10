@@ -16,6 +16,7 @@ namespace Rekalogika\File\Tests\FileSymfonyBridge;
 use Rekalogika\File\Bridge\Symfony\Constraints\Image;
 use Rekalogika\File\Bridge\Symfony\Constraints\ImageValidator;
 use Rekalogika\File\File;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 /**
@@ -23,7 +24,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
  */
 class ImageValidatorTest extends ConstraintValidatorTestCase
 {
-    protected function createValidator()
+    protected function createValidator(): ConstraintValidatorInterface
     {
         return new ImageValidator();
     }
@@ -42,7 +43,10 @@ class ImageValidatorTest extends ConstraintValidatorTestCase
         $constraint = new Image(maxWidth: 10);
         $this->validator->validate($image, $constraint);
 
-        $this->buildViolation((string) $constraint->maxWidthMessage)
+        /** @var string */
+        $maxWidth = $constraint->maxWidthMessage;
+
+        $this->buildViolation($maxWidth)
             ->setParameter('{{ width }}', '240')
             ->setParameter('{{ max_width }}', '10')
             ->setCode(Image::TOO_WIDE_ERROR)

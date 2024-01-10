@@ -30,7 +30,7 @@
         "rekalogika/file-association-contracts": "^1.8",
         "rekalogika/file-contracts": "^1.8",
         "rekalogika/reconstitutor": "^1.0",
-        "symfony/property-access": "^6.2"
+        "symfony/property-access": "^6.2 || ^7.0"
     },
     "extra": {
         "branch-alias": {

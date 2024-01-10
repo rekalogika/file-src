@@ -16,6 +16,7 @@ namespace Rekalogika\File\Tests\FileSymfonyBridge;
 use Rekalogika\File\Bridge\Symfony\Constraints\File;
 use Rekalogika\File\Bridge\Symfony\Constraints\FileValidator;
 use Rekalogika\File\TemporaryFile;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 /**
@@ -23,7 +24,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
  */
 class FileValidatorTest extends ConstraintValidatorTestCase
 {
-    protected function createValidator()
+    protected function createValidator(): ConstraintValidatorInterface
     {
         return new FileValidator();
     }
@@ -46,7 +47,10 @@ class FileValidatorTest extends ConstraintValidatorTestCase
         $file = (string) $violation->getParameters()['{{ file }}'];
         $name = (string) $violation->getParameters()['{{ name }}'];
 
-        $this->buildViolation((string) $constraint->maxSizeMessage)
+        /** @var string */
+        $maxSizeMessage = $constraint->maxSizeMessage;
+
+        $this->buildViolation($maxSizeMessage)
             ->setParameter('{{ limit }}', '1')
             ->setParameter('{{ size }}', '4')
             ->setParameter('{{ file }}', $file)

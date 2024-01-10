@@ -1,5 +1,5 @@
 .PHONY: test
-test: phpstan psalm phpunit
+test: composer-dump composer-validate phpstan psalm phpunit
 
 .PHONY: monorepo
 monorepo: validate merge
@@ -23,6 +23,14 @@ psalm:
 .PHONY: phpunit
 phpunit:
 	vendor/bin/phpunit --testdox -v
+
+.PHONY: composer-dump
+composer-dump:
+	composer dump --optimize
+
+.PHONY: composer-validate
+composer-validate:
+	composer validate --strict
 
 .PHONY: php-cs-fixer
 php-cs-fixer: tools/php-cs-fixer

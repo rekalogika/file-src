@@ -94,6 +94,9 @@ class TestKernel extends HttpKernelKernel
                     'memory' => true,
                     'charset' => 'UTF8',
                 ],
+                'orm' => [
+                    'enable_lazy_ghost_objects' => true,
+                ]
             ]);
 
             $container->loadFromExtension('rekalogika_file', $this->config);
