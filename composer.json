@@ -59,6 +59,8 @@
         "phpunit/phpunit": "^9.6",
         "psalm/plugin-mockery": "^1.1",
         "psalm/plugin-phpunit": "^0.18.4",
+        "symfony/console": "^6.2 || ^7.0",
+        "symfony/property-info": "^6.2 || ^7.0",
         "symfony/framework-bundle": "^6.2 || ^7.0",
         "symfony/phpunit-bridge": "^6.2 || ^7.0",
         "symfony/routing": "^6.2 || ^7.0",
