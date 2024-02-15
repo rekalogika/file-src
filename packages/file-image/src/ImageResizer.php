@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Image;
 
+use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\ImageManager;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Derivation\Filter\AbstractFileFilter;
@@ -98,7 +99,7 @@ class ImageResizer extends AbstractFileFilter
         }
 
         $img->resize((int) round($width), (int) round($height));
-        $img->encode();
+        $encoded = $img->encode(new AutoEncoder);
 
         return $this->getFileRepository()
             ->createFromString(
