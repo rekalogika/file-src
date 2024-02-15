@@ -66,8 +66,8 @@ class ImageResizer extends AbstractFileFilter
     {
         $ratio = null;
 
-        $img = (new ImageManager())
-            ->make($this->getSourceFile()->getContentAsStream());
+        $img = ImageManager::gd()
+            ->read($this->getSourceFile()->getContentAsStream()->detach());
 
         $w = $img->width();
         $h = $img->height();
@@ -104,7 +104,7 @@ class ImageResizer extends AbstractFileFilter
         return $this->getFileRepository()
             ->createFromString(
                 $this->getDerivationFilePointer(),
-                $img->getEncoded()
+                $encoded->toString(),
             );
     }
 }
