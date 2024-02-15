@@ -60,7 +60,7 @@
         "psalm/plugin-mockery": "^1.1",
         "psalm/plugin-phpunit": "^0.18.4",
         "symfony/framework-bundle": "^6.2",
-        "symfony/phpunit-bridge": "^6.2",
+        "symfony/phpunit-bridge": "^7.0",
         "symfony/routing": "^6.2 || ^7.0",
         "symfony/yaml": "^6.2",
         "symplify/monorepo-builder": "^11.2",
