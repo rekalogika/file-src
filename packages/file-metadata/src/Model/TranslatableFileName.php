@@ -40,7 +40,7 @@ final class TranslatableFileName implements FileNameInterface
 
     public function getFull(): \Stringable&TranslatableInterface
     {
-        if ($this->extension) {
+        if ($this->extension !== null && $this->extension !== '') {
             return new TranslatableMessage(
                 sprintf('%s.%s', (string) $this->base, $this->extension),
                 '{name}.{extension}',

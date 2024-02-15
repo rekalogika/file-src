@@ -20,7 +20,7 @@ class TemporaryFileException extends FileException
         ?string $filesystemId = null,
         \Throwable $previous = null
     ) {
-        if ($filesystemId) {
+        if ($filesystemId !== null) {
             parent::__construct(
                 sprintf(
                     'Cannot create a temporary file with prefix "%s" in filesystem "%s"',

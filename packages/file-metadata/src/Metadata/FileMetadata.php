@@ -42,7 +42,6 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
             return new FileName(null, $this->getType()->getExtension());
         }
         return new FileName((string) $result);
-
     }
 
     public function setName(?string $fileName): void
@@ -57,7 +56,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
         if (!$extension) {
             $type = $this->getType();
             $extension = $type->getExtension();
-            if ($extension) {
+            if ($extension !== null) {
                 $fileName .= '.' . $extension;
             }
         }

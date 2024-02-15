@@ -20,7 +20,7 @@ class FileNotFoundException extends FileException
         ?string $filesystemId = null,
         \Throwable $previous = null
     ) {
-        if ($filesystemId) {
+        if ($filesystemId !== null) {
             parent::__construct(
                 sprintf(
                     'File "%s" in filesystem "%s" does not exist.',

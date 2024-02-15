@@ -23,7 +23,7 @@ final class ImageMetadata extends AbstractMetadata implements
     public static function create(
         RawMetadataInterface $metadata
     ): ?static {
-        if (!$metadata->tryGet(Constants::MEDIA_WIDTH)) {
+        if (!((bool) $metadata->tryGet(Constants::MEDIA_WIDTH))) {
             return null;
         }
 

@@ -46,7 +46,7 @@ final class FileName implements FileNameInterface
     public function __toString(): string
     {
         if ($this->name === null) {
-            if ($this->extension) {
+            if ($this->extension !== null && $this->extension !== '') {
                 return 'Untitled.' . $this->extension;
             }
             return 'Untitled';
@@ -71,7 +71,7 @@ final class FileName implements FileNameInterface
     public function getFull(): \Stringable&TranslatableInterface
     {
         if ($this->name === null) {
-            if ($this->extension) {
+            if ($this->extension !== null && $this->extension !== '') {
                 return new TranslatableMessage(
                     'Untitled.' . $this->extension,
                     'Untitled.{extension}',
@@ -84,7 +84,7 @@ final class FileName implements FileNameInterface
 
         }
 
-        if ($this->extension) {
+        if ($this->extension !== null && $this->extension !== '') {
             return new TranslatableMessage(
                 $this->name . '.' . $this->extension,
                 '{name}.{extension}',
