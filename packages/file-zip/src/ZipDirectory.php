@@ -115,7 +115,7 @@ final class ZipDirectory
         $filename = $this->translate($file->getName()->getBase());
         $extension = $file->getName()->getExtension();
 
-        if ($extension) {
+        if ($extension !== null && $extension !== '') {
             $extension = '.' . $extension;
         } else {
             $extension = '';

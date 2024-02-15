@@ -188,6 +188,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
         return $this->getHttpFoundationFile()->getPerms();
     }
 
+    /** @psalm-suppress LessSpecificImplementedReturnType */
     public function getRealPath(): string|false
     {
         return $this->getHttpFoundationFile()->getRealPath();

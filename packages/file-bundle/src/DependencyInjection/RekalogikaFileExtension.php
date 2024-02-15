@@ -132,7 +132,7 @@ class RekalogikaFileExtension extends Extension implements PrependExtensionInter
             $path = (new \ReflectionClass(EmbeddedMetadata::class))
                 ->getFileName();
 
-            if (empty($path)) {
+            if ($path === false) {
                 throw new \RuntimeException('Unable to get path of EmbeddedMetadata class');
             }
 

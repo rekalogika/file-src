@@ -145,31 +145,31 @@ final class HttpMetadata extends AbstractMetadata implements
     {
         yield 'Date' => $this->getDate();
 
-        if ($cacheControl = $this->getCacheControl()) {
+        if (($cacheControl = $this->getCacheControl()) !== null) {
             yield 'Cache-Control' => $cacheControl;
         }
 
         yield 'Content-Disposition' => $this->getContentDisposition($disposition);
 
-        if ($contentLength = $this->getContentLength()) {
+        if (($contentLength = $this->getContentLength()) !== null) {
             yield 'Content-Length' => $contentLength;
         }
 
         yield 'Content-Type' => $this->getContentType();
 
-        if ($lastModified = $this->getLastModified()) {
+        if (($lastModified = $this->getLastModified()) !== null) {
             yield 'Last-Modified' => $lastModified;
         }
 
-        if ($eTag = $this->getETag()) {
+        if (($eTag = $this->getETag()) !== null) {
             yield 'ETag' => $eTag;
         }
 
-        if ($width = $this->getWidth()) {
+        if (($width = $this->getWidth()) !== null) {
             yield 'X-Width' => $width;
         }
 
-        if ($height = $this->getHeight()) {
+        if (($height = $this->getHeight()) !== null) {
             yield 'X-Height' => $height;
         }
     }
