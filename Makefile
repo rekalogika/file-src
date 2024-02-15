@@ -22,7 +22,7 @@ psalm:
 
 .PHONY: phpunit
 phpunit:
-	vendor/bin/phpunit --testdox -v
+	vendor/bin/phpunit --testdox
 
 .PHONY: composer-dump
 composer-dump:

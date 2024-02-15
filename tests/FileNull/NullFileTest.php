@@ -54,7 +54,7 @@ class NullFileTest extends TestCase
     /**
      * @return iterable<int,array{0:bool,1:FilePointerInterface|FileInterface,2:FilePointerInterface|FileInterface}>
      */
-    public function equalityProvider(): iterable
+    public static function equalityProvider(): iterable
     {
         $nullFile = new NullFile();
         $nullPointer = $nullFile->getPointer();
