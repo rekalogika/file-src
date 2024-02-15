@@ -15,7 +15,7 @@
         "doctrine/collections": "^2.0",
         "doctrine/persistence": "^3.1",
         "fileeye/mimemap": "^2.0",
-        "intervention/image": "^2.5",
+        "intervention/image": "^3.3",
         "league/flysystem": "^3.16",
         "league/flysystem-local": "^3.16",
         "league/mime-type-detection": "^1.0.0",
