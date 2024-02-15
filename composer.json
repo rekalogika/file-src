@@ -42,7 +42,7 @@
         "symfony/service-contracts": "^3.3",
         "symfony/stimulus-bundle": "^2.12",
         "symfony/translation-contracts": "^3.0",
-        "symfony/validator": "^6.2 || ^7.0",
+        "symfony/validator": "^6.3 || ^7.0",
         "twig/twig": "^2.12|^3.0",
         "webmozart/assert": "^1.11",
         "guzzlehttp/psr7": "^2.6"
@@ -63,7 +63,7 @@
         "symfony/console": "^6.2 || ^7.0",
         "symfony/property-info": "^6.2 || ^7.0",
         "symfony/framework-bundle": "^6.2 || ^7.0",
-        "symfony/phpunit-bridge": "^6.2 || ^7.0",
+        "symfony/phpunit-bridge": "^6.3 || ^7.0",
         "symfony/routing": "^6.2 || ^7.0",
         "symfony/yaml": "^6.2 || ^7.0",
         "symplify/monorepo-builder": "^11.2",
