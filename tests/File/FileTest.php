@@ -137,4 +137,20 @@ class FileTest extends TestCase
             type: 'image/png',
         );
     }
+
+    public function testOpenBasedir(): void
+    {
+        $dir = realpath(__DIR__ . '/../../');
+        ini_set('open_basedir', $dir . ":" . '/tmp');
+        $path = $dir . '/var/test.txt';
+        \file_put_contents($path, 'foo');
+
+        $file = new File($path);
+        $content = $file->getContent();
+        $file->setContent('bar');
+        $newContent = $file->getContent();
+
+        $this->assertSame('foo', $content);
+        $this->assertSame('bar', $newContent);
+    }
 }
