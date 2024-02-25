@@ -22,7 +22,8 @@ psalm:
 
 .PHONY: phpunit
 phpunit:
-	vendor/bin/phpunit --testdox
+	$(eval c ?=)
+	vendor/bin/phpunit $(c)
 
 .PHONY: composer-dump
 composer-dump:
