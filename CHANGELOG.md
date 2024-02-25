@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.8.2
+
+* build: allow specifying option in `make phpunit`.
+
 ## 1.8.0
 
 * Supports Symfony 7
