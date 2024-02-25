@@ -3,6 +3,7 @@
 ## 1.8.2
 
 * build: allow specifying option in `make phpunit`.
+* fix: fix errors under `open_basedir` restrictions.
 
 ## 1.8.0
 

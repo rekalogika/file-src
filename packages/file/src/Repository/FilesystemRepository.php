@@ -15,7 +15,6 @@ namespace Rekalogika\File\Repository;
 
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemOperator;
-use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\MimeTypeDetection\FinfoMimeTypeDetector;
 use Rekalogika\File\Contracts\FilesystemRepositoryInterface;
 use Rekalogika\File\Contracts\MetadataAwareFilesystemOperator;
