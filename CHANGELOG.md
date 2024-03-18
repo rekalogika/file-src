@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.8.3
+
+* fix: inconsistent intervention version
+
 ## 1.8.2
 
 * build: allow specifying option in `make phpunit`.

@@ -26,7 +26,7 @@
         }
     },
     "require": {
-        "intervention/image": "^2.5",
+        "intervention/image": "^3.3",
         "rekalogika/file-contracts": "^1.9",
         "rekalogika/file-derivation": "^1.9",
         "symfony/service-contracts": "^3.3",

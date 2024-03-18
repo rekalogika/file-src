@@ -99,7 +99,7 @@ class ImageResizer extends AbstractFileFilter
         }
 
         $img->resize((int) round($width), (int) round($height));
-        $encoded = $img->encode(new AutoEncoder);
+        $encoded = $img->encode(new AutoEncoder());
 
         return $this->getFileRepository()
             ->createFromString(
