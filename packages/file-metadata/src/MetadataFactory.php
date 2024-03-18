@@ -37,7 +37,7 @@ final class MetadataFactory
     /**
      * @template T of AbstractMetadata
      * @param string|class-string<T> $id
-     * @return ($id is class-string<T> ? T : class-string<AbstractMetadata>|null)
+     * @return ($id is class-string<T> ? class-string<T> : class-string<AbstractMetadata>|null)
      */
     private static function getMetadataClass(string $id)
     {
