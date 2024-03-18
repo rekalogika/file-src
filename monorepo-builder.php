@@ -14,17 +14,17 @@ use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
 
 return static function (MBConfig $mbConfig): void {
     $mbConfig->packageDirectories([__DIR__ . '/packages']);
-
     $mbConfig->defaultBranch('main');
+    $mbConfig->disableDefaultWorkers();
 
     $mbConfig->workers([
         UpdateReplaceReleaseWorker::class,
         SetCurrentMutualDependenciesReleaseWorker::class,
         // AddTagToChangelogReleaseWorker::class,
-        TagVersionReleaseWorker::class,
-        PushTagReleaseWorker::class,
-        SetNextMutualDependenciesReleaseWorker::class,
+        // TagVersionReleaseWorker::class,
+        // PushTagReleaseWorker::class,
+        // SetNextMutualDependenciesReleaseWorker::class,
         UpdateBranchAliasReleaseWorker::class,
-        PushNextDevReleaseWorker::class,
+        // PushNextDevReleaseWorker::class,
     ]);
 };
