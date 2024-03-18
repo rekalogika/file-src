@@ -66,7 +66,7 @@
         "symfony/property-info": "^6.2 || ^7.0",
         "symfony/routing": "^6.2 || ^7.0",
         "symfony/yaml": "^6.2 || ^7.0",
-        "symplify/monorepo-builder": "^11.2",
+        "symplify/monorepo-builder": "^11.2.20 || ^11.3",
         "vimeo/psalm": "^5.18"
     },
     "autoload": {
@@ -97,23 +97,23 @@
         }
     },
     "replace": {
-        "rekalogika/file": "1.8.3",
-        "rekalogika/file-association": "1.8.3",
-        "rekalogika/file-association-contracts": "1.8.3",
-        "rekalogika/file-association-entity": "1.8.3",
-        "rekalogika/file-bundle": "1.8.3",
-        "rekalogika/file-contracts": "1.8.3",
-        "rekalogika/file-derivation": "1.8.3",
-        "rekalogika/file-filepond": "1.8.3",
-        "rekalogika/file-image": "1.8.3",
-        "rekalogika/file-metadata": "1.8.3",
-        "rekalogika/file-metadata-contracts": "1.8.3",
-        "rekalogika/file-null": "1.8.3",
-        "rekalogika/file-oneup-uploader-bridge": "1.8.3",
-        "rekalogika/file-server": "1.8.3",
-        "rekalogika/file-symfony-bridge": "1.8.3",
-        "rekalogika/file-tree-contracts": "1.8.3",
-        "rekalogika/file-zip": "1.8.3"
+        "rekalogika/file": "1.8.4",
+        "rekalogika/file-association": "1.8.4",
+        "rekalogika/file-association-contracts": "1.8.4",
+        "rekalogika/file-association-entity": "1.8.4",
+        "rekalogika/file-bundle": "1.8.4",
+        "rekalogika/file-contracts": "1.8.4",
+        "rekalogika/file-derivation": "1.8.4",
+        "rekalogika/file-filepond": "1.8.4",
+        "rekalogika/file-image": "1.8.4",
+        "rekalogika/file-metadata": "1.8.4",
+        "rekalogika/file-metadata-contracts": "1.8.4",
+        "rekalogika/file-null": "1.8.4",
+        "rekalogika/file-oneup-uploader-bridge": "1.8.4",
+        "rekalogika/file-server": "1.8.4",
+        "rekalogika/file-symfony-bridge": "1.8.4",
+        "rekalogika/file-tree-contracts": "1.8.4",
+        "rekalogika/file-zip": "1.8.4"
     },
     "config": {
         "allow-plugins": {

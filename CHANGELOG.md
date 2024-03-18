@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.8.3
+## 1.8.4
 
 * fix: inconsistent intervention version
 * fix: `MetadataFactory` return type hint
