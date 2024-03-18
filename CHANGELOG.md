@@ -3,6 +3,7 @@
 ## 1.8.3
 
 * fix: inconsistent intervention version
+* fix: `MetadataFactory` return type hint
 
 ## 1.8.2
 
