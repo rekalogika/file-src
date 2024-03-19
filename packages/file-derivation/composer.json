@@ -21,7 +21,7 @@
         }
     },
     "require": {
-        "rekalogika/file-contracts": "^1.8.4"
+        "rekalogika/file-contracts": "^1.8.5"
     },
     "extra": {
         "branch-alias": {
