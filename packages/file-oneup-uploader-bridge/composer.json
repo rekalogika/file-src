@@ -24,8 +24,8 @@
     },
     "require": {
         "oneup/uploader-bundle": "^4.0",
-        "rekalogika/file-contracts": "^1.8.5",
-        "rekalogika/file": "^1.8.5"
+        "rekalogika/file-contracts": "^1.8.6",
+        "rekalogika/file": "^1.8.6"
     },
     "extra": {
         "branch-alias": {
