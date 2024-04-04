@@ -23,8 +23,8 @@
         }
     },
     "require": {
-        "rekalogika/file-contracts": "^1.8.5",
-        "rekalogika/file-symfony-bridge": "^1.8.5",
+        "rekalogika/file-contracts": "^1.8.6",
+        "rekalogika/file-symfony-bridge": "^1.8.6",
         "rekalogika/temporary-url-bundle": "^1.3",
         "symfony/http-foundation": "^6.2 || ^7.0"
     },
