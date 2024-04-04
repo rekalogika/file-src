@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.8.5
+
+* feat: AssetMapper compatibility
+
 ## 1.8.4
 
 * fix: inconsistent intervention version
