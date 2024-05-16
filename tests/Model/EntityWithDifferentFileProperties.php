@@ -16,6 +16,7 @@ namespace Rekalogika\File\Tests\Model;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
 
+/** @psalm-suppress MissingConstructor */
 class EntityWithDifferentFileProperties
 {
     #[AsFileAssociation(fetch: 'EAGER')]

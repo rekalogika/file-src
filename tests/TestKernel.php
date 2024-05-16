@@ -86,6 +86,13 @@ class TestKernel extends HttpKernelKernel
                 'php_errors' => [
                     'log' => true,
                 ],
+                'http_client' => [
+                    'enabled' => true,
+                    'max_host_connections' => 1,
+                    'default_options' => [
+                        'timeout' => 10,
+                    ],
+                ],
             ]);
 
             $container->loadFromExtension('doctrine', [
@@ -96,6 +103,9 @@ class TestKernel extends HttpKernelKernel
                 ],
                 'orm' => [
                     'enable_lazy_ghost_objects' => true,
+                    'controller_resolver' => [
+                        'auto_mapping' => false,
+                    ]
                 ]
             ]);
 

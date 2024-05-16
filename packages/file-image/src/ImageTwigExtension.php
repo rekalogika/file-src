@@ -14,20 +14,27 @@ declare(strict_types=1);
 namespace Rekalogika\File\Image;
 
 use Rekalogika\Contracts\File\FileInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Contracts\Service\Attribute\Required;
 use Symfony\Contracts\Service\ServiceSubscriberInterface;
-use Symfony\Contracts\Service\ServiceSubscriberTrait;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 class ImageTwigExtension extends AbstractExtension implements ServiceSubscriberInterface
 {
-    use ServiceSubscriberTrait;
+    protected ContainerInterface $container;
 
     public static function getSubscribedServices(): array
     {
         return [
             ImageResizer::class,
         ];
+    }
+
+    #[Required]
+    public function setContainer(ContainerInterface $container): void
+    {
+        $this->container = $container;
     }
 
     private function getImageResizer(): ImageResizer
