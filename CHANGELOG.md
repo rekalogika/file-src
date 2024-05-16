@@ -1,8 +1,14 @@
 # CHANGELOG
 
-## 1.8.5
+## 1.8.7
+
+* fix: remove dependency on `ServiceSubscriberTrait`, fixes deprecated warning
+  from `symfony/service-contracts`
+
+## 1.8.6
 
 * feat: AssetMapper compatibility
+* deps: Update oneup/uploaderbundle requirement from 4.0 to 5.0
 
 ## 1.8.4
 

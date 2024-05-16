@@ -73,6 +73,11 @@
                 <file name="packages/file-filepond/src/FilePondCollectionType.php" />
             </errorLevel>
         </MixedArgument>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <file name="packages/file-image/src/ImageTwigExtension.php" />
+            </errorLevel>
+        </MissingConstructor>
     </issueHandlers>
 
     <plugins>
