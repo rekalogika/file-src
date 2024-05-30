@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.8.8
+
+* fix: wrong type hint for `ContainerInterface`
+
 ## 1.8.7
 
 * fix: remove dependency on `ServiceSubscriberTrait`, fixes deprecated warning
