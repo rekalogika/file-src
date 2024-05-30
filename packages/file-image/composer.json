@@ -27,8 +27,8 @@
     },
     "require": {
         "intervention/image": "^3.3",
-        "rekalogika/file-contracts": "^1.8.7",
-        "rekalogika/file-derivation": "^1.8.7",
+        "rekalogika/file-contracts": "^1.8.8",
+        "rekalogika/file-derivation": "^1.8.8",
         "symfony/service-contracts": "^3.3",
         "twig/twig": "^2.12|^3.0",
         "webmozart/assert": "^1.11"
