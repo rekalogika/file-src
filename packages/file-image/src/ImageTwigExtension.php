@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Image;
 
+use Psr\Container\ContainerInterface;
 use Rekalogika\Contracts\File\FileInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 use Symfony\Contracts\Service\ServiceSubscriberInterface;
 use Twig\Extension\AbstractExtension;
