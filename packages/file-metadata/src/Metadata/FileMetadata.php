@@ -107,7 +107,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
             return $modificationTime;
         }
 
-        $result = \DateTimeImmutable::createFromFormat('U', (string) $result);
+        $result = (new \DateTimeImmutable())->setTimestamp($result);
 
         if ($result === false) {
             $modificationTime = new \DateTimeImmutable();
