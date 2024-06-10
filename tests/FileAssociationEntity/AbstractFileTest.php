@@ -93,4 +93,28 @@ class AbstractFileTest extends TestCase
         $this->expectException(UnsetFile::class);
         $entity->getContent();
     }
+
+    public function testEmbeddedMetadataTimezone(): void
+    {
+        $oldTimeZone = \date_default_timezone_get();
+        \date_default_timezone_set('Asia/Jakarta');
+
+        $metadata = new EmbeddedMetadata();
+        $metadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);
+        $timestamp = $metadata->get(Constants::FILE_MODIFICATION_TIME);
+
+        static::assertSame(1234567890, $timestamp);
+
+        $classReflection = new \ReflectionClass($metadata);
+        $modificationTime = $classReflection->getProperty('modificationTime');
+        $modificationTime->setAccessible(true);
+
+        /** @psalm-suppress MixedAssignment */
+        $modificationTime = $modificationTime->getValue($metadata);
+        static::assertInstanceOf(\DateTimeImmutable::class, $modificationTime);
+
+        static::assertSame('Asia/Jakarta', $modificationTime->getTimezone()->getName());
+
+        \date_default_timezone_set($oldTimeZone);
+    }
 }

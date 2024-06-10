@@ -97,7 +97,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
         $result = $this->metadata->tryGet(Constants::FILE_MODIFICATION_TIME);
 
         // if the metadata is not set, we set it to the current time, and return it
-        if ($result === null) {
+        if ($result === null || $result === false) {
             $modificationTime = new \DateTimeImmutable();
             $this->metadata->set(
                 Constants::FILE_MODIFICATION_TIME,
@@ -107,18 +107,6 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
             return $modificationTime;
         }
 
-        $result = \DateTimeImmutable::createFromFormat('U', (string) $result);
-
-        if ($result === false) {
-            $modificationTime = new \DateTimeImmutable();
-            $this->metadata->set(
-                Constants::FILE_MODIFICATION_TIME,
-                $modificationTime->getTimestamp()
-            );
-
-            return $modificationTime;
-        }
-
-        return $result;
+        return (new \DateTimeImmutable())->setTimestamp((int) $result);
     }
 }

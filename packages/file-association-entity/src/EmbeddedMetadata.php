@@ -145,7 +145,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
             Constants::FILE_SIZE => $this->size = (int) $value,
             Constants::FILE_TYPE => $this->type = $value !== null ? (string) $value : null,
             Constants::FILE_MODIFICATION_TIME => $this->modificationTime = (bool) $value
-                ? new \DateTimeImmutable('@' . $value)
+                ? (new \DateTimeImmutable())->setTimestamp((int) $value)
                 : null,
             Constants::MEDIA_WIDTH => $this->width = $value !== null ? (int) $value : null,
             Constants::MEDIA_HEIGHT => $this->height = $value !== null ? (int) $value : null,
