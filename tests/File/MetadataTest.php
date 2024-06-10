@@ -46,8 +46,10 @@ class MetadataTest extends TestCase
         $rawMetadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);
 
         $httpMetadata = HttpMetadata::create($rawMetadata);
-        /** @psalm-suppress InvalidArgument */
-        $headers = iterator_to_array($httpMetadata->getHeaders());
+        $headers = [];
+        foreach($httpMetadata->getHeaders() as $key => $value) {
+            $headers[$key] = $value;
+        }
 
         $lastModified = $headers['Last-Modified'];
         $this->assertSame('Fri, 13 Feb 2009 23:31:30 GMT', $lastModified);
@@ -61,8 +63,10 @@ class MetadataTest extends TestCase
         $rawMetadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);
 
         $httpMetadata = HttpMetadata::create($rawMetadata);
-        /** @psalm-suppress InvalidArgument */
-        $headers = iterator_to_array($httpMetadata->getHeaders());
+        $headers = [];
+        foreach($httpMetadata->getHeaders() as $key => $value) {
+            $headers[$key] = $value;
+        }
 
         $lastModified = $headers['Last-Modified'];
         $this->assertSame('Fri, 13 Feb 2009 23:31:30 GMT', $lastModified);
