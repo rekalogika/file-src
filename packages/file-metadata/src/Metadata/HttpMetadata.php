@@ -112,9 +112,14 @@ final class HttpMetadata extends AbstractMetadata implements
     private function getLastModified(): ?string
     {
         $lastModified = $this->metadata->tryGet(Constants::FILE_MODIFICATION_TIME);
-        $lastModified = (new \DateTimeImmutable())->setTimestamp($lastModified);
 
-        return $lastModified === false ? null : $lastModified->format(\DateTimeInterface::RFC7231);
+        if ($lastModified === null || $lastModified === false) {
+            return null;
+        }
+
+        return (new \DateTimeImmutable())
+            ->setTimestamp((int) $lastModified)
+            ->format(\DateTimeInterface::RFC7231);
     }
 
     public function getETag(): ?string
