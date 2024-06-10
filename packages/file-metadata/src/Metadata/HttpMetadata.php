@@ -117,8 +117,11 @@ final class HttpMetadata extends AbstractMetadata implements
             return null;
         }
 
+        // HTTP last modified is always in GMT
+        // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified
         return (new \DateTimeImmutable())
             ->setTimestamp((int) $lastModified)
+            ->setTimezone(new \DateTimeZone('UTC'))
             ->format(\DateTimeInterface::RFC7231);
     }
 
