@@ -34,7 +34,7 @@ class DefaultObjectIdResolver implements ObjectIdResolverInterface
             throw new MethodNotFoundException($object, $this->method);
         }
 
-        if (!is_string($id) && !is_integer($id) && !$id instanceof \Stringable) {
+        if (!is_string($id) && !is_int($id) && !$id instanceof \Stringable) {
             throw new IdNotSupportedException($object, $this->method, $id);
         }
 
