@@ -25,7 +25,7 @@ class IdNotSupportedException extends ObjectIdResolverException
             \sprintf(
                 'Method "%s" of object "%s" returned an unsupported identifier "%s"',
                 $method,
-                \get_class($object),
+                $object::class,
                 \get_debug_type($id)
             ),
             0,

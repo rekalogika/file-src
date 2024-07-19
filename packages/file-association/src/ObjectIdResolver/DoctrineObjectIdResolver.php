@@ -33,7 +33,7 @@ class DoctrineObjectIdResolver implements ObjectIdResolverInterface
     public function getObjectId(object $object): string
     {
         $objectManager = $this->managerRegistry
-            ->getManagerForClass(get_class($object));
+            ->getManagerForClass($object::class);
 
         if (!$objectManager) {
             throw new ObjectNotSupportedException($object);
@@ -49,11 +49,11 @@ class DoctrineObjectIdResolver implements ObjectIdResolverInterface
             if ($unitOfWork->isInIdentityMap($object)) {
                 $ids = $unitOfWork->getEntityIdentifier($object);
             } else {
-                $ids = $objectManager->getClassMetadata(get_class($object))
+                $ids = $objectManager->getClassMetadata($object::class)
                     ->getIdentifierValues($object);
             }
         } else {
-            $ids = $objectManager->getClassMetadata(get_class($object))
+            $ids = $objectManager->getClassMetadata($object::class)
                 ->getIdentifierValues($object);
         }
 

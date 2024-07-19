@@ -93,7 +93,7 @@ final class FileAssociationManager
                 sprintf(
                     'Property "%s" on object "%s" is not a %s instance',
                     $propertyName,
-                    get_class($object),
+                    $object::class,
                     FileInterface::class
                 )
             );
@@ -140,7 +140,7 @@ final class FileAssociationManager
                     'Unknown fetch mode "%s" on property "%s" of object "%s"',
                     $inspectorResult->getFetch(),
                     $propertyName,
-                    get_class($object)
+                    $object::class
                 )
             );
         }

@@ -23,7 +23,7 @@ class MissingPropertyException extends PropertyInspectorException
             sprintf(
                 'Property "%s" not found in object "%s"',
                 $propertyName,
-                get_class($object),
+                $object::class,
             ),
         );
     }

@@ -29,11 +29,11 @@ class AttributesPropertyLister implements PropertyListerInterface
 
     public function getFileProperties(object $object): iterable
     {
-        if (isset($this->cache[get_class($object)])) {
-            return $this->cache[get_class($object)];
+        if (isset($this->cache[$object::class])) {
+            return $this->cache[$object::class];
         }
 
-        $class = get_class($object);
+        $class = $object::class;
         $properties = [];
 
         foreach (self::getReflectionPropertiesWithAttribute($class, AsFileAssociation::class) as $reflectionProperty) {

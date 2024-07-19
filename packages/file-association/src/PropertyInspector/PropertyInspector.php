@@ -27,7 +27,7 @@ class PropertyInspector implements PropertyInspectorInterface
 
     public function inspect(object $object, string $propertyName): PropertyInspectorResult
     {
-        $cacheKey = get_class($object) . '::' . $propertyName;
+        $cacheKey = $object::class . '::' . $propertyName;
 
         if (isset($this->cache[$cacheKey])) {
             return $this->cache[$cacheKey];

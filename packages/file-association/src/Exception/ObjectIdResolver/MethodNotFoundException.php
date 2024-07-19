@@ -24,7 +24,7 @@ class MethodNotFoundException extends ObjectIdResolverException
             \sprintf(
                 "Method '%s' not found in object '%s'",
                 $method,
-                \get_class($object)
+                $object::class
             ),
             0,
             $previous
