@@ -33,6 +33,7 @@ class FileAdapterTest extends TestCase
     {
         $kernel = new TestKernel();
         $kernel->boot();
+
         $container = $kernel->getContainer();
         $fileRepository = $container->get('test.' . FileRepositoryInterface::class);
         $this->assertInstanceOf(FileRepositoryInterface::class, $fileRepository);

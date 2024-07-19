@@ -25,6 +25,7 @@ class IntegrationTest extends TestCase
     {
         $kernel = new TestKernel();
         $kernel->boot();
+
         $this->container = $kernel->getContainer();
     }
 

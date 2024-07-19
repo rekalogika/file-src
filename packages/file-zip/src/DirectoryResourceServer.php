@@ -38,6 +38,7 @@ final class DirectoryResourceServer
         $name = $files->getName();
         $name->setExtension('zip');
         $name = $name->trans($this->translator);
+
         $directory = new Directory($name);
 
         foreach ($files as $file) {

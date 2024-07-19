@@ -31,6 +31,7 @@ class EmbeddedMetadataTest extends TestCase
 
         $file = TemporaryFile::create('test');
         $file->setContent('test-temporary-file');
+
         $path = $file->getKey();
 
         $this->assertFileInterface(
