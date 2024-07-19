@@ -27,7 +27,7 @@ final class ImageMetadata extends AbstractMetadata implements
             return null;
         }
 
-        return new static($metadata);
+        return new self($metadata);
     }
 
     private function __construct(

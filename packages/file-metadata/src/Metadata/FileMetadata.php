@@ -26,7 +26,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
     public static function create(
         RawMetadataInterface $metadata
     ): static {
-        return new static($metadata);
+        return new self($metadata);
     }
 
     private function __construct(

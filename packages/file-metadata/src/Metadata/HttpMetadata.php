@@ -24,7 +24,7 @@ final class HttpMetadata extends AbstractMetadata implements
     public static function create(
         RawMetadataInterface $metadata
     ): static {
-        return new static($metadata);
+        return new self($metadata);
     }
 
     private function __construct(

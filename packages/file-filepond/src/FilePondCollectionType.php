@@ -49,7 +49,7 @@ class FilePondCollectionType extends FileType
                 $newData = $entityFiles->toArray();
 
                 if ($options['allow_delete'] === true) {
-                    foreach ($newData as $key => $file) {
+                    foreach (array_keys($newData) as $key) {
                         if (!in_array((string) $key, $incomingFiles, true)) {
                             unset($newData[$key]);
                         }

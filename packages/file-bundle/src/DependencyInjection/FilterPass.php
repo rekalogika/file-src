@@ -28,7 +28,7 @@ class FilterPass implements CompilerPassInterface
         $fileRepository = $container
             ->findDefinition(FileRepositoryInterface::class);
 
-        foreach ($filters as $id => $filter) {
+        foreach (array_keys($filters) as $id) {
             $definition = $container->findDefinition($id);
 
             $class = $definition->getClass();
