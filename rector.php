@@ -9,6 +9,7 @@ use Rector\CodingStyle\Rector\Catch_\CatchExceptionNameMatchingTypeRector;
 use Rector\CodingStyle\Rector\Use_\SeparateMultiUseImportsRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\Assign\RemoveUnusedVariableAssignRector;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodParameterRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
@@ -30,7 +31,7 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
     ])
     ->withPreparedSets(
-        // deadCode: true,
+        deadCode: true,
         // codeQuality: true,
         // codingStyle: true,
         typeDeclarations: true,
@@ -40,7 +41,6 @@ return RectorConfig::configure()
         // symfonyCodeQuality: true,
         // doctrineCodeQuality: true,
     )
-    ->withDeadCodeLevel(20)
     ->withPhpSets(php81: true)
     ->withRules([
         // AddOverrideAttributeToOverriddenMethodsRector::class,
@@ -54,6 +54,11 @@ return RectorConfig::configure()
         NewInInitializerRector::class => [
             // maybe false positive?
             __DIR__ . '/packages/file/src/MetadataGenerator/MetadataGenerator.php',
+        ],
+
+        RemoveUnusedPrivateMethodParameterRector::class => [
+            // false positive
+            __DIR__ . '/packages/file-association-entity/src/UnsetFile.php',
         ],
 
         // static analysis tools don't like this

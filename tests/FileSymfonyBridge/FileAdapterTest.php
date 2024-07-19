@@ -29,15 +29,13 @@ class FileAdapterTest extends TestCase
 {
     use FileTestTrait;
 
-    private function createRemoteFile(string $key, string $content): FileInterface
+    private function createRemoteFile(): FileInterface
     {
         $kernel = new TestKernel();
         $kernel->boot();
         $container = $kernel->getContainer();
-
         $fileRepository = $container->get('test.' . FileRepositoryInterface::class);
         $this->assertInstanceOf(FileRepositoryInterface::class, $fileRepository);
-
         return $fileRepository->createFromString(new FilePointer('default', 'key'), 'asdf');
     }
 
@@ -69,7 +67,7 @@ class FileAdapterTest extends TestCase
 
     public function testRemoteAdaptFromFileInterfaceToHttpFoundationFile(): void
     {
-        $file = $this->createRemoteFile('key', 'asdf');
+        $file = $this->createRemoteFile();
 
         $httpFoundationFile = ToHttpFoundationFileAdapter::adapt($file);
 
@@ -86,7 +84,7 @@ class FileAdapterTest extends TestCase
 
     public function testRemoteFileNonBypass(): void
     {
-        $file = $this->createRemoteFile('key', 'asdf');
+        $file = $this->createRemoteFile();
 
         $httpFoundationFile = ToHttpFoundationFileAdapter::adapt($file);
         $this->assertInstanceOf(ToHttpFoundationFileAdapter::class, $httpFoundationFile);
@@ -94,7 +92,7 @@ class FileAdapterTest extends TestCase
 
     public function testAdaptception(): void
     {
-        $file = $this->createRemoteFile('key', 'asdf');
+        $file = $this->createRemoteFile();
         $httpFoundationFile = ToHttpFoundationFileAdapter::adapt($file);
         $this->assertInstanceOf(ToHttpFoundationFileAdapter::class, $httpFoundationFile);
 

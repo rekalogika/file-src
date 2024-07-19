@@ -19,8 +19,5 @@ class LocalFilesystemAdapter extends FlysystemLocalFilesystemAdapter
 {
     protected function ensureDirectoryExists(string $dirname, int $visibility): void
     {
-        if ($dirname === '/' || $dirname === '') {
-            return;
-        }
     }
 }
