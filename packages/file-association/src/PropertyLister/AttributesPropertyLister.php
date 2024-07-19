@@ -36,7 +36,7 @@ class AttributesPropertyLister implements PropertyListerInterface
         $class = $object::class;
         $properties = [];
 
-        foreach (self::getReflectionPropertiesWithAttribute($class, AsFileAssociation::class) as $reflectionProperty) {
+        foreach ($this->getReflectionPropertiesWithAttribute($class, AsFileAssociation::class) as $reflectionProperty) {
             $properties[$reflectionProperty->getName()] = 1;
         }
 
@@ -68,7 +68,7 @@ class AttributesPropertyLister implements PropertyListerInterface
      * @param class-string $attribute
      * @return iterable<\ReflectionProperty>
      */
-    private static function getReflectionPropertiesWithAttribute(
+    private function getReflectionPropertiesWithAttribute(
         string $class,
         string $attribute
     ): iterable {

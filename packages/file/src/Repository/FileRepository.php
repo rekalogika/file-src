@@ -124,7 +124,7 @@ class FileRepository implements FileRepositoryInterface
 
     public function get(FilePointerInterface $filePointer): FileInterface
     {
-        $hash = self::getFilePointerHash($filePointer);
+        $hash = $this->getFilePointerHash($filePointer);
 
         if (isset($this->fileCache[$hash])) {
             return $this->fileCache[$hash];
@@ -162,7 +162,7 @@ class FileRepository implements FileRepositoryInterface
 
     public function getReference(FilePointerInterface $filePointer): FileInterface
     {
-        $hash = self::getFilePointerHash($filePointer);
+        $hash = $this->getFilePointerHash($filePointer);
 
         return $this->fileCache[$hash] ?? new FileProxy($filePointer, $this);
     }
@@ -218,7 +218,7 @@ class FileRepository implements FileRepositoryInterface
         $this->getFilesystemFromPointerOrFile($filePointer)
             ->delete($filePointer->getKey());
 
-        unset($this->fileCache[self::getFilePointerHash($filePointer)]);
+        unset($this->fileCache[$this->getFilePointerHash($filePointer)]);
     }
 
     public function copy(
@@ -265,7 +265,7 @@ class FileRepository implements FileRepositoryInterface
             $destination->getPointer() : $destination;
 
         // delete cache
-        unset($this->fileCache[self::getFilePointerHash($destination)]);
+        unset($this->fileCache[$this->getFilePointerHash($destination)]);
 
         return $this->get($destination);
     }
@@ -317,19 +317,19 @@ class FileRepository implements FileRepositoryInterface
         // delete cache
         $source = $source instanceof FileInterface ?
             $source->getPointer() : $source;
-        unset($this->fileCache[self::getFilePointerHash($source)]);
+        unset($this->fileCache[$this->getFilePointerHash($source)]);
 
         // get destination pointer
         $destination = $destination instanceof FileInterface ?
             $destination->getPointer() : $destination;
 
         // delete cache
-        unset($this->fileCache[self::getFilePointerHash($destination)]);
+        unset($this->fileCache[$this->getFilePointerHash($destination)]);
 
         return $this->get($destination);
     }
 
-    private static function getFilePointerHash(
+    private function getFilePointerHash(
         FilePointerInterface $filePointer
     ): string {
         return sha1(

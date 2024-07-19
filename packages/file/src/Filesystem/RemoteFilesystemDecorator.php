@@ -219,7 +219,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         /** @var bool */
         $bypassMetadataGeneration = $config['bypass_metadata_generation'] ?? false;
 
-        if (self::isStreamSeekable($contents)) {
+        if ($this->isStreamSeekable($contents)) {
             if (!$bypassMetadataGeneration) {
                 $this->metadataGenerator
                     ->generateMetadataFromStream($rawMetadata, $contents);
@@ -275,7 +275,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param resource $stream
      */
-    private static function isStreamSeekable(mixed $stream): bool
+    private function isStreamSeekable(mixed $stream): bool
     {
         $meta = stream_get_meta_data($stream);
 
