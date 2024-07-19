@@ -58,7 +58,7 @@ class PropertyInspector implements PropertyInspectorInterface
         $attributes = $reflectionProperty
             ->getAttributes(AsFileAssociation::class);
 
-        if (count($attributes) === 0) {
+        if ($attributes === []) {
             return $this->cache[$cacheKey] = new PropertyInspectorResult(
                 mandatory: $mandatory,
                 fetch: 'EAGER',
