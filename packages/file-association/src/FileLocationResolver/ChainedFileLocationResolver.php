@@ -28,6 +28,7 @@ class ChainedFileLocationResolver implements FileLocationResolverInterface
     ) {
     }
 
+    #[\Override]
     public function getFileLocation(
         object $object,
         string $propertyName

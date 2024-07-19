@@ -62,6 +62,7 @@ class FilesystemRepository implements FilesystemRepositoryInterface
         );
     }
 
+    #[\Override]
     public function addFilesystem(
         string $identifier,
         FilesystemOperator $filesystem
@@ -78,6 +79,7 @@ class FilesystemRepository implements FilesystemRepositoryInterface
         $this->filesystems[$identifier] = $filesystem;
     }
 
+    #[\Override]
     public function getFilesystem(
         ?string $identifier
     ): MetadataAwareFilesystemOperator {

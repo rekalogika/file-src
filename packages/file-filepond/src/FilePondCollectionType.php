@@ -28,6 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FilePondCollectionType extends FileType
 {
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple'] !== true) {
@@ -86,11 +87,13 @@ class FilePondCollectionType extends FileType
         ;
     }
 
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return 'rekalogika_file_filepond_collection';
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

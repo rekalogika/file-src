@@ -21,6 +21,7 @@ class IntegrationTest extends TestCase
 {
     private ?ContainerInterface $container = null;
 
+    #[\Override]
     protected function setUp(): void
     {
         $kernel = new TestKernel();

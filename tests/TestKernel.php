@@ -54,6 +54,7 @@ class TestKernel extends HttpKernelKernel
         parent::__construct('test', true);
     }
 
+    #[\Override]
     public function boot(): void
     {
         $filesystem = new Filesystem();
@@ -63,6 +64,7 @@ class TestKernel extends HttpKernelKernel
 
     }
 
+    #[\Override]
     public function registerBundles(): iterable
     {
         yield new FrameworkBundle();
@@ -74,6 +76,7 @@ class TestKernel extends HttpKernelKernel
         yield new RekalogikaPsr16SimpleCacheBundle();
     }
 
+    #[\Override]
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(function (ContainerBuilder $container): void {

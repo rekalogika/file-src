@@ -26,11 +26,13 @@ class FilePointer implements FilePointerInterface
     ) {
     }
 
+    #[\Override]
     public function getFilesystemIdentifier(): ?string
     {
         return $this->filesystemIdentifier;
     }
 
+    #[\Override]
     public function getKey(): string
     {
         return $this->key;

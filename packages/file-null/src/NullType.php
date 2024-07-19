@@ -24,31 +24,37 @@ class NullType implements FileTypeInterface
     ) {
     }
 
+    #[\Override]
     public function getName(): string
     {
         return 'application/x-zerosize';
     }
 
+    #[\Override]
     public function getType(): string
     {
         return 'application';
     }
 
+    #[\Override]
     public function getSubType(): string
     {
         return 'x-zerosize';
     }
 
+    #[\Override]
     public function getCommonExtensions(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getExtension(): ?string
     {
         return null;
     }
 
+    #[\Override]
     public function getDescription(): \Stringable&TranslatableInterface
     {
         return new TranslatableMessage(
@@ -57,6 +63,7 @@ class NullType implements FileTypeInterface
         );
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return 'application/x-zerosize';

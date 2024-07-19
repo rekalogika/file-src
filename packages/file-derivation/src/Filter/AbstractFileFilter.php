@@ -27,6 +27,7 @@ abstract class AbstractFileFilter implements FileFilterInterface
     /**
      * Will be executed by the container to inject the file repository
      */
+    #[\Override]
     final public function setFileRepository(
         FileRepositoryInterface $fileRepository
     ): void {

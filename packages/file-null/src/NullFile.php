@@ -30,21 +30,25 @@ class NullFile implements NullFileInterface
     ) {
     }
 
+    #[\Override]
     public function getFilesystemIdentifier(): ?string
     {
         return $this->filesystemIdentifier;
     }
 
+    #[\Override]
     public function getKey(): string
     {
         return $this->key ?? '/dev/null';
     }
 
+    #[\Override]
     public function getName(): FileNameInterface
     {
         return new NullName('Null', 'rekalogika_file');
     }
 
+    #[\Override]
     public function getType(): FileTypeInterface
     {
         return new NullType('Null file', 'rekalogika_file');

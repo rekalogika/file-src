@@ -112,16 +112,19 @@ final class FileProxy implements FileInterface
     // public methods
     //
 
+    #[\Override]
     public function getPointer(): FilePointerInterface
     {
         return $this->filePointer;
     }
 
+    #[\Override]
     public function getFilesystemIdentifier(): ?string
     {
         return $this->filePointer->getFilesystemIdentifier();
     }
 
+    #[\Override]
     public function getKey(): string
     {
         return $this->filePointer->getKey();

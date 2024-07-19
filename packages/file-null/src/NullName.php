@@ -25,15 +25,18 @@ class NullName implements FileNameInterface
     ) {
     }
 
+    #[\Override]
     public function getFull(): \Stringable&TranslatableInterface
     {
         return $this->getBase();
     }
 
+    #[\Override]
     public function setFull(string $name): void
     {
     }
 
+    #[\Override]
     public function getBase(): \Stringable&TranslatableInterface
     {
         return new TranslatableMessage(
@@ -42,29 +45,35 @@ class NullName implements FileNameInterface
         );
     }
 
+    #[\Override]
     public function setBase(string $name): void
     {
     }
 
+    #[\Override]
     public function getExtension(): ?string
     {
         return null;
     }
 
+    #[\Override]
     public function setExtension(?string $extension): void
     {
     }
 
+    #[\Override]
     public function hasExtension(): bool
     {
         return false;
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->name;
     }
 
+    #[\Override]
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
         return $this->getBase()->trans($translator, $locale);

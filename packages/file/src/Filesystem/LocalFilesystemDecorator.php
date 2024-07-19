@@ -67,6 +67,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
         ];
     }
 
+    #[\Override]
     public function getMetadata(string $location): RawMetadata
     {
         $metadata = new RawMetadata();
@@ -88,6 +89,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
         return $metadata;
     }
 
+    #[\Override]
     public function setMetadata(string $location, iterable $metadata): void
     {
         // noop
@@ -97,6 +99,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     // forwarders
     //
 
+    #[\Override]
     public function mimeType(string $path): string
     {
         try {
@@ -113,6 +116,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function write(string $location, string $contents, array $config = []): void
     {
         $this->wrapped->write($location, $contents, $config);
@@ -121,16 +125,19 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function writeStream(string $location, mixed $contents, array $config = []): void
     {
         $this->wrapped->writeStream($location, $contents, $config);
     }
 
+    #[\Override]
     public function delete(string $location): void
     {
         $this->wrapped->delete($location);
     }
 
+    #[\Override]
     public function deleteDirectory(string $location): void
     {
         $this->wrapped->deleteDirectory($location);
@@ -164,51 +171,61 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
         return $this->wrapped->checksum($path, $config);
     }
 
+    #[\Override]
     public function fileExists(string $location): bool
     {
         return $this->wrapped->fileExists($location);
     }
 
+    #[\Override]
     public function directoryExists(string $location): bool
     {
         return $this->wrapped->directoryExists($location);
     }
 
+    #[\Override]
     public function has(string $location): bool
     {
         return $this->wrapped->has($location);
     }
 
+    #[\Override]
     public function read(string $location): string
     {
         return $this->wrapped->read($location);
     }
 
+    #[\Override]
     public function readStream(string $location)
     {
         return $this->wrapped->readStream($location);
     }
 
+    #[\Override]
     public function listContents(string $location, bool $deep = self::LIST_SHALLOW): DirectoryListing
     {
         return $this->wrapped->listContents($location, $deep);
     }
 
+    #[\Override]
     public function lastModified(string $path): int
     {
         return $this->wrapped->lastModified($path);
     }
 
+    #[\Override]
     public function fileSize(string $path): int
     {
         return $this->wrapped->fileSize($path);
     }
 
+    #[\Override]
     public function visibility(string $path): string
     {
         return $this->wrapped->visibility($path);
     }
 
+    #[\Override]
     public function setVisibility(string $path, string $visibility): void
     {
         $this->wrapped->setVisibility($path, $visibility);
@@ -217,6 +234,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function createDirectory(string $location, array $config = []): void
     {
         $this->wrapped->createDirectory($location, $config);
@@ -225,6 +243,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function move(string $source, string $destination, array $config = []): void
     {
         $this->wrapped->move($source, $destination, $config);
@@ -233,6 +252,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function copy(string $source, string $destination, array $config = []): void
     {
         $this->wrapped->copy($source, $destination, $config);

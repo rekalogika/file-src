@@ -34,6 +34,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class RekalogikaFileExtension extends Extension implements PrependExtensionInterface
 {
+    #[\Override]
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new PhpFileLoader(
@@ -124,6 +125,7 @@ class RekalogikaFileExtension extends Extension implements PrependExtensionInter
             ->addTag('rekalogika.file.association.object_id_resolver');
     }
 
+    #[\Override]
     public function prepend(ContainerBuilder $container): void
     {
         if (

@@ -44,6 +44,7 @@ final class ReadableFileCollection extends ReadableCollectionDecorator implement
         parent::__construct($files);
     }
 
+    #[\Override]
     public function getName(): FileNameInterface
     {
         if ($this->name instanceof TranslatableInterface) {

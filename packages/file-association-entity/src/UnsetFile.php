@@ -41,21 +41,25 @@ class UnsetFile extends \Exception implements NullFileInterface
         ));
     }
 
+    #[\Override]
     public function getFilesystemIdentifier(): ?string
     {
         return null;
     }
 
+    #[\Override]
     public function getKey(): string
     {
         return '/dev/null';
     }
 
+    #[\Override]
     public function getName(): FileNameInterface
     {
         return new NullName('(unset)', 'rekalogika_file');
     }
 
+    #[\Override]
     public function getType(): FileTypeInterface
     {
         return new NullType('The file is unset due to an error', 'rekalogika_file');

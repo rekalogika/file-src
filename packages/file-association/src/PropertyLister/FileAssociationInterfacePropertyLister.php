@@ -22,6 +22,7 @@ use Rekalogika\File\Association\Contracts\PropertyListerInterface;
  */
 class FileAssociationInterfacePropertyLister implements PropertyListerInterface
 {
+    #[\Override]
     public function getFileProperties(object $object): iterable
     {
         if (!$object instanceof FileAssociationInterface) {

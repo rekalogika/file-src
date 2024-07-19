@@ -44,6 +44,7 @@ final class FileName implements FileNameInterface
         $this->extension = isset($pathinfo['extension']) ? strtolower($pathinfo['extension']) : null;
     }
 
+    #[\Override]
     public function __toString(): string
     {
         if ($this->name === null) {
@@ -58,6 +59,7 @@ final class FileName implements FileNameInterface
         return (string) $this->getFull();
     }
 
+    #[\Override]
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
         if ($this->name === null) {
@@ -70,6 +72,7 @@ final class FileName implements FileNameInterface
         return (string) $this->getFull();
     }
 
+    #[\Override]
     public function getFull(): \Stringable&TranslatableInterface
     {
         if ($this->name === null) {
@@ -108,11 +111,13 @@ final class FileName implements FileNameInterface
 
     }
 
+    #[\Override]
     public function setFull(string $name): void
     {
         $this->parse($name);
     }
 
+    #[\Override]
     public function getBase(): \Stringable&TranslatableInterface
     {
         if ($this->name === null) {
@@ -129,16 +134,19 @@ final class FileName implements FileNameInterface
 
     }
 
+    #[\Override]
     public function setBase(string $name): void
     {
         $this->name = $name;
     }
 
+    #[\Override]
     public function getExtension(): ?string
     {
         return $this->extension;
     }
 
+    #[\Override]
     public function setExtension(?string $extension): void
     {
         if ($extension === '') {
@@ -148,6 +156,7 @@ final class FileName implements FileNameInterface
         $this->extension = $extension;
     }
 
+    #[\Override]
     public function hasExtension(): bool
     {
         return $this->extension !== '' && $this->extension !== null;

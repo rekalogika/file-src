@@ -79,16 +79,19 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     // File methods
     //
 
+    #[\Override]
     public function guessExtension(): ?string
     {
         return $this->getHttpFoundationFile()->guessExtension();
     }
 
+    #[\Override]
     public function getMimeType(): ?string
     {
         return $this->getHttpFoundationFile()->getMimeType();
     }
 
+    #[\Override]
     public function move(string $directory, string $name = null): self
     {
         $this->getHttpFoundationFile()->move($directory, $name);
@@ -96,6 +99,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
         return $this;
     }
 
+    #[\Override]
     public function getContent(): string
     {
         return $this->getHttpFoundationFile()->getContent();
@@ -105,21 +109,25 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     // \SplFileInfo methods
     //
 
+    #[\Override]
     public function getATime(): int|false
     {
         return $this->getHttpFoundationFile()->getATime();
     }
 
+    #[\Override]
     public function getBasename(string $suffix = ''): string
     {
         return $this->getHttpFoundationFile()->getBasename($suffix);
     }
 
+    #[\Override]
     public function getCTime(): int|false
     {
         return $this->getHttpFoundationFile()->getCTime();
     }
 
+    #[\Override]
     public function getExtension(): string
     {
         return $this->getHttpFoundationFile()->getExtension();
@@ -128,41 +136,49 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     /**
      * @param class-string|null $class
      */
+    #[\Override]
     public function getFileInfo($class = null): \SplFileInfo
     {
         return $this->getHttpFoundationFile()->getFileInfo($class);
     }
 
+    #[\Override]
     public function getFilename(): string
     {
         return $this->getHttpFoundationFile()->getFilename();
     }
 
+    #[\Override]
     public function getGroup(): int|false
     {
         return $this->getHttpFoundationFile()->getGroup();
     }
 
+    #[\Override]
     public function getInode(): int|false
     {
         return $this->getHttpFoundationFile()->getInode();
     }
 
+    #[\Override]
     public function getLinkTarget(): string|false
     {
         return $this->getHttpFoundationFile()->getLinkTarget();
     }
 
+    #[\Override]
     public function getMTime(): int|false
     {
         return $this->getHttpFoundationFile()->getMTime();
     }
 
+    #[\Override]
     public function getOwner(): int|false
     {
         return $this->getHttpFoundationFile()->getOwner();
     }
 
+    #[\Override]
     public function getPath(): string
     {
         return $this->getHttpFoundationFile()->getPath();
@@ -171,62 +187,74 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     /**
      * @param class-string|null $class
      */
+    #[\Override]
     public function getPathInfo($class = null): ?\SplFileInfo
     {
         return $this->getHttpFoundationFile()->getPathInfo($class);
     }
 
+    #[\Override]
     public function getPathname(): string
     {
         return $this->getHttpFoundationFile()->getPathname();
     }
 
+    #[\Override]
     public function getPerms(): int|false
     {
         return $this->getHttpFoundationFile()->getPerms();
     }
 
     /** @psalm-suppress LessSpecificImplementedReturnType */
+    #[\Override]
     public function getRealPath(): string|false
     {
         return $this->getHttpFoundationFile()->getRealPath();
     }
 
+    #[\Override]
     public function getSize(): int|false
     {
         return $this->getHttpFoundationFile()->getSize();
     }
 
+    #[\Override]
     public function getType(): string|false
     {
         return $this->getHttpFoundationFile()->getType();
     }
 
+    #[\Override]
     public function isDir(): bool
     {
         return $this->getHttpFoundationFile()->isDir();
     }
 
+    #[\Override]
     public function isExecutable(): bool
     {
         return $this->getHttpFoundationFile()->isExecutable();
     }
 
+    #[\Override]
     public function isFile(): bool
     {
         return $this->getHttpFoundationFile()->isFile();
     }
 
+    #[\Override]
     public function isLink(): bool
     {
         return $this->getHttpFoundationFile()->isLink();
     }
 
+    #[\Override]
     public function isReadable(): bool
     {
         return $this->getHttpFoundationFile()->isReadable();
     }
 
+    #[\Override]
     public function isWritable(): bool
     {
         return $this->getHttpFoundationFile()->isWritable();
@@ -235,6 +263,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     /**
      * @param ?resource $context
      */
+    #[\Override]
     public function openFile(
         string $mode = 'r',
         bool $useIncludePath = false,
@@ -247,6 +276,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     /**
      * @param class-string $class
      */
+    #[\Override]
     public function setFileClass($class = \SplFileObject::class): void
     {
         $this->getHttpFoundationFile()->setFileClass($class);
@@ -255,6 +285,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     /**
      * @param class-string $class
      */
+    #[\Override]
     public function setInfoClass($class = \SplFileInfo::class): void
     {
         $this->getHttpFoundationFile()->setInfoClass($class);

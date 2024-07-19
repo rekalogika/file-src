@@ -24,6 +24,7 @@ class ImageTwigExtension extends AbstractExtension implements ServiceSubscriberI
 {
     protected ContainerInterface $container;
 
+    #[\Override]
     public static function getSubscribedServices(): array
     {
         return [
@@ -45,6 +46,7 @@ class ImageTwigExtension extends AbstractExtension implements ServiceSubscriberI
         return $resizer;
     }
 
+    #[\Override]
     public function getFilters(): array
     {
         return [

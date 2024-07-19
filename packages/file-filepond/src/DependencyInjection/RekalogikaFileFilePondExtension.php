@@ -23,6 +23,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 class RekalogikaFileFilePondExtension extends Extension implements
     PrependExtensionInterface
 {
+    #[\Override]
     public function load(array $configs, ContainerBuilder $container): void
     {
         $container
@@ -30,6 +31,7 @@ class RekalogikaFileFilePondExtension extends Extension implements
             ->addTag('form.type');
     }
 
+    #[\Override]
     public function prepend(ContainerBuilder $container): void
     {
         $container->prependExtensionConfig('twig', [

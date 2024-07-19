@@ -35,6 +35,7 @@ class FileAssociationManagerTest extends TestCase
 
     private ?FileRepositoryInterface $fileRepository = null;
 
+    #[\Override]
     protected function setUp(): void
     {
         $kernel = new TestKernel();

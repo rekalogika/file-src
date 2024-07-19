@@ -28,16 +28,19 @@ final class TranslatableFileName implements FileNameInterface
     ) {
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return (string) $this->getFull();
     }
 
+    #[\Override]
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
         return $this->getFull()->trans($translator, $locale);
     }
 
+    #[\Override]
     public function getFull(): \Stringable&TranslatableInterface
     {
         if ($this->extension !== null && $this->extension !== '') {
@@ -61,26 +64,31 @@ final class TranslatableFileName implements FileNameInterface
 
     }
 
+    #[\Override]
     public function setFull(string $name): void
     {
         throw new \BadMethodCallException('Cannot set base name on translatable file name');
     }
 
+    #[\Override]
     public function getBase(): \Stringable&TranslatableInterface
     {
         return $this->base;
     }
 
+    #[\Override]
     public function setBase(string $name): void
     {
         throw new \BadMethodCallException('Cannot set base name on translatable file name');
     }
 
+    #[\Override]
     public function getExtension(): ?string
     {
         return $this->extension;
     }
 
+    #[\Override]
     public function setExtension(?string $extension): void
     {
         if ($extension === '') {
@@ -90,6 +98,7 @@ final class TranslatableFileName implements FileNameInterface
         $this->extension = $extension;
     }
 
+    #[\Override]
     public function hasExtension(): bool
     {
         return $this->extension !== '' && $this->extension !== null;

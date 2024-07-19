@@ -19,21 +19,25 @@ use Rekalogika\Contracts\File\NullFilePointerInterface;
 
 class NullPointer implements NullFilePointerInterface
 {
+    #[\Override]
     public function getFilesystemIdentifier(): ?string
     {
         return null;
     }
 
+    #[\Override]
     public function getKey(): string
     {
         return '/dev/null';
     }
 
+    #[\Override]
     public function isEqualTo(FileInterface|FilePointerInterface $other): bool
     {
         return false;
     }
 
+    #[\Override]
     public function isSameFilesystem(FileInterface|FilePointerInterface $other): bool
     {
         return false;

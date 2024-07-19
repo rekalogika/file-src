@@ -33,6 +33,7 @@ final class LocalTemporaryFile extends \SplFileInfo
      * __destructed. We prevent that from happening by throwing an exception
      * here.
      */
+    #[\Override]
     public function __toString(): string
     {
         \trigger_deprecation('rekalogika/file', 'latest', 'LocalTemporaryFile should not be cast to string. Use getPathname() instead.');

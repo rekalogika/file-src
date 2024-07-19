@@ -28,6 +28,7 @@ class DefaultFileLocationResolver implements FileLocationResolverInterface
     ) {
     }
 
+    #[\Override]
     public function getFileLocation(
         object $object,
         string $propertyName

@@ -44,6 +44,7 @@ final class FileCollection extends CollectionDecorator implements DirectoryInter
         parent::__construct($files);
     }
 
+    #[\Override]
     public function getName(): FileNameInterface
     {
         if ($this->name instanceof TranslatableInterface) {

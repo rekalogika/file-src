@@ -32,6 +32,7 @@ final class MimeMapFileTypeAdapter implements FileTypeInterface
         $this->type = $type;
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->getParsed()->toString();
@@ -50,26 +51,31 @@ final class MimeMapFileTypeAdapter implements FileTypeInterface
         }
     }
 
+    #[\Override]
     public function getName(): string
     {
         return $this->getParsed()->toString();
     }
 
+    #[\Override]
     public function getType(): string
     {
         return $this->getParsed()->getMedia();
     }
 
+    #[\Override]
     public function getSubType(): string
     {
         return $this->getParsed()->getSubType();
     }
 
+    #[\Override]
     public function getCommonExtensions(): array
     {
         return $this->getParsed()->getExtensions();
     }
 
+    #[\Override]
     public function getExtension(): ?string
     {
         try {
@@ -79,6 +85,7 @@ final class MimeMapFileTypeAdapter implements FileTypeInterface
         }
     }
 
+    #[\Override]
     public function getDescription(): \Stringable&TranslatableInterface
     {
         try {

@@ -34,11 +34,13 @@ class RawMetadata implements RawMetadataInterface, \IteratorAggregate
         $this->merge($metadata);
     }
 
+    #[\Override]
     public function getIterator(): \Traversable
     {
         yield from $this->metadata;
     }
 
+    #[\Override]
     public function get(string $key): int|string|bool|null
     {
         if (!array_key_exists($key, $this->metadata)) {
@@ -48,21 +50,25 @@ class RawMetadata implements RawMetadataInterface, \IteratorAggregate
         return $this->metadata[$key];
     }
 
+    #[\Override]
     public function tryGet(string $key): int|string|bool|null
     {
         return $this->metadata[$key] ?? null;
     }
 
+    #[\Override]
     public function set(string $key, int|string|bool|null $value): void
     {
         $this->metadata[$key] = $value;
     }
 
+    #[\Override]
     public function delete(string $key): void
     {
         unset($this->metadata[$key]);
     }
 
+    #[\Override]
     public function merge(iterable $metadata): void
     {
         foreach ($metadata as $key => $value) {
@@ -70,6 +76,7 @@ class RawMetadata implements RawMetadataInterface, \IteratorAggregate
         }
     }
 
+    #[\Override]
     public function count(): int
     {
         return \count($this->metadata);

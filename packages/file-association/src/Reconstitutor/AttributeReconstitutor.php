@@ -27,26 +27,31 @@ class AttributeReconstitutor implements AttributeReconstitutorInterface
     ) {
     }
 
+    #[\Override]
     public static function getAttributeClass(): string
     {
         return WithFileAssociation::class;
     }
 
+    #[\Override]
     public function onSave(object $object): void
     {
         $this->fileAssociationManager->save($object);
     }
 
+    #[\Override]
     public function onRemove(object $object): void
     {
         $this->fileAssociationManager->remove($object);
     }
 
+    #[\Override]
     public function onLoad(object $object): void
     {
         $this->fileAssociationManager->load($object);
     }
 
+    #[\Override]
     public function onCreate(object $object): void
     {
     }

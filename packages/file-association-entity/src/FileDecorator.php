@@ -131,6 +131,7 @@ class FileDecorator implements FileInterface
         return $this->file;
     }
 
+    #[\Override]
     public function get(string $id)
     {
         if ($id === RawMetadataInterface::class) {

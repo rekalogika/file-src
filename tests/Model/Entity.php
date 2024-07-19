@@ -25,6 +25,7 @@ class Entity implements FileAssociationInterface
     ) {
     }
 
+    #[\Override]
     public static function getFileAssociationPropertyList(): array
     {
         return ['file'];

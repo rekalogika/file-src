@@ -25,6 +25,7 @@ class PropertyInspector implements PropertyInspectorInterface
      */
     private array $cache = [];
 
+    #[\Override]
     public function inspect(object $object, string $propertyName): PropertyInspectorResult
     {
         $cacheKey = $object::class . '::' . $propertyName;

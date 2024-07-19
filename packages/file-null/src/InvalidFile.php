@@ -30,21 +30,25 @@ class InvalidFile extends \Exception implements NullFileInterface
     ) {
     }
 
+    #[\Override]
     public function getFilesystemIdentifier(): ?string
     {
         return $this->filesystemIdentifier;
     }
 
+    #[\Override]
     public function getKey(): string
     {
         return $this->key ?? '/dev/null';
     }
 
+    #[\Override]
     public function getName(): FileNameInterface
     {
         return new NullName('Invalid', 'rekalogika_file');
     }
 
+    #[\Override]
     public function getType(): FileTypeInterface
     {
         return new NullType('Invalid file', 'rekalogika_file');

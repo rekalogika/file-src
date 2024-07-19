@@ -59,11 +59,13 @@ class ImageResizer extends AbstractFileFilter
     // implementations
     //
 
+    #[\Override]
     protected function getDerivationId(): string
     {
         return sprintf('%s-%s', $this->aspect, $this->maxWidthOrHeight);
     }
 
+    #[\Override]
     protected function process(): FileInterface
     {
         $ratio = null;

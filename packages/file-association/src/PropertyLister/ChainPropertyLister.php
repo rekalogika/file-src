@@ -28,6 +28,7 @@ class ChainPropertyLister implements PropertyListerInterface
     ) {
     }
 
+    #[\Override]
     public function getFileProperties(object $object): iterable
     {
         $properties = [];

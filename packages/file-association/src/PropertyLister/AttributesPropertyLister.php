@@ -27,6 +27,7 @@ class AttributesPropertyLister implements PropertyListerInterface
      */
     private array $cache = [];
 
+    #[\Override]
     public function getFileProperties(object $object): iterable
     {
         if (isset($this->cache[$object::class])) {

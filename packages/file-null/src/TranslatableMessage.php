@@ -24,11 +24,13 @@ class TranslatableMessage implements \Stringable, TranslatableInterface
     ) {
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->name;
     }
 
+    #[\Override]
     public function trans(
         TranslatorInterface $translator,
         ?string $locale = null

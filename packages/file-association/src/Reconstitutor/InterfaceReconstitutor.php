@@ -29,26 +29,31 @@ class InterfaceReconstitutor implements ClassReconstitutorInterface
     ) {
     }
 
+    #[\Override]
     public static function getClass(): string
     {
         return FileAssociationInterface::class;
     }
 
+    #[\Override]
     public function onSave(object $object): void
     {
         $this->fileAssociationService->save($object);
     }
 
+    #[\Override]
     public function onRemove(object $object): void
     {
         $this->fileAssociationService->remove($object);
     }
 
+    #[\Override]
     public function onLoad(object $object): void
     {
         $this->fileAssociationService->load($object);
     }
 
+    #[\Override]
     public function onCreate(object $object): void
     {
     }

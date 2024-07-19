@@ -25,7 +25,7 @@ class FileResponseTest extends TestCase
         $file = new File(__DIR__ . '/../Resources/localFile.txt');
 
         $response = new FileResponse($file);
-        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertSame(Response::HTTP_OK, $response->getStatusCode(), (string) $response->getContent());
         $this->assertSame('text/plain', $response->headers->get('content-type'));
         $this->assertSame('inline; filename="localFile.txt"', $response->headers->get('content-disposition'));
         $this->assertSame('4', $response->headers->get('content-length'));
@@ -42,7 +42,7 @@ class FileResponseTest extends TestCase
         $file = new File(__DIR__ . '/../Resources/localFile.txt');
 
         $response = new FileResponse($file, disposition: 'attachment');
-        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertSame(Response::HTTP_OK, $response->getStatusCode(), (string) $response->getContent());
         $this->assertSame('text/plain', $response->headers->get('content-type'));
         $this->assertSame('attachment; filename="localFile.txt"', $response->headers->get('content-disposition'));
         $this->assertSame('4', $response->headers->get('content-length'));
@@ -62,7 +62,7 @@ class FileResponseTest extends TestCase
             'x-foo' => 'bar',
         ]);
 
-        $this->assertSame(Response::HTTP_OK, $response->getStatusCode());
+        $this->assertSame(Response::HTTP_OK, $response->getStatusCode(), (string) $response->getContent());
         $this->assertSame('bar', $response->headers->get('x-foo'));
     }
 }

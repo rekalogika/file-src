@@ -48,6 +48,7 @@ class FromHttpFoundationFileAdapter extends File
         return $this->source;
     }
 
+    #[\Override]
     protected function getRawMetadata(): RawMetadata
     {
         if ($this->cachedMetadata !== null) {

@@ -105,6 +105,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         $this->other = [];
     }
 
+    #[\Override]
     public function getIterator(): \Traversable
     {
         yield Constants::FILE_NAME => $this->name;
@@ -119,6 +120,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         yield from $this->getOthers();
     }
 
+    #[\Override]
     public function get(string $key): int|string|bool|null
     {
         return match ($key) {
@@ -134,6 +136,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         };
     }
 
+    #[\Override]
     public function tryGet(string $key): int|string|bool|null
     {
         try {
@@ -143,6 +146,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         }
     }
 
+    #[\Override]
     public function set(string $key, int|string|bool|null $value): void
     {
         match ($key) {
@@ -158,6 +162,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         };
     }
 
+    #[\Override]
     public function delete(string $key): void
     {
         match ($key) {
@@ -171,6 +176,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         };
     }
 
+    #[\Override]
     public function merge(iterable $metadata): void
     {
         foreach ($metadata as $key => $value) {
@@ -178,6 +184,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         }
     }
 
+    #[\Override]
     public function count(): int
     {
         return count($this->getOthers()) + 6;

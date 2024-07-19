@@ -25,6 +25,7 @@ class DefaultObjectIdResolver implements ObjectIdResolverInterface
     ) {
     }
 
+    #[\Override]
     public function getObjectId(object $object): string
     {
         if (\method_exists($object, $this->method)) {

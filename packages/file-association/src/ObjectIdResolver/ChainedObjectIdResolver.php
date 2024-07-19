@@ -36,6 +36,7 @@ class ChainedObjectIdResolver implements ObjectIdResolverInterface
         $this->cache = $map;
     }
 
+    #[\Override]
     public function getObjectId(object $object): string
     {
         if (isset($this->cache[$object])) {

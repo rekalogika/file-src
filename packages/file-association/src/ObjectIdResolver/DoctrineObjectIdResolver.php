@@ -30,6 +30,7 @@ class DoctrineObjectIdResolver implements ObjectIdResolverInterface
     ) {
     }
 
+    #[\Override]
     public function getObjectId(object $object): string
     {
         $objectManager = $this->managerRegistry

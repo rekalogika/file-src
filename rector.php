@@ -45,9 +45,7 @@ return RectorConfig::configure()
     )
     ->withPhpSets(php81: true)
     ->withRules([
-        NewlineAfterStatementRector::class,
-        NewlineBeforeNewAssignSetRector::class,
-        // AddOverrideAttributeToOverriddenMethodsRector::class,
+        AddOverrideAttributeToOverriddenMethodsRector::class,
     ])
     ->withSkip([
         FirstClassCallableRector::class => [

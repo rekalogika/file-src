@@ -19,6 +19,7 @@ use Rekalogika\File\RawMetadata;
 
 class MetadataSerializer implements MetadataSerializerInterface
 {
+    #[\Override]
     public function serialize(RawMetadataInterface $metadata): string
     {
         $array = \iterator_to_array($metadata);
@@ -26,6 +27,7 @@ class MetadataSerializer implements MetadataSerializerInterface
         return json_encode($array, \JSON_FORCE_OBJECT | \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
     }
 
+    #[\Override]
     public function deserialize(string $serialized): RawMetadataInterface
     {
         $array = json_decode($serialized, true, 512, \JSON_THROW_ON_ERROR);
