@@ -132,7 +132,7 @@ class FileDecorator implements FileInterface
 
     public function get(string $id)
     {
-        if ($id == RawMetadataInterface::class) {
+        if ($id === RawMetadataInterface::class) {
             return new FileMetadataDecorator(
                 $this->metadata,
                 $this->file->get(RawMetadataInterface::class) ?? new RawMetadata(),

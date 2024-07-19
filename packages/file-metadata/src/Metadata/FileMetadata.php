@@ -53,7 +53,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
 
-        if (!$extension) {
+        if ($extension === '' || $extension === '0') {
             $type = $this->getType();
             $extension = $type->getExtension();
             if ($extension !== null) {

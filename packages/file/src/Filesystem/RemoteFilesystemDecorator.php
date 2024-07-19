@@ -52,7 +52,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
 
     private function getWrapped(): FilesystemOperator
     {
-        if (!$this->wrapped) {
+        if ($this->wrapped === null) {
             throw new \LogicException('No wrapped filesystem. Call withFilesystem() first.');
         }
 
@@ -115,7 +115,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         $metadata = $this->getMetadataFromSidecarFile($location);
 
         // if metadata is present in the sidecar file, return it
-        if ($metadata) {
+        if ($metadata !== null) {
             return $metadata;
         }
 

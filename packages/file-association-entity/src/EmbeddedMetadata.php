@@ -105,7 +105,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         yield Constants::FILE_NAME => $this->name;
         yield Constants::FILE_SIZE => $this->size;
         yield Constants::FILE_TYPE => $this->type;
-        yield Constants::FILE_MODIFICATION_TIME => $this->modificationTime
+        yield Constants::FILE_MODIFICATION_TIME => $this->modificationTime !== null
             ? $this->modificationTime->getTimestamp()
             : null;
         yield Constants::MEDIA_WIDTH => $this->width;
@@ -120,7 +120,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
             Constants::FILE_NAME => $this->name,
             Constants::FILE_SIZE => $this->size,
             Constants::FILE_TYPE => $this->type,
-            Constants::FILE_MODIFICATION_TIME => $this->modificationTime
+            Constants::FILE_MODIFICATION_TIME => $this->modificationTime !== null
                 ? $this->modificationTime->getTimestamp()
                 : null,
             Constants::MEDIA_WIDTH => $this->width,

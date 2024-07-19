@@ -72,7 +72,7 @@ class ImageResizer extends AbstractFileFilter
         $w = $img->width();
         $h = $img->height();
 
-        if ($this->aspect == self::ASPECTRATIO_SQUARE) {
+        if ($this->aspect === self::ASPECTRATIO_SQUARE) {
             if ($w > $h) {
                 $img->crop($h, $h);
             } else {
@@ -80,7 +80,7 @@ class ImageResizer extends AbstractFileFilter
             }
 
             $ratio = 1;
-        } elseif ($this->aspect == self::ASPECTRATIO_ORIGINAL) {
+        } elseif ($this->aspect === self::ASPECTRATIO_ORIGINAL) {
             $ratio = $w / $h;
         } else {
             throw new \InvalidArgumentException(sprintf(
