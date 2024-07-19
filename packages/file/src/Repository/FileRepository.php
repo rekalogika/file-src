@@ -62,6 +62,7 @@ class FileRepository implements FileRepositoryInterface
             if ($file instanceof FileInterface) {
                 throw new AdHocFilesystemException($file, $e);
             }
+
             throw $e;
         }
     }
@@ -144,6 +145,7 @@ class FileRepository implements FileRepositoryInterface
                 $filePointer->getKey(),
             );
         }
+
         return $this->fileCache[$hash] = new File(
             $filePointer->getKey(),
             $this->getFilesystemFromPointerOrFile($filePointer),

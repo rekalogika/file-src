@@ -48,6 +48,7 @@ final class FileProxy implements FileInterface
     //
 
     private bool $isFileMissing = false;
+
     private ?FileInterface $wrapped = null;
 
     //

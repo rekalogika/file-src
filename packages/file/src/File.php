@@ -36,8 +36,11 @@ class File implements FileInterface
     use MetadataTrait;
 
     private ?RawMetadata $metadataCache = null;
+
     private FilesystemOperator $filesystem;
+
     private bool $isAdHocFilesystem = false;
+
     private bool $isLocalFilesystem;
 
     /**

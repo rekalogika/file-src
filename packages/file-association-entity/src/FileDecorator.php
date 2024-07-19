@@ -50,6 +50,7 @@ class FileDecorator implements FileInterface
                 // any chance the caller calls `flush()`, the metadata will be
                 // persisted.
             }
+
             $metadata->clear();
             $metadata->merge($file->get(RawMetadataInterface::class) ?? []);
 

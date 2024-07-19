@@ -49,6 +49,7 @@ final class FileCollection extends CollectionDecorator implements DirectoryInter
         if ($this->name instanceof TranslatableInterface) {
             return new TranslatableFileName($this->name);
         }
+
         return new FileName($this->name);
 
     }

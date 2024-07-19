@@ -38,8 +38,11 @@ final class ZipDirectory
      * @var DirectoryInterface<array-key,NodeInterface>
      */
     private DirectoryInterface $directory;
+
     private string $directoryName = '';
+
     private ?self $parent = null;
+
     private ?string $directoryPathCache = null;
 
     public function __construct(
@@ -76,6 +79,7 @@ final class ZipDirectory
                 if ($file === null) {
                     continue;
                 }
+
                 $this->processFile($file);
             } elseif ($node instanceof FileInterface) {
                 $this->processFile($node);
@@ -160,6 +164,7 @@ final class ZipDirectory
         if ($this->translator !== null) {
             return $message->trans($this->translator, $this->translator->getLocale());
         }
+
         return (string) $message;
 
     }

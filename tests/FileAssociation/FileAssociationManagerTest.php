@@ -32,6 +32,7 @@ class FileAssociationManagerTest extends TestCase
     use FileTestTrait;
 
     private ?FileAssociationManager $fileAssociationManager = null;
+
     private ?FileRepositoryInterface $fileRepository = null;
 
     public function setUp(): void

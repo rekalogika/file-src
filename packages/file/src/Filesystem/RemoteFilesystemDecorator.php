@@ -224,6 +224,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
                 $this->metadataGenerator
                     ->generateMetadataFromStream($rawMetadata, $contents);
             }
+
             fseek($contents, 0);
             $this->getWrapped()->writeStream($location, $contents, $config);
         } else {

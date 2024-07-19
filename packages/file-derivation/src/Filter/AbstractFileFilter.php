@@ -21,6 +21,7 @@ use Rekalogika\Contracts\File\FileRepositoryInterface;
 abstract class AbstractFileFilter implements FileFilterInterface
 {
     private FileRepositoryInterface $fileRepository;
+
     private FileInterface $sourceFile;
 
     /**
@@ -117,6 +118,7 @@ abstract class AbstractFileFilter implements FileFilterInterface
         if ($result->isEqualTo($derivationFilePointer)) {
             return $result;
         }
+
         return $this->fileRepository->copy($result, $derivationFilePointer);
 
     }

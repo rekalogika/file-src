@@ -49,6 +49,7 @@ final class ReadableFileCollection extends ReadableCollectionDecorator implement
         if ($this->name instanceof TranslatableInterface) {
             return new TranslatableFileName($this->name);
         }
+
         return new FileName($this->name);
 
     }

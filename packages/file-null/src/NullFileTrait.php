@@ -28,6 +28,7 @@ trait NullFileTrait
         if ($this instanceof \Throwable) {
             throw new NullFileOperationException($message, 0, $this);
         }
+
         throw new NullFileOperationException($message);
 
     }

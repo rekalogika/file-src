@@ -76,6 +76,7 @@ class FilePondType extends FileType
                     if (!$options['allow_delete']) {
                         $event->setData($event->getForm()->getData());
                     }
+
                     return;
                 }
 

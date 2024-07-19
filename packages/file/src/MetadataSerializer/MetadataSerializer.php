@@ -76,6 +76,7 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_string($file) && !is_null($file)) {
                         $file = null;
                     }
+
                     $newArray[Constants::FILE_NAME] = $file;
                     break;
 
@@ -83,6 +84,7 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_int($value)) {
                         continue 2;
                     }
+
                     $newArray[Constants::FILE_SIZE] = $value;
                     break;
 
@@ -94,6 +96,7 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_string($value)) {
                         continue 2;
                     }
+
                     $datetime = new \DateTimeImmutable($value);
                     $newArray[Constants::FILE_MODIFICATION_TIME] = (int) $datetime->format('U');
 
@@ -102,6 +105,7 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_int($value)) {
                         continue 2;
                     }
+
                     $newArray[Constants::MEDIA_WIDTH] = $value;
                     break;
 
@@ -109,6 +113,7 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_int($value)) {
                         continue 2;
                     }
+
                     $newArray[Constants::MEDIA_HEIGHT] = $value;
                     break;
             }

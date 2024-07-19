@@ -21,6 +21,7 @@ use Rekalogika\Contracts\File\NullFilePointerInterface;
 trait EqualityTrait
 {
     abstract public function getFilesystemIdentifier(): ?string;
+
     abstract public function getKey(): string;
 
     public function isEqualTo(FilePointerInterface|FileInterface $other): bool

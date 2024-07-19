@@ -41,6 +41,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
         if ($result === null) {
             return new FileName(null, $this->getType()->getExtension());
         }
+
         return new FileName((string) $result);
     }
 

@@ -20,6 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class FileName implements FileNameInterface
 {
     private ?string $name = null;
+
     private ?string $extension = null;
 
     public function __construct(
@@ -49,6 +50,7 @@ final class FileName implements FileNameInterface
             if ($this->extension !== null && $this->extension !== '') {
                 return 'Untitled.' . $this->extension;
             }
+
             return 'Untitled';
 
         }
@@ -80,6 +82,7 @@ final class FileName implements FileNameInterface
                     ]
                 );
             }
+
             return new TranslatableMessage('Untitled', 'Untitled');
 
         }
@@ -94,6 +97,7 @@ final class FileName implements FileNameInterface
                 ]
             );
         }
+
         return new TranslatableMessage(
             $this->name,
             '{name}',
@@ -114,6 +118,7 @@ final class FileName implements FileNameInterface
         if ($this->name === null) {
             return new TranslatableMessage('Untitled', 'Untitled');
         }
+
         return new TranslatableMessage(
             $this->name,
             '{name}',

@@ -50,6 +50,7 @@ final class TranslatableFileName implements FileNameInterface
                 ]
             );
         }
+
         return new TranslatableMessage(
             (string) $this->base,
             '{name}',

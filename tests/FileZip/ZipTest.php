@@ -24,6 +24,7 @@ use Rekalogika\File\Zip\Model\Directory;
 class ZipTest extends TestCase
 {
     private ?FileRepositoryInterface $fileRepository = null;
+
     private ?FileZip $fileZip = null;
 
     public function setUp(): void

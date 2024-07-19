@@ -25,6 +25,7 @@ class ImageResizer extends AbstractFileFilter
     //
 
     final public const ASPECTRATIO_ORIGINAL = 'original';
+
     final public const ASPECTRATIO_SQUARE = 'square';
 
     //
@@ -32,6 +33,7 @@ class ImageResizer extends AbstractFileFilter
     //
 
     private int $maxWidthOrHeight = 512;
+
     private string $aspect = self::ASPECTRATIO_ORIGINAL;
 
     //

@@ -25,10 +25,15 @@ use Rekalogika\Domain\File\Metadata\Constants;
 class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
 {
     private ?string $name = null;
+
     private ?int $size = null;
+
     private ?string $type = null;
+
     private ?\DateTimeInterface $modificationTime = null;
+
     private ?int $width = null;
+
     private ?int $height = null;
 
     /**

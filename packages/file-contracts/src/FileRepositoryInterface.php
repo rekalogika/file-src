@@ -38,6 +38,7 @@ interface FileRepositoryInterface
      * Gets a lazy-loading proxy to the file specified by the pointer.
      */
     public function getReference(FilePointerInterface $filePointer): FileInterface;
+
     /**
      * Clears the repository's cache
      */
