@@ -40,7 +40,7 @@ class DefaultObjectIdResolver implements ObjectIdResolverInterface
 
         $id = (string) $id;
 
-        if (strlen($id) === 0) {
+        if ($id === '') {
             throw new EmptyIdException($object, $this->method);
         }
 
