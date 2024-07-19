@@ -107,7 +107,7 @@ abstract class AbstractFileFilter implements FileFilterInterface
         }
 
         if (
-            $derivationFile
+            $derivationFile !== null
             && $derivationFile->getLastModified() >= $this->sourceFile->getLastModified()
         ) {
             return $derivationFile;

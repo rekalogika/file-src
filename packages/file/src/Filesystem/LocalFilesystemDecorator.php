@@ -27,11 +27,6 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     ) {
     }
 
-    private function getWrapped(): FilesystemOperator
-    {
-        return $this->wrapped;
-    }
-
     //
     // implementations
     //
@@ -105,7 +100,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     public function mimeType(string $path): string
     {
         try {
-            return $this->getWrapped()->mimeType($path);
+            return $this->wrapped->mimeType($path);
         } catch (UnableToRetrieveMetadata) {
             return 'application/octet-stream';
         }
@@ -120,7 +115,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
      */
     public function write(string $location, string $contents, array $config = []): void
     {
-        $this->getWrapped()->write($location, $contents, $config);
+        $this->wrapped->write($location, $contents, $config);
     }
 
     /**
@@ -128,17 +123,17 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
      */
     public function writeStream(string $location, mixed $contents, array $config = []): void
     {
-        $this->getWrapped()->writeStream($location, $contents, $config);
+        $this->wrapped->writeStream($location, $contents, $config);
     }
 
     public function delete(string $location): void
     {
-        $this->getWrapped()->delete($location);
+        $this->wrapped->delete($location);
     }
 
     public function deleteDirectory(string $location): void
     {
-        $this->getWrapped()->deleteDirectory($location);
+        $this->wrapped->deleteDirectory($location);
     }
 
     /**
@@ -146,7 +141,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
      */
     public function publicUrl(string $path, $config = []): string
     {
-        return $this->getWrapped()->publicUrl($path, $config);
+        return $this->wrapped->publicUrl($path, $config);
     }
 
     /**
@@ -157,7 +152,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
         \DateTimeInterface $expiresAt,
         $config = []
     ): string {
-        return $this->getWrapped()->temporaryUrl($path, $expiresAt, $config);
+        return $this->wrapped->temporaryUrl($path, $expiresAt, $config);
     }
 
     /**
@@ -166,57 +161,57 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
      */
     public function checksum($path, $config = []): string
     {
-        return $this->getWrapped()->checksum($path, $config);
+        return $this->wrapped->checksum($path, $config);
     }
 
     public function fileExists(string $location): bool
     {
-        return $this->getWrapped()->fileExists($location);
+        return $this->wrapped->fileExists($location);
     }
 
     public function directoryExists(string $location): bool
     {
-        return $this->getWrapped()->directoryExists($location);
+        return $this->wrapped->directoryExists($location);
     }
 
     public function has(string $location): bool
     {
-        return $this->getWrapped()->has($location);
+        return $this->wrapped->has($location);
     }
 
     public function read(string $location): string
     {
-        return $this->getWrapped()->read($location);
+        return $this->wrapped->read($location);
     }
 
     public function readStream(string $location)
     {
-        return $this->getWrapped()->readStream($location);
+        return $this->wrapped->readStream($location);
     }
 
     public function listContents(string $location, bool $deep = self::LIST_SHALLOW): DirectoryListing
     {
-        return $this->getWrapped()->listContents($location, $deep);
+        return $this->wrapped->listContents($location, $deep);
     }
 
     public function lastModified(string $path): int
     {
-        return $this->getWrapped()->lastModified($path);
+        return $this->wrapped->lastModified($path);
     }
 
     public function fileSize(string $path): int
     {
-        return $this->getWrapped()->fileSize($path);
+        return $this->wrapped->fileSize($path);
     }
 
     public function visibility(string $path): string
     {
-        return $this->getWrapped()->visibility($path);
+        return $this->wrapped->visibility($path);
     }
 
     public function setVisibility(string $path, string $visibility): void
     {
-        $this->getWrapped()->setVisibility($path, $visibility);
+        $this->wrapped->setVisibility($path, $visibility);
     }
 
     /**
@@ -224,7 +219,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
      */
     public function createDirectory(string $location, array $config = []): void
     {
-        $this->getWrapped()->createDirectory($location, $config);
+        $this->wrapped->createDirectory($location, $config);
     }
 
     /**
@@ -232,7 +227,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
      */
     public function move(string $source, string $destination, array $config = []): void
     {
-        $this->getWrapped()->move($source, $destination, $config);
+        $this->wrapped->move($source, $destination, $config);
     }
 
     /**
@@ -240,6 +235,6 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
      */
     public function copy(string $source, string $destination, array $config = []): void
     {
-        $this->getWrapped()->copy($source, $destination, $config);
+        $this->wrapped->copy($source, $destination, $config);
     }
 }
