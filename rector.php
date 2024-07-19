@@ -40,8 +40,8 @@ return RectorConfig::configure()
         privatization: true,
         instanceOf: true,
         strictBooleans: true,
-        // symfonyCodeQuality: true,
-        // doctrineCodeQuality: true,
+        symfonyCodeQuality: true,
+        doctrineCodeQuality: true,
     )
     ->withPhpSets(php81: true)
     ->withRules([
