@@ -28,7 +28,7 @@ class FromHttpFoundationFileAdapter extends File
     private ?RawMetadata $cachedMetadata = null;
 
     private function __construct(
-        private HttpFoundationFile $source,
+        private readonly HttpFoundationFile $source,
     ) {
         parent::__construct($this->source->getRealPath());
     }

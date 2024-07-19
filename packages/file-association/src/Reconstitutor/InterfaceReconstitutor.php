@@ -25,7 +25,7 @@ use Rekalogika\Reconstitutor\Contract\ClassReconstitutorInterface;
 class InterfaceReconstitutor implements ClassReconstitutorInterface
 {
     public function __construct(
-        private FileAssociationManager $fileAssociationService
+        private readonly FileAssociationManager $fileAssociationService
     ) {
     }
 

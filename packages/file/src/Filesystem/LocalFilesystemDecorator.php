@@ -23,7 +23,7 @@ use Rekalogika\File\RawMetadata;
 class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
 {
     public function __construct(
-        private FilesystemOperator $wrapped,
+        private readonly FilesystemOperator $wrapped,
     ) {
     }
 

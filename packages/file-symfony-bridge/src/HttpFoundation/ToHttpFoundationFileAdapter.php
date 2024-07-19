@@ -39,7 +39,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
      */
     private ?HttpFoundationFile $httpFoundationFile = null;
 
-    private function __construct(private FileInterface $file)
+    private function __construct(private readonly FileInterface $file)
     {
     }
 

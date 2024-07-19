@@ -24,8 +24,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class DirectoryResourceServer
 {
     public function __construct(
-        private FileZip $fileZip,
-        private TranslatorInterface $translator,
+        private readonly FileZip $fileZip,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

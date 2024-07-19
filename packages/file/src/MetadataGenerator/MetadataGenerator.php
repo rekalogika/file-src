@@ -22,7 +22,7 @@ use Rekalogika\File\LocalTemporaryFile;
 
 final class MetadataGenerator implements MetadataGeneratorInterface
 {
-    private MimeTypeDetector $mimeTypeDetector;
+    private readonly MimeTypeDetector $mimeTypeDetector;
 
     public function __construct(
         ?MimeTypeDetector $mimeTypeDetector = null

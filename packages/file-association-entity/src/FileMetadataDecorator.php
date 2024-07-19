@@ -25,8 +25,8 @@ class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggregate
      * @param RawMetadataInterface $fileMetadata Metadata from the real file
      */
     public function __construct(
-        private RawMetadataInterface $embeddedMetadata,
-        private RawMetadataInterface $fileMetadata,
+        private readonly RawMetadataInterface $embeddedMetadata,
+        private readonly RawMetadataInterface $fileMetadata,
     ) {
     }
 

@@ -23,7 +23,7 @@ use Rekalogika\Reconstitutor\Contract\AttributeReconstitutorInterface;
 class AttributeReconstitutor implements AttributeReconstitutorInterface
 {
     public function __construct(
-        private FileAssociationManager $fileAssociationManager
+        private readonly FileAssociationManager $fileAssociationManager
     ) {
     }
 

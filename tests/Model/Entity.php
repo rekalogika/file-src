@@ -21,7 +21,7 @@ class Entity implements FileAssociationInterface
     private ?FileInterface $file = null;
 
     public function __construct(
-        private string $id
+        private readonly string $id
     ) {
     }
 

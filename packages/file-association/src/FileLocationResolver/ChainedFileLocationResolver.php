@@ -24,7 +24,7 @@ class ChainedFileLocationResolver implements FileLocationResolverInterface
      * @param iterable<FileLocationResolverInterface> $fileLocationResolvers
      */
     public function __construct(
-        private iterable $fileLocationResolvers,
+        private readonly iterable $fileLocationResolvers,
     ) {
     }
 

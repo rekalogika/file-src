@@ -21,7 +21,7 @@ use Rekalogika\File\Association\Exception\ObjectIdResolver\MethodNotFoundExcepti
 class DefaultObjectIdResolver implements ObjectIdResolverInterface
 {
     public function __construct(
-        private string $method = 'getId',
+        private readonly string $method = 'getId',
     ) {
     }
 

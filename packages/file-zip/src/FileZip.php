@@ -24,8 +24,8 @@ use ZipStream\ZipStream;
 final class FileZip
 {
     public function __construct(
-        private ZipDirectory $zipDirectory,
-        private TranslatorInterface $translator,
+        private readonly ZipDirectory $zipDirectory,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

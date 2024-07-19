@@ -40,9 +40,9 @@ class FileRepository implements FileRepositoryInterface
 
 
     public function __construct(
-        private FilesystemRepositoryInterface $filesystemRepository,
-        private MetadataGeneratorInterface $metadataGenerator,
-        private ?string $defaultFilesystemIdForTemporaryFile = null
+        private readonly FilesystemRepositoryInterface $filesystemRepository,
+        private readonly MetadataGeneratorInterface $metadataGenerator,
+        private readonly ?string $defaultFilesystemIdForTemporaryFile = null
     ) {
     }
 

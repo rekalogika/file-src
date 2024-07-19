@@ -27,7 +27,7 @@ class SymfonyPropertyAccessorBridge implements
     PropertyWriterInterface
 {
     public function __construct(
-        private SymfonyPropertyAccessorInterface $propertyAccessor,
+        private readonly SymfonyPropertyAccessorInterface $propertyAccessor,
     ) {
     }
 

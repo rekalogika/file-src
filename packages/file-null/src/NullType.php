@@ -19,8 +19,8 @@ use Symfony\Contracts\Translation\TranslatableInterface;
 class NullType implements FileTypeInterface
 {
     public function __construct(
-        private string $description,
-        private string $translationDomain
+        private readonly string $description,
+        private readonly string $translationDomain
     ) {
     }
 

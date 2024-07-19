@@ -14,6 +14,8 @@ use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\DeadCode\Rector\Node\RemoveNonExistingVarAnnotationRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
+use Rector\Php81\Rector\Array_\FirstClassCallableRector;
+use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\Strict\Rector\Ternary\DisallowedShortTernaryRuleFixerRector;
 use Rector\ValueObject\PhpVersion;
@@ -35,12 +37,18 @@ return RectorConfig::configure()
         // symfonyCodeQuality: true,
         // doctrineCodeQuality: true,
     )
-    ->withTypeCoverageLevel(10)
-    ->withPhpSets(php82: true)
+    // ->withTypeCoverageLevel(1)
+    // ->withPhpSets(php81: true)
     ->withRules([
+        ReadOnlyPropertyRector::class,
         // AddOverrideAttributeToOverriddenMethodsRector::class,
     ])
     ->withSkip([
+        FirstClassCallableRector::class => [
+            // false positive
+            __DIR__ . '/packages/file-bundle/config/tests.php',
+        ],
+
         // static analysis tools don't like this
         RemoveNonExistingVarAnnotationRector::class,
 

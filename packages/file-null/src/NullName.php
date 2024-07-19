@@ -20,8 +20,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class NullName implements FileNameInterface
 {
     public function __construct(
-        private string $name,
-        private string $translationDomain
+        private readonly string $name,
+        private readonly string $translationDomain
     ) {
     }
 

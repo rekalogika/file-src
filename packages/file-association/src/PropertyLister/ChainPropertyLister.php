@@ -24,7 +24,7 @@ class ChainPropertyLister implements PropertyListerInterface
      * @param iterable<PropertyListerInterface> $propertyListers
      */
     public function __construct(
-        private iterable $propertyListers,
+        private readonly iterable $propertyListers,
     ) {
     }
 

@@ -28,7 +28,7 @@ final class HttpMetadata extends AbstractMetadata implements
     }
 
     private function __construct(
-        private RawMetadataInterface $metadata
+        private readonly RawMetadataInterface $metadata
     ) {
     }
 

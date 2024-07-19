@@ -30,7 +30,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
     }
 
     private function __construct(
-        private RawMetadataInterface $metadata
+        private readonly RawMetadataInterface $metadata
     ) {
     }
 

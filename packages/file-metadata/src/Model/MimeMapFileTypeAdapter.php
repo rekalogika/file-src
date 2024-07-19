@@ -21,7 +21,7 @@ use Symfony\Contracts\Translation\TranslatableInterface;
 
 final class MimeMapFileTypeAdapter implements FileTypeInterface
 {
-    private string $type;
+    private readonly string $type;
     private ?Type $parsedType = null;
 
     public function __construct(string $type)

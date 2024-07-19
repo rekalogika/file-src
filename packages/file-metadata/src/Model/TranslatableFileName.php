@@ -23,7 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class TranslatableFileName implements FileNameInterface
 {
     public function __construct(
-        private TranslatableInterface&\Stringable $base,
+        private readonly TranslatableInterface&\Stringable $base,
         private ?string $extension = null
     ) {
     }

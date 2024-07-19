@@ -30,7 +30,7 @@ final class MetadataFactory
     }
 
     private function __construct(
-        private RawMetadataInterface $metadata
+        private readonly RawMetadataInterface $metadata
     ) {
     }
 

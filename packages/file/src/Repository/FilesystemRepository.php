@@ -36,7 +36,7 @@ class FilesystemRepository implements FilesystemRepositoryInterface
      * @param iterable<string,FilesystemOperator> $filesystems
      */
     public function __construct(
-        private RemoteFilesystemDecorator $metadataSidecarFilesystemOperatorDecorator,
+        private readonly RemoteFilesystemDecorator $metadataSidecarFilesystemOperatorDecorator,
         iterable $filesystems = [],
     ) {
         foreach ($filesystems as $identifier => $filesystem) {

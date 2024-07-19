@@ -22,7 +22,7 @@ use Rekalogika\File\File;
 class FromSplFileInfoAdapter extends File
 {
     private function __construct(
-        private \SplFileInfo $source,
+        private readonly \SplFileInfo $source,
     ) {
         parent::__construct($this->source->getRealPath());
     }
