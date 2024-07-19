@@ -16,6 +16,7 @@ use Rector\DeadCode\Rector\Node\RemoveNonExistingVarAnnotationRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php80\Rector\FuncCall\ClassOnObjectRector;
 use Rector\Php81\Rector\Array_\FirstClassCallableRector;
+use Rector\Php81\Rector\ClassMethod\NewInInitializerRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
@@ -40,16 +41,19 @@ return RectorConfig::configure()
         // doctrineCodeQuality: true,
     )
     // ->withTypeCoverageLevel(1)
-    // ->withPhpSets(php81: true)
+    ->withPhpSets(php81: true)
     ->withRules([
-        ReadOnlyPropertyRector::class,
-        ClassOnObjectRector::class,
         // AddOverrideAttributeToOverriddenMethodsRector::class,
     ])
     ->withSkip([
         FirstClassCallableRector::class => [
             // false positive
             __DIR__ . '/packages/file-bundle/config/tests.php',
+        ],
+
+        NewInInitializerRector::class => [
+            // maybe false positive?
+            __DIR__ . '/packages/file/src/MetadataGenerator/MetadataGenerator.php',
         ],
 
         // static analysis tools don't like this

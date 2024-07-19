@@ -67,7 +67,7 @@ class FilePondCollectionType extends FileType
                         // try decoding if the client sent a base64 string
                         try {
                             $file = FilePondFileEncodeAdapter::adaptFromString($file);
-                        } catch (\JsonException $e) {
+                        } catch (\JsonException) {
                             // if the client sent a plain string, it means the user
                             // did not delete the file that is already existing
                             continue;

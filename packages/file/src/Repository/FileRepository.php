@@ -166,11 +166,7 @@ class FileRepository implements FileRepositoryInterface
     {
         $hash = self::getFilePointerHash($filePointer);
 
-        if (isset($this->fileCache[$hash])) {
-            return $this->fileCache[$hash];
-        }
-
-        return new FileProxy($filePointer, $this);
+        return $this->fileCache[$hash] ?? new FileProxy($filePointer, $this);
     }
 
     private function getMetadata(
@@ -348,8 +344,7 @@ class FileRepository implements FileRepositoryInterface
         ?string $prefix = null,
         ?string $filesystemId = null
     ): FileInterface {
-        $filesystemId = $filesystemId ??
-            $this->defaultFilesystemIdForTemporaryFile;
+        $filesystemId ??= $this->defaultFilesystemIdForTemporaryFile;
 
         if ($filesystemId === null) {
             $tmpDir = sys_get_temp_dir();

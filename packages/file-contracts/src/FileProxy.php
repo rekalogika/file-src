@@ -80,7 +80,7 @@ final class FileProxy implements FileInterface
         // try to fetch the file. if it fails, mark it as missing
         try {
             $this->wrapped = $this->fileRepository->get($this->filePointer);
-        } catch (FileNotFoundException $e) {
+        } catch (FileNotFoundException) {
             $this->isFileMissing = true;
             $this->throwNotFound();
         }

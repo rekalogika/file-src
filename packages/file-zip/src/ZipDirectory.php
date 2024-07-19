@@ -39,7 +39,7 @@ final class ZipDirectory
      */
     private DirectoryInterface $directory;
     private string $directoryName = '';
-    private ?self $parent;
+    private ?self $parent = null;
     private ?string $directoryPathCache = null;
 
     public function __construct(

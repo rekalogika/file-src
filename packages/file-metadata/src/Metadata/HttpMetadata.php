@@ -73,7 +73,7 @@ final class HttpMetadata extends AbstractMetadata implements
 
     private function getContentDisposition(?string $disposition = null): string
     {
-        $disposition = $disposition ?? $this->getDisposition();
+        $disposition ??= $this->getDisposition();
 
         return ContentDisposition::create(
             $this->getFileName(),

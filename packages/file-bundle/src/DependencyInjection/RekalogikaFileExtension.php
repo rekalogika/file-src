@@ -136,7 +136,7 @@ class RekalogikaFileExtension extends Extension implements PrependExtensionInter
                 throw new \RuntimeException('Unable to get path of EmbeddedMetadata class');
             }
 
-            $configDir = realpath(dirname(dirname($path)) . '/config/doctrine');
+            $configDir = realpath(dirname($path, 2) . '/config/doctrine');
             if (false === $configDir) {
                 throw new \RuntimeException('Unable to get path of EmbeddedMetadata class');
             }
