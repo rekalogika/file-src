@@ -259,7 +259,7 @@ class File implements FileInterface
             throw new DerivationNotSupportedException('It is not allowed to create derivation from a file in an ad-hoc filesystem.');
         }
 
-        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $derivationId)) {
+        if ((bool)preg_match('/^[a-zA-Z0-9_-]+$/', $derivationId) === false) {
             throw new \InvalidArgumentException('Derivation ID must consist of alphanumeric characters, dash, or underscore only.');
         }
 
