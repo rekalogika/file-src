@@ -27,7 +27,7 @@ class ZipTest extends TestCase
 
     private ?FileZip $fileZip = null;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = new TestKernel();
         $kernel->boot();

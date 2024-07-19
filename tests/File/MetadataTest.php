@@ -23,14 +23,14 @@ class MetadataTest extends TestCase
 {
     private string $originalTimeZone = 'UTC';
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->originalTimeZone = \date_default_timezone_get();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         /** @psalm-suppress ArgumentTypeCoercion */
         \date_default_timezone_set($this->originalTimeZone);

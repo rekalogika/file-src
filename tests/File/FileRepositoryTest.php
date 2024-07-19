@@ -25,7 +25,7 @@ class FileRepositoryTest extends TestCase
 
     private FileRepositoryInterface $fileRepository;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->fileRepository = FileFactory::createFileRepository();
     }

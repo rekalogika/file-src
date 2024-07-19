@@ -24,7 +24,7 @@ class TemporaryUrlTest extends TestCase
 {
     private ?ContainerInterface $container = null;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $kernel = new TestKernel();
         $kernel->boot();
