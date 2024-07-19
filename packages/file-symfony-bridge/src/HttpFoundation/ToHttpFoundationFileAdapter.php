@@ -28,8 +28,6 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     /**
      * We keep the original output of createLocalTemporaryFile here to prevent
      * it from being __destructed
-     *
-     * @var \SplFileInfo|null
      */
     private ?\SplFileInfo $localTemporaryFile = null;
 
