@@ -133,8 +133,6 @@ interface FileInterface extends NodeInterface
 
     /**
      * Flushes metadata to the storage.
-     *
-     * @return void
      */
     public function flush(): void;
 }
