@@ -47,7 +47,7 @@ class AttributesPropertyLister implements PropertyListerInterface
      * @param class-string $class
      * @return iterable<\ReflectionProperty>
      */
-    private static function getReflectionProperties(string $class): iterable
+    private function getReflectionProperties(string $class): iterable
     {
         $reflectionClass = (new \ReflectionClass($class));
         while ($reflectionClass instanceof \ReflectionClass) {
@@ -72,7 +72,7 @@ class AttributesPropertyLister implements PropertyListerInterface
         string $class,
         string $attribute
     ): iterable {
-        foreach (self::getReflectionProperties($class) as $reflectionProperty) {
+        foreach ($this->getReflectionProperties($class) as $reflectionProperty) {
             $attributes = $reflectionProperty
                 ->getAttributes($attribute);
 
