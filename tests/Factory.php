@@ -31,8 +31,6 @@ class Factory
 
     public static function createTestFilesystem(): FilesystemOperator
     {
-        $filesystem = new Filesystem(new InMemoryFilesystemAdapter());
-
-        return $filesystem;
+        return new Filesystem(new InMemoryFilesystemAdapter());
     }
 }

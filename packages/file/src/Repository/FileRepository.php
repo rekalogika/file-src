@@ -63,7 +63,6 @@ class FileRepository implements FileRepositoryInterface
                 throw new AdHocFilesystemException($file, $e);
             }
             throw $e;
-
         }
     }
 
@@ -150,7 +149,6 @@ class FileRepository implements FileRepositoryInterface
             $this->getFilesystemFromPointerOrFile($filePointer),
             $filePointer->getFilesystemIdentifier(),
         );
-
     }
 
     public function tryGet(FilePointerInterface $filePointer): ?FileInterface
@@ -335,8 +333,7 @@ class FileRepository implements FileRepositoryInterface
         FilePointerInterface $filePointer
     ): string {
         return sha1(
-            (string) $filePointer->getFilesystemIdentifier() .
-                $filePointer->getKey()
+            ($filePointer->getFilesystemIdentifier() ?? '') . $filePointer->getKey()
         );
     }
 

@@ -40,9 +40,8 @@ class FileFactory
             $metadataSerializer,
             self::createMetadataGenerator()
         );
-        $repository = new FilesystemRepository($metadataSidecarDecorator);
 
-        return $repository;
+        return new FilesystemRepository($metadataSidecarDecorator);
     }
 
     public static function createMetadataGenerator(): MetadataGeneratorInterface
