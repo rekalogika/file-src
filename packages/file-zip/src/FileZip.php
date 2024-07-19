@@ -63,7 +63,7 @@ final class FileZip
      */
     public function createZipResponse(DirectoryInterface $directory): Response
     {
-        return new StreamedResponse(function () use ($directory) {
+        return new StreamedResponse(function () use ($directory): void {
             $this->streamZip($directory);
         });
     }

@@ -39,7 +39,7 @@ final class MetadataFactory
      * @param string|class-string<T> $id
      * @return ($id is class-string<T> ? class-string<T> : class-string<AbstractMetadata>|null)
      */
-    private static function getMetadataClass(string $id)
+    private static function getMetadataClass(string $id): ?string
     {
         switch ($id) {
             case HttpMetadataInterface::class:

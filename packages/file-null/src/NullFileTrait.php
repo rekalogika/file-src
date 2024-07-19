@@ -115,7 +115,7 @@ trait NullFileTrait
         $this->throwException('Cannot derive from a null file');
     }
 
-    public function get(string $id)
+    public function get(string $id): null
     {
         return null;
     }

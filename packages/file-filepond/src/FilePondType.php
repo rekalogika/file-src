@@ -48,7 +48,7 @@ class FilePondType extends FileType
         }
 
         $builder
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options): void {
                 /** @var null|string|UploadedFile|FileInterface */
                 $data = $event->getData();
                 if ($data instanceof UploadedFile) {

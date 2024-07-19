@@ -35,7 +35,7 @@ class FilePondCollectionType extends FileType
         }
 
         $builder
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options): void {
                 $incomingFiles = $event->getData();
                 if (!is_array($incomingFiles)) {
                     throw new \InvalidArgumentException('Incoming files must be an array');
