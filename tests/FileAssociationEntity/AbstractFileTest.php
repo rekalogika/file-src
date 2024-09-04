@@ -30,6 +30,7 @@ class AbstractFileTest extends TestCase
     {
         $file = TemporaryFile::create('test');
         $file->setContent('test-temporary-file');
+
         $path = $file->getKey();
 
         $this->assertFileInterface(
@@ -101,6 +102,7 @@ class AbstractFileTest extends TestCase
 
         $metadata = new EmbeddedMetadata();
         $metadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);
+
         $timestamp = $metadata->get(Constants::FILE_MODIFICATION_TIME);
 
         static::assertSame(1234567890, $timestamp);

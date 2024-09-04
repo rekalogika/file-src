@@ -32,8 +32,8 @@ class Directory implements DirectoryInterface, \IteratorAggregate
      * @param array<TKey,T> $entries
      */
     public function __construct(
-        private string $name,
-        private array $entries = []
+        private readonly string $name,
+        private readonly array $entries = []
     ) {
     }
 

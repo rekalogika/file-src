@@ -22,8 +22,8 @@ final class PropertyInspectorResult
      * @param 'EAGER'|'LAZY' $fetch
      */
     public function __construct(
-        private bool $mandatory,
-        private string $fetch,
+        private readonly bool $mandatory,
+        private readonly string $fetch,
     ) {
         if (!in_array($fetch, ['EAGER', 'LAZY'])) {
             throw new \InvalidArgumentException('Fetch mode can only be EAGER or LAZY.');

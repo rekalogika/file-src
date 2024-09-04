@@ -21,13 +21,14 @@ use Rekalogika\File\Association\Model\FilePointer;
 class DefaultFileLocationResolver implements FileLocationResolverInterface
 {
     public function __construct(
-        private ObjectIdResolverInterface $objectIdResolver,
-        private string $filesystemIdentifier = 'default',
-        private string $prefix = 'entity',
-        private int $hashLevel = 4,
+        private readonly ObjectIdResolverInterface $objectIdResolver,
+        private readonly string $filesystemIdentifier = 'default',
+        private readonly string $prefix = 'entity',
+        private readonly int $hashLevel = 4,
     ) {
     }
 
+    #[\Override]
     public function getFileLocation(
         object $object,
         string $propertyName

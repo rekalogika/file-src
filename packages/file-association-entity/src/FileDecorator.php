@@ -39,9 +39,9 @@ class FileDecorator implements FileInterface
             if ($file === null) {
                 return null;
 
-            // metadata says the file does not exist, but we get a lazy-loading
-            // proxy that we don't know whether the real file exists or not. it
-            // is highly probable the real file does not exist.
+                // metadata says the file does not exist, but we get a lazy-loading
+                // proxy that we don't know whether the real file exists or not. it
+                // is highly probable the real file does not exist.
             } elseif ($file instanceof FileProxy) {
                 return null;
 
@@ -50,6 +50,7 @@ class FileDecorator implements FileInterface
                 // any chance the caller calls `flush()`, the metadata will be
                 // persisted.
             }
+
             $metadata->clear();
             $metadata->merge($file->get(RawMetadataInterface::class) ?? []);
 
@@ -130,9 +131,10 @@ class FileDecorator implements FileInterface
         return $this->file;
     }
 
+    #[\Override]
     public function get(string $id)
     {
-        if ($id == RawMetadataInterface::class) {
+        if ($id === RawMetadataInterface::class) {
             return new FileMetadataDecorator(
                 $this->metadata,
                 $this->file->get(RawMetadataInterface::class) ?? new RawMetadata(),

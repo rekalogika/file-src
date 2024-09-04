@@ -46,21 +46,25 @@ class MissingFile extends \Exception implements NullFileInterface
         }
     }
 
+    #[\Override]
     public function getFilesystemIdentifier(): ?string
     {
         return $this->filesystemIdentifier;
     }
 
+    #[\Override]
     public function getKey(): string
     {
         return $this->key;
     }
 
+    #[\Override]
     public function getName(): FileNameInterface
     {
         return new NullName('(missing)', 'rekalogika_file');
     }
 
+    #[\Override]
     public function getType(): FileTypeInterface
     {
         return new NullType('The file is missing in the storage media', 'rekalogika_file');

@@ -19,16 +19,18 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class TranslatableMessage implements \Stringable, TranslatableInterface
 {
     public function __construct(
-        private string $name,
-        private string $translationDomain
+        private readonly string $name,
+        private readonly string $translationDomain
     ) {
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->name;
     }
 
+    #[\Override]
     public function trans(
         TranslatorInterface $translator,
         ?string $locale = null

@@ -23,17 +23,19 @@ use Rekalogika\Domain\File\Metadata\Model\MimeMapFileTypeAdapter;
 
 final class FileMetadata extends AbstractMetadata implements FileMetadataInterface
 {
+    #[\Override]
     public static function create(
         RawMetadataInterface $metadata
     ): static {
-        return new static($metadata);
+        return new self($metadata);
     }
 
     private function __construct(
-        private RawMetadataInterface $metadata
+        private readonly RawMetadataInterface $metadata
     ) {
     }
 
+    #[\Override]
     public function getName(): FileNameInterface
     {
         $result = $this->metadata->tryGet(Constants::FILE_NAME);
@@ -41,9 +43,11 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
         if ($result === null) {
             return new FileName(null, $this->getType()->getExtension());
         }
+
         return new FileName((string) $result);
     }
 
+    #[\Override]
     public function setName(?string $fileName): void
     {
         if (null === $fileName) {
@@ -53,7 +57,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
 
-        if (!$extension) {
+        if ($extension === '' || $extension === '0') {
             $type = $this->getType();
             $extension = $type->getExtension();
             if ($extension !== null) {
@@ -64,6 +68,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
         $this->metadata->set(Constants::FILE_NAME, $fileName);
     }
 
+    #[\Override]
     public function getSize(): int
     {
         $size = $this->metadata->tryGet(Constants::FILE_SIZE) ?? 0;
@@ -79,6 +84,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
         return $size;
     }
 
+    #[\Override]
     public function getType(): FileTypeInterface
     {
         $type = (string) ($this->metadata->tryGet(Constants::FILE_TYPE)
@@ -87,11 +93,13 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
         return new MimeMapFileTypeAdapter($type);
     }
 
+    #[\Override]
     public function setType(string $type): void
     {
         $this->metadata->set(Constants::FILE_TYPE, $type);
     }
 
+    #[\Override]
     public function getModificationTime(): \DateTimeInterface
     {
         $result = $this->metadata->tryGet(Constants::FILE_MODIFICATION_TIME);

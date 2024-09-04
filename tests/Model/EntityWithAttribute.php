@@ -24,7 +24,7 @@ class EntityWithAttribute
     private ?FileInterface $nonAssociatedFile = null;
 
     public function __construct(
-        private string $id
+        private readonly string $id
     ) {
     }
 

@@ -17,10 +17,8 @@ use League\Flysystem\Local\LocalFilesystemAdapter as FlysystemLocalFilesystemAda
 
 class LocalFilesystemAdapter extends FlysystemLocalFilesystemAdapter
 {
+    #[\Override]
     protected function ensureDirectoryExists(string $dirname, int $visibility): void
     {
-        if ($dirname === '/' || $dirname === '') {
-            return;
-        }
     }
 }

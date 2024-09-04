@@ -22,7 +22,7 @@ class ObjectNotSupportedException extends ObjectIdResolverException
         parent::__construct(
             \sprintf(
                 'Object "%s" is not supported.',
-                \get_class($object),
+                $object::class,
             ),
             0,
             $previous

@@ -21,5 +21,6 @@ use Rekalogika\Contracts\File\RawMetadataInterface;
 interface MetadataSerializerInterface
 {
     public function serialize(RawMetadataInterface $metadata): string;
+
     public function deserialize(string $serialized): RawMetadataInterface;
 }

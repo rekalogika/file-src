@@ -24,7 +24,7 @@ class EmptyIdException extends ObjectIdResolverException
             \sprintf(
                 "Method '%s' in object '%s' returned an empty id",
                 $method,
-                \get_class($object)
+                $object::class
             ),
             0,
             $previous

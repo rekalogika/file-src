@@ -16,7 +16,7 @@ namespace Rekalogika\File\Tests\Model;
 class EntityWithAnyId
 {
     public function __construct(
-        private mixed $id
+        private readonly mixed $id
     ) {
     }
 

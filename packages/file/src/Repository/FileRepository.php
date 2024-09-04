@@ -40,12 +40,13 @@ class FileRepository implements FileRepositoryInterface
 
 
     public function __construct(
-        private FilesystemRepositoryInterface $filesystemRepository,
-        private MetadataGeneratorInterface $metadataGenerator,
-        private ?string $defaultFilesystemIdForTemporaryFile = null
+        private readonly FilesystemRepositoryInterface $filesystemRepository,
+        private readonly MetadataGeneratorInterface $metadataGenerator,
+        private readonly ?string $defaultFilesystemIdForTemporaryFile = null
     ) {
     }
 
+    #[\Override]
     public function clear(): void
     {
         $this->fileCache = [];
@@ -62,11 +63,12 @@ class FileRepository implements FileRepositoryInterface
             if ($file instanceof FileInterface) {
                 throw new AdHocFilesystemException($file, $e);
             }
-            throw $e;
 
+            throw $e;
         }
     }
 
+    #[\Override]
     public function createFromString(
         FilePointerInterface $filePointer,
         string $contents,
@@ -80,6 +82,7 @@ class FileRepository implements FileRepositoryInterface
         return $this->get($filePointer);
     }
 
+    #[\Override]
     public function createFromStream(
         FilePointerInterface $filePointer,
         mixed $stream,
@@ -101,6 +104,7 @@ class FileRepository implements FileRepositoryInterface
         return $this->get($filePointer);
     }
 
+    #[\Override]
     public function createFromLocalFile(
         FilePointerInterface $filePointer,
         string $localFilePath,
@@ -123,9 +127,10 @@ class FileRepository implements FileRepositoryInterface
         return $this->get($filePointer);
     }
 
+    #[\Override]
     public function get(FilePointerInterface $filePointer): FileInterface
     {
-        $hash = self::getFilePointerHash($filePointer);
+        $hash = $this->getFilePointerHash($filePointer);
 
         if (isset($this->fileCache[$hash])) {
             return $this->fileCache[$hash];
@@ -145,14 +150,15 @@ class FileRepository implements FileRepositoryInterface
                 $filePointer->getKey(),
             );
         }
+
         return $this->fileCache[$hash] = new File(
             $filePointer->getKey(),
             $this->getFilesystemFromPointerOrFile($filePointer),
             $filePointer->getFilesystemIdentifier(),
         );
-
     }
 
+    #[\Override]
     public function tryGet(FilePointerInterface $filePointer): ?FileInterface
     {
         try {
@@ -162,15 +168,12 @@ class FileRepository implements FileRepositoryInterface
         }
     }
 
+    #[\Override]
     public function getReference(FilePointerInterface $filePointer): FileInterface
     {
-        $hash = self::getFilePointerHash($filePointer);
+        $hash = $this->getFilePointerHash($filePointer);
 
-        if (isset($this->fileCache[$hash])) {
-            return $this->fileCache[$hash];
-        }
-
-        return new FileProxy($filePointer, $this);
+        return $this->fileCache[$hash] ?? new FileProxy($filePointer, $this);
     }
 
     private function getMetadata(
@@ -219,14 +222,16 @@ class FileRepository implements FileRepositoryInterface
         }
     }
 
+    #[\Override]
     public function delete(FilePointerInterface $filePointer): void
     {
         $this->getFilesystemFromPointerOrFile($filePointer)
             ->delete($filePointer->getKey());
 
-        unset($this->fileCache[self::getFilePointerHash($filePointer)]);
+        unset($this->fileCache[$this->getFilePointerHash($filePointer)]);
     }
 
+    #[\Override]
     public function copy(
         FilePointerInterface|FileInterface $source,
         FilePointerInterface|FileInterface $destination
@@ -271,11 +276,12 @@ class FileRepository implements FileRepositoryInterface
             $destination->getPointer() : $destination;
 
         // delete cache
-        unset($this->fileCache[self::getFilePointerHash($destination)]);
+        unset($this->fileCache[$this->getFilePointerHash($destination)]);
 
         return $this->get($destination);
     }
 
+    #[\Override]
     public function move(
         FilePointerInterface|FileInterface $source,
         FilePointerInterface|FileInterface $destination
@@ -323,33 +329,32 @@ class FileRepository implements FileRepositoryInterface
         // delete cache
         $source = $source instanceof FileInterface ?
             $source->getPointer() : $source;
-        unset($this->fileCache[self::getFilePointerHash($source)]);
+        unset($this->fileCache[$this->getFilePointerHash($source)]);
 
         // get destination pointer
         $destination = $destination instanceof FileInterface ?
             $destination->getPointer() : $destination;
 
         // delete cache
-        unset($this->fileCache[self::getFilePointerHash($destination)]);
+        unset($this->fileCache[$this->getFilePointerHash($destination)]);
 
         return $this->get($destination);
     }
 
-    private static function getFilePointerHash(
+    private function getFilePointerHash(
         FilePointerInterface $filePointer
     ): string {
         return sha1(
-            (string) $filePointer->getFilesystemIdentifier() .
-                $filePointer->getKey()
+            ($filePointer->getFilesystemIdentifier() ?? '') . $filePointer->getKey()
         );
     }
 
+    #[\Override]
     public function createTemporaryFile(
         ?string $prefix = null,
         ?string $filesystemId = null
     ): FileInterface {
-        $filesystemId = $filesystemId ??
-            $this->defaultFilesystemIdForTemporaryFile;
+        $filesystemId ??= $this->defaultFilesystemIdForTemporaryFile;
 
         if ($filesystemId === null) {
             $tmpDir = sys_get_temp_dir();

@@ -49,11 +49,12 @@ class TestKernel extends HttpKernelKernel
     /**
      * @param array<string,mixed> $config
      */
-    public function __construct(private array $config = [])
+    public function __construct(private readonly array $config = [])
     {
         parent::__construct('test', true);
     }
 
+    #[\Override]
     public function boot(): void
     {
         $filesystem = new Filesystem();
@@ -63,6 +64,7 @@ class TestKernel extends HttpKernelKernel
 
     }
 
+    #[\Override]
     public function registerBundles(): iterable
     {
         yield new FrameworkBundle();
@@ -74,9 +76,10 @@ class TestKernel extends HttpKernelKernel
         yield new RekalogikaPsr16SimpleCacheBundle();
     }
 
+    #[\Override]
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load(function (ContainerBuilder $container) {
+        $loader->load(function (ContainerBuilder $container): void {
             $container->loadFromExtension('framework', [
                 'http_method_override' => false,
                 'handle_all_throwables' => true,

@@ -21,10 +21,12 @@ class IntegrationTest extends TestCase
 {
     private ?ContainerInterface $container = null;
 
-    public function setUp(): void
+    #[\Override]
+    protected function setUp(): void
     {
         $kernel = new TestKernel();
         $kernel->boot();
+
         $this->container = $kernel->getContainer();
     }
 

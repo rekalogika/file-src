@@ -52,7 +52,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
 
     private function getWrapped(): FilesystemOperator
     {
-        if (!$this->wrapped) {
+        if ($this->wrapped === null) {
             throw new \LogicException('No wrapped filesystem. Call withFilesystem() first.');
         }
 
@@ -101,6 +101,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     // overrides
     //
 
+    #[\Override]
     public function getMetadata(string $location): iterable
     {
         return $this->getOrInitMetadata($location);
@@ -115,7 +116,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         $metadata = $this->getMetadataFromSidecarFile($location);
 
         // if metadata is present in the sidecar file, return it
-        if ($metadata) {
+        if ($metadata !== null) {
             return $metadata;
         }
 
@@ -144,6 +145,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         return $metadata;
     }
 
+    #[\Override]
     public function setMetadata(string $location, iterable $metadata): void
     {
         $savedMetadata = $this->getOrInitMetadata($location);
@@ -178,6 +180,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function write(
         string $location,
         string $contents,
@@ -202,6 +205,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function writeStream(
         string $location,
         mixed $contents,
@@ -219,11 +223,12 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         /** @var bool */
         $bypassMetadataGeneration = $config['bypass_metadata_generation'] ?? false;
 
-        if (self::isStreamSeekable($contents)) {
+        if ($this->isStreamSeekable($contents)) {
             if (!$bypassMetadataGeneration) {
                 $this->metadataGenerator
                     ->generateMetadataFromStream($rawMetadata, $contents);
             }
+
             fseek($contents, 0);
             $this->getWrapped()->writeStream($location, $contents, $config);
         } else {
@@ -245,6 +250,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         $this->saveMetadata($location, $rawMetadata);
     }
 
+    #[\Override]
     public function delete(string $location): void
     {
         try {
@@ -263,6 +269,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         }
     }
 
+    #[\Override]
     public function deleteDirectory(string $location): void
     {
         $this->getWrapped()->deleteDirectory($location);
@@ -275,7 +282,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param resource $stream
      */
-    private static function isStreamSeekable(mixed $stream): bool
+    private function isStreamSeekable(mixed $stream): bool
     {
         $meta = stream_get_meta_data($stream);
 
@@ -314,56 +321,67 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         return $this->getWrapped()->checksum($path, $config);
     }
 
+    #[\Override]
     public function fileExists(string $location): bool
     {
         return $this->getWrapped()->fileExists($location);
     }
 
+    #[\Override]
     public function directoryExists(string $location): bool
     {
         return $this->getWrapped()->directoryExists($location);
     }
 
+    #[\Override]
     public function has(string $location): bool
     {
         return $this->getWrapped()->has($location);
     }
 
+    #[\Override]
     public function read(string $location): string
     {
         return $this->getWrapped()->read($location);
     }
 
+    #[\Override]
     public function readStream(string $location)
     {
         return $this->getWrapped()->readStream($location);
     }
 
+    #[\Override]
     public function listContents(string $location, bool $deep = self::LIST_SHALLOW): DirectoryListing
     {
         return $this->getWrapped()->listContents($location, $deep);
     }
 
+    #[\Override]
     public function lastModified(string $path): int
     {
         return $this->getWrapped()->lastModified($path);
     }
 
+    #[\Override]
     public function fileSize(string $path): int
     {
         return $this->getWrapped()->fileSize($path);
     }
 
+    #[\Override]
     public function mimeType(string $path): string
     {
         return $this->getWrapped()->mimeType($path);
     }
 
+    #[\Override]
     public function visibility(string $path): string
     {
         return $this->getWrapped()->visibility($path);
     }
 
+    #[\Override]
     public function setVisibility(string $path, string $visibility): void
     {
         $this->getWrapped()->setVisibility($path, $visibility);
@@ -372,6 +390,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function createDirectory(string $location, array $config = []): void
     {
         $this->getWrapped()->createDirectory($location, $config);
@@ -380,6 +399,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function move(string $source, string $destination, array $config = []): void
     {
         $this->getWrapped()->move($source, $destination, $config);
@@ -388,6 +408,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function copy(string $source, string $destination, array $config = []): void
     {
         $this->getWrapped()->copy($source, $destination, $config);

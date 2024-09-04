@@ -30,7 +30,7 @@ final class MetadataFactory
     }
 
     private function __construct(
-        private RawMetadataInterface $metadata
+        private readonly RawMetadataInterface $metadata
     ) {
     }
 
@@ -39,7 +39,7 @@ final class MetadataFactory
      * @param string|class-string<T> $id
      * @return ($id is class-string<T> ? class-string<T> : class-string<AbstractMetadata>|null)
      */
-    private static function getMetadataClass(string $id)
+    private function getMetadataClass(string $id): ?string
     {
         switch ($id) {
             case HttpMetadataInterface::class:
@@ -71,7 +71,7 @@ final class MetadataFactory
                 return $this->metadata;
 
             default:
-                $class = self::getMetadataClass($id);
+                $class = $this->getMetadataClass($id);
                 if ($class === null) {
                     return null;
                 }

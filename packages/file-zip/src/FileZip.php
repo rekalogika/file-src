@@ -24,8 +24,8 @@ use ZipStream\ZipStream;
 final class FileZip
 {
     public function __construct(
-        private ZipDirectory $zipDirectory,
-        private TranslatorInterface $translator,
+        private readonly ZipDirectory $zipDirectory,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -63,7 +63,7 @@ final class FileZip
      */
     public function createZipResponse(DirectoryInterface $directory): Response
     {
-        return new StreamedResponse(function () use ($directory) {
+        return new StreamedResponse(function () use ($directory): void {
             $this->streamZip($directory);
         });
     }

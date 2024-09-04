@@ -25,44 +25,51 @@ class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggregate
      * @param RawMetadataInterface $fileMetadata Metadata from the real file
      */
     public function __construct(
-        private RawMetadataInterface $embeddedMetadata,
-        private RawMetadataInterface $fileMetadata,
+        private readonly RawMetadataInterface $embeddedMetadata,
+        private readonly RawMetadataInterface $fileMetadata,
     ) {
     }
 
+    #[\Override]
     public function getIterator(): \Traversable
     {
         yield from $this->embeddedMetadata;
     }
 
+    #[\Override]
     public function get(string $key): int|string|bool|null
     {
         return $this->embeddedMetadata->get($key);
     }
 
+    #[\Override]
     public function tryGet(string $key): int|string|bool|null
     {
         return $this->embeddedMetadata->tryGet($key);
     }
 
+    #[\Override]
     public function set(string $key, int|string|bool|null $value): void
     {
         $this->embeddedMetadata->set($key, $value);
         $this->fileMetadata->set($key, $value);
     }
 
+    #[\Override]
     public function delete(string $key): void
     {
         $this->embeddedMetadata->delete($key);
         $this->fileMetadata->delete($key);
     }
 
+    #[\Override]
     public function merge(iterable $metadata): void
     {
         $this->embeddedMetadata->merge($metadata);
         $this->fileMetadata->merge($metadata);
     }
 
+    #[\Override]
     public function count(): int
     {
         return $this->embeddedMetadata->count();

@@ -24,10 +24,11 @@ class ChainPropertyLister implements PropertyListerInterface
      * @param iterable<PropertyListerInterface> $propertyListers
      */
     public function __construct(
-        private iterable $propertyListers,
+        private readonly iterable $propertyListers,
     ) {
     }
 
+    #[\Override]
     public function getFileProperties(object $object): iterable
     {
         $properties = [];

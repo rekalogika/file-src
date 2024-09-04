@@ -36,7 +36,7 @@ class FilesystemRepository implements FilesystemRepositoryInterface
      * @param iterable<string,FilesystemOperator> $filesystems
      */
     public function __construct(
-        private RemoteFilesystemDecorator $metadataSidecarFilesystemOperatorDecorator,
+        private readonly RemoteFilesystemDecorator $metadataSidecarFilesystemOperatorDecorator,
         iterable $filesystems = [],
     ) {
         foreach ($filesystems as $identifier => $filesystem) {
@@ -62,6 +62,7 @@ class FilesystemRepository implements FilesystemRepositoryInterface
         );
     }
 
+    #[\Override]
     public function addFilesystem(
         string $identifier,
         FilesystemOperator $filesystem
@@ -78,6 +79,7 @@ class FilesystemRepository implements FilesystemRepositoryInterface
         $this->filesystems[$identifier] = $filesystem;
     }
 
+    #[\Override]
     public function getFilesystem(
         ?string $identifier
     ): MetadataAwareFilesystemOperator {

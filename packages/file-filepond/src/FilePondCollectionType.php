@@ -28,6 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FilePondCollectionType extends FileType
 {
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple'] !== true) {
@@ -35,7 +36,7 @@ class FilePondCollectionType extends FileType
         }
 
         $builder
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options): void {
                 $incomingFiles = $event->getData();
                 if (!is_array($incomingFiles)) {
                     throw new \InvalidArgumentException('Incoming files must be an array');
@@ -49,7 +50,7 @@ class FilePondCollectionType extends FileType
                 $newData = $entityFiles->toArray();
 
                 if ($options['allow_delete'] === true) {
-                    foreach ($newData as $key => $file) {
+                    foreach (array_keys($newData) as $key) {
                         if (!in_array((string) $key, $incomingFiles, true)) {
                             unset($newData[$key]);
                         }
@@ -67,7 +68,7 @@ class FilePondCollectionType extends FileType
                         // try decoding if the client sent a base64 string
                         try {
                             $file = FilePondFileEncodeAdapter::adaptFromString($file);
-                        } catch (\JsonException $e) {
+                        } catch (\JsonException) {
                             // if the client sent a plain string, it means the user
                             // did not delete the file that is already existing
                             continue;
@@ -86,11 +87,13 @@ class FilePondCollectionType extends FileType
         ;
     }
 
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return 'rekalogika_file_filepond_collection';
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

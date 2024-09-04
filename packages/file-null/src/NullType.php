@@ -19,36 +19,42 @@ use Symfony\Contracts\Translation\TranslatableInterface;
 class NullType implements FileTypeInterface
 {
     public function __construct(
-        private string $description,
-        private string $translationDomain
+        private readonly string $description,
+        private readonly string $translationDomain
     ) {
     }
 
+    #[\Override]
     public function getName(): string
     {
         return 'application/x-zerosize';
     }
 
+    #[\Override]
     public function getType(): string
     {
         return 'application';
     }
 
+    #[\Override]
     public function getSubType(): string
     {
         return 'x-zerosize';
     }
 
+    #[\Override]
     public function getCommonExtensions(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getExtension(): ?string
     {
         return null;
     }
 
+    #[\Override]
     public function getDescription(): \Stringable&TranslatableInterface
     {
         return new TranslatableMessage(
@@ -57,6 +63,7 @@ class NullType implements FileTypeInterface
         );
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return 'application/x-zerosize';

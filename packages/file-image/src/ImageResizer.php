@@ -25,6 +25,7 @@ class ImageResizer extends AbstractFileFilter
     //
 
     final public const ASPECTRATIO_ORIGINAL = 'original';
+
     final public const ASPECTRATIO_SQUARE = 'square';
 
     //
@@ -32,6 +33,7 @@ class ImageResizer extends AbstractFileFilter
     //
 
     private int $maxWidthOrHeight = 512;
+
     private string $aspect = self::ASPECTRATIO_ORIGINAL;
 
     //
@@ -57,11 +59,13 @@ class ImageResizer extends AbstractFileFilter
     // implementations
     //
 
+    #[\Override]
     protected function getDerivationId(): string
     {
         return sprintf('%s-%s', $this->aspect, $this->maxWidthOrHeight);
     }
 
+    #[\Override]
     protected function process(): FileInterface
     {
         $ratio = null;
@@ -72,7 +76,7 @@ class ImageResizer extends AbstractFileFilter
         $w = $img->width();
         $h = $img->height();
 
-        if ($this->aspect == self::ASPECTRATIO_SQUARE) {
+        if ($this->aspect === self::ASPECTRATIO_SQUARE) {
             if ($w > $h) {
                 $img->crop($h, $h);
             } else {
@@ -80,7 +84,7 @@ class ImageResizer extends AbstractFileFilter
             }
 
             $ratio = 1;
-        } elseif ($this->aspect == self::ASPECTRATIO_ORIGINAL) {
+        } elseif ($this->aspect === self::ASPECTRATIO_ORIGINAL) {
             $ratio = $w / $h;
         } else {
             throw new \InvalidArgumentException(sprintf(

@@ -28,7 +28,7 @@ class ChainedObjectIdResolver implements ObjectIdResolverInterface
      * @param iterable<ObjectIdResolverInterface> $objectIdResolvers
      */
     public function __construct(
-        private iterable $objectIdResolvers
+        private readonly iterable $objectIdResolvers
     ) {
         /** @var \WeakMap<object,string> */
         $map = new \WeakMap();
@@ -36,6 +36,7 @@ class ChainedObjectIdResolver implements ObjectIdResolverInterface
         $this->cache = $map;
     }
 
+    #[\Override]
     public function getObjectId(object $object): string
     {
         if (isset($this->cache[$object])) {

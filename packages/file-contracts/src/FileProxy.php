@@ -48,6 +48,7 @@ final class FileProxy implements FileInterface
     //
 
     private bool $isFileMissing = false;
+
     private ?FileInterface $wrapped = null;
 
     //
@@ -80,7 +81,7 @@ final class FileProxy implements FileInterface
         // try to fetch the file. if it fails, mark it as missing
         try {
             $this->wrapped = $this->fileRepository->get($this->filePointer);
-        } catch (FileNotFoundException $e) {
+        } catch (FileNotFoundException) {
             $this->isFileMissing = true;
             $this->throwNotFound();
         }
@@ -111,16 +112,19 @@ final class FileProxy implements FileInterface
     // public methods
     //
 
+    #[\Override]
     public function getPointer(): FilePointerInterface
     {
         return $this->filePointer;
     }
 
+    #[\Override]
     public function getFilesystemIdentifier(): ?string
     {
         return $this->filePointer->getFilesystemIdentifier();
     }
 
+    #[\Override]
     public function getKey(): string
     {
         return $this->filePointer->getKey();

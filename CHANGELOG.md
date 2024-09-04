@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.8.10
+
+* chore: add and set rector
+
 ## 1.8.9
 
 * fix: creates `DateTime` objects with the default timezone.

@@ -23,14 +23,16 @@ class MetadataTest extends TestCase
 {
     private string $originalTimeZone = 'UTC';
 
-    public function setUp(): void
+    #[\Override]
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->originalTimeZone = \date_default_timezone_get();
     }
 
-    public function tearDown(): void
+    #[\Override]
+    protected function tearDown(): void
     {
         /** @psalm-suppress ArgumentTypeCoercion */
         \date_default_timezone_set($this->originalTimeZone);
@@ -47,7 +49,7 @@ class MetadataTest extends TestCase
 
         $httpMetadata = HttpMetadata::create($rawMetadata);
         $headers = [];
-        foreach($httpMetadata->getHeaders() as $key => $value) {
+        foreach ($httpMetadata->getHeaders() as $key => $value) {
             $headers[$key] = $value;
         }
 
@@ -64,7 +66,7 @@ class MetadataTest extends TestCase
 
         $httpMetadata = HttpMetadata::create($rawMetadata);
         $headers = [];
-        foreach($httpMetadata->getHeaders() as $key => $value) {
+        foreach ($httpMetadata->getHeaders() as $key => $value) {
             $headers[$key] = $value;
         }
 

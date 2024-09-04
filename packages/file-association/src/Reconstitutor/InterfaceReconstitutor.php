@@ -25,30 +25,35 @@ use Rekalogika\Reconstitutor\Contract\ClassReconstitutorInterface;
 class InterfaceReconstitutor implements ClassReconstitutorInterface
 {
     public function __construct(
-        private FileAssociationManager $fileAssociationService
+        private readonly FileAssociationManager $fileAssociationService
     ) {
     }
 
+    #[\Override]
     public static function getClass(): string
     {
         return FileAssociationInterface::class;
     }
 
+    #[\Override]
     public function onSave(object $object): void
     {
         $this->fileAssociationService->save($object);
     }
 
+    #[\Override]
     public function onRemove(object $object): void
     {
         $this->fileAssociationService->remove($object);
     }
 
+    #[\Override]
     public function onLoad(object $object): void
     {
         $this->fileAssociationService->load($object);
     }
 
+    #[\Override]
     public function onCreate(object $object): void
     {
     }

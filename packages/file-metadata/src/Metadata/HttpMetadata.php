@@ -21,14 +21,15 @@ use Rekalogika\Domain\File\Metadata\Constants;
 final class HttpMetadata extends AbstractMetadata implements
     HttpMetadataInterface
 {
+    #[\Override]
     public static function create(
         RawMetadataInterface $metadata
     ): static {
-        return new static($metadata);
+        return new self($metadata);
     }
 
     private function __construct(
-        private RawMetadataInterface $metadata
+        private readonly RawMetadataInterface $metadata
     ) {
     }
 
@@ -37,6 +38,7 @@ final class HttpMetadata extends AbstractMetadata implements
         return (new \DateTimeImmutable())->format(\DateTimeInterface::RFC7231);
     }
 
+    #[\Override]
     public function getCacheControl(): ?string
     {
         $data = $this->metadata->tryGet(Constants::HTTP_CACHE_CONTROL);
@@ -47,6 +49,7 @@ final class HttpMetadata extends AbstractMetadata implements
         return (string) $data;
     }
 
+    #[\Override]
     public function setCacheControl(?string $cacheControl): void
     {
         if ($cacheControl === null) {
@@ -57,11 +60,13 @@ final class HttpMetadata extends AbstractMetadata implements
         $this->metadata->set(Constants::HTTP_CACHE_CONTROL, $cacheControl);
     }
 
+    #[\Override]
     public function getDisposition(): string
     {
         return (string) ($this->metadata->tryGet(Constants::HTTP_DISPOSITION) ?? 'inline');
     }
 
+    #[\Override]
     public function setDisposition(string $disposition): void
     {
         if (!\in_array($disposition, ['inline', 'attachment'], true)) {
@@ -73,7 +78,7 @@ final class HttpMetadata extends AbstractMetadata implements
 
     private function getContentDisposition(?string $disposition = null): string
     {
-        $disposition = $disposition ?? $this->getDisposition();
+        $disposition ??= $this->getDisposition();
 
         return ContentDisposition::create(
             $this->getFileName(),
@@ -149,6 +154,7 @@ final class HttpMetadata extends AbstractMetadata implements
     /**
      * @return iterable<string,string>
      */
+    #[\Override]
     public function getHeaders(?string $disposition = null): iterable
     {
         yield 'Date' => $this->getDate();

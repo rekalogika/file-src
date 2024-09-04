@@ -20,6 +20,7 @@ use Rekalogika\Domain\File\Metadata\Constants;
 final class ImageMetadata extends AbstractMetadata implements
     ImageMetadataInterface
 {
+    #[\Override]
     public static function create(
         RawMetadataInterface $metadata
     ): ?static {
@@ -27,24 +28,27 @@ final class ImageMetadata extends AbstractMetadata implements
             return null;
         }
 
-        return new static($metadata);
+        return new self($metadata);
     }
 
     private function __construct(
-        private RawMetadataInterface $metadata
+        private readonly RawMetadataInterface $metadata
     ) {
     }
 
+    #[\Override]
     public function getWidth(): int
     {
         return (int) $this->metadata->tryGet(Constants::MEDIA_WIDTH);
     }
 
+    #[\Override]
     public function getHeight(): int
     {
         return (int) $this->metadata->tryGet(Constants::MEDIA_HEIGHT);
     }
 
+    #[\Override]
     public function getAspectRatio(): float
     {
         if ($this->getHeight() === 0) {
@@ -54,21 +58,25 @@ final class ImageMetadata extends AbstractMetadata implements
         return $this->getWidth() / $this->getHeight();
     }
 
+    #[\Override]
     public function isAspectRatio(float $aspectRatio): bool
     {
         return abs($this->getAspectRatio() - $aspectRatio) < 0.001;
     }
 
+    #[\Override]
     public function isLandscape(): bool
     {
         return $this->getAspectRatio() > 1;
     }
 
+    #[\Override]
     public function isPortrait(): bool
     {
         return $this->getAspectRatio() < 1;
     }
 
+    #[\Override]
     public function isSquare(): bool
     {
         return $this->isAspectRatio(1);

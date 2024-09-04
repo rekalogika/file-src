@@ -23,7 +23,7 @@ class EntityWithLazyFile
     #[AsFileAssociation(fetch: 'LAZY')]
     private ?FileInterface $file = null;
 
-    public function __construct(private string $id)
+    public function __construct(private readonly string $id)
     {
     }
 

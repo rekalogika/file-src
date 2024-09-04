@@ -27,10 +27,11 @@ class SymfonyPropertyAccessorBridge implements
     PropertyWriterInterface
 {
     public function __construct(
-        private SymfonyPropertyAccessorInterface $propertyAccessor,
+        private readonly SymfonyPropertyAccessorInterface $propertyAccessor,
     ) {
     }
 
+    #[\Override]
     public function write(object $object, string $propertyName, mixed $value): void
     {
         try {
@@ -40,6 +41,7 @@ class SymfonyPropertyAccessorBridge implements
         }
     }
 
+    #[\Override]
     public function read(object $object, string $propertyName): mixed
     {
         try {

@@ -31,8 +31,8 @@ final class Directory implements DirectoryInterface, \IteratorAggregate
     private array $entries = [];
 
     public function __construct(
-        private ?string $name = null,
-        private ?Directory $parent = null
+        private readonly ?string $name = null,
+        private readonly ?Directory $parent = null
     ) {
     }
 

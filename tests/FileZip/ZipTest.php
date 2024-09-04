@@ -24,12 +24,15 @@ use Rekalogika\File\Zip\Model\Directory;
 class ZipTest extends TestCase
 {
     private ?FileRepositoryInterface $fileRepository = null;
+
     private ?FileZip $fileZip = null;
 
-    public function setUp(): void
+    #[\Override]
+    protected function setUp(): void
     {
         $kernel = new TestKernel();
         $kernel->boot();
+
         $container = $kernel->getContainer();
 
         $fileRepository = $container
@@ -90,6 +93,7 @@ class ZipTest extends TestCase
         $rootDirectory->addPointer($file2->getPointer());
         $rootDirectory->addPointer($file3->getPointer());
         $rootDirectory->addPointer($file3a->getPointer());
+
         $subdir = $rootDirectory->createDirectory('subdir');
         $subdir->addPointer($fileInSubDir1->getPointer());
         $subdir->addPointer($fileInSubDir2->getPointer());

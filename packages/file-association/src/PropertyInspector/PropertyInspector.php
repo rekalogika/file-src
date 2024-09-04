@@ -25,9 +25,10 @@ class PropertyInspector implements PropertyInspectorInterface
      */
     private array $cache = [];
 
+    #[\Override]
     public function inspect(object $object, string $propertyName): PropertyInspectorResult
     {
-        $cacheKey = get_class($object) . '::' . $propertyName;
+        $cacheKey = $object::class . '::' . $propertyName;
 
         if (isset($this->cache[$cacheKey])) {
             return $this->cache[$cacheKey];
@@ -58,7 +59,7 @@ class PropertyInspector implements PropertyInspectorInterface
         $attributes = $reflectionProperty
             ->getAttributes(AsFileAssociation::class);
 
-        if (count($attributes) === 0) {
+        if ($attributes === []) {
             return $this->cache[$cacheKey] = new PropertyInspectorResult(
                 mandatory: $mandatory,
                 fetch: 'EAGER',

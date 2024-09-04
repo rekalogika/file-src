@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints\FileValidator as SymfonyFileValidato
 
 class FileValidator extends SymfonyFileValidator
 {
+    #[\Override]
     public function validate(mixed $value, Constraint $constraint): void
     {
         if ($value instanceof FileInterface) {

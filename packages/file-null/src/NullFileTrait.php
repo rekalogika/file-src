@@ -28,6 +28,7 @@ trait NullFileTrait
         if ($this instanceof \Throwable) {
             throw new NullFileOperationException($message, 0, $this);
         }
+
         throw new NullFileOperationException($message);
 
     }
@@ -115,7 +116,7 @@ trait NullFileTrait
         $this->throwException('Cannot derive from a null file');
     }
 
-    public function get(string $id)
+    public function get(string $id): mixed
     {
         return null;
     }

@@ -32,12 +32,15 @@ class FileAssociationManagerTest extends TestCase
     use FileTestTrait;
 
     private ?FileAssociationManager $fileAssociationManager = null;
+
     private ?FileRepositoryInterface $fileRepository = null;
 
-    public function setUp(): void
+    #[\Override]
+    protected function setUp(): void
     {
         $kernel = new TestKernel();
         $kernel->boot();
+
         $container = $kernel->getContainer();
 
         $fileAssociationManager = $container
@@ -69,6 +72,7 @@ class FileAssociationManagerTest extends TestCase
         // set file
         $newFile = TemporaryFile::createFromString('testContent');
         $newFile->setName('newname.txt');
+
         $entity->setFile($newFile);
 
         $file = $entity->getFile();
@@ -119,6 +123,7 @@ class FileAssociationManagerTest extends TestCase
         // set file
         $newFile = TemporaryFile::createFromString('testContent');
         $newFile->setName('newname.txt');
+
         $entity->setFile($newFile);
 
         // persist
@@ -148,6 +153,7 @@ class FileAssociationManagerTest extends TestCase
         // set file
         $newFile = TemporaryFile::createFromString('testContent');
         $newFile->setName('newname.txt');
+
         $entity->setFile($newFile);
 
         // persist
@@ -178,6 +184,7 @@ class FileAssociationManagerTest extends TestCase
         // set file
         $newFile = TemporaryFile::createFromString('testContent');
         $newFile->setName('newname.txt');
+
         $entity->setFile($newFile);
 
         // persist

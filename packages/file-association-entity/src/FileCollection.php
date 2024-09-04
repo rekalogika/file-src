@@ -39,16 +39,18 @@ final class FileCollection extends CollectionDecorator implements DirectoryInter
      */
     public function __construct(
         Collection $files,
-        private null|string|(TranslatableInterface&\Stringable) $name = null
+        private readonly null|string|(TranslatableInterface&\Stringable) $name = null
     ) {
         parent::__construct($files);
     }
 
+    #[\Override]
     public function getName(): FileNameInterface
     {
         if ($this->name instanceof TranslatableInterface) {
             return new TranslatableFileName($this->name);
         }
+
         return new FileName($this->name);
 
     }

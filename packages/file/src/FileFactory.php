@@ -36,9 +36,6 @@ class FileFactory
      */
     protected array $filesystems = [];
 
-    protected ?string $defaultFilesystemIdForTemporaryFile = null;
-    protected ?MimeTypeDetector $mimeTypeDetector = null;
-
     //
     // magic methods
     //
@@ -48,15 +45,12 @@ class FileFactory
      */
     public function __construct(
         iterable $filesystems = [],
-        ?string $defaultFilesystemIdForTemporaryFile = null,
-        ?MimeTypeDetector $mimeTypeDetector = null,
+        protected ?string $defaultFilesystemIdForTemporaryFile = null,
+        protected ?MimeTypeDetector $mimeTypeDetector = null,
     ) {
         $this->filesystems = $filesystems instanceof \Traversable
             ? iterator_to_array($filesystems)
             : $filesystems;
-
-        $this->defaultFilesystemIdForTemporaryFile = $defaultFilesystemIdForTemporaryFile;
-        $this->mimeTypeDetector = $mimeTypeDetector;
     }
 
     //

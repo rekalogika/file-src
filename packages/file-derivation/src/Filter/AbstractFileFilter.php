@@ -21,11 +21,13 @@ use Rekalogika\Contracts\File\FileRepositoryInterface;
 abstract class AbstractFileFilter implements FileFilterInterface
 {
     private FileRepositoryInterface $fileRepository;
+
     private FileInterface $sourceFile;
 
     /**
      * Will be executed by the container to inject the file repository
      */
+    #[\Override]
     final public function setFileRepository(
         FileRepositoryInterface $fileRepository
     ): void {
@@ -106,7 +108,7 @@ abstract class AbstractFileFilter implements FileFilterInterface
         }
 
         if (
-            $derivationFile
+            $derivationFile !== null
             && $derivationFile->getLastModified() >= $this->sourceFile->getLastModified()
         ) {
             return $derivationFile;
@@ -117,6 +119,7 @@ abstract class AbstractFileFilter implements FileFilterInterface
         if ($result->isEqualTo($derivationFilePointer)) {
             return $result;
         }
+
         return $this->fileRepository->copy($result, $derivationFilePointer);
 
     }

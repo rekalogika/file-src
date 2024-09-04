@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints\ImageValidator as SymfonyImageValida
 
 class ImageValidator extends SymfonyImageValidator
 {
+    #[\Override]
     public function validate(mixed $value, Constraint $constraint): void
     {
         if ($value instanceof FileInterface) {

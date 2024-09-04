@@ -20,6 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class FilterPass implements CompilerPassInterface
 {
+    #[\Override]
     public function process(ContainerBuilder $container): void
     {
         $filters = $container
@@ -28,7 +29,7 @@ class FilterPass implements CompilerPassInterface
         $fileRepository = $container
             ->findDefinition(FileRepositoryInterface::class);
 
-        foreach ($filters as $id => $filter) {
+        foreach (array_keys($filters) as $id) {
             $definition = $container->findDefinition($id);
 
             $class = $definition->getClass();

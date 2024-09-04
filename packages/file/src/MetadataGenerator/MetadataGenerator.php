@@ -22,7 +22,7 @@ use Rekalogika\File\LocalTemporaryFile;
 
 final class MetadataGenerator implements MetadataGeneratorInterface
 {
-    private MimeTypeDetector $mimeTypeDetector;
+    private readonly MimeTypeDetector $mimeTypeDetector;
 
     public function __construct(
         ?MimeTypeDetector $mimeTypeDetector = null
@@ -30,6 +30,7 @@ final class MetadataGenerator implements MetadataGeneratorInterface
         $this->mimeTypeDetector = $mimeTypeDetector ?? new FinfoMimeTypeDetector();
     }
 
+    #[\Override]
     public function generateMetadataFromFile(
         RawMetadataInterface $rawMetadata,
         string|\SplFileInfo $file,
@@ -69,6 +70,7 @@ final class MetadataGenerator implements MetadataGeneratorInterface
         }
     }
 
+    #[\Override]
     public function generateMetadataFromString(
         RawMetadataInterface $rawMetadata,
         string $content
@@ -78,6 +80,7 @@ final class MetadataGenerator implements MetadataGeneratorInterface
         $this->generateMetadataFromFile($rawMetadata, $tempFile);
     }
 
+    #[\Override]
     public function generateMetadataFromStream(
         RawMetadataInterface $rawMetadata,
         mixed $stream,

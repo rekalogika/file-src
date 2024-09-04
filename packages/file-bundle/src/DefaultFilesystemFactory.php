@@ -25,7 +25,7 @@ class DefaultFilesystemFactory
 {
     private ?FilesystemOperator $filesystem = null;
 
-    public function __construct(private string $directory)
+    public function __construct(private readonly string $directory)
     {
     }
 

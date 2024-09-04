@@ -25,7 +25,6 @@ class FilePondFileEncodeAdapter
 {
     /**
      * @param array<array-key,mixed> $input
-     * @return FileInterface
      */
     public static function adaptFromArray(array $input): FileInterface
     {

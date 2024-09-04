@@ -20,7 +20,7 @@ class ChainedObjectNotSupportedException extends FileLocationResolverException
      */
     public function __construct(
         object $object,
-        private iterable $exceptions,
+        private readonly iterable $exceptions,
         \Throwable $previous = null
     ) {
         \Exception::__construct(

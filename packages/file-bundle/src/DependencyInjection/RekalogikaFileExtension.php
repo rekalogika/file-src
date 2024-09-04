@@ -34,6 +34,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class RekalogikaFileExtension extends Extension implements PrependExtensionInterface
 {
+    #[\Override]
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new PhpFileLoader(
@@ -124,6 +125,7 @@ class RekalogikaFileExtension extends Extension implements PrependExtensionInter
             ->addTag('rekalogika.file.association.object_id_resolver');
     }
 
+    #[\Override]
     public function prepend(ContainerBuilder $container): void
     {
         if (
@@ -136,7 +138,7 @@ class RekalogikaFileExtension extends Extension implements PrependExtensionInter
                 throw new \RuntimeException('Unable to get path of EmbeddedMetadata class');
             }
 
-            $configDir = realpath(dirname(dirname($path)) . '/config/doctrine');
+            $configDir = realpath(dirname($path, 2) . '/config/doctrine');
             if (false === $configDir) {
                 throw new \RuntimeException('Unable to get path of EmbeddedMetadata class');
             }

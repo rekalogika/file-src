@@ -41,6 +41,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FilePondType extends FileType
 {
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['multiple'] === true) {
@@ -48,7 +49,7 @@ class FilePondType extends FileType
         }
 
         $builder
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options): void {
                 /** @var null|string|UploadedFile|FileInterface */
                 $data = $event->getData();
                 if ($data instanceof UploadedFile) {
@@ -59,7 +60,7 @@ class FilePondType extends FileType
                     // try decoding if the client sent a base64 string
                     try {
                         $data = FilePondFileEncodeAdapter::adaptFromString($data);
-                    } catch (\JsonException $e) {
+                    } catch (\JsonException) {
                         // if the client sent a plain string, it means the user
                         // did not delete the file that is already existing
                         $event->setData($event->getForm()->getData());
@@ -76,6 +77,7 @@ class FilePondType extends FileType
                     if (!$options['allow_delete']) {
                         $event->setData($event->getForm()->getData());
                     }
+
                     return;
                 }
 
@@ -83,11 +85,13 @@ class FilePondType extends FileType
             });
     }
 
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return 'rekalogika_file_filepond';
     }
 
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

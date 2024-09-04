@@ -56,6 +56,7 @@ class FileExtensionTest extends TypeTestCase
     /**
      * @return array<array-key,object>
      */
+    #[\Override]
     protected function getTypeExtensions(): array
     {
         return [

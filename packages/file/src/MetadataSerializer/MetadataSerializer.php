@@ -19,6 +19,7 @@ use Rekalogika\File\RawMetadata;
 
 class MetadataSerializer implements MetadataSerializerInterface
 {
+    #[\Override]
     public function serialize(RawMetadataInterface $metadata): string
     {
         $array = \iterator_to_array($metadata);
@@ -26,6 +27,7 @@ class MetadataSerializer implements MetadataSerializerInterface
         return json_encode($array, \JSON_FORCE_OBJECT | \JSON_THROW_ON_ERROR | \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
     }
 
+    #[\Override]
     public function deserialize(string $serialized): RawMetadataInterface
     {
         $array = json_decode($serialized, true, 512, \JSON_THROW_ON_ERROR);
@@ -76,6 +78,7 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_string($file) && !is_null($file)) {
                         $file = null;
                     }
+
                     $newArray[Constants::FILE_NAME] = $file;
                     break;
 
@@ -83,6 +86,7 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_int($value)) {
                         continue 2;
                     }
+
                     $newArray[Constants::FILE_SIZE] = $value;
                     break;
 
@@ -94,6 +98,7 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_string($value)) {
                         continue 2;
                     }
+
                     $datetime = new \DateTimeImmutable($value);
                     $newArray[Constants::FILE_MODIFICATION_TIME] = (int) $datetime->format('U');
 
@@ -102,6 +107,7 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_int($value)) {
                         continue 2;
                     }
+
                     $newArray[Constants::MEDIA_WIDTH] = $value;
                     break;
 
@@ -109,6 +115,7 @@ class MetadataSerializer implements MetadataSerializerInterface
                     if (!is_int($value)) {
                         continue 2;
                     }
+
                     $newArray[Constants::MEDIA_HEIGHT] = $value;
                     break;
             }

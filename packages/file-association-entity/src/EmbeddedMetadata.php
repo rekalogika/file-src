@@ -25,10 +25,15 @@ use Rekalogika\Domain\File\Metadata\Constants;
 class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
 {
     private ?string $name = null;
+
     private ?int $size = null;
+
     private ?string $type = null;
+
     private ?\DateTimeInterface $modificationTime = null;
+
     private ?int $width = null;
+
     private ?int $height = null;
 
     /**
@@ -100,12 +105,13 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         $this->other = [];
     }
 
+    #[\Override]
     public function getIterator(): \Traversable
     {
         yield Constants::FILE_NAME => $this->name;
         yield Constants::FILE_SIZE => $this->size;
         yield Constants::FILE_TYPE => $this->type;
-        yield Constants::FILE_MODIFICATION_TIME => $this->modificationTime
+        yield Constants::FILE_MODIFICATION_TIME => $this->modificationTime !== null
             ? $this->modificationTime->getTimestamp()
             : null;
         yield Constants::MEDIA_WIDTH => $this->width;
@@ -114,13 +120,14 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         yield from $this->getOthers();
     }
 
+    #[\Override]
     public function get(string $key): int|string|bool|null
     {
         return match ($key) {
             Constants::FILE_NAME => $this->name,
             Constants::FILE_SIZE => $this->size,
             Constants::FILE_TYPE => $this->type,
-            Constants::FILE_MODIFICATION_TIME => $this->modificationTime
+            Constants::FILE_MODIFICATION_TIME => $this->modificationTime !== null
                 ? $this->modificationTime->getTimestamp()
                 : null,
             Constants::MEDIA_WIDTH => $this->width,
@@ -129,6 +136,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         };
     }
 
+    #[\Override]
     public function tryGet(string $key): int|string|bool|null
     {
         try {
@@ -138,6 +146,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         }
     }
 
+    #[\Override]
     public function set(string $key, int|string|bool|null $value): void
     {
         match ($key) {
@@ -153,6 +162,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         };
     }
 
+    #[\Override]
     public function delete(string $key): void
     {
         match ($key) {
@@ -166,6 +176,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         };
     }
 
+    #[\Override]
     public function merge(iterable $metadata): void
     {
         foreach ($metadata as $key => $value) {
@@ -173,6 +184,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
         }
     }
 
+    #[\Override]
     public function count(): int
     {
         return count($this->getOthers()) + 6;

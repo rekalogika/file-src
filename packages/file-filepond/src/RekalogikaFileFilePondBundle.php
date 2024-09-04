@@ -18,11 +18,13 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class RekalogikaFileFilePondBundle extends Bundle
 {
+    #[\Override]
     public function getPath(): string
     {
         return \dirname(__DIR__);
     }
 
+    #[\Override]
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);

@@ -21,10 +21,11 @@ use Rekalogika\File\Association\Exception\ObjectIdResolver\MethodNotFoundExcepti
 class DefaultObjectIdResolver implements ObjectIdResolverInterface
 {
     public function __construct(
-        private string $method = 'getId',
+        private readonly string $method = 'getId',
     ) {
     }
 
+    #[\Override]
     public function getObjectId(object $object): string
     {
         if (\method_exists($object, $this->method)) {
@@ -34,13 +35,13 @@ class DefaultObjectIdResolver implements ObjectIdResolverInterface
             throw new MethodNotFoundException($object, $this->method);
         }
 
-        if (!is_string($id) && !is_integer($id) && !$id instanceof \Stringable) {
+        if (!is_string($id) && !is_int($id) && !$id instanceof \Stringable) {
             throw new IdNotSupportedException($object, $this->method, $id);
         }
 
         $id = (string) $id;
 
-        if (strlen($id) === 0) {
+        if ($id === '') {
             throw new EmptyIdException($object, $this->method);
         }
 

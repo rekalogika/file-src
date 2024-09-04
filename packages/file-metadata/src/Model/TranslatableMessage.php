@@ -25,17 +25,19 @@ final class TranslatableMessage implements TranslatableInterface, \Stringable
      * @param array<string,string|TranslatableInterface> $parameters
      */
     public function __construct(
-        private string $stringName,
-        private string $translationId,
-        private array $parameters = []
+        private readonly string $stringName,
+        private readonly string $translationId,
+        private readonly array $parameters = []
     ) {
     }
 
+    #[\Override]
     public function __toString(): string
     {
         return $this->stringName;
     }
 
+    #[\Override]
     public function trans(
         TranslatorInterface $translator,
         ?string $locale = null

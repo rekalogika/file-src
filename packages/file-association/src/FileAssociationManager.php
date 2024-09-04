@@ -25,12 +25,12 @@ use Rekalogika\File\Association\Model\MissingFile;
 final class FileAssociationManager
 {
     public function __construct(
-        private FileRepositoryInterface $fileRepository,
-        private PropertyListerInterface $lister,
-        private PropertyReaderInterface $reader,
-        private PropertyWriterInterface $writer,
-        private PropertyInspectorInterface $inspector,
-        private FileLocationResolverInterface $fileLocationResolver,
+        private readonly FileRepositoryInterface $fileRepository,
+        private readonly PropertyListerInterface $lister,
+        private readonly PropertyReaderInterface $reader,
+        private readonly PropertyWriterInterface $writer,
+        private readonly PropertyInspectorInterface $inspector,
+        private readonly FileLocationResolverInterface $fileLocationResolver,
     ) {
     }
 
@@ -93,7 +93,7 @@ final class FileAssociationManager
                 sprintf(
                     'Property "%s" on object "%s" is not a %s instance',
                     $propertyName,
-                    get_class($object),
+                    $object::class,
                     FileInterface::class
                 )
             );
@@ -140,7 +140,7 @@ final class FileAssociationManager
                     'Unknown fetch mode "%s" on property "%s" of object "%s"',
                     $inspectorResult->getFetch(),
                     $propertyName,
-                    get_class($object)
+                    $object::class
                 )
             );
         }

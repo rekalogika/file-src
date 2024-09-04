@@ -23,13 +23,8 @@ use Rekalogika\File\RawMetadata;
 class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
 {
     public function __construct(
-        private FilesystemOperator $wrapped,
+        private readonly FilesystemOperator $wrapped,
     ) {
-    }
-
-    private function getWrapped(): FilesystemOperator
-    {
-        return $this->wrapped;
     }
 
     //
@@ -72,6 +67,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
         ];
     }
 
+    #[\Override]
     public function getMetadata(string $location): RawMetadata
     {
         $metadata = new RawMetadata();
@@ -93,6 +89,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
         return $metadata;
     }
 
+    #[\Override]
     public function setMetadata(string $location, iterable $metadata): void
     {
         // noop
@@ -102,10 +99,11 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     // forwarders
     //
 
+    #[\Override]
     public function mimeType(string $path): string
     {
         try {
-            return $this->getWrapped()->mimeType($path);
+            return $this->wrapped->mimeType($path);
         } catch (UnableToRetrieveMetadata) {
             return 'application/octet-stream';
         }
@@ -118,27 +116,31 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function write(string $location, string $contents, array $config = []): void
     {
-        $this->getWrapped()->write($location, $contents, $config);
+        $this->wrapped->write($location, $contents, $config);
     }
 
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function writeStream(string $location, mixed $contents, array $config = []): void
     {
-        $this->getWrapped()->writeStream($location, $contents, $config);
+        $this->wrapped->writeStream($location, $contents, $config);
     }
 
+    #[\Override]
     public function delete(string $location): void
     {
-        $this->getWrapped()->delete($location);
+        $this->wrapped->delete($location);
     }
 
+    #[\Override]
     public function deleteDirectory(string $location): void
     {
-        $this->getWrapped()->deleteDirectory($location);
+        $this->wrapped->deleteDirectory($location);
     }
 
     /**
@@ -146,7 +148,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
      */
     public function publicUrl(string $path, $config = []): string
     {
-        return $this->getWrapped()->publicUrl($path, $config);
+        return $this->wrapped->publicUrl($path, $config);
     }
 
     /**
@@ -157,7 +159,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
         \DateTimeInterface $expiresAt,
         $config = []
     ): string {
-        return $this->getWrapped()->temporaryUrl($path, $expiresAt, $config);
+        return $this->wrapped->temporaryUrl($path, $expiresAt, $config);
     }
 
     /**
@@ -166,80 +168,93 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
      */
     public function checksum($path, $config = []): string
     {
-        return $this->getWrapped()->checksum($path, $config);
+        return $this->wrapped->checksum($path, $config);
     }
 
+    #[\Override]
     public function fileExists(string $location): bool
     {
-        return $this->getWrapped()->fileExists($location);
+        return $this->wrapped->fileExists($location);
     }
 
+    #[\Override]
     public function directoryExists(string $location): bool
     {
-        return $this->getWrapped()->directoryExists($location);
+        return $this->wrapped->directoryExists($location);
     }
 
+    #[\Override]
     public function has(string $location): bool
     {
-        return $this->getWrapped()->has($location);
+        return $this->wrapped->has($location);
     }
 
+    #[\Override]
     public function read(string $location): string
     {
-        return $this->getWrapped()->read($location);
+        return $this->wrapped->read($location);
     }
 
+    #[\Override]
     public function readStream(string $location)
     {
-        return $this->getWrapped()->readStream($location);
+        return $this->wrapped->readStream($location);
     }
 
+    #[\Override]
     public function listContents(string $location, bool $deep = self::LIST_SHALLOW): DirectoryListing
     {
-        return $this->getWrapped()->listContents($location, $deep);
+        return $this->wrapped->listContents($location, $deep);
     }
 
+    #[\Override]
     public function lastModified(string $path): int
     {
-        return $this->getWrapped()->lastModified($path);
+        return $this->wrapped->lastModified($path);
     }
 
+    #[\Override]
     public function fileSize(string $path): int
     {
-        return $this->getWrapped()->fileSize($path);
+        return $this->wrapped->fileSize($path);
     }
 
+    #[\Override]
     public function visibility(string $path): string
     {
-        return $this->getWrapped()->visibility($path);
+        return $this->wrapped->visibility($path);
     }
 
+    #[\Override]
     public function setVisibility(string $path, string $visibility): void
     {
-        $this->getWrapped()->setVisibility($path, $visibility);
+        $this->wrapped->setVisibility($path, $visibility);
     }
 
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function createDirectory(string $location, array $config = []): void
     {
-        $this->getWrapped()->createDirectory($location, $config);
+        $this->wrapped->createDirectory($location, $config);
     }
 
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function move(string $source, string $destination, array $config = []): void
     {
-        $this->getWrapped()->move($source, $destination, $config);
+        $this->wrapped->move($source, $destination, $config);
     }
 
     /**
      * @param array<array-key,mixed> $config
      */
+    #[\Override]
     public function copy(string $source, string $destination, array $config = []): void
     {
-        $this->getWrapped()->copy($source, $destination, $config);
+        $this->wrapped->copy($source, $destination, $config);
     }
 }

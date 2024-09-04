@@ -19,11 +19,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class FileType extends AbstractType
 {
+    #[\Override]
     public function getParent(): string
     {
         return SymfonyFileType::class;
     }
 
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(new FileTransformer());

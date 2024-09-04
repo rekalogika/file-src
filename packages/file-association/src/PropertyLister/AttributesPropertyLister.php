@@ -27,16 +27,17 @@ class AttributesPropertyLister implements PropertyListerInterface
      */
     private array $cache = [];
 
+    #[\Override]
     public function getFileProperties(object $object): iterable
     {
-        if (isset($this->cache[get_class($object)])) {
-            return $this->cache[get_class($object)];
+        if (isset($this->cache[$object::class])) {
+            return $this->cache[$object::class];
         }
 
-        $class = get_class($object);
+        $class = $object::class;
         $properties = [];
 
-        foreach (self::getReflectionPropertiesWithAttribute($class, AsFileAssociation::class) as $reflectionProperty) {
+        foreach ($this->getReflectionPropertiesWithAttribute($class, AsFileAssociation::class) as $reflectionProperty) {
             $properties[$reflectionProperty->getName()] = 1;
         }
 
@@ -47,7 +48,7 @@ class AttributesPropertyLister implements PropertyListerInterface
      * @param class-string $class
      * @return iterable<\ReflectionProperty>
      */
-    private static function getReflectionProperties(string $class): iterable
+    private function getReflectionProperties(string $class): iterable
     {
         $reflectionClass = (new \ReflectionClass($class));
         while ($reflectionClass instanceof \ReflectionClass) {
@@ -68,11 +69,11 @@ class AttributesPropertyLister implements PropertyListerInterface
      * @param class-string $attribute
      * @return iterable<\ReflectionProperty>
      */
-    private static function getReflectionPropertiesWithAttribute(
+    private function getReflectionPropertiesWithAttribute(
         string $class,
         string $attribute
     ): iterable {
-        foreach (self::getReflectionProperties($class) as $reflectionProperty) {
+        foreach ($this->getReflectionProperties($class) as $reflectionProperty) {
             $attributes = $reflectionProperty
                 ->getAttributes($attribute);
 

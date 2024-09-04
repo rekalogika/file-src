@@ -36,8 +36,11 @@ class File implements FileInterface
     use MetadataTrait;
 
     private ?RawMetadata $metadataCache = null;
+
     private FilesystemOperator $filesystem;
+
     private bool $isAdHocFilesystem = false;
+
     private bool $isLocalFilesystem;
 
     /**
@@ -103,6 +106,7 @@ class File implements FileInterface
         throw new \LogicException('Serialization is not supported. Use getPointer() to get a pointer to this file and serialize it instead.');
     }
 
+    #[\Override]
     public function getPointer(): FilePointerInterface
     {
         return new FilePointer(
@@ -111,11 +115,13 @@ class File implements FileInterface
         );
     }
 
+    #[\Override]
     public function getFilesystemIdentifier(): ?string
     {
         return $this->filesystemIdentifier;
     }
 
+    #[\Override]
     public function getKey(): string
     {
         return $this->key;
@@ -126,6 +132,7 @@ class File implements FileInterface
         return $this->filesystem;
     }
 
+    #[\Override]
     public function setContent(string $contents): void
     {
         // restore original filename if it is a local filesystem. because
@@ -144,6 +151,7 @@ class File implements FileInterface
         }
     }
 
+    #[\Override]
     public function setContentFromStream(mixed $stream): void
     {
         $oldFileName = null;
@@ -167,11 +175,13 @@ class File implements FileInterface
         }
     }
 
+    #[\Override]
     public function getContent(): string
     {
         return $this->filesystem->read($this->key);
     }
 
+    #[\Override]
     public function getContentAsStream(): StreamInterface
     {
         $stream = $this->filesystem->readStream($this->key);
@@ -179,6 +189,7 @@ class File implements FileInterface
         return (new Psr17Factory())->createStreamFromResource($stream);
     }
 
+    #[\Override]
     public function saveToLocalFile(string $path): \SplFileInfo
     {
         $output = fopen($path, 'wb');
@@ -201,6 +212,7 @@ class File implements FileInterface
         return new \SplFileInfo($path);
     }
 
+    #[\Override]
     public function createLocalTemporaryFile(): \SplFileInfo
     {
         $temporaryFile = LocalTemporaryFile::create();
@@ -246,6 +258,7 @@ class File implements FileInterface
         return $this->metadataCache = $metadata;
     }
 
+    #[\Override]
     public function getDerivation(string $derivationId): FilePointerInterface
     {
         if ($this->getFilesystemIdentifier() === null) {
@@ -256,7 +269,7 @@ class File implements FileInterface
             throw new DerivationNotSupportedException('It is not allowed to create derivation from a file in an ad-hoc filesystem.');
         }
 
-        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $derivationId)) {
+        if ((bool)preg_match('/^[a-zA-Z0-9_-]+$/', $derivationId) === false) {
             throw new \InvalidArgumentException('Derivation ID must consist of alphanumeric characters, dash, or underscore only.');
         }
 
@@ -268,6 +281,7 @@ class File implements FileInterface
         );
     }
 
+    #[\Override]
     public function get(string $id)
     {
         if ($id === RawMetadataInterface::class) {
@@ -278,6 +292,7 @@ class File implements FileInterface
         return MetadataFactory::create($this->getRawMetadata())->get($id);
     }
 
+    #[\Override]
     public function flush(): void
     {
         $filesystem = $this->filesystem;

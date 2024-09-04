@@ -32,6 +32,7 @@ class FileTransformer implements DataTransformerInterface
      *
      * @return ($value is null ? null : File)
      */
+    #[\Override]
     public function transform($value): ?File
     {
         if (null === $value) {
@@ -59,6 +60,7 @@ class FileTransformer implements DataTransformerInterface
      * @param ?File $value
      * @return ($value is null ? null : FileInterface)
      */
+    #[\Override]
     public function reverseTransform(mixed $value): ?FileInterface
     {
         if ($value === null) {

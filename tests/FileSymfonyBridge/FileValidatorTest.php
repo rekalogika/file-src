@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
  */
 class FileValidatorTest extends ConstraintValidatorTestCase
 {
+    #[\Override]
     protected function createValidator(): ConstraintValidatorInterface
     {
         return new FileValidator();
