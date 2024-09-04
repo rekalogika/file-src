@@ -49,7 +49,7 @@ class MetadataTest extends TestCase
 
         $httpMetadata = HttpMetadata::create($rawMetadata);
         $headers = [];
-        foreach($httpMetadata->getHeaders() as $key => $value) {
+        foreach ($httpMetadata->getHeaders() as $key => $value) {
             $headers[$key] = $value;
         }
 
@@ -66,7 +66,7 @@ class MetadataTest extends TestCase
 
         $httpMetadata = HttpMetadata::create($rawMetadata);
         $headers = [];
-        foreach($httpMetadata->getHeaders() as $key => $value) {
+        foreach ($httpMetadata->getHeaders() as $key => $value) {
             $headers[$key] = $value;
         }
 
