@@ -27,7 +27,7 @@ class AsFileAssociation
     public function __construct(
         string $fetch = 'EAGER',
     ) {
-        if (!in_array($fetch, ['EAGER', 'LAZY'])) {
+        if (!\in_array($fetch, ['EAGER', 'LAZY'])) {
             throw new \InvalidArgumentException('Fetch mode can only be EAGER or LAZY.');
         }
 

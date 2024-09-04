@@ -25,13 +25,12 @@ class ChainedFileLocationResolver implements FileLocationResolverInterface
      */
     public function __construct(
         private readonly iterable $fileLocationResolvers,
-    ) {
-    }
+    ) {}
 
     #[\Override]
     public function getFileLocation(
         object $object,
-        string $propertyName
+        string $propertyName,
     ): FilePointerInterface {
         $exceptions = [];
 

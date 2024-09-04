@@ -25,8 +25,7 @@ class FileInterfaceResourceServer
 {
     public function __construct(
         private readonly FileRepositoryInterface $fileRepository,
-    ) {
-    }
+    ) {}
 
     #[AsTemporaryUrlResourceTransformer]
     public function transform(FileInterface $file): FilePointerInterface

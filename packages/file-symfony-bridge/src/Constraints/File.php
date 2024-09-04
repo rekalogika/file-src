@@ -16,6 +16,4 @@ namespace Rekalogika\File\Bridge\Symfony\Constraints;
 use Symfony\Component\Validator\Constraints\File as SymfonyFile;
 
 #[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD | \Attribute::IS_REPEATABLE)]
-class File extends SymfonyFile
-{
-}
+class File extends SymfonyFile {}

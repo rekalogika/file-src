@@ -33,9 +33,8 @@ class Directory implements DirectoryInterface, \IteratorAggregate
      */
     public function __construct(
         private readonly string $name,
-        private readonly array $entries = []
-    ) {
-    }
+        private readonly array $entries = [],
+    ) {}
 
     #[\Override]
     public function getIterator(): \Traversable
@@ -52,6 +51,6 @@ class Directory implements DirectoryInterface, \IteratorAggregate
     #[\Override]
     public function count(): int
     {
-        return count($this->entries);
+        return \count($this->entries);
     }
 }

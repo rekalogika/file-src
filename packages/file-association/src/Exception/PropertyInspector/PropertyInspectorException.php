@@ -15,6 +15,4 @@ namespace Rekalogika\File\Association\Exception\PropertyInspector;
 
 use Rekalogika\File\Association\Exception\FileAssociationException;
 
-abstract class PropertyInspectorException extends FileAssociationException
-{
-}
+abstract class PropertyInspectorException extends FileAssociationException {}

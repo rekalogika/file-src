@@ -71,13 +71,13 @@ class AttributesPropertyLister implements PropertyListerInterface
      */
     private function getReflectionPropertiesWithAttribute(
         string $class,
-        string $attribute
+        string $attribute,
     ): iterable {
         foreach ($this->getReflectionProperties($class) as $reflectionProperty) {
             $attributes = $reflectionProperty
                 ->getAttributes($attribute);
 
-            if (count($attributes) === 1) {
+            if (\count($attributes) === 1) {
                 yield $reflectionProperty;
             }
         }

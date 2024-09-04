@@ -16,6 +16,4 @@ namespace Rekalogika\Contracts\File;
 /**
  * Represents a file, a file pointer, or directory
  */
-interface NodeInterface
-{
-}
+interface NodeInterface {}

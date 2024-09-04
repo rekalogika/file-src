@@ -18,6 +18,4 @@ use League\Flysystem\FilesystemOperator;
 interface MetadataAwareFilesystemOperator extends
     FilesystemOperator,
     MetadataAwareFilesystemReader,
-    MetadataAwareFilesystemWriter
-{
-}
+    MetadataAwareFilesystemWriter {}

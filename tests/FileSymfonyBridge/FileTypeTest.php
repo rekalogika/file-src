@@ -28,7 +28,7 @@ class FileTypeTest extends TypeTestCase
     public function testFileType(): void
     {
         $temporaryFile = LocalTemporaryFile::create();
-        \file_put_contents($temporaryFile->getPathname(), 'foo');
+        file_put_contents($temporaryFile->getPathname(), 'foo');
         $file = new UploadedFile($temporaryFile->getPathname(), 'foo.txt', null, 0, true);
 
         $form = $this->factory->createBuilder(FileType::class)

@@ -20,9 +20,9 @@ class PropertyReaderException extends FileAssociationException
     public function __construct(
         object $object,
         string $property,
-        \Throwable $previous = null
+        \Throwable $previous = null,
     ) {
-        $message = sprintf('Unable to read property "%s" in object "%s"', $property, \get_debug_type($object));
+        $message = \sprintf('Unable to read property "%s" in object "%s"', $property, get_debug_type($object));
 
         parent::__construct($message, 0, $previous);
     }

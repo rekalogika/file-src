@@ -18,6 +18,6 @@ use Rekalogika\Contracts\File\FileRepositoryInterface;
 interface FileFilterInterface
 {
     public function setFileRepository(
-        FileRepositoryInterface $fileRepository
+        FileRepositoryInterface $fileRepository,
     ): void;
 }

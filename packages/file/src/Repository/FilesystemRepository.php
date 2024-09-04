@@ -56,16 +56,16 @@ class FilesystemRepository implements FilesystemRepositoryInterface
             new Filesystem(
                 new LocalFilesystemAdapter(
                     '/',
-                    mimeTypeDetector: $mimeTypeDetector
-                )
-            )
+                    mimeTypeDetector: $mimeTypeDetector,
+                ),
+            ),
         );
     }
 
     #[\Override]
     public function addFilesystem(
         string $identifier,
-        FilesystemOperator $filesystem
+        FilesystemOperator $filesystem,
     ): void {
         if (isset($this->filesystems[$identifier])) {
             throw new FilesystemAlreadyExistsException($identifier);
@@ -81,7 +81,7 @@ class FilesystemRepository implements FilesystemRepositoryInterface
 
     #[\Override]
     public function getFilesystem(
-        ?string $identifier
+        ?string $identifier,
     ): MetadataAwareFilesystemOperator {
         if (null === $identifier) {
             return self::getLocalFilesystem();

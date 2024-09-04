@@ -39,8 +39,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
         private readonly MetadataSerializerInterface $serializer,
         private readonly MetadataGeneratorInterface $metadataGenerator,
         private readonly string $suffix = '.metadata',
-    ) {
-    }
+    ) {}
 
     public function withFilesystem(FilesystemOperator $filesystem): self
     {
@@ -64,7 +63,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     //
 
     private function getMetadataFromSidecarFile(
-        string $location
+        string $location,
     ): ?RawMetadata {
         try {
             $serialized = $this->getWrapped()
@@ -89,7 +88,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
 
     private function generateMetadataFromStoredData(
         RawMetadataInterface $rawMetadata,
-        string $location
+        string $location,
     ): void {
         $input = $this->getWrapped()->readStream($location);
 
@@ -163,7 +162,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
      */
     private function saveMetadata(
         string $location,
-        iterable $metadata
+        iterable $metadata,
     ): void {
         if (!$metadata instanceof RawMetadata) {
             $metadata = new RawMetadata($metadata);
@@ -184,7 +183,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     public function write(
         string $location,
         string $contents,
-        array $config = []
+        array $config = [],
     ): void {
         $rawMetadata = $this->getMetadataFromSidecarFile($location)
             ?? new RawMetadata();
@@ -209,9 +208,9 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     public function writeStream(
         string $location,
         mixed $contents,
-        array $config = []
+        array $config = [],
     ): void {
-        assert(\is_resource($contents));
+        \assert(\is_resource($contents));
 
         $rawMetadata = $this->getMetadataFromSidecarFile($location)
             ?? new RawMetadata();
@@ -307,7 +306,7 @@ class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
     public function temporaryUrl(
         string $path,
         \DateTimeInterface $expiresAt,
-        $config = []
+        $config = [],
     ): string {
         return $this->getWrapped()->temporaryUrl($path, $expiresAt, $config);
     }

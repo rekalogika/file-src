@@ -18,26 +18,26 @@ class TemporaryFileException extends FileException
     public function __construct(
         string $prefix,
         ?string $filesystemId = null,
-        \Throwable $previous = null
+        \Throwable $previous = null,
     ) {
         if ($filesystemId !== null) {
             parent::__construct(
-                sprintf(
+                \sprintf(
                     'Cannot create a temporary file with prefix "%s" in filesystem "%s"',
                     $prefix,
                     $filesystemId,
                 ),
                 0,
-                $previous
+                $previous,
             );
         } else {
             parent::__construct(
-                sprintf(
+                \sprintf(
                     'Cannot create a temporary file with prefix "%s" in the local filesystem.',
                     $prefix,
                 ),
                 0,
-                $previous
+                $previous,
             );
         }
     }

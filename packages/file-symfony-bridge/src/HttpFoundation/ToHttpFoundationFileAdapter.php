@@ -37,9 +37,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
      */
     private ?HttpFoundationFile $httpFoundationFile = null;
 
-    private function __construct(private readonly FileInterface $file)
-    {
-    }
+    private function __construct(private readonly FileInterface $file) {}
 
     public static function adapt(FileInterface $file): HttpFoundationFile
     {
@@ -64,7 +62,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
 
         $this->localTemporaryFile = $this->file->createLocalTemporaryFile();
         $this->httpFoundationFile = new HttpFoundationFile(
-            $this->localTemporaryFile->getPathname()
+            $this->localTemporaryFile->getPathname(),
         );
 
         return $this->httpFoundationFile;
@@ -267,7 +265,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     public function openFile(
         string $mode = 'r',
         bool $useIncludePath = false,
-        $context = null
+        $context = null,
     ): \SplFileObject {
         return $this->getHttpFoundationFile()
             ->openFile($mode, $useIncludePath, $context);

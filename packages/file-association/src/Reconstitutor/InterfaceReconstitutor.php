@@ -25,9 +25,8 @@ use Rekalogika\Reconstitutor\Contract\ClassReconstitutorInterface;
 class InterfaceReconstitutor implements ClassReconstitutorInterface
 {
     public function __construct(
-        private readonly FileAssociationManager $fileAssociationService
-    ) {
-    }
+        private readonly FileAssociationManager $fileAssociationService,
+    ) {}
 
     #[\Override]
     public static function getClass(): string
@@ -54,7 +53,5 @@ class InterfaceReconstitutor implements ClassReconstitutorInterface
     }
 
     #[\Override]
-    public function onCreate(object $object): void
-    {
-    }
+    public function onCreate(object $object): void {}
 }

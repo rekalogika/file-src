@@ -33,7 +33,7 @@ class FileResponse extends StreamedResponse
             ?->getHeaders($disposition) ?? [];
 
         if ($headersFromMetadata instanceof \Traversable) {
-            $headersFromMetadata = \iterator_to_array($headersFromMetadata);
+            $headersFromMetadata = iterator_to_array($headersFromMetadata);
         }
 
         $responseHeaders = [
@@ -42,7 +42,7 @@ class FileResponse extends StreamedResponse
         ];
 
         $inputStream = $file->getContentAsStream()->detach();
-        assert($inputStream !== null);
+        \assert($inputStream !== null);
 
         $callback = function () use ($inputStream): void {
             $outputStream = fopen('php://output', 'wb');

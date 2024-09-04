@@ -18,9 +18,9 @@ class MetadataNotFoundException extends \Exception
     public function __construct(string $metadataName, \Throwable $previous = null)
     {
         parent::__construct(
-            sprintf('Metadata "%s" is not found', $metadataName),
+            \sprintf('Metadata "%s" is not found', $metadataName),
             0,
-            $previous
+            $previous,
         );
     }
 }

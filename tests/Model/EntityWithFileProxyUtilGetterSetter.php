@@ -19,9 +19,8 @@ use Rekalogika\Contracts\File\FileProxy;
 class EntityWithFileProxyUtilGetterSetter
 {
     public function __construct(
-        private ?FileInterface $file = null
-    ) {
-    }
+        private ?FileInterface $file = null,
+    ) {}
 
     public function getFile(): ?FileInterface
     {

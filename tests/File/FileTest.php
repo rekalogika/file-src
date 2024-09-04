@@ -33,10 +33,10 @@ class FileTest extends TestCase
 
         $path = $dir . '/test.txt';
 
-        \file_put_contents($path, 'test');
+        file_put_contents($path, 'test');
 
         $file = new File($path);
-        $path = \realpath($path);
+        $path = realpath($path);
         $this->assertNotFalse($path);
 
         $this->assertFileInterface(
@@ -144,7 +144,7 @@ class FileTest extends TestCase
         $dir = realpath(__DIR__ . '/../../');
         ini_set('open_basedir', $dir . ":" . '/tmp');
         $path = $dir . '/var/test.txt';
-        \file_put_contents($path, 'foo');
+        file_put_contents($path, 'foo');
 
         $file = new File($path);
         $content = $file->getContent();

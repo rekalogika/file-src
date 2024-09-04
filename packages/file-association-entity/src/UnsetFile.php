@@ -33,11 +33,11 @@ class UnsetFile extends \Exception implements NullFileInterface
      */
     public function __construct(string $className, string $propertyName)
     {
-        parent::__construct(sprintf(
+        parent::__construct(\sprintf(
             'File property "%s" in class "%s" is unset. This might be caused by the use of `AbstractQuery::toIterable()`. If that is the case, you can: 1. stop involving "%s" in the query; 2. pre-hydrate the file entities before the query; or 3. use other means to iterate the query.',
             $propertyName,
             $className,
-            $className
+            $className,
         ));
     }
 

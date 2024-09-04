@@ -18,9 +18,8 @@ use Rekalogika\Contracts\File\FileInterface;
 class EntityWithPlainGetterSetter
 {
     public function __construct(
-        private ?FileInterface $file = null
-    ) {
-    }
+        private ?FileInterface $file = null,
+    ) {}
 
     public function getFile(): ?FileInterface
     {

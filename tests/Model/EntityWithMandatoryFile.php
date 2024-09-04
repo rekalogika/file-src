@@ -23,9 +23,7 @@ class EntityWithMandatoryFile
     #[AsFileAssociation]
     private FileInterface $file;
 
-    public function __construct(private readonly string $id)
-    {
-    }
+    public function __construct(private readonly string $id) {}
 
     /**
      * Get the value of file

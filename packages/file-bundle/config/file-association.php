@@ -77,7 +77,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->alias(
         ObjectIdResolverInterface::class,
-        ChainedObjectIdResolver::class
+        ChainedObjectIdResolver::class,
     );
 
     $services->set(ChainedObjectIdResolver::class)
@@ -106,7 +106,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->alias(
         FileLocationResolverInterface::class,
-        ChainedFileLocationResolver::class
+        ChainedFileLocationResolver::class,
     );
 
     $services->set(ChainedFileLocationResolver::class)
@@ -150,12 +150,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->alias(
         PropertyReaderInterface::class,
-        SymfonyPropertyAccessorBridge::class
+        SymfonyPropertyAccessorBridge::class,
     );
 
     $services->alias(
         PropertyWriterInterface::class,
-        SymfonyPropertyAccessorBridge::class
+        SymfonyPropertyAccessorBridge::class,
     );
 
     //

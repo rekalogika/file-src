@@ -25,7 +25,7 @@ final class PropertyInspectorResult
         private readonly bool $mandatory,
         private readonly string $fetch,
     ) {
-        if (!in_array($fetch, ['EAGER', 'LAZY'])) {
+        if (!\in_array($fetch, ['EAGER', 'LAZY'])) {
             throw new \InvalidArgumentException('Fetch mode can only be EAGER or LAZY.');
         }
     }

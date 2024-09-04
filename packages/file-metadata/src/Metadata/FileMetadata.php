@@ -25,15 +25,14 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
 {
     #[\Override]
     public static function create(
-        RawMetadataInterface $metadata
+        RawMetadataInterface $metadata,
     ): static {
         return new self($metadata);
     }
 
     private function __construct(
-        private readonly RawMetadataInterface $metadata
-    ) {
-    }
+        private readonly RawMetadataInterface $metadata,
+    ) {}
 
     #[\Override]
     public function getName(): FileNameInterface
@@ -73,7 +72,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
     {
         $size = $this->metadata->tryGet(Constants::FILE_SIZE) ?? 0;
 
-        if (!is_int($size)) {
+        if (!\is_int($size)) {
             $size = (int) $size;
         }
 
@@ -109,7 +108,7 @@ final class FileMetadata extends AbstractMetadata implements FileMetadataInterfa
             $modificationTime = new \DateTimeImmutable();
             $this->metadata->set(
                 Constants::FILE_MODIFICATION_TIME,
-                $modificationTime->getTimestamp()
+                $modificationTime->getTimestamp(),
             );
 
             return $modificationTime;

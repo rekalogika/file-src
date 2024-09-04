@@ -21,9 +21,8 @@ class Entity implements FileAssociationInterface
     private ?FileInterface $file = null;
 
     public function __construct(
-        private readonly string $id
-    ) {
-    }
+        private readonly string $id,
+    ) {}
 
     #[\Override]
     public static function getFileAssociationPropertyList(): array

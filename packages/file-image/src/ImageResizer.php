@@ -42,7 +42,7 @@ class ImageResizer extends AbstractFileFilter
 
     public function resize(
         int $maxWidthOrHeight = 512,
-        string $aspect = self::ASPECTRATIO_ORIGINAL
+        string $aspect = self::ASPECTRATIO_ORIGINAL,
     ): self {
         $this->maxWidthOrHeight = $maxWidthOrHeight;
         $this->aspect = $aspect;
@@ -62,7 +62,7 @@ class ImageResizer extends AbstractFileFilter
     #[\Override]
     protected function getDerivationId(): string
     {
-        return sprintf('%s-%s', $this->aspect, $this->maxWidthOrHeight);
+        return \sprintf('%s-%s', $this->aspect, $this->maxWidthOrHeight);
     }
 
     #[\Override]
@@ -87,9 +87,9 @@ class ImageResizer extends AbstractFileFilter
         } elseif ($this->aspect === self::ASPECTRATIO_ORIGINAL) {
             $ratio = $w / $h;
         } else {
-            throw new \InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'Unknown aspect ratio "%s"',
-                $this->aspect
+                $this->aspect,
             ));
         }
 

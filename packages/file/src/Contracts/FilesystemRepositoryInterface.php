@@ -31,7 +31,7 @@ interface FilesystemRepositoryInterface
      * @throws FilesystemNotFoundException
      */
     public function getFilesystem(
-        ?string $identifier
+        ?string $identifier,
     ): MetadataAwareFilesystemOperator;
 
     /**
@@ -41,6 +41,6 @@ interface FilesystemRepositoryInterface
      */
     public function addFilesystem(
         string $identifier,
-        FilesystemOperator $filesystem
+        FilesystemOperator $filesystem,
     ): void;
 }

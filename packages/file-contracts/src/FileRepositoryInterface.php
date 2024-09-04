@@ -52,7 +52,7 @@ interface FileRepositoryInterface
     public function createFromString(
         FilePointerInterface $filePointer,
         string $contents,
-        iterable $metadata = []
+        iterable $metadata = [],
     ): FileInterface;
 
     /**
@@ -64,7 +64,7 @@ interface FileRepositoryInterface
     public function createFromStream(
         FilePointerInterface $filePointer,
         mixed $stream,
-        iterable $metadata = []
+        iterable $metadata = [],
     ): FileInterface;
 
     /**
@@ -73,7 +73,7 @@ interface FileRepositoryInterface
     public function createFromLocalFile(
         FilePointerInterface $filePointer,
         string $localFilePath,
-        iterable $metadata = []
+        iterable $metadata = [],
     ): FileInterface;
 
     /**
@@ -96,7 +96,7 @@ interface FileRepositoryInterface
      */
     public function copy(
         FilePointerInterface|FileInterface $source,
-        FilePointerInterface|FileInterface $destination
+        FilePointerInterface|FileInterface $destination,
     ): FileInterface;
 
     /**
@@ -104,6 +104,6 @@ interface FileRepositoryInterface
      */
     public function move(
         FilePointerInterface|FileInterface $source,
-        FilePointerInterface|FileInterface $destination
+        FilePointerInterface|FileInterface $destination,
     ): FileInterface;
 }

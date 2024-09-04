@@ -65,27 +65,27 @@ class EmbeddedMetadataTest extends TestCase
 
         $this->assertSame(
             $originalMetadata->get(Constants::FILE_NAME),
-            $entityMetadata->get(Constants::FILE_NAME)
+            $entityMetadata->get(Constants::FILE_NAME),
         );
         $this->assertSame(
             $originalMetadata->get(Constants::FILE_SIZE),
-            $entityMetadata->get(Constants::FILE_SIZE)
+            $entityMetadata->get(Constants::FILE_SIZE),
         );
         $this->assertSame(
             $originalMetadata->get(Constants::FILE_TYPE),
-            $entityMetadata->get(Constants::FILE_TYPE)
+            $entityMetadata->get(Constants::FILE_TYPE),
         );
         $this->assertSame(
             $originalMetadata->get(Constants::FILE_MODIFICATION_TIME),
-            $entityMetadata->get(Constants::FILE_MODIFICATION_TIME)
+            $entityMetadata->get(Constants::FILE_MODIFICATION_TIME),
         );
         $this->assertSame(
             $originalMetadata->tryGet(Constants::MEDIA_WIDTH),
-            $entityMetadata->tryGet(Constants::MEDIA_WIDTH)
+            $entityMetadata->tryGet(Constants::MEDIA_WIDTH),
         );
         $this->assertSame(
             $originalMetadata->tryGet(Constants::MEDIA_HEIGHT),
-            $entityMetadata->tryGet(Constants::MEDIA_HEIGHT)
+            $entityMetadata->tryGet(Constants::MEDIA_HEIGHT),
         );
 
         // setting high-level name
@@ -112,7 +112,7 @@ class EmbeddedMetadataTest extends TestCase
 
         $this->assertSame(
             $originalMetadata->get(Constants::FILE_NAME),
-            $entityMetadata->get(Constants::FILE_NAME)
+            $entityMetadata->get(Constants::FILE_NAME),
         );
 
         // setting high-level type
@@ -139,7 +139,7 @@ class EmbeddedMetadataTest extends TestCase
 
         $this->assertSame(
             $originalMetadata->get(Constants::FILE_TYPE),
-            $entityMetadata->get(Constants::FILE_TYPE)
+            $entityMetadata->get(Constants::FILE_TYPE),
         );
     }
 }

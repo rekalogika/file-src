@@ -26,6 +26,6 @@ interface FileLocationResolverInterface
 {
     public function getFileLocation(
         object $object,
-        string $propertyName
+        string $propertyName,
     ): FilePointerInterface;
 }

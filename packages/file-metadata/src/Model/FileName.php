@@ -25,7 +25,7 @@ final class FileName implements FileNameInterface
 
     public function __construct(
         ?string $filename,
-        ?string $forceExtension = null
+        ?string $forceExtension = null,
     ) {
         if ($filename !== null) {
             $this->parse($filename);
@@ -64,7 +64,7 @@ final class FileName implements FileNameInterface
     {
         if ($this->name === null) {
             $full = $this->getFull();
-            assert($full instanceof TranslatableInterface);
+            \assert($full instanceof TranslatableInterface);
 
             return $full->trans($translator, $locale);
         }
@@ -82,7 +82,7 @@ final class FileName implements FileNameInterface
                     'Untitled.{extension}',
                     [
                         '{extension}' => $this->extension,
-                    ]
+                    ],
                 );
             }
 
@@ -97,7 +97,7 @@ final class FileName implements FileNameInterface
                 [
                     '{name}' => $this->name,
                     '{extension}' => $this->extension,
-                ]
+                ],
             );
         }
 
@@ -106,7 +106,7 @@ final class FileName implements FileNameInterface
             '{name}',
             [
                 '{name}' => $this->name,
-            ]
+            ],
         );
 
     }
@@ -129,7 +129,7 @@ final class FileName implements FileNameInterface
             '{name}',
             [
                 '{name}' => $this->name,
-            ]
+            ],
         );
 
     }

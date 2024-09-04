@@ -24,9 +24,9 @@ class PropertyWriterException extends FileAssociationException
         object|array $object,
         string $property,
         mixed $value,
-        \Throwable $previous = null
+        \Throwable $previous = null,
     ) {
-        $message = sprintf('Unable to write "%s" to property "%s" in object "%s"', \get_debug_type($value), $property, \get_debug_type($object));
+        $message = \sprintf('Unable to write "%s" to property "%s" in object "%s"', get_debug_type($value), $property, get_debug_type($object));
 
         parent::__construct($message, 0, $previous);
     }

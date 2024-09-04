@@ -25,13 +25,11 @@ use Symfony\Component\HttpFoundation\File\File as HttpFoundationFile;
  */
 class FileAdapter
 {
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     public static function adapt(string|object $source): FileInterface
     {
-        if (is_string($source)) {
+        if (\is_string($source)) {
             return new File($source);
         } elseif ($source instanceof FileInterface) {
             return $source;
@@ -43,9 +41,9 @@ class FileAdapter
             return FromOneUpUploaderFileAdapter::adapt($source);
         }
 
-        throw new \InvalidArgumentException(sprintf(
+        throw new \InvalidArgumentException(\sprintf(
             'Converting "%s" to a "%s" is not supported',
-            \get_debug_type($source),
+            get_debug_type($source),
             FileInterface::class,
         ));
     }

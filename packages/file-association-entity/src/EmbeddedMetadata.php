@@ -75,7 +75,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
             $this->other = [];
         }
 
-        if (!array_key_exists($key, $this->other)) {
+        if (!\array_key_exists($key, $this->other)) {
             throw new MetadataNotFoundException($key);
         }
 
@@ -172,7 +172,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
             Constants::FILE_MODIFICATION_TIME => $this->modificationTime = null,
             Constants::MEDIA_WIDTH => $this->width = null,
             Constants::MEDIA_HEIGHT => $this->height = null,
-            default => $this->unsetOther($key)
+            default => $this->unsetOther($key),
         };
     }
 
@@ -187,6 +187,6 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
     #[\Override]
     public function count(): int
     {
-        return count($this->getOthers()) + 6;
+        return \count($this->getOthers()) + 6;
     }
 }

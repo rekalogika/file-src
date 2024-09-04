@@ -25,7 +25,7 @@ interface MetadataGeneratorInterface
      */
     public function generateMetadataFromFile(
         RawMetadataInterface $rawMetadata,
-        string|\SplFileInfo $file
+        string|\SplFileInfo $file,
     ): void;
 
     /**
@@ -33,7 +33,7 @@ interface MetadataGeneratorInterface
      */
     public function generateMetadataFromString(
         RawMetadataInterface $rawMetadata,
-        string $content
+        string $content,
     ): void;
 
     /**

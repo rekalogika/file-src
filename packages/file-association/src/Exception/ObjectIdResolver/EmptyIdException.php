@@ -18,16 +18,16 @@ class EmptyIdException extends ObjectIdResolverException
     public function __construct(
         object $object,
         string $method,
-        \Throwable $previous = null
+        \Throwable $previous = null,
     ) {
         parent::__construct(
             \sprintf(
                 "Method '%s' in object '%s' returned an empty id",
                 $method,
-                $object::class
+                $object::class,
             ),
             0,
-            $previous
+            $previous,
         );
     }
 }

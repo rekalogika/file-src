@@ -13,6 +13,4 @@ declare(strict_types=1);
 
 namespace Rekalogika\Contracts\File\Exception\File;
 
-class DerivationNotSupportedException extends FileException
-{
-}
+class DerivationNotSupportedException extends FileException {}

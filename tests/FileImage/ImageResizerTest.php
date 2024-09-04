@@ -34,7 +34,7 @@ class ImageResizerTest extends TestCase
     {
         $file = $this->fileRepository->createFromLocalFile(
             new FilePointer('inmemory', 'smiley'),
-            __DIR__ . '/../Resources/smiley.png'
+            __DIR__ . '/../Resources/smiley.png',
         );
 
         $imageResizer = new ImageResizer();

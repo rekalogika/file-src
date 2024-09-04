@@ -27,8 +27,7 @@ class DoctrineObjectIdResolver implements ObjectIdResolverInterface
 {
     public function __construct(
         private readonly ManagerRegistry $managerRegistry,
-    ) {
-    }
+    ) {}
 
     #[\Override]
     public function getObjectId(object $object): string
@@ -40,7 +39,7 @@ class DoctrineObjectIdResolver implements ObjectIdResolverInterface
             throw new ObjectNotSupportedException($object);
         }
 
-        if (\method_exists($objectManager, 'getUnitOfWork')) {
+        if (method_exists($objectManager, 'getUnitOfWork')) {
             /** @var UnitOfWork */
             $unitOfWork = $objectManager->getUnitOfWork();
             if (!$unitOfWork instanceof UnitOfWork) {
@@ -61,7 +60,7 @@ class DoctrineObjectIdResolver implements ObjectIdResolverInterface
         $stringIds = [];
 
         foreach ($ids as $id) {
-            if (!is_scalar($id) && !$id instanceof \Stringable) {
+            if (!\is_scalar($id) && !$id instanceof \Stringable) {
                 throw new ObjectNotSupportedException($object);
             }
 

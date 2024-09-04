@@ -26,7 +26,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(FileZip::class)
         ->args([
             service(ZipDirectory::class),
-            service(TranslatorInterface::class)
+            service(TranslatorInterface::class),
         ]);
 
     $services->set(ZipDirectory::class)

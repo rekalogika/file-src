@@ -48,8 +48,7 @@ final class ZipDirectory
     public function __construct(
         private FileRepositoryInterface $fileRepository,
         private ?TranslatorInterface $translator = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @param DirectoryInterface<array-key,NodeInterface> $directory
@@ -142,10 +141,10 @@ final class ZipDirectory
         }
 
         if ($this->parent !== null) {
-            $result = sprintf(
+            $result = \sprintf(
                 '%s/%s/',
                 $this->parent->getDirectoryPath(),
-                $this->directoryName
+                $this->directoryName,
             );
         } else {
             $result = $this->directoryName . '/';

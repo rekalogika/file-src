@@ -18,16 +18,16 @@ class MethodNotFoundException extends ObjectIdResolverException
     public function __construct(
         object $object,
         string $method,
-        \Throwable $previous = null
+        \Throwable $previous = null,
     ) {
         parent::__construct(
             \sprintf(
                 "Method '%s' not found in object '%s'",
                 $method,
-                $object::class
+                $object::class,
             ),
             0,
-            $previous
+            $previous,
         );
     }
 }

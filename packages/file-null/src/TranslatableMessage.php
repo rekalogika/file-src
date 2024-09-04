@@ -20,9 +20,8 @@ class TranslatableMessage implements \Stringable, TranslatableInterface
 {
     public function __construct(
         private readonly string $name,
-        private readonly string $translationDomain
-    ) {
-    }
+        private readonly string $translationDomain,
+    ) {}
 
     #[\Override]
     public function __toString(): string
@@ -33,13 +32,13 @@ class TranslatableMessage implements \Stringable, TranslatableInterface
     #[\Override]
     public function trans(
         TranslatorInterface $translator,
-        ?string $locale = null
+        ?string $locale = null,
     ): string {
         return $translator->trans(
             $this->name,
             [],
             $this->translationDomain,
-            $locale
+            $locale,
         );
     }
 }

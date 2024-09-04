@@ -27,8 +27,7 @@ class FilePointer implements FilePointerInterface
     public function __construct(
         private ?string $filesystemIdentifier,
         private string $key,
-    ) {
-    }
+    ) {}
 
     #[\Override]
     public function getFilesystemIdentifier(): ?string

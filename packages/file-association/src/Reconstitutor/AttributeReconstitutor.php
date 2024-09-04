@@ -23,9 +23,8 @@ use Rekalogika\Reconstitutor\Contract\AttributeReconstitutorInterface;
 class AttributeReconstitutor implements AttributeReconstitutorInterface
 {
     public function __construct(
-        private readonly FileAssociationManager $fileAssociationManager
-    ) {
-    }
+        private readonly FileAssociationManager $fileAssociationManager,
+    ) {}
 
     #[\Override]
     public static function getAttributeClass(): string
@@ -52,7 +51,5 @@ class AttributeReconstitutor implements AttributeReconstitutorInterface
     }
 
     #[\Override]
-    public function onCreate(object $object): void
-    {
-    }
+    public function onCreate(object $object): void {}
 }

@@ -28,7 +28,7 @@ final class MimeMapFileTypeAdapter implements FileTypeInterface
     public function __construct(string $type)
     {
         $type = strtolower($type);
-        $type = \trim($type);
+        $type = trim($type);
         $this->type = $type;
     }
 
@@ -98,10 +98,10 @@ final class MimeMapFileTypeAdapter implements FileTypeInterface
             );
         } catch (MappingException) {
             return new TranslatableMessage(
-                sprintf('Unknown file type (%s)', $this->type),
+                \sprintf('Unknown file type (%s)', $this->type),
                 'Unknown file type ({type})',
                 [
-                    '{type}' => $this->type
+                    '{type}' => $this->type,
                 ],
             );
         }

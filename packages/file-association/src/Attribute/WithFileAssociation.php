@@ -14,6 +14,4 @@ declare(strict_types=1);
 namespace Rekalogika\File\Association\Attribute;
 
 #[\Attribute(\Attribute::TARGET_CLASS)]
-class WithFileAssociation
-{
-}
+class WithFileAssociation {}

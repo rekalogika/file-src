@@ -31,8 +31,7 @@ final class FileAssociationManager
         private readonly PropertyWriterInterface $writer,
         private readonly PropertyInspectorInterface $inspector,
         private readonly FileLocationResolverInterface $fileLocationResolver,
-    ) {
-    }
+    ) {}
 
     /**
      * Called when the object is saved
@@ -69,10 +68,10 @@ final class FileAssociationManager
      */
     private function saveProperty(
         object $object,
-        string $propertyName
+        string $propertyName,
     ): void {
         $currentFile = $this->reader->read($object, $propertyName);
-        assert($currentFile instanceof FileInterface || null === $currentFile);
+        \assert($currentFile instanceof FileInterface || null === $currentFile);
 
         if ($currentFile instanceof FileInterface) {
             $filePointer = $this->fileLocationResolver
@@ -90,12 +89,12 @@ final class FileAssociationManager
             $this->removeProperty($object, $propertyName);
         } else {
             throw new \InvalidArgumentException(
-                sprintf(
+                \sprintf(
                     'Property "%s" on object "%s" is not a %s instance',
                     $propertyName,
                     $object::class,
-                    FileInterface::class
-                )
+                    FileInterface::class,
+                ),
             );
         }
     }
@@ -105,7 +104,7 @@ final class FileAssociationManager
      */
     private function removeProperty(
         object $object,
-        string $propertyName
+        string $propertyName,
     ): void {
         $filePointer = $this->fileLocationResolver
             ->getFileLocation($object, $propertyName);
@@ -117,7 +116,7 @@ final class FileAssociationManager
      */
     private function loadProperty(
         object $object,
-        string $propertyName
+        string $propertyName,
     ): void {
         $inspectorResult = $this->inspector->inspect($object, $propertyName);
         $filePointer = $this->fileLocationResolver
@@ -129,19 +128,19 @@ final class FileAssociationManager
             if ($file === null && $inspectorResult->isMandatory()) {
                 $file = new MissingFile(
                     $filePointer->getFilesystemIdentifier(),
-                    $filePointer->getKey()
+                    $filePointer->getKey(),
                 );
             }
         } elseif ($inspectorResult->getFetch() === 'LAZY') {
             $file = $this->fileRepository->getReference($filePointer);
         } else {
             throw new \InvalidArgumentException(
-                sprintf(
+                \sprintf(
                     'Unknown fetch mode "%s" on property "%s" of object "%s"',
                     $inspectorResult->getFetch(),
                     $propertyName,
-                    $object::class
-                )
+                    $object::class,
+                ),
             );
         }
 

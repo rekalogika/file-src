@@ -36,7 +36,7 @@ class FilesystemRepositoryTest extends TestCase
 
         $repository->addFilesystem(
             'test',
-            new Filesystem(new LocalFilesystemAdapter('/tmp'))
+            new Filesystem(new LocalFilesystemAdapter('/tmp')),
         );
         $filesystem = $repository->getFilesystem('test');
         $this->assertInstanceOf(FilesystemOperator::class, $filesystem);
@@ -49,12 +49,12 @@ class FilesystemRepositoryTest extends TestCase
 
         $repository->addFilesystem(
             'test',
-            new Filesystem(new LocalFilesystemAdapter('/tmp'))
+            new Filesystem(new LocalFilesystemAdapter('/tmp')),
         );
 
         $repository->addFilesystem(
             'test',
-            new Filesystem(new LocalFilesystemAdapter('/tmp'))
+            new Filesystem(new LocalFilesystemAdapter('/tmp')),
         );
     }
 

@@ -43,7 +43,7 @@ class RawMetadata implements RawMetadataInterface, \IteratorAggregate
     #[\Override]
     public function get(string $key): int|string|bool|null
     {
-        if (!array_key_exists($key, $this->metadata)) {
+        if (!\array_key_exists($key, $this->metadata)) {
             throw new MetadataNotFoundException($key);
         }
 

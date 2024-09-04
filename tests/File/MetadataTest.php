@@ -28,21 +28,21 @@ class MetadataTest extends TestCase
     {
         parent::setUp();
 
-        $this->originalTimeZone = \date_default_timezone_get();
+        $this->originalTimeZone = date_default_timezone_get();
     }
 
     #[\Override]
     protected function tearDown(): void
     {
         /** @psalm-suppress ArgumentTypeCoercion */
-        \date_default_timezone_set($this->originalTimeZone);
+        date_default_timezone_set($this->originalTimeZone);
 
         parent::tearDown();
     }
 
     public function testHttpMetadataUtcTimezone(): void
     {
-        \date_default_timezone_set('UTC');
+        date_default_timezone_set('UTC');
 
         $rawMetadata = new RawMetadata();
         $rawMetadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);
@@ -59,7 +59,7 @@ class MetadataTest extends TestCase
 
     public function testHttpMetadataWibTimezone(): void
     {
-        \date_default_timezone_set('Asia/Jakarta');
+        date_default_timezone_set('Asia/Jakarta');
 
         $rawMetadata = new RawMetadata();
         $rawMetadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);
@@ -76,7 +76,7 @@ class MetadataTest extends TestCase
 
     public function testFileMetadataUtcTimezone(): void
     {
-        \date_default_timezone_set('UTC');
+        date_default_timezone_set('UTC');
 
         $rawMetadata = new RawMetadata();
         $rawMetadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);
@@ -90,7 +90,7 @@ class MetadataTest extends TestCase
 
     public function testFileMetadataWibTimezone(): void
     {
-        \date_default_timezone_set('Asia/Jakarta');
+        date_default_timezone_set('Asia/Jakarta');
 
         $rawMetadata = new RawMetadata();
         $rawMetadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);

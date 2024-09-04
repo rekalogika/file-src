@@ -41,7 +41,7 @@ class ImageTwigExtension extends AbstractExtension implements ServiceSubscriberI
     private function getImageResizer(): ImageResizer
     {
         $resizer = $this->container->get(ImageResizer::class);
-        assert($resizer instanceof ImageResizer);
+        \assert($resizer instanceof ImageResizer);
 
         return $resizer;
     }
@@ -50,14 +50,14 @@ class ImageTwigExtension extends AbstractExtension implements ServiceSubscriberI
     public function getFilters(): array
     {
         return [
-            new TwigFilter('image_resize', $this->fileImageResize(...))
+            new TwigFilter('image_resize', $this->fileImageResize(...)),
         ];
     }
 
     public function fileImageResize(
         ?FileInterface $file,
         int $maxWidthOrHeight = 512,
-        string $aspect = ImageResizer::ASPECTRATIO_ORIGINAL
+        string $aspect = ImageResizer::ASPECTRATIO_ORIGINAL,
     ): ?FileInterface {
         if ($file === null) {
             return null;

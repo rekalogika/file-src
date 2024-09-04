@@ -21,9 +21,8 @@ class NullName implements FileNameInterface
 {
     public function __construct(
         private readonly string $name,
-        private readonly string $translationDomain
-    ) {
-    }
+        private readonly string $translationDomain,
+    ) {}
 
     #[\Override]
     public function getFull(): \Stringable&TranslatableInterface
@@ -32,23 +31,19 @@ class NullName implements FileNameInterface
     }
 
     #[\Override]
-    public function setFull(string $name): void
-    {
-    }
+    public function setFull(string $name): void {}
 
     #[\Override]
     public function getBase(): \Stringable&TranslatableInterface
     {
         return new TranslatableMessage(
             $this->name,
-            $this->translationDomain
+            $this->translationDomain,
         );
     }
 
     #[\Override]
-    public function setBase(string $name): void
-    {
-    }
+    public function setBase(string $name): void {}
 
     #[\Override]
     public function getExtension(): ?string
@@ -57,9 +52,7 @@ class NullName implements FileNameInterface
     }
 
     #[\Override]
-    public function setExtension(?string $extension): void
-    {
-    }
+    public function setExtension(?string $extension): void {}
 
     #[\Override]
     public function hasExtension(): bool

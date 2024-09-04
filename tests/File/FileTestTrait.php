@@ -50,9 +50,9 @@ trait FileTestTrait
 
         // filename tests
         if ($fileName !== null) {
-            $fullName = \pathinfo($fileName, PATHINFO_BASENAME);
-            $extension = \pathinfo($fileName, PATHINFO_EXTENSION);
-            $fileNameWithoutExtension = \pathinfo($fileName, PATHINFO_FILENAME);
+            $fullName = pathinfo($fileName, PATHINFO_BASENAME);
+            $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+            $fileNameWithoutExtension = pathinfo($fileName, PATHINFO_FILENAME);
 
             $this->assertSame((string) $file->getName()->getFull(), $fullName);
             $this->assertSame((string) $file->getName()->getBase(), $fileNameWithoutExtension);
@@ -66,21 +66,21 @@ trait FileTestTrait
 
         // local file saving tests
         $splFileInfo = $file->saveToLocalFile($localTestFile);
-        $this->assertSame($splFileInfo->getRealPath(), \realpath($localTestFile));
-        $this->assertSame(\file_get_contents($localTestFile), $content);
+        $this->assertSame($splFileInfo->getRealPath(), realpath($localTestFile));
+        $this->assertSame(file_get_contents($localTestFile), $content);
         unlink($localTestFile);
 
         // local temporary file tests
         $localTemporaryFile = $file->createLocalTemporaryFile();
-        $this->assertSame(\file_get_contents($localTemporaryFile->getRealPath()), $content);
+        $this->assertSame(file_get_contents($localTemporaryFile->getRealPath()), $content);
         $localTemporaryFilePath = $localTemporaryFile->getRealPath();
         unset($localTemporaryFile);
         $this->assertFileDoesNotExist($localTemporaryFilePath);
 
         // media type tests
         $this->assertSame($file->getType()->getName(), $type);
-        $this->assertSame($file->getType()->getType(), \explode('/', $type)[0]);
-        $this->assertSame($file->getType()->getSubType(), \explode('/', $type)[1]);
+        $this->assertSame($file->getType()->getType(), explode('/', $type)[0]);
+        $this->assertSame($file->getType()->getSubType(), explode('/', $type)[1]);
 
         // size tests
         $this->assertSame($file->getSize(), \strlen($content));
@@ -102,10 +102,10 @@ trait FileTestTrait
         $this->assertSame((string) $fileMetadata->getType(), $type);
 
         $metadataLastModified = $metadata->get(Constants::FILE_MODIFICATION_TIME);
-        $this->assertTrue(is_int($metadataLastModified));
+        $this->assertTrue(\is_int($metadataLastModified));
         $this->assertSame(
             $fileMetadata->getModificationTime()->getTimestamp(),
-            $metadata->get(Constants::FILE_MODIFICATION_TIME)
+            $metadata->get(Constants::FILE_MODIFICATION_TIME),
         );
 
         // width and height tests

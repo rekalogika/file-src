@@ -16,6 +16,4 @@ namespace Rekalogika\Contracts\File;
 /**
  * Marker interface for a null file pointer object.
  */
-interface NullFilePointerInterface extends FilePointerInterface
-{
-}
+interface NullFilePointerInterface extends FilePointerInterface {}

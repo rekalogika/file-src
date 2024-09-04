@@ -27,9 +27,8 @@ final class TranslatableMessage implements TranslatableInterface, \Stringable
     public function __construct(
         private readonly string $stringName,
         private readonly string $translationId,
-        private readonly array $parameters = []
-    ) {
-    }
+        private readonly array $parameters = [],
+    ) {}
 
     #[\Override]
     public function __toString(): string
@@ -40,13 +39,13 @@ final class TranslatableMessage implements TranslatableInterface, \Stringable
     #[\Override]
     public function trans(
         TranslatorInterface $translator,
-        ?string $locale = null
+        ?string $locale = null,
     ): string {
         return $translator->trans(
             $this->translationId,
             $this->parameters,
             'rekalogika_file',
-            $locale
+            $locale,
         );
     }
 }

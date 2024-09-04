@@ -20,9 +20,8 @@ class NullType implements FileTypeInterface
 {
     public function __construct(
         private readonly string $description,
-        private readonly string $translationDomain
-    ) {
-    }
+        private readonly string $translationDomain,
+    ) {}
 
     #[\Override]
     public function getName(): string
@@ -59,7 +58,7 @@ class NullType implements FileTypeInterface
     {
         return new TranslatableMessage(
             $this->description,
-            $this->translationDomain
+            $this->translationDomain,
         );
     }
 

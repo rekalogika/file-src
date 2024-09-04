@@ -121,7 +121,5 @@ trait NullFileTrait
         return null;
     }
 
-    public function flush(): void
-    {
-    }
+    public function flush(): void {}
 }

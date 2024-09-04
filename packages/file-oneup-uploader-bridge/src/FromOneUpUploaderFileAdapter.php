@@ -26,14 +26,14 @@ class FromOneUpUploaderFileAdapter extends File
     private function __construct(TheirFileInterface $file)
     {
         $filesystem = $file->getFileSystem();
-        assert($filesystem === null || $filesystem instanceof FilesystemOperator);
+        \assert($filesystem === null || $filesystem instanceof FilesystemOperator);
 
         if ($filesystem === null) {
             $ourFilesystem = null;
         } elseif (class_exists(FilesystemOperator::class) && $filesystem instanceof FilesystemOperator) {
             $ourFilesystem = $filesystem;
         } else {
-            throw new \InvalidArgumentException('Unsupported filesystem type: ' . \get_debug_type($filesystem));
+            throw new \InvalidArgumentException('Unsupported filesystem type: ' . get_debug_type($filesystem));
         }
 
         parent::__construct($file->getPathname(), $ourFilesystem);

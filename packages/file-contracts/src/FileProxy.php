@@ -28,7 +28,7 @@ final class FileProxy implements FileInterface
     //
 
     public static function getFile(
-        FileInterface|null $file
+        FileInterface|null $file,
     ): FileInterface|null {
         if ($file instanceof self) {
             try {
@@ -58,8 +58,7 @@ final class FileProxy implements FileInterface
     public function __construct(
         private FilePointerInterface $filePointer,
         private FileRepositoryInterface $fileRepository,
-    ) {
-    }
+    ) {}
 
     //
     // proxy related methods
