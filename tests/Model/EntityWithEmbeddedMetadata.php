@@ -29,7 +29,7 @@ class EntityWithEmbeddedMetadata
     private EmbeddedMetadata $fileMetadata;
 
     public function __construct(
-        private string $id
+        private string $id,
     ) {
         $this->fileMetadata = new EmbeddedMetadata();
     }

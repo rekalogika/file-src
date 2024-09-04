@@ -29,7 +29,7 @@ abstract class AbstractFileFilter implements FileFilterInterface
      */
     #[\Override]
     final public function setFileRepository(
-        FileRepositoryInterface $fileRepository
+        FileRepositoryInterface $fileRepository,
     ): void {
         $this->fileRepository = $fileRepository;
     }
@@ -43,7 +43,7 @@ abstract class AbstractFileFilter implements FileFilterInterface
      * Caller must call this method to set the source file
      */
     final public function take(
-        FileInterface $sourceFile
+        FileInterface $sourceFile,
     ): static {
         $clone = clone $this;
         $clone->sourceFile = $sourceFile;
@@ -95,7 +95,7 @@ abstract class AbstractFileFilter implements FileFilterInterface
     {
         if (!isset($this->sourceFile)) {
             throw new \LogicException(
-                'Call "take()" first before calling "getResult()"'
+                'Call "take()" first before calling "getResult()"',
             );
         }
 

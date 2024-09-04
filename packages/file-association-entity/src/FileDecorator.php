@@ -31,7 +31,7 @@ class FileDecorator implements FileInterface
 
     public static function getFile(
         ?FileInterface $file,
-        EmbeddedMetadata $metadata
+        EmbeddedMetadata $metadata,
     ): ?FileInterface {
         if ($metadata->isFilePresent() === false) {
             // metadata says the file does not exist, and the file does not
@@ -70,7 +70,7 @@ class FileDecorator implements FileInterface
     public static function setFile(
         ?FileInterface $input,
         ?FileInterface &$file,
-        EmbeddedMetadata $metadata
+        EmbeddedMetadata $metadata,
     ): void {
         $metadata->clear();
 
@@ -87,7 +87,7 @@ class FileDecorator implements FileInterface
     public static function setFileMandatory(
         FileInterface $input,
         FileInterface &$file,
-        EmbeddedMetadata $metadata
+        EmbeddedMetadata $metadata,
     ): void {
         $metadata->clear();
         $file = $input;
@@ -100,9 +100,8 @@ class FileDecorator implements FileInterface
 
     private function __construct(
         private FileInterface $file,
-        private EmbeddedMetadata $metadata
-    ) {
-    }
+        private EmbeddedMetadata $metadata,
+    ) {}
 
     //
     // other methods
@@ -115,13 +114,13 @@ class FileDecorator implements FileInterface
     {
         if (!$file instanceof self) {
             throw new \InvalidArgumentException(
-                sprintf('"syncMetadata()" only accepts %s', static::class)
+                \sprintf('"syncMetadata()" only accepts %s', static::class),
             );
         }
 
         $file->metadata->clear();
         $file->metadata->merge(
-            $file->file->get(RawMetadataInterface::class) ?? []
+            $file->file->get(RawMetadataInterface::class) ?? [],
         );
     }
 
@@ -143,7 +142,7 @@ class FileDecorator implements FileInterface
 
         /** @psalm-suppress MixedReturnStatement */
         return MetadataFactory::create(
-            $this->get(RawMetadataInterface::class) ?? new RawMetadata()
+            $this->get(RawMetadataInterface::class) ?? new RawMetadata(),
         )
             ->get($id);
     }

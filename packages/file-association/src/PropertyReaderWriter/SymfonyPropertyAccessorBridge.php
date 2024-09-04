@@ -28,8 +28,7 @@ class SymfonyPropertyAccessorBridge implements
 {
     public function __construct(
         private readonly SymfonyPropertyAccessorInterface $propertyAccessor,
-    ) {
-    }
+    ) {}
 
     #[\Override]
     public function write(object $object, string $propertyName, mixed $value): void

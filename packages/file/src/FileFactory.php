@@ -118,7 +118,7 @@ class FileFactory
 
     public function addFilesystem(
         string $identifier,
-        FilesystemOperator $filesystem
+        FilesystemOperator $filesystem,
     ): self {
         $this->filesystems[$identifier] = $filesystem;
 
@@ -126,7 +126,7 @@ class FileFactory
     }
 
     public function setDefaultFilesystemIdForTemporaryFile(
-        ?string $defaultFilesystemIdForTemporaryFile
+        ?string $defaultFilesystemIdForTemporaryFile,
     ): self {
         $this->defaultFilesystemIdForTemporaryFile = $defaultFilesystemIdForTemporaryFile;
 

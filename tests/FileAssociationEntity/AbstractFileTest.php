@@ -97,8 +97,8 @@ class AbstractFileTest extends TestCase
 
     public function testEmbeddedMetadataTimezone(): void
     {
-        $oldTimeZone = \date_default_timezone_get();
-        \date_default_timezone_set('Asia/Jakarta');
+        $oldTimeZone = date_default_timezone_get();
+        date_default_timezone_set('Asia/Jakarta');
 
         $metadata = new EmbeddedMetadata();
         $metadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);
@@ -117,6 +117,6 @@ class AbstractFileTest extends TestCase
 
         static::assertSame('Asia/Jakarta', $modificationTime->getTimezone()->getName());
 
-        \date_default_timezone_set($oldTimeZone);
+        date_default_timezone_set($oldTimeZone);
     }
 }

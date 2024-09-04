@@ -40,7 +40,7 @@ class ZipTest extends TestCase
 
         $this->assertInstanceOf(
             FileRepositoryInterface::class,
-            $fileRepository
+            $fileRepository,
         );
 
         $this->fileRepository = $fileRepository;
@@ -50,7 +50,7 @@ class ZipTest extends TestCase
 
         $this->assertInstanceOf(
             FileZip::class,
-            $fileZip
+            $fileZip,
         );
 
         $this->fileZip = $fileZip;
@@ -111,37 +111,37 @@ class ZipTest extends TestCase
 
         $this->assertEquals(
             'file1',
-            file_get_contents('zip://' . $temporaryFile . '#file1.txt')
+            file_get_contents('zip://' . $temporaryFile . '#file1.txt'),
         );
 
         $this->assertEquals(
             'file2',
-            file_get_contents('zip://' . $temporaryFile . '#file2.txt')
+            file_get_contents('zip://' . $temporaryFile . '#file2.txt'),
         );
 
         $this->assertEquals(
             'file3',
-            file_get_contents('zip://' . $temporaryFile . '#file3.txt')
+            file_get_contents('zip://' . $temporaryFile . '#file3.txt'),
         );
 
         $this->assertEquals(
             'file3a',
-            file_get_contents('zip://' . $temporaryFile . '#file3 (1).txt')
+            file_get_contents('zip://' . $temporaryFile . '#file3 (1).txt'),
         );
 
         $this->assertEquals(
             'fileInSubDir1',
-            file_get_contents('zip://' . $temporaryFile . '#subdir/fileInSubDir1.txt')
+            file_get_contents('zip://' . $temporaryFile . '#subdir/fileInSubDir1.txt'),
         );
 
         $this->assertEquals(
             'fileInSubDir2',
-            file_get_contents('zip://' . $temporaryFile . '#subdir/fileInSubDir2.txt')
+            file_get_contents('zip://' . $temporaryFile . '#subdir/fileInSubDir2.txt'),
         );
 
         $this->assertEquals(
             'fileInSubDir2a',
-            file_get_contents('zip://' . $temporaryFile . '#subdir/fileInSubDir2 (1).txt')
+            file_get_contents('zip://' . $temporaryFile . '#subdir/fileInSubDir2 (1).txt'),
         );
 
         fclose($output);

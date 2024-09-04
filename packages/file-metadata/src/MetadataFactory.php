@@ -30,9 +30,8 @@ final class MetadataFactory
     }
 
     private function __construct(
-        private readonly RawMetadataInterface $metadata
-    ) {
-    }
+        private readonly RawMetadataInterface $metadata,
+    ) {}
 
     /**
      * @template T of AbstractMetadata

@@ -27,8 +27,7 @@ class NullFile implements NullFileInterface
     public function __construct(
         private ?string $filesystemIdentifier = null,
         private ?string $key = null,
-    ) {
-    }
+    ) {}
 
     #[\Override]
     public function getFilesystemIdentifier(): ?string

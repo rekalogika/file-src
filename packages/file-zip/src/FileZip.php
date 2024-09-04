@@ -26,8 +26,7 @@ final class FileZip
     public function __construct(
         private readonly ZipDirectory $zipDirectory,
         private readonly TranslatorInterface $translator,
-    ) {
-    }
+    ) {}
 
     /**
      * @param DirectoryInterface<array-key,NodeInterface> $directory

@@ -28,7 +28,7 @@ class ChainedObjectIdResolver implements ObjectIdResolverInterface
      * @param iterable<ObjectIdResolverInterface> $objectIdResolvers
      */
     public function __construct(
-        private readonly iterable $objectIdResolvers
+        private readonly iterable $objectIdResolvers,
     ) {
         /** @var \WeakMap<object,string> */
         $map = new \WeakMap();

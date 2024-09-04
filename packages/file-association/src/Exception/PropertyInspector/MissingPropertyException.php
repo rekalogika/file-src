@@ -20,7 +20,7 @@ class MissingPropertyException extends PropertyInspectorException
         object $object,
     ) {
         parent::__construct(
-            sprintf(
+            \sprintf(
                 'Property "%s" not found in object "%s"',
                 $propertyName,
                 $object::class,

@@ -22,7 +22,7 @@ final class ImageMetadata extends AbstractMetadata implements
 {
     #[\Override]
     public static function create(
-        RawMetadataInterface $metadata
+        RawMetadataInterface $metadata,
     ): ?static {
         if (!((bool) $metadata->tryGet(Constants::MEDIA_WIDTH))) {
             return null;
@@ -32,9 +32,8 @@ final class ImageMetadata extends AbstractMetadata implements
     }
 
     private function __construct(
-        private readonly RawMetadataInterface $metadata
-    ) {
-    }
+        private readonly RawMetadataInterface $metadata,
+    ) {}
 
     #[\Override]
     public function getWidth(): int

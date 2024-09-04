@@ -27,8 +27,7 @@ class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggregate
     public function __construct(
         private readonly RawMetadataInterface $embeddedMetadata,
         private readonly RawMetadataInterface $fileMetadata,
-    ) {
-    }
+    ) {}
 
     #[\Override]
     public function getIterator(): \Traversable

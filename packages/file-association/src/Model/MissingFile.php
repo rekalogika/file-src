@@ -33,15 +33,15 @@ class MissingFile extends \Exception implements NullFileInterface
         private string $key,
     ) {
         if ($filesystemIdentifier === null) {
-            parent::__construct(sprintf(
+            parent::__construct(\sprintf(
                 'File with key "%s" is missing in the local filesystem',
                 $key,
             ));
         } else {
-            parent::__construct(sprintf(
+            parent::__construct(\sprintf(
                 'File with key "%s" is missing in filesystem "%s"',
                 $key,
-                $filesystemIdentifier
+                $filesystemIdentifier,
             ));
         }
     }

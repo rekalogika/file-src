@@ -87,7 +87,7 @@ class File implements FileInterface
                 throw new FileNotFoundException($key);
             }
 
-            if (!\file_exists($realpath)) {
+            if (!file_exists($realpath)) {
                 throw new FileNotFoundException($key);
             }
 
@@ -111,7 +111,7 @@ class File implements FileInterface
     {
         return new FilePointer(
             $this->getFilesystemIdentifier(),
-            $this->key
+            $this->key,
         );
     }
 
@@ -269,15 +269,15 @@ class File implements FileInterface
             throw new DerivationNotSupportedException('It is not allowed to create derivation from a file in an ad-hoc filesystem.');
         }
 
-        if ((bool)preg_match('/^[a-zA-Z0-9_-]+$/', $derivationId) === false) {
+        if ((bool) preg_match('/^[a-zA-Z0-9_-]+$/', $derivationId) === false) {
             throw new \InvalidArgumentException('Derivation ID must consist of alphanumeric characters, dash, or underscore only.');
         }
 
-        $derivationKey = sprintf('%s.d/%s', $this->key, $derivationId);
+        $derivationKey = \sprintf('%s.d/%s', $this->key, $derivationId);
 
         return new FilePointer(
             $this->getFilesystemIdentifier(),
-            $derivationKey
+            $derivationKey,
         );
     }
 

@@ -35,7 +35,7 @@ class RekalogikaFileFilePondExtension extends Extension implements
     public function prepend(ContainerBuilder $container): void
     {
         $container->prependExtensionConfig('twig', [
-            'form_themes' => ['@RekalogikaFileFilePond/filepond_form_theme.html.twig']
+            'form_themes' => ['@RekalogikaFileFilePond/filepond_form_theme.html.twig'],
         ]);
 
         if ($this->isAssetMapperAvailable($container)) {

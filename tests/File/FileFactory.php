@@ -27,9 +27,7 @@ use Rekalogika\File\Repository\FilesystemRepository;
 
 class FileFactory
 {
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     private static ?MetadataGeneratorInterface $metadataGenerator = null;
 
@@ -38,7 +36,7 @@ class FileFactory
         $metadataSerializer = new MetadataSerializer();
         $metadataSidecarDecorator = new RemoteFilesystemDecorator(
             $metadataSerializer,
-            self::createMetadataGenerator()
+            self::createMetadataGenerator(),
         );
 
         return new FilesystemRepository($metadataSidecarDecorator);
@@ -63,20 +61,20 @@ class FileFactory
         $repository->addFilesystem(
             'local',
             new Filesystem(
-                new LocalFilesystemAdapter(__DIR__ . '/../../var/test')
-            )
+                new LocalFilesystemAdapter(__DIR__ . '/../../var/test'),
+            ),
         );
 
         // in memory filesystem
         $repository->addFilesystem(
             'inmemory',
-            new Filesystem(new InMemoryFilesystemAdapter())
+            new Filesystem(new InMemoryFilesystemAdapter()),
         );
 
         // another in memory filesystem
         $repository->addFilesystem(
             'inmemory2',
-            new Filesystem(new InMemoryFilesystemAdapter())
+            new Filesystem(new InMemoryFilesystemAdapter()),
         );
 
         return $repository;

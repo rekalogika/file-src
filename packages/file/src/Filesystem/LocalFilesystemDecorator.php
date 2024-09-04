@@ -24,8 +24,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
 {
     public function __construct(
         private readonly FilesystemOperator $wrapped,
-    ) {
-    }
+    ) {}
 
     //
     // implementations
@@ -40,7 +39,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
 
         $temporaryFile = tempnam(
             sys_get_temp_dir(),
-            'metadata_aware_filesystem_operator_decorator_'
+            'metadata_aware_filesystem_operator_decorator_',
         );
 
         if ($temporaryFile === false) {
@@ -157,7 +156,7 @@ class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
     public function temporaryUrl(
         string $path,
         \DateTimeInterface $expiresAt,
-        $config = []
+        $config = [],
     ): string {
         return $this->wrapped->temporaryUrl($path, $expiresAt, $config);
     }

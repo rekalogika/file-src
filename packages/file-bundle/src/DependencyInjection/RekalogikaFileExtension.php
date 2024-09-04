@@ -39,7 +39,7 @@ class RekalogikaFileExtension extends Extension implements PrependExtensionInter
     {
         $loader = new PhpFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../../config')
+            new FileLocator(__DIR__ . '/../../config'),
         );
 
         //
@@ -90,9 +90,9 @@ class RekalogikaFileExtension extends Extension implements PrependExtensionInter
         /** @var array<string,string> */
         $filesystems = $config['filesystems'] ?? [];
 
-        if (count($filesystems) === 0) {
+        if (\count($filesystems) === 0) {
             $filesystems = [
-                'default' => 'rekalogika.file.default_filesystem'
+                'default' => 'rekalogika.file.default_filesystem',
             ];
         }
 
@@ -138,7 +138,7 @@ class RekalogikaFileExtension extends Extension implements PrependExtensionInter
                 throw new \RuntimeException('Unable to get path of EmbeddedMetadata class');
             }
 
-            $configDir = realpath(dirname($path, 2) . '/config/doctrine');
+            $configDir = realpath(\dirname($path, 2) . '/config/doctrine');
             if (false === $configDir) {
                 throw new \RuntimeException('Unable to get path of EmbeddedMetadata class');
             }

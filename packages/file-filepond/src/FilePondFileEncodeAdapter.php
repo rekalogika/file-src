@@ -29,22 +29,22 @@ class FilePondFileEncodeAdapter
     public static function adaptFromArray(array $input): FileInterface
     {
         $data = $input['data'] ?? null;
-        if (!is_string($data)) {
+        if (!\is_string($data)) {
             throw new \UnexpectedValueException('Invalid FilePond input. Expecting "data" containing a Base64 string.');
         }
 
-        $data = \base64_decode($data, true);
+        $data = base64_decode($data, true);
         if ($data === false) {
             throw new \UnexpectedValueException('Invalid Base64 string.');
         }
 
         $name = $input['name'] ?? null;
-        if (!is_string($name)) {
+        if (!\is_string($name)) {
             throw new \UnexpectedValueException('Invalid FilePond input. Expecting "name" containing a string.');
         }
 
         $type = $input['type'] ?? null;
-        if (!is_string($type)) {
+        if (!\is_string($type)) {
             throw new \UnexpectedValueException('Invalid FilePond input. Expecting "type" containing a string.');
         }
 
@@ -59,8 +59,8 @@ class FilePondFileEncodeAdapter
 
     public static function adaptFromString(string $jsonInput): FileInterface
     {
-        $input = \json_decode($jsonInput, true, 512, JSON_THROW_ON_ERROR);
-        if (!is_array($input)) {
+        $input = json_decode($jsonInput, true, 512, JSON_THROW_ON_ERROR);
+        if (!\is_array($input)) {
             throw new \JsonException('Expecting JSON data in object type');
         }
 

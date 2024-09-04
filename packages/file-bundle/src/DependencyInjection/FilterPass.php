@@ -34,16 +34,16 @@ class FilterPass implements CompilerPassInterface
 
             $class = $definition->getClass();
             if ($class === null) {
-                throw new \InvalidArgumentException(sprintf('Service "%s" has no class', $id));
+                throw new \InvalidArgumentException(\sprintf('Service "%s" has no class', $id));
             }
 
             $reflection = $container->getReflectionClass($class);
             if ($reflection === null) {
-                throw new \InvalidArgumentException(sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
+                throw new \InvalidArgumentException(\sprintf('Class "%s" used for service "%s" cannot be found.', $class, $id));
             }
 
             if (!$reflection->isSubclassOf(FileFilterInterface::class)) {
-                throw new \InvalidArgumentException(sprintf('Service %s is not %s', $id, FileFilterInterface::class));
+                throw new \InvalidArgumentException(\sprintf('Service %s is not %s', $id, FileFilterInterface::class));
             }
 
             $definition

@@ -25,22 +25,21 @@ class DefaultFileLocationResolver implements FileLocationResolverInterface
         private readonly string $filesystemIdentifier = 'default',
         private readonly string $prefix = 'entity',
         private readonly int $hashLevel = 4,
-    ) {
-    }
+    ) {}
 
     #[\Override]
     public function getFileLocation(
         object $object,
-        string $propertyName
+        string $propertyName,
     ): FilePointerInterface {
         $id = $this->objectIdResolver->getObjectId($object);
 
         $splittedHash = str_split(sha1($id), 2);
-        $hash = implode('/', array_slice($splittedHash, 0, $this->hashLevel));
+        $hash = implode('/', \array_slice($splittedHash, 0, $this->hashLevel));
 
         $classHash = sha1($object::class);
 
-        $key = sprintf(
+        $key = \sprintf(
             '%s/%s/%s/%s/%s',
             $this->prefix,
             $classHash,
@@ -50,7 +49,7 @@ class DefaultFileLocationResolver implements FileLocationResolverInterface
         );
 
         $key = preg_replace('/\/+/', '/', $key);
-        assert(is_string($key));
+        \assert(\is_string($key));
 
         return new FilePointer($this->filesystemIdentifier, $key);
     }

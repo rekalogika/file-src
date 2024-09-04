@@ -27,14 +27,14 @@ class PropertyListerTest extends TestCase
         $entity = new EntityWithAttribute('id');
         $properties = $lister->getFileProperties($entity);
         $properties = $properties instanceof \Traversable
-            ? \iterator_to_array($properties)
+            ? iterator_to_array($properties)
             : $properties;
         $this->assertSame(['file'], $properties);
 
         $subclassedEntity = new SubclassOfEntityWithAttribute('id');
         $properties = $lister->getFileProperties($subclassedEntity);
         $properties = $properties instanceof \Traversable
-            ? \iterator_to_array($properties)
+            ? iterator_to_array($properties)
             : $properties;
         $this->assertSame(['anotherFile', 'file'], $properties);
     }

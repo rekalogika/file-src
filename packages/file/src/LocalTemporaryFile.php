@@ -36,7 +36,7 @@ final class LocalTemporaryFile extends \SplFileInfo
     #[\Override]
     public function __toString(): string
     {
-        \trigger_deprecation('rekalogika/file', 'latest', 'LocalTemporaryFile should not be cast to string. Use getPathname() instead.');
+        trigger_deprecation('rekalogika/file', 'latest', 'LocalTemporaryFile should not be cast to string. Use getPathname() instead.');
         return parent::__toString();
 
         // disable this for now
@@ -56,7 +56,7 @@ final class LocalTemporaryFile extends \SplFileInfo
         $path = tempnam(sys_get_temp_dir(), $prefix);
 
         if ($path === false) {
-            throw new LocalTemporaryFileException(sprintf(
+            throw new LocalTemporaryFileException(\sprintf(
                 'Cannot create a temporary file with prefix "%s" in system temporary directory.',
                 $prefix,
             ));
@@ -72,18 +72,18 @@ final class LocalTemporaryFile extends \SplFileInfo
     final public static function createFromExisting(
         mixed $file,
     ): self {
-        if (!is_string($file)) {
+        if (!\is_string($file)) {
             throw new \InvalidArgumentException(
-                sprintf(
+                \sprintf(
                     'File must be a string, "%s" given',
-                    \get_debug_type($file)
-                )
+                    get_debug_type($file),
+                ),
             );
         }
 
-        if (!\file_exists($file)) {
+        if (!file_exists($file)) {
             throw new LocalTemporaryFileException(
-                sprintf('File "%s" does not exist', $file)
+                \sprintf('File "%s" does not exist', $file),
             );
         }
 

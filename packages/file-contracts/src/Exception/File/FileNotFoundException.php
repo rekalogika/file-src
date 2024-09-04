@@ -18,26 +18,26 @@ class FileNotFoundException extends FileException
     public function __construct(
         string $key,
         ?string $filesystemId = null,
-        \Throwable $previous = null
+        \Throwable $previous = null,
     ) {
         if ($filesystemId !== null) {
             parent::__construct(
-                sprintf(
+                \sprintf(
                     'File "%s" in filesystem "%s" does not exist.',
                     $key,
                     $filesystemId,
                 ),
                 0,
-                $previous
+                $previous,
             );
         } else {
             parent::__construct(
-                sprintf(
+                \sprintf(
                     'File "%s" does not exist.',
                     $key,
                 ),
                 0,
-                $previous
+                $previous,
             );
         }
     }

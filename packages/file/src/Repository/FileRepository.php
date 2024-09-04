@@ -42,9 +42,8 @@ class FileRepository implements FileRepositoryInterface
     public function __construct(
         private readonly FilesystemRepositoryInterface $filesystemRepository,
         private readonly MetadataGeneratorInterface $metadataGenerator,
-        private readonly ?string $defaultFilesystemIdForTemporaryFile = null
-    ) {
-    }
+        private readonly ?string $defaultFilesystemIdForTemporaryFile = null,
+    ) {}
 
     #[\Override]
     public function clear(): void
@@ -53,7 +52,7 @@ class FileRepository implements FileRepositoryInterface
     }
 
     private function getFilesystemFromPointerOrFile(
-        FilePointerInterface|FileInterface $file
+        FilePointerInterface|FileInterface $file,
     ): FilesystemOperator {
         try {
             $identifier = $file->getFilesystemIdentifier();
@@ -72,7 +71,7 @@ class FileRepository implements FileRepositoryInterface
     public function createFromString(
         FilePointerInterface $filePointer,
         string $contents,
-        iterable $metadata = []
+        iterable $metadata = [],
     ): FileInterface {
         $this->getFilesystemFromPointerOrFile($filePointer)
             ->write($filePointer->getKey(), $contents, [
@@ -86,7 +85,7 @@ class FileRepository implements FileRepositoryInterface
     public function createFromStream(
         FilePointerInterface $filePointer,
         mixed $stream,
-        iterable $metadata = []
+        iterable $metadata = [],
     ): FileInterface {
         if ($stream instanceof StreamInterface) {
             $stream = $stream->detach();
@@ -108,7 +107,7 @@ class FileRepository implements FileRepositoryInterface
     public function createFromLocalFile(
         FilePointerInterface $filePointer,
         string $localFilePath,
-        iterable $metadata = []
+        iterable $metadata = [],
     ): FileInterface {
         $newMetadata = new RawMetadata();
 
@@ -141,7 +140,7 @@ class FileRepository implements FileRepositoryInterface
         if (!$filesystem->fileExists($filePointer->getKey())) {
             throw new FileNotFoundException(
                 $filePointer->getKey(),
-                $filePointer->getFilesystemIdentifier()
+                $filePointer->getFilesystemIdentifier(),
             );
         }
 
@@ -177,17 +176,17 @@ class FileRepository implements FileRepositoryInterface
     }
 
     private function getMetadata(
-        FilePointerInterface|FileInterface $file
+        FilePointerInterface|FileInterface $file,
     ): RawMetadataInterface {
         if ($file instanceof FileInterface) {
             $metadata = $file->get(RawMetadataInterface::class);
 
             if (!$metadata) {
                 throw new \InvalidArgumentException(
-                    sprintf(
+                    \sprintf(
                         'File "%s" does not have metadata',
-                        $file->getKey()
-                    )
+                        $file->getKey(),
+                    ),
                 );
             }
 
@@ -204,7 +203,7 @@ class FileRepository implements FileRepositoryInterface
 
         throw new FileNotFoundException(
             $file->getKey(),
-            $file->getFilesystemIdentifier()
+            $file->getFilesystemIdentifier(),
         );
     }
 
@@ -213,7 +212,7 @@ class FileRepository implements FileRepositoryInterface
      */
     private function setMetadata(
         FilePointerInterface|FileInterface $file,
-        iterable $metadata
+        iterable $metadata,
     ): void {
         $filesystem = $this->getFilesystemFromPointerOrFile($file);
 
@@ -234,14 +233,14 @@ class FileRepository implements FileRepositoryInterface
     #[\Override]
     public function copy(
         FilePointerInterface|FileInterface $source,
-        FilePointerInterface|FileInterface $destination
+        FilePointerInterface|FileInterface $destination,
     ): FileInterface {
         if ($source->isEqualTo($destination)) {
             throw new \InvalidArgumentException(
-                sprintf(
+                \sprintf(
                     'Source and destination file pointers are the same: %s',
-                    $source->getKey()
-                )
+                    $source->getKey(),
+                ),
             );
         }
 
@@ -249,7 +248,7 @@ class FileRepository implements FileRepositoryInterface
             $this->getFilesystemFromPointerOrFile($source)
                 ->copy(
                     $source->getKey(),
-                    $destination->getKey()
+                    $destination->getKey(),
                 );
         } else {
             if ($source instanceof FilePointerInterface) {
@@ -257,7 +256,7 @@ class FileRepository implements FileRepositoryInterface
             }
 
             $sourceStream = $source->getContentAsStream()->detach();
-            assert(is_resource($sourceStream));
+            \assert(\is_resource($sourceStream));
 
             $this->getFilesystemFromPointerOrFile($destination)
                 ->writeStream(
@@ -284,14 +283,14 @@ class FileRepository implements FileRepositoryInterface
     #[\Override]
     public function move(
         FilePointerInterface|FileInterface $source,
-        FilePointerInterface|FileInterface $destination
+        FilePointerInterface|FileInterface $destination,
     ): FileInterface {
         if ($source->isEqualTo($destination)) {
             throw new \InvalidArgumentException(
-                sprintf(
+                \sprintf(
                     'Source and destination file pointers are the same: %s',
-                    $source->getKey()
-                )
+                    $source->getKey(),
+                ),
             );
         }
 
@@ -303,7 +302,7 @@ class FileRepository implements FileRepositoryInterface
             $this->getFilesystemFromPointerOrFile($source)
                 ->move(
                     $source->getKey(),
-                    $destination->getKey()
+                    $destination->getKey(),
                 );
         } else {
             if ($source instanceof FilePointerInterface) {
@@ -311,7 +310,7 @@ class FileRepository implements FileRepositoryInterface
             }
 
             $sourceStream = $source->getContentAsStream()->detach();
-            assert(is_resource($sourceStream));
+            \assert(\is_resource($sourceStream));
 
             $this->getFilesystemFromPointerOrFile($destination)
                 ->writeStream(
@@ -342,30 +341,30 @@ class FileRepository implements FileRepositoryInterface
     }
 
     private function getFilePointerHash(
-        FilePointerInterface $filePointer
+        FilePointerInterface $filePointer,
     ): string {
         return sha1(
-            ($filePointer->getFilesystemIdentifier() ?? '') . $filePointer->getKey()
+            ($filePointer->getFilesystemIdentifier() ?? '') . $filePointer->getKey(),
         );
     }
 
     #[\Override]
     public function createTemporaryFile(
         ?string $prefix = null,
-        ?string $filesystemId = null
+        ?string $filesystemId = null,
     ): FileInterface {
         $filesystemId ??= $this->defaultFilesystemIdForTemporaryFile;
 
         if ($filesystemId === null) {
             $tmpDir = sys_get_temp_dir();
-            $tmpFile = \tempnam($tmpDir, $prefix ?? 'rekalogika-file-');
+            $tmpFile = tempnam($tmpDir, $prefix ?? 'rekalogika-file-');
 
             if ($tmpFile === false) {
                 throw new \RuntimeException(
-                    sprintf(
+                    \sprintf(
                         'Failed to create temporary file in %s',
-                        $tmpDir
-                    )
+                        $tmpDir,
+                    ),
                 );
             }
 
@@ -377,7 +376,7 @@ class FileRepository implements FileRepositoryInterface
         $filesystem = $this->filesystemRepository
             ->getFilesystem($filesystemId);
 
-        $key = $prefix . \bin2hex(\random_bytes(16));
+        $key = $prefix . bin2hex(random_bytes(16));
 
         $filesystem->write($key, '');
 

@@ -18,6 +18,6 @@ use Rekalogika\Contracts\File\RawMetadataInterface;
 abstract class AbstractMetadata
 {
     abstract public static function create(
-        RawMetadataInterface $metadata
+        RawMetadataInterface $metadata,
     ): ?static;
 }

@@ -23,15 +23,14 @@ final class HttpMetadata extends AbstractMetadata implements
 {
     #[\Override]
     public static function create(
-        RawMetadataInterface $metadata
+        RawMetadataInterface $metadata,
     ): static {
         return new self($metadata);
     }
 
     private function __construct(
-        private readonly RawMetadataInterface $metadata
-    ) {
-    }
+        private readonly RawMetadataInterface $metadata,
+    ) {}
 
     public function getDate(): string
     {

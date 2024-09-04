@@ -303,7 +303,7 @@ class FileRepositoryTest extends TestCase
 
         $image = fopen(__DIR__ . '/../Resources/smiley.png', 'rb');
         $this->assertNotFalse($image);
-        $imageContent = \file_get_contents(__DIR__ . '/../Resources/smiley.png');
+        $imageContent = file_get_contents(__DIR__ . '/../Resources/smiley.png');
         $this->assertNotFalse($imageContent);
 
         $temporaryFile->setContentFromStream($image);

@@ -39,7 +39,7 @@ final class ReadableFileCollection extends ReadableCollectionDecorator implement
      */
     public function __construct(
         ReadableCollection $files,
-        private readonly null|string|(TranslatableInterface&\Stringable) $name = null
+        private readonly null|string|(TranslatableInterface&\Stringable) $name = null,
     ) {
         parent::__construct($files);
     }

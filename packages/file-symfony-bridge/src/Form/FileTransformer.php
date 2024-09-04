@@ -44,10 +44,10 @@ class FileTransformer implements DataTransformerInterface
         }
 
         if (!$value instanceof FileInterface) {
-            throw new TransformationFailedException(sprintf(
+            throw new TransformationFailedException(\sprintf(
                 'Expecting "%s", but getting "%s" instead.',
                 FileInterface::class,
-                \get_debug_type($value),
+                get_debug_type($value),
             ));
         }
 
@@ -72,10 +72,10 @@ class FileTransformer implements DataTransformerInterface
         }
 
         if (!$value instanceof File) {
-            throw new TransformationFailedException(sprintf(
+            throw new TransformationFailedException(\sprintf(
                 'Expecting "%s", but getting "%s" instead.',
                 File::class,
-                \get_debug_type($value),
+                get_debug_type($value),
             ));
         }
 

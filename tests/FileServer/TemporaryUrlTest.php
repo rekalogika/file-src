@@ -40,7 +40,7 @@ class TemporaryUrlTest extends TestCase
 
         $this->assertInstanceOf(
             TemporaryUrlGeneratorInterface::class,
-            $temporaryUrlGenerator
+            $temporaryUrlGenerator,
         );
 
         $filePointer = new FilePointer('default', 'test.txt');
@@ -56,7 +56,7 @@ class TemporaryUrlTest extends TestCase
 
         $this->assertInstanceOf(
             TemporaryUrlGeneratorInterface::class,
-            $temporaryUrlGenerator
+            $temporaryUrlGenerator,
         );
 
         $file = new File(__DIR__ . '/../Resources/localFile.txt');

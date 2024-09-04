@@ -108,8 +108,8 @@ class TestKernel extends HttpKernelKernel
                     'enable_lazy_ghost_objects' => true,
                     'controller_resolver' => [
                         'auto_mapping' => false,
-                    ]
-                ]
+                    ],
+                ],
             ]);
 
             $container->loadFromExtension('rekalogika_file', $this->config);

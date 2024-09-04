@@ -17,6 +17,4 @@ use Doctrine\ORM\Mapping\Entity;
 use Rekalogika\Domain\File\Association\Entity\AbstractFile;
 
 #[Entity()]
-class EntityExtendingAbstractFile extends AbstractFile
-{
-}
+class EntityExtendingAbstractFile extends AbstractFile {}

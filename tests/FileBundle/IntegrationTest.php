@@ -35,7 +35,7 @@ class IntegrationTest extends TestCase
         foreach (TestKernel::getServiceIds() as $serviceId) {
             $this->assertInstanceOf(
                 $serviceId,
-                $this->container?->get('test.' . $serviceId)
+                $this->container?->get('test.' . $serviceId),
             );
         }
     }

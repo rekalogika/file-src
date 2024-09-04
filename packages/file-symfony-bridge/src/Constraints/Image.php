@@ -16,6 +16,4 @@ namespace Rekalogika\File\Bridge\Symfony\Constraints;
 use Symfony\Component\Validator\Constraints\Image as SymfonyImage;
 
 #[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD | \Attribute::IS_REPEATABLE)]
-class Image extends SymfonyImage
-{
-}
+class Image extends SymfonyImage {}

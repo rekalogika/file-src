@@ -25,7 +25,7 @@ final class MetadataGenerator implements MetadataGeneratorInterface
     private readonly MimeTypeDetector $mimeTypeDetector;
 
     public function __construct(
-        ?MimeTypeDetector $mimeTypeDetector = null
+        ?MimeTypeDetector $mimeTypeDetector = null,
     ) {
         $this->mimeTypeDetector = $mimeTypeDetector ?? new FinfoMimeTypeDetector();
     }
@@ -44,7 +44,7 @@ final class MetadataGenerator implements MetadataGeneratorInterface
             Constants::FILE_TYPE,
             $this->mimeTypeDetector
                 ->detectMimeTypeFromFile($path)
-                ?? 'application/octet-stream'
+                ?? 'application/octet-stream',
         );
 
         $imagesize = $this->getImageSize($path);
@@ -73,7 +73,7 @@ final class MetadataGenerator implements MetadataGeneratorInterface
     #[\Override]
     public function generateMetadataFromString(
         RawMetadataInterface $rawMetadata,
-        string $content
+        string $content,
     ): void {
         $tempFile = $this->createTemporaryFileFromString($content);
 

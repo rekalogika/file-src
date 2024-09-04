@@ -25,8 +25,7 @@ class ChainPropertyLister implements PropertyListerInterface
      */
     public function __construct(
         private readonly iterable $propertyListers,
-    ) {
-    }
+    ) {}
 
     #[\Override]
     public function getFileProperties(object $object): iterable
@@ -35,7 +34,7 @@ class ChainPropertyLister implements PropertyListerInterface
 
         foreach ($this->propertyListers as $propertyLister) {
             $newProperties = $propertyLister->getFileProperties($object);
-            $newProperties = is_array($newProperties) ? $newProperties : iterator_to_array($newProperties);
+            $newProperties = \is_array($newProperties) ? $newProperties : iterator_to_array($newProperties);
             $properties = array_merge($properties, $newProperties);
         }
 

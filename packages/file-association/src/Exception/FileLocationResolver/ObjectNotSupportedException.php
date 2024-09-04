@@ -24,17 +24,17 @@ class ObjectNotSupportedException extends FileLocationResolverException
         string $class,
         object $object,
         string $message,
-        \Throwable $previous = null
+        \Throwable $previous = null,
     ) {
         parent::__construct(
             \sprintf(
                 'File location resolver "%s" does not support object "%s": %s',
                 $class,
                 $object::class,
-                $message
+                $message,
             ),
             0,
-            $previous
+            $previous,
         );
     }
 }

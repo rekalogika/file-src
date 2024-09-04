@@ -17,6 +17,6 @@ class FilesystemAlreadyExistsException extends FilesystemRepositoryException
 {
     public function __construct(string $filesystemId)
     {
-        parent::__construct(sprintf('Filesystem with identifier "%s" is already exists', $filesystemId));
+        parent::__construct(\sprintf('Filesystem with identifier "%s" is already exists', $filesystemId));
     }
 }

@@ -22,21 +22,20 @@ final class FilePointer implements FilePointerInterface
 
     public static function createFromInterface(
         FilePointerInterface $filePointer,
-        Directory $directory
+        Directory $directory,
     ): self {
         return new self(
             $filePointer->getFilesystemIdentifier(),
             $filePointer->getKey(),
-            $directory
+            $directory,
         );
     }
 
     public function __construct(
         private ?string $filesystemIdentifier,
         private string $key,
-        private ?Directory $directory = null
-    ) {
-    }
+        private ?Directory $directory = null,
+    ) {}
 
     #[\Override]
     public function getFilesystemIdentifier(): ?string

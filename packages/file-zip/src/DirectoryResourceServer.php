@@ -26,8 +26,7 @@ final class DirectoryResourceServer
     public function __construct(
         private readonly FileZip $fileZip,
         private readonly TranslatorInterface $translator,
-    ) {
-    }
+    ) {}
 
     /**
      * @param DirectoryInterface<array-key,FileInterface> $files

@@ -24,9 +24,8 @@ final class TranslatableFileName implements FileNameInterface
 {
     public function __construct(
         private readonly TranslatableInterface&\Stringable $base,
-        private ?string $extension = null
-    ) {
-    }
+        private ?string $extension = null,
+    ) {}
 
     #[\Override]
     public function __toString(): string
@@ -45,12 +44,12 @@ final class TranslatableFileName implements FileNameInterface
     {
         if ($this->extension !== null && $this->extension !== '') {
             return new TranslatableMessage(
-                sprintf('%s.%s', (string) $this->base, $this->extension),
+                \sprintf('%s.%s', (string) $this->base, $this->extension),
                 '{name}.{extension}',
                 [
                     '{name}' => $this->base,
                     '{extension}' => $this->extension,
-                ]
+                ],
             );
         }
 
@@ -59,7 +58,7 @@ final class TranslatableFileName implements FileNameInterface
             '{name}',
             [
                 '{name}' => $this->base,
-            ]
+            ],
         );
 
     }

@@ -47,7 +47,7 @@ class FileAssociationManagerTest extends TestCase
             ->get('test.' . FileAssociationManager::class);
         $this->assertInstanceOf(
             FileAssociationManager::class,
-            $fileAssociationManager
+            $fileAssociationManager,
         );
 
         $this->fileAssociationManager = $fileAssociationManager;
@@ -57,7 +57,7 @@ class FileAssociationManagerTest extends TestCase
 
         $this->assertInstanceOf(
             FileRepositoryInterface::class,
-            $fileRepository
+            $fileRepository,
         );
 
         $this->fileRepository = $fileRepository;

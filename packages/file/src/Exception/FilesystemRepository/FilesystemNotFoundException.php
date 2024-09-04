@@ -17,6 +17,6 @@ class FilesystemNotFoundException extends FilesystemRepositoryException
 {
     public function __construct(string $filesystemId)
     {
-        parent::__construct(sprintf('Filesystem with identifier "%s" is not found', $filesystemId));
+        parent::__construct(\sprintf('Filesystem with identifier "%s" is not found', $filesystemId));
     }
 }
