@@ -19,7 +19,7 @@ class AdHocFilesystemException extends FileRepositoryException
 {
     public function __construct(
         FileInterface $file,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct(\sprintf(
             'File with key "%s" has an ad-hoc filesystem "%s", but the function you are using in the file repository is unable work with such a file.',

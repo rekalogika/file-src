@@ -17,7 +17,7 @@ class ObjectNotSupportedException extends ObjectIdResolverException
 {
     public function __construct(
         object $object,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct(
             \sprintf(

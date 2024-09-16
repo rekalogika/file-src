@@ -24,7 +24,7 @@ class ObjectNotSupportedException extends FileLocationResolverException
         string $class,
         object $object,
         string $message,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct(
             \sprintf(

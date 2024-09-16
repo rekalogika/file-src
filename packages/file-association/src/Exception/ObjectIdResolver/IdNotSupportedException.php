@@ -19,7 +19,7 @@ class IdNotSupportedException extends ObjectIdResolverException
         object $object,
         string $method,
         mixed $id,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         parent::__construct(
             \sprintf(

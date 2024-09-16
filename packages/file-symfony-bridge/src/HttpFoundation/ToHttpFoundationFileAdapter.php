@@ -90,7 +90,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     }
 
     #[\Override]
-    public function move(string $directory, string $name = null): self
+    public function move(string $directory, ?string $name = null): self
     {
         $this->getHttpFoundationFile()->move($directory, $name);
 
@@ -188,6 +188,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     #[\Override]
     public function getPathInfo($class = null): ?\SplFileInfo
     {
+        // @phpstan-ignore return.type
         return $this->getHttpFoundationFile()->getPathInfo($class);
     }
 

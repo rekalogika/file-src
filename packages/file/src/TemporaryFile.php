@@ -35,7 +35,7 @@ class TemporaryFile extends File
      * Creates a temporary file in the local filesystem
      */
     final public static function create(
-        string $prefix = null,
+        ?string $prefix = null,
     ): self {
         $prefix ??= 'temporaryfile-';
         $path = tempnam(sys_get_temp_dir(), $prefix);
@@ -55,7 +55,7 @@ class TemporaryFile extends File
      */
     final public static function createFromString(
         string $content,
-        string $prefix = null,
+        ?string $prefix = null,
     ): self {
         $file = self::create($prefix);
         $file->setContent($content);
@@ -65,8 +65,8 @@ class TemporaryFile extends File
 
     final public static function createFromExisting(
         string $key,
-        FilesystemOperator $filesystem = null,
-        string $filesystemIdentifier = null,
+        ?FilesystemOperator $filesystem = null,
+        ?string $filesystemIdentifier = null,
     ): self {
         $file = new self($key, $filesystem, $filesystemIdentifier);
         $file->setName(null);
