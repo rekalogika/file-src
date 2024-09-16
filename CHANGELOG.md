@@ -3,6 +3,7 @@
 ## 1.9.0
 
 * feat: PHP 8.4 compatibility
+* deps: drop PHP 8.1 support
 
 ## 1.8.10
 
