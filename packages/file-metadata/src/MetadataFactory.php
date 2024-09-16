@@ -22,7 +22,7 @@ use Rekalogika\Domain\File\Metadata\Metadata\FileMetadata;
 use Rekalogika\Domain\File\Metadata\Metadata\HttpMetadata;
 use Rekalogika\Domain\File\Metadata\Metadata\ImageMetadata;
 
-final class MetadataFactory
+final readonly class MetadataFactory
 {
     public static function create(RawMetadataInterface $metadata): self
     {
@@ -30,7 +30,7 @@ final class MetadataFactory
     }
 
     private function __construct(
-        private readonly RawMetadataInterface $metadata,
+        private RawMetadataInterface $metadata,
     ) {}
 
     /**

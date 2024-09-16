@@ -20,9 +20,9 @@ use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\LocalTemporaryFile;
 
-final class MetadataGenerator implements MetadataGeneratorInterface
+final readonly class MetadataGenerator implements MetadataGeneratorInterface
 {
-    private readonly MimeTypeDetector $mimeTypeDetector;
+    private MimeTypeDetector $mimeTypeDetector;
 
     public function __construct(
         ?MimeTypeDetector $mimeTypeDetector = null,

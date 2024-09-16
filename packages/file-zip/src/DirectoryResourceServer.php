@@ -21,11 +21,11 @@ use Rekalogika\TemporaryUrl\Attribute\AsTemporaryUrlServer;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class DirectoryResourceServer
+final readonly class DirectoryResourceServer
 {
     public function __construct(
-        private readonly FileZip $fileZip,
-        private readonly TranslatorInterface $translator,
+        private FileZip $fileZip,
+        private TranslatorInterface $translator,
     ) {}
 
     /**

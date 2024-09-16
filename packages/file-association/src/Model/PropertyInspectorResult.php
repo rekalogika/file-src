@@ -16,14 +16,14 @@ namespace Rekalogika\File\Association\Model;
 /**
  * The result of a property inspection.
  */
-final class PropertyInspectorResult
+final readonly class PropertyInspectorResult
 {
     /**
      * @param 'EAGER'|'LAZY' $fetch
      */
     public function __construct(
-        private readonly bool $mandatory,
-        private readonly string $fetch,
+        private bool $mandatory,
+        private string $fetch,
     ) {
         if (!\in_array($fetch, ['EAGER', 'LAZY'])) {
             throw new \InvalidArgumentException('Fetch mode can only be EAGER or LAZY.');
