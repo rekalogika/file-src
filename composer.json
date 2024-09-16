@@ -2,7 +2,6 @@
     "name": "rekalogika/file-src",
     "description": "Monorepo for rekalogika/file and related packages",
     "homepage": "https://rekalogika.dev/file",
-    "type": "project",
     "license": "MIT",
     "authors": [
         {
@@ -10,6 +9,7 @@
             "email": "priyadi@rekalogika.com"
         }
     ],
+    "type": "project",
     "require": {
         "cardinalby/content-disposition": "^1.1",
         "doctrine/collections": "^2.0",
@@ -99,28 +99,28 @@
             "Rekalogika\\File\\Tests\\": "tests/"
         }
     },
-    "replace": {
-        "rekalogika/file": "1.8.9",
-        "rekalogika/file-association": "1.8.9",
-        "rekalogika/file-association-contracts": "1.8.9",
-        "rekalogika/file-association-entity": "1.8.9",
-        "rekalogika/file-bundle": "1.8.9",
-        "rekalogika/file-contracts": "1.8.9",
-        "rekalogika/file-derivation": "1.8.9",
-        "rekalogika/file-filepond": "1.8.9",
-        "rekalogika/file-image": "1.8.9",
-        "rekalogika/file-metadata": "1.8.9",
-        "rekalogika/file-metadata-contracts": "1.8.9",
-        "rekalogika/file-null": "1.8.9",
-        "rekalogika/file-oneup-uploader-bridge": "1.8.9",
-        "rekalogika/file-server": "1.8.9",
-        "rekalogika/file-symfony-bridge": "1.8.9",
-        "rekalogika/file-tree-contracts": "1.8.9",
-        "rekalogika/file-zip": "1.8.9"
-    },
     "config": {
         "allow-plugins": {
             "php-http/discovery": true
         }
+    },
+    "replace": {
+        "rekalogika/file": "1.9.0",
+        "rekalogika/file-association": "1.9.0",
+        "rekalogika/file-association-contracts": "1.9.0",
+        "rekalogika/file-association-entity": "1.9.0",
+        "rekalogika/file-bundle": "1.9.0",
+        "rekalogika/file-contracts": "1.9.0",
+        "rekalogika/file-derivation": "1.9.0",
+        "rekalogika/file-filepond": "1.9.0",
+        "rekalogika/file-image": "1.9.0",
+        "rekalogika/file-metadata": "1.9.0",
+        "rekalogika/file-metadata-contracts": "1.9.0",
+        "rekalogika/file-null": "1.9.0",
+        "rekalogika/file-oneup-uploader-bridge": "1.9.0",
+        "rekalogika/file-server": "1.9.0",
+        "rekalogika/file-symfony-bridge": "1.9.0",
+        "rekalogika/file-tree-contracts": "1.9.0",
+        "rekalogika/file-zip": "1.9.0"
     }
 }
