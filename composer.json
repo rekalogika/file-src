@@ -69,7 +69,7 @@
         "symfony/routing": "^6.2 || ^7.0",
         "symfony/yaml": "^6.2 || ^7.0",
         "symplify/monorepo-builder": "^11.2.20 || ^11.3",
-        "vimeo/psalm": "^5.18",
+        "vimeo/psalm": "^5.26",
         "rector/rector": "^1.2"
     },
     "autoload": {
