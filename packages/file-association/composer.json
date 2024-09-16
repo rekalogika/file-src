@@ -27,14 +27,14 @@
     },
     "require": {
         "rekalogika/direct-property-access": "^1.1.2 || ^1.2",
-        "rekalogika/file-association-contracts": "^1.9",
-        "rekalogika/file-contracts": "^1.9",
+        "rekalogika/file-association-contracts": "^1.10",
+        "rekalogika/file-contracts": "^1.10",
         "rekalogika/reconstitutor": "^1.0",
         "symfony/property-access": "^6.2 || ^7.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.10-dev"
+            "dev-main": "1.11-dev"
         }
     }
 }
