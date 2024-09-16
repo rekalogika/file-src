@@ -21,11 +21,11 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use ZipStream\ZipStream;
 
-final class FileZip
+final readonly class FileZip
 {
     public function __construct(
-        private readonly ZipDirectory $zipDirectory,
-        private readonly TranslatorInterface $translator,
+        private ZipDirectory $zipDirectory,
+        private TranslatorInterface $translator,
     ) {}
 
     /**
