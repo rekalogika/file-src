@@ -18,7 +18,7 @@ class FileNotFoundException extends FileException
     public function __construct(
         string $key,
         ?string $filesystemId = null,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         if ($filesystemId !== null) {
             parent::__construct(

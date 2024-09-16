@@ -90,7 +90,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     }
 
     #[\Override]
-    public function move(string $directory, string $name = null): self
+    public function move(string $directory, ?string $name = null): self
     {
         $this->getHttpFoundationFile()->move($directory, $name);
 

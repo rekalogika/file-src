@@ -15,7 +15,7 @@ namespace Rekalogika\Contracts\File\Exception;
 
 class MetadataNotFoundException extends \Exception
 {
-    public function __construct(string $metadataName, \Throwable $previous = null)
+    public function __construct(string $metadataName, ?\Throwable $previous = null)
     {
         parent::__construct(
             \sprintf('Metadata "%s" is not found', $metadataName),

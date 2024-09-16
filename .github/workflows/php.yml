@@ -15,9 +15,13 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
-        php: [ '8.1', '8.2', '8.3' ]
-        symfony: [ '6.*' ]
+        php: [ '8.1', '8.2', '8.3', '8.4' ]
+        symfony: [ '6.*', '7.*' ]
         dep: [highest,lowest]
+        exclude:
+          # Symfony 7 requires PHP >=8.2
+          - php: '8.1'
+            symfony: '7.*'
 
     runs-on: ${{ matrix.operating-system }}
 
@@ -55,6 +59,7 @@ jobs:
 
     - name: Run psalm
       run: vendor/bin/psalm
+      if: matrix.dep == 'highest'
 
     - name: Run phpstan
       run: vendor/bin/phpstan analyse

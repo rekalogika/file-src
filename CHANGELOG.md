@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.9.0
+
+* feat: PHP 8.4 compatibility
+
 ## 1.8.10
 
 * chore: add and set rector

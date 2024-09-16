@@ -18,7 +18,7 @@ class TemporaryFileException extends FileException
     public function __construct(
         string $prefix,
         ?string $filesystemId = null,
-        \Throwable $previous = null,
+        ?\Throwable $previous = null,
     ) {
         if ($filesystemId !== null) {
             parent::__construct(
