@@ -1,3 +1,10 @@
+.PHONY: all
+all: test
+
+.PHONY: js
+js:
+	cd packages/file-filepond/assets && npm update && npm run build
+
 .PHONY: test
 test: composer-dump composer-validate phpstan psalm phpunit
 
