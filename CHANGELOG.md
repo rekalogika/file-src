@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.10.1
+
+* deps: update javascript dependencies
+
 ## 1.10.0
 
 * deps: drop PHP 8.1 support
