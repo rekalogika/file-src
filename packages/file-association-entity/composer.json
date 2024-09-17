@@ -27,9 +27,9 @@
     },
     "require": {
         "doctrine/collections": "^2.0",
-        "rekalogika/file-contracts": "^1.10",
-        "rekalogika/file-metadata": "^1.10",
-        "rekalogika/file-null": "^1.10",
+        "rekalogika/file-contracts": "^1.10.1",
+        "rekalogika/file-metadata": "^1.10.1",
+        "rekalogika/file-null": "^1.10.1",
         "rekalogika/doctrine-collections-decorator": "^2.0"
     },
     "extra": {
