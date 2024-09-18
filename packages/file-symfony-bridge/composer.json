@@ -31,7 +31,7 @@
         "rekalogika/file-metadata-contracts": "^1.10.1",
         "symfony/form": "^6.2 || ^7.0",
         "symfony/http-foundation": "^6.2 || ^7.0",
-        "symfony/validator": "^6.2 || ^7.0"
+        "symfony/validator": "^6.3 || ^7.1"
     },
     "extra": {
         "branch-alias": {
