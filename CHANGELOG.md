@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.10.2
+
+* chore: cleanup `composer.json`
+
 ## 1.10.1
 
 * deps: update javascript dependencies

@@ -1,15 +1,15 @@
 {
     "name": "rekalogika/file-src",
     "description": "Monorepo for rekalogika/file and related packages",
-    "homepage": "https://rekalogika.dev/file",
     "license": "MIT",
+    "type": "project",
     "authors": [
         {
             "name": "Priyadi Iman Nurcahyo",
             "email": "priyadi@rekalogika.com"
         }
     ],
-    "type": "project",
+    "homepage": "https://rekalogika.dev/file",
     "require": {
         "cardinalby/content-disposition": "^1.1",
         "doctrine/collections": "^2.0",
@@ -22,8 +22,8 @@
         "league/mime-type-detection": "^1.0.0",
         "maennchen/zipstream-php": "^3.1",
         "nyholm/psr7": "^1.8",
-        "oneup/uploader-bundle": "^5.0",
-        "php": "^8.2",
+        "oneup/uploader-bundle": "^4.0",
+        "php": "^8.1",
         "php-http/discovery": "^1.15",
         "psr/container": "^2.0",
         "psr/http-factory-implementation": "^1.0",
@@ -43,7 +43,7 @@
         "symfony/service-contracts": "^3.3",
         "symfony/stimulus-bundle": "^2.12",
         "symfony/translation-contracts": "^3.0",
-        "symfony/validator": "^6.3 || ^7.0",
+        "symfony/validator": "^6.3 || ^7.1",
         "twig/twig": "^2.12|^3.0",
         "webmozart/assert": "^1.11"
     },
@@ -60,6 +60,7 @@
         "phpunit/phpunit": "^10.5",
         "psalm/plugin-mockery": "^1.1",
         "psalm/plugin-phpunit": "^0.19.0",
+        "rector/rector": "^1.2",
         "symfony/asset-mapper": "^6.2 || ^7.0",
         "symfony/console": "^6.2 || ^7.0",
         "symfony/framework-bundle": "^6.2 || ^7.0",
@@ -69,8 +70,26 @@
         "symfony/routing": "^6.2 || ^7.0",
         "symfony/yaml": "^6.2 || ^7.0",
         "symplify/monorepo-builder": "^11.2.20 || ^11.3",
-        "vimeo/psalm": "^5.26",
-        "rector/rector": "^1.2"
+        "vimeo/psalm": "^5.26"
+    },
+    "replace": {
+        "rekalogika/file": "1.10.1",
+        "rekalogika/file-association": "1.10.1",
+        "rekalogika/file-association-contracts": "1.10.1",
+        "rekalogika/file-association-entity": "1.10.1",
+        "rekalogika/file-bundle": "1.10.1",
+        "rekalogika/file-contracts": "1.10.1",
+        "rekalogika/file-derivation": "1.10.1",
+        "rekalogika/file-filepond": "1.10.1",
+        "rekalogika/file-image": "1.10.1",
+        "rekalogika/file-metadata": "1.10.1",
+        "rekalogika/file-metadata-contracts": "1.10.1",
+        "rekalogika/file-null": "1.10.1",
+        "rekalogika/file-oneup-uploader-bridge": "1.10.1",
+        "rekalogika/file-server": "1.10.1",
+        "rekalogika/file-symfony-bridge": "1.10.1",
+        "rekalogika/file-tree-contracts": "1.10.1",
+        "rekalogika/file-zip": "1.10.1"
     },
     "autoload": {
         "psr-4": {
@@ -103,24 +122,5 @@
         "allow-plugins": {
             "php-http/discovery": true
         }
-    },
-    "replace": {
-        "rekalogika/file": "1.10.1",
-        "rekalogika/file-association": "1.10.1",
-        "rekalogika/file-association-contracts": "1.10.1",
-        "rekalogika/file-association-entity": "1.10.1",
-        "rekalogika/file-bundle": "1.10.1",
-        "rekalogika/file-contracts": "1.10.1",
-        "rekalogika/file-derivation": "1.10.1",
-        "rekalogika/file-filepond": "1.10.1",
-        "rekalogika/file-image": "1.10.1",
-        "rekalogika/file-metadata": "1.10.1",
-        "rekalogika/file-metadata-contracts": "1.10.1",
-        "rekalogika/file-null": "1.10.1",
-        "rekalogika/file-oneup-uploader-bridge": "1.10.1",
-        "rekalogika/file-server": "1.10.1",
-        "rekalogika/file-symfony-bridge": "1.10.1",
-        "rekalogika/file-tree-contracts": "1.10.1",
-        "rekalogika/file-zip": "1.10.1"
     }
 }
