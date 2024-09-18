@@ -3,6 +3,7 @@
 ## 1.10.2
 
 * chore: cleanup `composer.json`
+* deps: avoid buggy reconstitutor versions
 
 ## 1.10.1
 
