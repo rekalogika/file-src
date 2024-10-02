@@ -38,6 +38,7 @@ use Rekalogika\Psr16SimpleCacheBundle\RekalogikaPsr16SimpleCacheBundle;
 use Rekalogika\Reconstitutor\RekalogikaReconstitutorBundle;
 use Rekalogika\TemporaryUrl\RekalogikaTemporaryUrlBundle;
 use Rekalogika\TemporaryUrl\TemporaryUrlGeneratorInterface;
+use Symfony\Bundle\DebugBundle\DebugBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -76,6 +77,7 @@ class TestKernel extends HttpKernelKernel
     {
         yield new FrameworkBundle();
         yield new DoctrineBundle();
+        yield new DebugBundle();
         yield new RekalogikaDirectPropertyAccessBundle();
         yield new RekalogikaReconstitutorBundle();
         yield new RekalogikaFileBundle();

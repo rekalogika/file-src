@@ -63,6 +63,7 @@
         "rector/rector": "^1.2",
         "symfony/asset-mapper": "^6.2 || ^7.0",
         "symfony/console": "^6.2 || ^7.0",
+        "symfony/debug-bundle": "^6.2 || ^7.0",
         "symfony/dotenv": "^6.2 || ^7.0",
         "symfony/framework-bundle": "^6.2 || ^7.0",
         "symfony/http-client": "^6.2 || ^7.0",

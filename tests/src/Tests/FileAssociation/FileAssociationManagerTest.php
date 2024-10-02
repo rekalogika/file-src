@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\Tests\FileAssociation;
 
-use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
 use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
@@ -21,13 +20,13 @@ use Rekalogika\File\Association\FileAssociationManager;
 use Rekalogika\File\Association\Model\MissingFile;
 use Rekalogika\File\File;
 use Rekalogika\File\TemporaryFile;
-use Rekalogika\File\Tests\TestKernel;
 use Rekalogika\File\Tests\Tests\File\FileTestTrait;
 use Rekalogika\File\Tests\Tests\Model\Entity;
 use Rekalogika\File\Tests\Tests\Model\EntityWithLazyFile;
 use Rekalogika\File\Tests\Tests\Model\EntityWithMandatoryFile;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class FileAssociationManagerTest extends TestCase
+class FileAssociationManagerTest extends KernelTestCase
 {
     use FileTestTrait;
 
@@ -38,13 +37,9 @@ class FileAssociationManagerTest extends TestCase
     #[\Override]
     protected function setUp(): void
     {
-        $kernel = new TestKernel();
-        $kernel->boot();
 
-        $container = $kernel->getContainer();
-
-        $fileAssociationManager = $container
-            ->get('test.' . FileAssociationManager::class);
+        $fileAssociationManager = static::getContainer()
+            ->get(FileAssociationManager::class);
         $this->assertInstanceOf(
             FileAssociationManager::class,
             $fileAssociationManager,
@@ -52,8 +47,8 @@ class FileAssociationManagerTest extends TestCase
 
         $this->fileAssociationManager = $fileAssociationManager;
 
-        $fileRepository = $container
-            ->get('test.' . FileRepositoryInterface::class);
+        $fileRepository = static::getContainer()
+            ->get(FileRepositoryInterface::class);
 
         $this->assertInstanceOf(
             FileRepositoryInterface::class,

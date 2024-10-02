@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\Tests\FileZip;
 
-use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\FilePointer;
-use Rekalogika\File\Tests\TestKernel;
 use Rekalogika\File\Zip\FileZip;
 use Rekalogika\File\Zip\Model\Directory;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class ZipTest extends TestCase
+class ZipTest extends KernelTestCase
 {
     private ?FileRepositoryInterface $fileRepository = null;
 
@@ -30,13 +29,8 @@ class ZipTest extends TestCase
     #[\Override]
     protected function setUp(): void
     {
-        $kernel = new TestKernel();
-        $kernel->boot();
-
-        $container = $kernel->getContainer();
-
-        $fileRepository = $container
-            ->get('test.' . FileRepositoryInterface::class);
+        $fileRepository = static::getContainer()
+            ->get(FileRepositoryInterface::class);
 
         $this->assertInstanceOf(
             FileRepositoryInterface::class,
@@ -45,8 +39,8 @@ class ZipTest extends TestCase
 
         $this->fileRepository = $fileRepository;
 
-        $fileZip = $container
-            ->get('test.' . FileZip::class);
+        $fileZip = static::getContainer()
+            ->get(FileZip::class);
 
         $this->assertInstanceOf(
             FileZip::class,

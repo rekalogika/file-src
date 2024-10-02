@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\Tests\FileSymfonyBridge;
 
-use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Bridge\Symfony\HttpFoundation\FromHttpFoundationFileAdapter;
@@ -21,22 +20,21 @@ use Rekalogika\File\Bridge\Symfony\HttpFoundation\ToHttpFoundationFileAdapter;
 use Rekalogika\File\FilePointer;
 use Rekalogika\File\LocalTemporaryFile;
 use Rekalogika\File\TemporaryFile;
-use Rekalogika\File\Tests\TestKernel;
 use Rekalogika\File\Tests\Tests\File\FileTestTrait;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
-class FileAdapterTest extends TestCase
+class FileAdapterTest extends KernelTestCase
 {
     use FileTestTrait;
 
     private function createRemoteFile(): FileInterface
     {
-        $kernel = new TestKernel();
-        $kernel->boot();
+        $fileRepository = static::getContainer()
+            ->get(FileRepositoryInterface::class);
 
-        $container = $kernel->getContainer();
-        $fileRepository = $container->get('test.' . FileRepositoryInterface::class);
         $this->assertInstanceOf(FileRepositoryInterface::class, $fileRepository);
+
         return $fileRepository->createFromString(new FilePointer('default', 'key'), 'asdf');
     }
 

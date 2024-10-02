@@ -139,10 +139,15 @@ class FileTest extends TestCase
         );
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testOpenBasedir(): void
     {
-        $dir = realpath(__DIR__ . '/../../../../');
-        ini_set('open_basedir', $dir . ":" . '/tmp');
+        $openBaseDir = realpath(__DIR__ . '/../../../../');
+        $dir = realpath(__DIR__ . '/../../../');
+        ini_set('open_basedir', $openBaseDir . ":" . '/tmp');
+        mkdir($dir . '/var/', 0777, true);
         $path = $dir . '/var/test.txt';
         file_put_contents($path, 'foo');
 
