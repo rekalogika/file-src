@@ -188,6 +188,7 @@ class ToHttpFoundationFileAdapter extends HttpFoundationFile
     #[\Override]
     public function getPathInfo($class = null): ?\SplFileInfo
     {
+        // @phpstan-ignore return.type
         return $this->getHttpFoundationFile()->getPathInfo($class);
     }
 
