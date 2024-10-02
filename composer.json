@@ -63,11 +63,13 @@
         "rector/rector": "^1.2",
         "symfony/asset-mapper": "^6.2 || ^7.0",
         "symfony/console": "^6.2 || ^7.0",
+        "symfony/dotenv": "^6.2 || ^7.0",
         "symfony/framework-bundle": "^6.2 || ^7.0",
         "symfony/http-client": "^6.2 || ^7.0",
         "symfony/phpunit-bridge": "^6.3 || ^7.0",
         "symfony/property-info": "^6.2 || ^7.0",
         "symfony/routing": "^6.2 || ^7.0",
+        "symfony/runtime": "^6.2 || ^7.0",
         "symfony/yaml": "^6.2 || ^7.0",
         "symplify/monorepo-builder": "^11.2.20 || ^11.3",
         "vimeo/psalm": "^5.26"
@@ -115,12 +117,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Rekalogika\\File\\Tests\\": "tests/"
+            "Rekalogika\\File\\Tests\\": "tests/src/"
         }
     },
     "config": {
         "allow-plugins": {
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "symfony/runtime": false
         }
     }
 }

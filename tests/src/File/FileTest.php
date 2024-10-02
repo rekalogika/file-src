@@ -141,7 +141,7 @@ class FileTest extends TestCase
 
     public function testOpenBasedir(): void
     {
-        $dir = realpath(__DIR__ . '/../../');
+        $dir = realpath(__DIR__ . '/../../../');
         ini_set('open_basedir', $dir . ":" . '/tmp');
         $path = $dir . '/var/test.txt';
         file_put_contents($path, 'foo');

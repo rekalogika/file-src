@@ -39,6 +39,7 @@ use Rekalogika\Reconstitutor\RekalogikaReconstitutorBundle;
 use Rekalogika\TemporaryUrl\RekalogikaTemporaryUrlBundle;
 use Rekalogika\TemporaryUrl\TemporaryUrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Filesystem\Filesystem;
@@ -46,12 +47,18 @@ use Symfony\Component\HttpKernel\Kernel as HttpKernelKernel;
 
 class TestKernel extends HttpKernelKernel
 {
+    use MicroKernelTrait {
+        registerContainerConfiguration as private baseRegisterContainerConfiguration;
+    }
     /**
      * @param array<string,mixed> $config
      */
-    public function __construct(private readonly array $config = [])
-    {
-        parent::__construct('test', true);
+    public function __construct(
+        private string $env = 'test',
+        bool $debug = true,
+        private readonly array $config = [],
+    ) {
+        parent::__construct($env, $debug);
     }
 
     #[\Override]
@@ -77,44 +84,33 @@ class TestKernel extends HttpKernelKernel
     }
 
     #[\Override]
+    protected function build(ContainerBuilder $container): void
+    {
+        parent::build($container);
+
+    }
+
+    public function getBuildDir(): string
+    {
+        return $this->getProjectDir() . '/var/build/' . $this->env;
+    }
+
+    #[\Override]
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
+        $this->baseRegisterContainerConfiguration($loader);
+
         $loader->load(function (ContainerBuilder $container): void {
-            $container->loadFromExtension('framework', [
-                'http_method_override' => false,
-                'handle_all_throwables' => true,
-                'validation' => [
-                    'email_validation_mode' => 'html5',
-                ],
-                'php_errors' => [
-                    'log' => true,
-                ],
-                'http_client' => [
-                    'enabled' => true,
-                    'max_host_connections' => 1,
-                    'default_options' => [
-                        'timeout' => 10,
-                    ],
-                ],
-            ]);
-
-            $container->loadFromExtension('doctrine', [
-                'dbal' => [
-                    'driver' => 'pdo_sqlite',
-                    'memory' => true,
-                    'charset' => 'UTF8',
-                ],
-                'orm' => [
-                    'enable_lazy_ghost_objects' => true,
-                    'controller_resolver' => [
-                        'auto_mapping' => false,
-                    ],
-                ],
-            ]);
-
             $container->loadFromExtension('rekalogika_file', $this->config);
         });
     }
+
+    #[\Override]
+    public function getProjectDir(): string
+    {
+        return __DIR__ . '/../';
+    }
+
 
     /**
      * @return iterable<class-string>

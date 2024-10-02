@@ -10,7 +10,7 @@
 
     <projectFiles>
         <directory name="packages" />
-        <directory name="tests" />
+        <directory name="tests/src" />
         <ignoreFiles>
             <directory name="vendor" />
         </ignoreFiles>
@@ -21,8 +21,8 @@
             <errorLevel type="suppress">
                 <directory name="packages/file-symfony-bridge/src/Constraints/" />
                 <file name="packages/file-symfony-bridge/src/HttpFoundation/FileResponse.php" />
-                <file name="tests/Model/EntityWithMandatoryFile.php" />
-                <file name="tests/Model/EntityExtendingAbstractFile.php" />
+                <file name="tests/src/Model/EntityWithMandatoryFile.php" />
+                <file name="tests/src/Model/EntityExtendingAbstractFile.php" />
                 <file name="packages/file-zip/src/ZipDirectory.php" />
             </errorLevel>
         </PropertyNotSetInConstructor>
@@ -34,8 +34,8 @@
         </RedundantPropertyInitializationCheck>
         <MissingConstructor>
             <errorLevel type="suppress">
-                <file name="tests/File/FileRepositoryTest.php" />
-                <file name="tests/Model/EntityWithDifferentFileProperties.php" />
+                <file name="tests/src/File/FileRepositoryTest.php" />
+                <file name="tests/src/Model/EntityWithDifferentFileProperties.php" />
             </errorLevel>
         </MissingConstructor>
         <UndefinedMethod>
