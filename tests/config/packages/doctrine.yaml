@@ -11,10 +11,10 @@ doctrine:
             auto_mapping: false
         enable_lazy_ghost_objects: true
         report_fields_where_declared: true
-        # mappings:
-        #     App:
-        #         is_bundle: false
-        #         type: attribute
-        #         dir: "%kernel.project_dir%/src/Fixtures/Doctrine"
-        #         prefix: 'Rekalogika\File\Tests\Fixtures\Doctrine'
-        #         alias: App
+        mappings:
+            App:
+                is_bundle: false
+                type: attribute
+                dir: "%kernel.project_dir%/src/Entity"
+                prefix: 'Rekalogika\File\Tests\Entity'
+                alias: App

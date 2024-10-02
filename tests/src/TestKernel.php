@@ -65,11 +65,7 @@ class TestKernel extends HttpKernelKernel
     #[\Override]
     public function boot(): void
     {
-        $filesystem = new Filesystem();
-        $filesystem->remove(__DIR__ . '/../var/');
-
         parent::boot();
-
     }
 
     #[\Override]
