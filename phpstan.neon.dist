@@ -2,7 +2,7 @@ parameters:
     level: max
     paths:
         - packages
-        - tests
+        - tests/src
     # exceptions:
     #     check:
     #         missingCheckedExceptionInThrows: true

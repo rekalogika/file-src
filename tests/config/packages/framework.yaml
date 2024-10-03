@@ -1,0 +1,16 @@
+parameters:
+    kernel.secret: test
+
+framework:
+    test: true
+    http_method_override: false
+    handle_all_throwables: true
+    php_errors:
+        log: true
+    validation:
+        email_validation_mode: html5
+    http_client:
+        enabled: true
+        max_host_connections: 1
+        default_options:
+            timeout: 10

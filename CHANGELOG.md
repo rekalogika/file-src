@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.11.0
+
+* test: modernization
+
 ## 1.10.2
 
 * chore: cleanup `composer.json`

@@ -19,6 +19,7 @@ psalm:
 .PHONY: phpunit
 phpunit:
 	$(eval c ?=)
+	rm -rf tests/var
 	vendor/bin/phpunit $(c)
 
 .PHONY: composer-dump

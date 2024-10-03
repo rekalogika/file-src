@@ -27,9 +27,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // add test aliases
     $serviceIds = TestKernel::getServiceIds();
 
-    foreach ($serviceIds as $serviceId) {
-        $services->alias('test.' . $serviceId, $serviceId)->public();
-    }
+    // foreach ($serviceIds as $serviceId) {
+    //     $services->set($serviceId)->public();
+    // }
 
     // filesystem for testing
     $services->set('test.filesystem', FilesystemOperator::class)
