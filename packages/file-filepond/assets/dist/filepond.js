@@ -144,6 +144,9 @@ var _default = /*#__PURE__*/function (_Controller) {
     // remove input class attribute
     input.removeAttribute('class');
 
+    // remove input style attribute
+    input.removeAttribute('style');
+
     // get the files from the data elements and process them
     for (var _iterator2 = _createForOfIteratorHelperLoose(this.element.children), _step2; !(_step2 = _iterator2()).done;) {
       var _child = _step2.value;

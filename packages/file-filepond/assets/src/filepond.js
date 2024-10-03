@@ -149,6 +149,9 @@ export default class extends Controller {
         // remove input class attribute
         input.removeAttribute('class')
 
+        // remove input style attribute
+        input.removeAttribute('style')
+
         // get the files from the data elements and process them
         for (const child of this.element.children) {
             if (child.tagName !== 'DATA') {
