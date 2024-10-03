@@ -22,6 +22,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->public();
 
     $services
-        ->load('Rekalogika\\File\\Tests\\App\\', '../src/App/*');
+        ->load('Rekalogika\\File\\Tests\\App\\', '../src/App/*')
+        ->exclude('../src/App/{TestKernel.php,Entity}');
+
 
 };
