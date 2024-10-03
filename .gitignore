@@ -6,3 +6,4 @@ tools
 var
 rector.log
 .env.local
+.vscode

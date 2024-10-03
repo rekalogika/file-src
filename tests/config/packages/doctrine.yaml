@@ -15,6 +15,6 @@ doctrine:
             App:
                 is_bundle: false
                 type: attribute
-                dir: "%kernel.project_dir%/src/Entity"
-                prefix: 'Rekalogika\File\Tests\Entity'
+                dir: "%kernel.project_dir%/src/App/Entity"
+                prefix: 'Rekalogika\File\Tests\App\Entity'
                 alias: App
