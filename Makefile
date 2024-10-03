@@ -1,3 +1,8 @@
+include .env
+-include .env.local
+
+export APP_ENV
+
 .PHONY: all
 all: test
 
@@ -10,17 +15,17 @@ test: composer-dump composer-validate phpstan psalm phpunit
 
 .PHONY: phpstan
 phpstan:
-	vendor/bin/phpstan analyse
+	$(PHP) vendor/bin/phpstan analyse
 
 .PHONY: psalm
 psalm:
-	vendor/bin/psalm
+	$(PHP) vendor/bin/psalm
 
 .PHONY: phpunit
 phpunit:
 	$(eval c ?=)
 	rm -rf tests/var
-	vendor/bin/phpunit $(c)
+	$(PHP) vendor/bin/phpunit $(c)
 
 .PHONY: composer-dump
 composer-dump:
@@ -32,7 +37,7 @@ composer-validate:
 
 .PHONY: php-cs-fixer
 php-cs-fixer: tools/php-cs-fixer
-	$< fix --config=.php-cs-fixer.dist.php --verbose --allow-risky=yes
+	$(PHP) $< fix --config=.php-cs-fixer.dist.php --verbose --allow-risky=yes
 
 .PHONY: tools/php-cs-fixer
 tools/php-cs-fixer:
@@ -62,3 +67,11 @@ monorepo-release-%:
 	git switch -c release/$*
 	git add .
 	git commit -m "release: $*"
+
+.PHONY: serve
+serve:
+	$(PHP) tests/bin/console cache:clear
+	$(PHP) tests/bin/console importmap:install
+	$(PHP) tests/bin/console asset-map:compile
+	$(PHP) tests/bin/console asset:install tests/public/
+	cd tests && sh -c "$(SYMFONY) server:start --document-root=public"

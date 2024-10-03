@@ -30,6 +30,7 @@ use Rekalogika\File\Association\PropertyLister\FileAssociationInterfacePropertyL
 use Rekalogika\File\Association\PropertyReaderWriter\SymfonyPropertyAccessorBridge;
 use Rekalogika\File\Association\Reconstitutor\AttributeReconstitutor;
 use Rekalogika\File\Association\Reconstitutor\InterfaceReconstitutor;
+use Rekalogika\File\Bridge\FilePond\RekalogikaFileFilePondBundle;
 use Rekalogika\File\Bundle\RekalogikaFileBundle;
 use Rekalogika\File\Image\ImageResizer;
 use Rekalogika\File\Zip\FileZip;
@@ -41,10 +42,15 @@ use Rekalogika\TemporaryUrl\TemporaryUrlGeneratorInterface;
 use Symfony\Bundle\DebugBundle\DebugBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\MakerBundle\MakerBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Kernel as HttpKernelKernel;
+use Symfony\UX\StimulusBundle\StimulusBundle;
+use Symfony\UX\Turbo\TurboBundle;
+use Twig\Extra\TwigExtraBundle\TwigExtraBundle;
 
 class TestKernel extends HttpKernelKernel
 {
@@ -74,9 +80,16 @@ class TestKernel extends HttpKernelKernel
         yield new FrameworkBundle();
         yield new DoctrineBundle();
         yield new DebugBundle();
+        yield new WebProfilerBundle();
+        yield new TwigBundle();
+        yield new MakerBundle();
+        yield new StimulusBundle();
+        yield new TurboBundle();
+        yield new TwigExtraBundle();
         yield new RekalogikaDirectPropertyAccessBundle();
         yield new RekalogikaReconstitutorBundle();
         yield new RekalogikaFileBundle();
+        yield new RekalogikaFileFilePondBundle();
         yield new RekalogikaTemporaryUrlBundle();
         yield new RekalogikaPsr16SimpleCacheBundle();
     }
