@@ -4,6 +4,7 @@
 
 * test: modernization
 * fix(filepond): clear field class, fix issues with Bootstrap 4
+* fix(filepond): also clear style attribute just in case
 
 ## 1.10.2
 
