@@ -3,6 +3,7 @@
 ## 1.11.0
 
 * test: modernization
+* fix(filepond): clear field class, fix issues with Bootstrap 4
 
 ## 1.10.2
 

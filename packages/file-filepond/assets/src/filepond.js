@@ -139,12 +139,17 @@ export default class extends Controller {
         let files = []
         let input
 
+        // get the file input element
         for (const child of this.element.children) {
             if (child.tagName === 'INPUT' && child.type === 'file') {
                 input = child
             }
         }
 
+        // remove input class attribute
+        input.removeAttribute('class')
+
+        // get the files from the data elements and process them
         for (const child of this.element.children) {
             if (child.tagName !== 'DATA') {
                 continue
@@ -152,7 +157,7 @@ export default class extends Controller {
 
             let file = {
                 // sentinel value sent to server. if this is value is sent
-                // to the server, then the user didn't remove the image from
+                // to the server, then the user has not removed the image from
                 // the filepond field
                 source: child.dataset.id || '__NOT_DELETED__',
 
@@ -175,6 +180,7 @@ export default class extends Controller {
             files.push(file)
         }
 
+        // create filepond instance
         FilePond.create(input, {
             ...getCurrentLocale(),
             storeAsFile: true,
