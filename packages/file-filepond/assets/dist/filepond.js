@@ -132,12 +132,19 @@ var _default = /*#__PURE__*/function (_Controller) {
   _proto.connect = function connect() {
     var files = [];
     var input;
+
+    // get the file input element
     for (var _iterator = _createForOfIteratorHelperLoose(this.element.children), _step; !(_step = _iterator()).done;) {
       var child = _step.value;
       if (child.tagName === 'INPUT' && child.type === 'file') {
         input = child;
       }
     }
+
+    // remove input class attribute
+    input.removeAttribute('class');
+
+    // get the files from the data elements and process them
     for (var _iterator2 = _createForOfIteratorHelperLoose(this.element.children), _step2; !(_step2 = _iterator2()).done;) {
       var _child = _step2.value;
       if (_child.tagName !== 'DATA') {
@@ -145,7 +152,7 @@ var _default = /*#__PURE__*/function (_Controller) {
       }
       var file = {
         // sentinel value sent to server. if this is value is sent
-        // to the server, then the user didn't remove the image from
+        // to the server, then the user has not removed the image from
         // the filepond field
         source: _child.dataset.id || '__NOT_DELETED__',
         options: {
@@ -163,6 +170,8 @@ var _default = /*#__PURE__*/function (_Controller) {
       }
       files.push(file);
     }
+
+    // create filepond instance
     FilePond.create(input, _extends({}, getCurrentLocale(), {
       storeAsFile: true,
       files: files
