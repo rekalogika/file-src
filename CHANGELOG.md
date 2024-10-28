@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.11.1
+
+* fix: fix phpstan errors
+
 ## 1.11.0
 
 * test: modernization
