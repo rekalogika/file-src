@@ -12,6 +12,9 @@ parameters:
         -
             message: '#Attribute class Override does not exist#'
             reportUnmatched: false
+        -
+            identifier: method.nonObject
+            path: packages/file-bundle/src/DependencyInjection/Configuration.php
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon

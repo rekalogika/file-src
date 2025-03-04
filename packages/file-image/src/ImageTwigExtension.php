@@ -40,8 +40,8 @@ class ImageTwigExtension extends AbstractExtension implements ServiceSubscriberI
 
     private function getImageResizer(): ImageResizer
     {
+        /** @var ImageResizer */
         $resizer = $this->container->get(ImageResizer::class);
-        \assert($resizer instanceof ImageResizer);
 
         return $resizer;
     }

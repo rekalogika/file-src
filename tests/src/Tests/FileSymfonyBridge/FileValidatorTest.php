@@ -45,8 +45,12 @@ class FileValidatorTest extends ConstraintValidatorTestCase
         $this->validator->validate($file, $constraint);
 
         $violation = $this->context->getViolations()->get(0);
-        $file = (string) $violation->getParameters()['{{ file }}'];
-        $name = (string) $violation->getParameters()['{{ name }}'];
+        /** @psalm-suppress MixedAssignment */
+        $file = $violation->getParameters()['{{ file }}'];
+        $name = $violation->getParameters()['{{ name }}'];
+
+        $this->assertIsString($file);
+        $this->assertIsString($name);
 
         /** @var string */
         $maxSizeMessage = $constraint->maxSizeMessage;

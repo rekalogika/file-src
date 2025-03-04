@@ -32,6 +32,7 @@ class ZipTest extends KernelTestCase
         $fileRepository = static::getContainer()
             ->get(FileRepositoryInterface::class);
 
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(
             FileRepositoryInterface::class,
             $fileRepository,
@@ -42,6 +43,7 @@ class ZipTest extends KernelTestCase
         $fileZip = static::getContainer()
             ->get(FileZip::class);
 
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(
             FileZip::class,
             $fileZip,

@@ -31,6 +31,7 @@ class NullFileTest extends TestCase
         $nullName = $nullFile->getName();
         $nullPointer = $nullFile->getPointer();
 
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(NullFile::class, $nullFile);
         $this->assertInstanceOf(NullType::class, $nullType);
         $this->assertInstanceOf(NullName::class, $nullName);

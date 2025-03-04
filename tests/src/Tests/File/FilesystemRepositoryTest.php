@@ -27,6 +27,7 @@ class FilesystemRepositoryTest extends TestCase
         $repository = FileFactory::createFilesystemRepository();
 
         $localFilesystem = $repository->getFilesystem(null);
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(FilesystemOperator::class, $localFilesystem);
     }
 
@@ -39,6 +40,7 @@ class FilesystemRepositoryTest extends TestCase
             new Filesystem(new LocalFilesystemAdapter('/tmp')),
         );
         $filesystem = $repository->getFilesystem('test');
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(FilesystemOperator::class, $filesystem);
     }
 

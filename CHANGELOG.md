@@ -4,6 +4,7 @@
 
 * fix: fix phpstan errors
 * build: schedule weekly CI
+* build: update to phpstan 2
 
 ## 1.11.0
 

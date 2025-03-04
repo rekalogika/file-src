@@ -68,10 +68,6 @@ class PropertyInspector implements PropertyInspectorInterface
 
         $attribute = $attributes[0]->newInstance();
 
-        if (!$attribute instanceof AsFileAssociation) {
-            throw new \LogicException('Attribute must be instance of ' . AsFileAssociation::class);
-        }
-
         return $this->cache[$cacheKey] = new PropertyInspectorResult(
             mandatory: $mandatory,
             fetch: $attribute->fetch,

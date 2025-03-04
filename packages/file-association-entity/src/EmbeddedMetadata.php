@@ -38,6 +38,7 @@ class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
 
     /**
      * @var array<string,int|string|bool|null>
+     * @phpstan-ignore property.unusedType
      */
     private ?array $other = [];
 

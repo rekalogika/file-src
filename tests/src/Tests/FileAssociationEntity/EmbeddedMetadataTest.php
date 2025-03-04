@@ -61,6 +61,7 @@ class EmbeddedMetadataTest extends TestCase
         $originalMetadata = $file->get(RawMetadataInterface::class);
         $this->assertInstanceOf(RawMetadataInterface::class, $originalMetadata);
         $entityMetadata = $entity->getFileMetadata();
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(RawMetadataInterface::class, $entityMetadata);
 
         $this->assertSame(
