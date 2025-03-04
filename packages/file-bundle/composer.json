@@ -28,8 +28,8 @@
         "league/flysystem": "^3.16",
         "league/flysystem-local": "^3.16",
         "psr/container": "^2.0",
-        "rekalogika/file": "^1.11",
-        "rekalogika/file-contracts": "^1.11",
+        "rekalogika/file": "^1.12",
+        "rekalogika/file-contracts": "^1.12",
         "symfony/config": "^6.2 || ^7.0",
         "symfony/dependency-injection": "^6.2 || ^7.0",
         "symfony/http-kernel": "^6.2 || ^7.0"
@@ -46,7 +46,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     }
 }

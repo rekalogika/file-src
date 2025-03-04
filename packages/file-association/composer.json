@@ -27,8 +27,8 @@
     },
     "require": {
         "rekalogika/direct-property-access": "^1.1.2 || ^1.2",
-        "rekalogika/file-association-contracts": "^1.11",
-        "rekalogika/file-contracts": "^1.11",
+        "rekalogika/file-association-contracts": "^1.12",
+        "rekalogika/file-contracts": "^1.12",
         "rekalogika/reconstitutor": "^1.3.2 || ^1.4",
         "symfony/property-access": "^6.2 || ^7.0"
     },
@@ -37,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.12-dev"
+            "dev-main": "1.13-dev"
         }
     }
 }
