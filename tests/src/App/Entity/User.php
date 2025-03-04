@@ -14,8 +14,12 @@ declare(strict_types=1);
 namespace Rekalogika\File\Tests\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\File\Association\Attribute\AsFileAssociation;
+use Rekalogika\File\Association\Attribute\WithFileAssociation;
 
 #[ORM\Entity]
+#[WithFileAssociation]
 class User
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: 'integer')]
@@ -24,13 +28,12 @@ class User
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private string $email;
+    #[AsFileAssociation]
+    private ?FileInterface $image = null;
 
-    public function __construct(string $name, string $email)
+    public function __construct(string $name)
     {
         $this->name = $name;
-        $this->email = $email;
     }
 
     public function getId(): ?int
@@ -43,9 +46,15 @@ class User
         return $this->name;
     }
 
-    public function getEmail(): string
+    public function getImage(): ?FileInterface
     {
-        return $this->email;
+        return $this->image;
     }
 
+    public function setImage(?FileInterface $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
 }

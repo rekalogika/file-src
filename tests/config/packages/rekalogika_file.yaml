@@ -1,0 +1,5 @@
+rekalogika_file:
+    filesystems:
+        # 'default.storage' is the filesystem key under 'flysystem.storages'
+        # in config/packages/flysystem.yaml
+        default: 'default.storage'

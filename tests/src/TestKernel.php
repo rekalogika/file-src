@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Tests;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use League\FlysystemBundle\FlysystemBundle;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\RekalogikaDirectPropertyAccessBundle;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
@@ -92,6 +93,7 @@ final class TestKernel extends HttpKernelKernel
         yield new RekalogikaFileFilePondBundle();
         yield new RekalogikaTemporaryUrlBundle();
         yield new RekalogikaPsr16SimpleCacheBundle();
+        yield new FlysystemBundle();
     }
 
     #[\Override]
