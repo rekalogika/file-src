@@ -101,6 +101,7 @@ class TestKernel extends HttpKernelKernel
 
     }
 
+    #[\Override]
     public function getBuildDir(): string
     {
         return $this->getProjectDir() . '/var/build/' . $this->env;

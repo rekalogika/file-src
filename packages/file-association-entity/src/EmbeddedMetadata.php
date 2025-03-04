@@ -22,7 +22,7 @@ use Rekalogika\Domain\File\Metadata\Constants;
  *
  * @implements \IteratorAggregate<string,int|string|bool|null>
  */
-class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
+final class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
 {
     private ?string $name = null;
 

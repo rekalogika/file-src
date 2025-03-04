@@ -21,7 +21,7 @@ use Rekalogika\Domain\File\Metadata\MetadataFactory;
 use Rekalogika\Domain\File\Null\NullFile;
 use Rekalogika\File\RawMetadata;
 
-class FileDecorator implements FileInterface
+final class FileDecorator implements FileInterface
 {
     use FileDecoratorTrait;
 
@@ -125,6 +125,7 @@ class FileDecorator implements FileInterface
     }
 
 
+    #[\Override]
     protected function getWrapped(): FileInterface
     {
         return $this->file;

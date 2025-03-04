@@ -86,6 +86,7 @@ final class FileProxy implements FileInterface
         }
     }
 
+    #[\Override]
     protected function getWrapped(): FileInterface
     {
         $this->load();
