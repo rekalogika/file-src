@@ -7,6 +7,7 @@
 * build: update to phpstan 2
 * build: update to psalm 6
 * fix: handle attempts to resize corrupt images
+* feat: `FileLocationResolverCommand` to debug file location
 
 ## 1.11.0
 

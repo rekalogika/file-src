@@ -80,7 +80,8 @@
         "symfony/yaml": "^6.2 || ^7.0",
         "symplify/monorepo-builder": "^11.2.20 || ^11.3",
         "twig/extra-bundle": "^2.12|^3.0",
-        "vimeo/psalm": "^6.0"
+        "vimeo/psalm": "^6.0",
+        "league/flysystem-bundle": "^3.4"
     },
     "autoload": {
         "psr-4": {

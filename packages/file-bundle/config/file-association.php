@@ -14,6 +14,7 @@ declare(strict_types=1);
 use Doctrine\Persistence\ManagerRegistry;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\DirectPropertyAccessor;
+use Rekalogika\File\Association\Command\FileLocationResolverCommand;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
@@ -163,4 +164,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     //
 
     $services->set(PropertyInspectorInterface::class, PropertyInspector::class);
+
+    //
+    // commands
+    //
+
+    $services->set(FileLocationResolverCommand::class)
+        ->args([
+            '$managerRegistry' => service('doctrine'),
+            '$fileLocationResolver' => service(FileLocationResolverInterface::class),
+        ])
+        ->tag('console.command');
 };
