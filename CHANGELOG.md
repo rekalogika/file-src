@@ -3,6 +3,7 @@
 ## 1.11.1
 
 * fix: fix phpstan errors
+* build: schedule weekly CI
 
 ## 1.11.0
 
