@@ -59,11 +59,6 @@
                 <directory name="tests/src/App/Entity" />
             </errorLevel>
         </ClassMustBeFinal>
-        <InvalidDocblock>
-            <errorLevel type="suppress">
-                <file name="packages/file-symfony-bridge/src/Constraints/Image.php" />
-            </errorLevel>
-        </InvalidDocblock>
     </issueHandlers>
 
     <plugins>
