@@ -49,4 +49,20 @@ final class ImageResizerTest extends TestCase
         $this->assertEquals(120, $resizedFile->get(ImageMetadataInterface::class)?->getHeight());
         $this->assertEquals('smiley.d/square-120', $resizedFile->getKey());
     }
+
+    public function testCorruptImage(): void
+    {
+        $file = $this->fileRepository->createFromLocalFile(
+            new FilePointer('inmemory', 'corrupt'),
+            __DIR__ . '/../Resources/corrupt.jpg',
+        );
+
+        $imageResizer = new ImageResizer();
+        $imageResizer->setFileRepository($this->fileRepository);
+
+        $imageResizer
+            ->take($file)
+            ->resize(120, ImageResizer::ASPECTRATIO_SQUARE)
+            ->getResult();
+    }
 }

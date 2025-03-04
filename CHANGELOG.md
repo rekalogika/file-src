@@ -1,11 +1,12 @@
 # CHANGELOG
 
-## 1.11.1
+## 1.12.0
 
 * fix: fix phpstan errors
 * build: schedule weekly CI
 * build: update to phpstan 2
 * build: update to psalm 6
+* fix: handle attempts to resize corrupt images
 
 ## 1.11.0
 
