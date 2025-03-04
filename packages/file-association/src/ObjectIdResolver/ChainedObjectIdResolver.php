@@ -17,7 +17,7 @@ use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Exception\ObjectIdResolver\ChainedObjectIdResolverException;
 use Rekalogika\File\Association\Exception\ObjectIdResolver\ObjectIdResolverException;
 
-class ChainedObjectIdResolver implements ObjectIdResolverInterface
+final class ChainedObjectIdResolver implements ObjectIdResolverInterface
 {
     /**
      * @var \WeakMap<object,string>
@@ -40,6 +40,7 @@ class ChainedObjectIdResolver implements ObjectIdResolverInterface
     public function getObjectId(object $object): string
     {
         if (isset($this->cache[$object])) {
+            /** @var string */
             return $this->cache[$object];
         }
 

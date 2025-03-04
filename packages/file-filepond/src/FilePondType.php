@@ -39,7 +39,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * ],
  * ```
  */
-class FilePondType extends FileType
+final class FilePondType extends FileType
 {
     #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void

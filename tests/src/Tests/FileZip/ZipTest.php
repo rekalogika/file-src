@@ -20,7 +20,7 @@ use Rekalogika\File\Zip\FileZip;
 use Rekalogika\File\Zip\Model\Directory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class ZipTest extends KernelTestCase
+final class ZipTest extends KernelTestCase
 {
     private ?FileRepositoryInterface $fileRepository = null;
 

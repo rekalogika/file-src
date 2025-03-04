@@ -16,7 +16,7 @@ namespace Rekalogika\File\Bridge\FilePond;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class RekalogikaFileFilePondBundle extends Bundle
+final class RekalogikaFileFilePondBundle extends Bundle
 {
     #[\Override]
     public function getPath(): string

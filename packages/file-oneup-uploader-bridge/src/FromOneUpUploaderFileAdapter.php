@@ -21,7 +21,7 @@ use Rekalogika\File\File;
 /**
  * Adapter to convert a OneUpUploader's FileInterface into our FileInterface
  */
-class FromOneUpUploaderFileAdapter extends File
+final class FromOneUpUploaderFileAdapter extends File
 {
     private function __construct(TheirFileInterface $file)
     {

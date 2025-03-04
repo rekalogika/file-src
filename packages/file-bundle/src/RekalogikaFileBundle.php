@@ -17,7 +17,7 @@ use Rekalogika\File\Bundle\DependencyInjection\FilterPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class RekalogikaFileBundle extends Bundle
+final class RekalogikaFileBundle extends Bundle
 {
     #[\Override]
     public function getPath(): string

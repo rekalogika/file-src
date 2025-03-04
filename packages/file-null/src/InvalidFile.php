@@ -20,7 +20,7 @@ use Rekalogika\Contracts\File\NullFileInterface;
 /**
  * A null file object that is also an exception
  */
-class InvalidFile extends \Exception implements NullFileInterface
+final class InvalidFile extends \Exception implements NullFileInterface
 {
     use NullFileTrait;
 

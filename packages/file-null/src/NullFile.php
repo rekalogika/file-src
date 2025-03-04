@@ -20,7 +20,7 @@ use Rekalogika\Contracts\File\NullFileInterface;
 /**
  * A null-value pattern implementation for FileInterface.
  */
-class NullFile implements NullFileInterface
+final class NullFile implements NullFileInterface
 {
     use NullFileTrait;
 

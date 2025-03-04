@@ -19,7 +19,7 @@ use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\File;
 use Rekalogika\File\TemporaryFile;
 
-class FileTest extends TestCase
+final class FileTest extends TestCase
 {
     use FileTestTrait;
 
@@ -145,7 +145,11 @@ class FileTest extends TestCase
     public function testOpenBasedir(): void
     {
         $openBaseDir = realpath(__DIR__ . '/../../../../');
+        $this->assertIsString($openBaseDir);
+
         $dir = realpath(__DIR__ . '/../../../');
+        $this->assertIsString($dir);
+
         ini_set('open_basedir', $openBaseDir . ":" . '/tmp');
         mkdir($dir . '/var/', 0777, true);
         $path = $dir . '/var/test.txt';

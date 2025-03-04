@@ -18,7 +18,7 @@ use Rekalogika\File\Bridge\Symfony\Form\FileTransformer;
 use Rekalogika\File\TemporaryFile;
 use Symfony\Component\HttpFoundation\File\File;
 
-class FileTransformerTest extends TestCase
+final class FileTransformerTest extends TestCase
 {
     public function testTransform(): void
     {

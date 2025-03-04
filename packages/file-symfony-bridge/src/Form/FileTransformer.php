@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\File\File;
  *
  * @implements DataTransformerInterface<FileInterface,File>
  */
-class FileTransformer implements DataTransformerInterface
+final class FileTransformer implements DataTransformerInterface
 {
     /**
      * Transforms a FileInterface to HttpFoundation File

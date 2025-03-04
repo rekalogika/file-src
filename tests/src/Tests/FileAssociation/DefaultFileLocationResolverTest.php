@@ -18,7 +18,7 @@ use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Tests\Tests\Model\Entity;
 
-class DefaultFileLocationResolverTest extends TestCase
+final class DefaultFileLocationResolverTest extends TestCase
 {
     public function testDefaultLocationResolver(): void
     {

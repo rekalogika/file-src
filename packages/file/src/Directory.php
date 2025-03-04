@@ -26,7 +26,7 @@ use Rekalogika\Domain\File\Metadata\Model\FileName;
  * @implements \IteratorAggregate<TKey,T>
  * @implements DirectoryInterface<TKey,T>
  */
-class Directory implements DirectoryInterface, \IteratorAggregate
+final class Directory implements DirectoryInterface, \IteratorAggregate
 {
     /**
      * @param array<TKey,T> $entries

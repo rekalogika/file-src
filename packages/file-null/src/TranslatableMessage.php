@@ -16,7 +16,7 @@ namespace Rekalogika\Domain\File\Null;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class TranslatableMessage implements \Stringable, TranslatableInterface
+final class TranslatableMessage implements \Stringable, TranslatableInterface
 {
     public function __construct(
         private readonly string $name,

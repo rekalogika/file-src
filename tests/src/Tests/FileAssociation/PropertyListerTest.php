@@ -18,7 +18,7 @@ use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Tests\Tests\Model\EntityWithAttribute;
 use Rekalogika\File\Tests\Tests\Model\SubclassOfEntityWithAttribute;
 
-class PropertyListerTest extends TestCase
+final class PropertyListerTest extends TestCase
 {
     public function testAttributePropertyLister(): void
     {

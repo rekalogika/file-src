@@ -18,7 +18,7 @@ namespace Rekalogika\Domain\File\Metadata;
  *
  * @internal
  */
-class Constants
+final class Constants
 {
     public const HTTP_CACHE_CONTROL = 'http.cacheControl';
 

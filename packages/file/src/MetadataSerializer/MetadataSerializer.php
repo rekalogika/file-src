@@ -17,7 +17,7 @@ use Rekalogika\Contracts\File\RawMetadataInterface;
 use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\RawMetadata;
 
-class MetadataSerializer implements MetadataSerializerInterface
+final class MetadataSerializer implements MetadataSerializerInterface
 {
     #[\Override]
     public function serialize(RawMetadataInterface $metadata): string

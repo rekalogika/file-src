@@ -19,7 +19,7 @@ use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\FilePointer;
 
-class FileRepositoryTest extends TestCase
+final class FileRepositoryTest extends TestCase
 {
     use FileTestTrait;
 

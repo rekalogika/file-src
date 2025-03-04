@@ -17,7 +17,7 @@ use Rekalogika\Contracts\File\FileNameInterface;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class NullName implements FileNameInterface
+final class NullName implements FileNameInterface
 {
     public function __construct(
         private readonly string $name,

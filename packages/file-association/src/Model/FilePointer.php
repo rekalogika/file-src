@@ -20,7 +20,7 @@ use Rekalogika\Contracts\File\Trait\EqualityTrait;
  * An implementation of FilePointerInterface. We don't use the one in the
  * rekalogika/file package so that this package does not have to depend on that.
  */
-class FilePointer implements FilePointerInterface
+final class FilePointer implements FilePointerInterface
 {
     use EqualityTrait;
 

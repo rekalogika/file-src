@@ -16,7 +16,7 @@ namespace Rekalogika\File\Tests\Tests\File;
 use PHPUnit\Framework\TestCase;
 use Rekalogika\Domain\File\Metadata\Model\FileName;
 
-class FileNameTest extends TestCase
+final class FileNameTest extends TestCase
 {
     public function testFileName(): void
     {

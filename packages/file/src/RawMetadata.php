@@ -19,7 +19,7 @@ use Rekalogika\Contracts\File\RawMetadataInterface;
 /**
  * @implements \IteratorAggregate<string,int|string|bool|null>
  */
-class RawMetadata implements RawMetadataInterface, \IteratorAggregate
+final class RawMetadata implements RawMetadataInterface, \IteratorAggregate
 {
     /**
      * @var array<string,int|string|bool|null> $metadata

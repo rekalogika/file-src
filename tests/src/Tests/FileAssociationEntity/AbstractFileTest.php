@@ -22,7 +22,7 @@ use Rekalogika\File\TemporaryFile;
 use Rekalogika\File\Tests\Tests\File\FileTestTrait;
 use Rekalogika\File\Tests\Tests\Model\EntityExtendingAbstractFile;
 
-class AbstractFileTest extends TestCase
+final class AbstractFileTest extends TestCase
 {
     use FileTestTrait;
 

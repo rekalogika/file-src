@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 use Rekalogika\File\Exception\FilesystemRepository\FilesystemAlreadyExistsException;
 use Rekalogika\File\Exception\FilesystemRepository\FilesystemNotFoundException;
 
-class FilesystemRepositoryTest extends TestCase
+final class FilesystemRepositoryTest extends TestCase
 {
     public function testFilesystemRepository(): void
     {

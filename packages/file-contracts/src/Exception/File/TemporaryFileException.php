@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\Contracts\File\Exception\File;
 
-class TemporaryFileException extends FileException
+final class TemporaryFileException extends FileException
 {
     public function __construct(
         string $prefix,

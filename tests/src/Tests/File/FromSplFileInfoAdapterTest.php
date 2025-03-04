@@ -16,7 +16,7 @@ namespace Rekalogika\File\Tests\Tests\File;
 use PHPUnit\Framework\TestCase;
 use Rekalogika\File\Adapter\FromSplFileInfoAdapter;
 
-class FromSplFileInfoAdapterTest extends TestCase
+final class FromSplFileInfoAdapterTest extends TestCase
 {
     use FileTestTrait;
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Exception\ObjectIdResolver;
 
-class MethodNotFoundException extends ObjectIdResolverException
+final class MethodNotFoundException extends ObjectIdResolverException
 {
     public function __construct(
         object $object,

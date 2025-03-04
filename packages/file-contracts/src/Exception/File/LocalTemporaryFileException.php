@@ -13,4 +13,4 @@ declare(strict_types=1);
 
 namespace Rekalogika\Contracts\File\Exception\File;
 
-class LocalTemporaryFileException extends FileException {}
+final class LocalTemporaryFileException extends FileException {}

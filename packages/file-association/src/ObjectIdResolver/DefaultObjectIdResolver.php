@@ -18,7 +18,7 @@ use Rekalogika\File\Association\Exception\ObjectIdResolver\EmptyIdException;
 use Rekalogika\File\Association\Exception\ObjectIdResolver\IdNotSupportedException;
 use Rekalogika\File\Association\Exception\ObjectIdResolver\MethodNotFoundException;
 
-class DefaultObjectIdResolver implements ObjectIdResolverInterface
+final class DefaultObjectIdResolver implements ObjectIdResolverInterface
 {
     public function __construct(
         private readonly string $method = 'getId',

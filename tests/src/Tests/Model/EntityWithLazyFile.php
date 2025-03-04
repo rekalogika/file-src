@@ -18,7 +18,7 @@ use Rekalogika\File\Association\Attribute\AsFileAssociation;
 use Rekalogika\File\Association\Attribute\WithFileAssociation;
 
 #[WithFileAssociation]
-class EntityWithLazyFile
+final class EntityWithLazyFile
 {
     #[AsFileAssociation(fetch: 'LAZY')]
     private ?FileInterface $file = null;

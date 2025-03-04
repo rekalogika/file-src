@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Adapter to convert a HttpFoundation File to a FileInterface object.
  */
-class FromHttpFoundationFileAdapter extends File
+final class FromHttpFoundationFileAdapter extends File
 {
     private ?RawMetadata $cachedMetadata = null;
 

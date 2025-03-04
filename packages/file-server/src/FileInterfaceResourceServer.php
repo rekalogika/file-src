@@ -21,7 +21,7 @@ use Rekalogika\TemporaryUrl\Attribute\AsTemporaryUrlResourceTransformer;
 use Rekalogika\TemporaryUrl\Attribute\AsTemporaryUrlServer;
 use Symfony\Component\HttpFoundation\Response;
 
-class FileInterfaceResourceServer
+final class FileInterfaceResourceServer
 {
     public function __construct(
         private readonly FileRepositoryInterface $fileRepository,

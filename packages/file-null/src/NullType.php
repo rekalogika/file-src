@@ -16,7 +16,7 @@ namespace Rekalogika\Domain\File\Null;
 use Rekalogika\Contracts\File\FileTypeInterface;
 use Symfony\Contracts\Translation\TranslatableInterface;
 
-class NullType implements FileTypeInterface
+final class NullType implements FileTypeInterface
 {
     public function __construct(
         private readonly string $description,

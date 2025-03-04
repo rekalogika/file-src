@@ -21,7 +21,7 @@ use Rekalogika\File\TemporaryFile;
  *
  * @see https://pqina.nl/filepond/docs/api/plugins/file-encode/
  */
-class FilePondFileEncodeAdapter
+final class FilePondFileEncodeAdapter
 {
     /**
      * @param array<array-key,mixed> $input

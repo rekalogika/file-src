@@ -20,7 +20,7 @@ use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\Contracts\MetadataAwareFilesystemOperator;
 use Rekalogika\File\RawMetadata;
 
-class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
+final class LocalFilesystemDecorator implements MetadataAwareFilesystemOperator
 {
     public function __construct(
         private readonly FilesystemOperator $wrapped,

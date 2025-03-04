@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\Contracts\File\Exception\File;
 
-class FileNotFoundException extends FileException
+final class FileNotFoundException extends FileException
 {
     public function __construct(
         string $key,

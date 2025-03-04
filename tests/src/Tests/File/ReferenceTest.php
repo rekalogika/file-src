@@ -22,7 +22,7 @@ use Rekalogika\DirectPropertyAccess\DirectPropertyAccessor;
 use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\FilePointer;
 
-class ReferenceTest extends TestCase
+final class ReferenceTest extends TestCase
 {
     use FileTestTrait;
 

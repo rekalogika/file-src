@@ -19,7 +19,7 @@ use Rekalogika\Domain\File\Metadata\Metadata\FileMetadata;
 use Rekalogika\Domain\File\Metadata\Metadata\HttpMetadata;
 use Rekalogika\File\RawMetadata;
 
-class MetadataTest extends TestCase
+final class MetadataTest extends TestCase
 {
     private string $originalTimeZone = 'UTC';
 

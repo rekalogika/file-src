@@ -13,6 +13,7 @@
         <directory name="tests/src" />
         <ignoreFiles>
             <directory name="vendor" />
+            <file name="packages/file-symfony-bridge/src/Constraints/ImageValidator.php" />
         </ignoreFiles>
     </projectFiles>
 
@@ -48,36 +49,21 @@
                 <file name="packages/file-bundle/src/DependencyInjection/Configuration.php" />
             </errorLevel>
         </MixedMethodCall>
-        <MixedAssignment>
-            <errorLevel type="suppress">
-                <file name="packages/file-zip/src/ZipDirectory.php" />
-            </errorLevel>
-        </MixedAssignment>
-        <UndefinedAttributeClass>
-            <errorLevel type="suppress">
-                <referencedClass name="Override" />
-            </errorLevel>
-        </UndefinedAttributeClass>
-        <MixedArrayAccess>
-            <errorLevel type="suppress">
-                <file name="packages/file-filepond/src/FilePondCollectionType.php" />
-            </errorLevel>
-        </MixedArrayAccess>
-        <MixedArrayAssignment>
-            <errorLevel type="suppress">
-                <file name="packages/file-filepond/src/FilePondCollectionType.php" />
-            </errorLevel>
-        </MixedArrayAssignment>
-        <MixedArgument>
-            <errorLevel type="suppress">
-                <file name="packages/file-filepond/src/FilePondCollectionType.php" />
-            </errorLevel>
-        </MixedArgument>
         <MissingConstructor>
             <errorLevel type="suppress">
                 <file name="packages/file-image/src/ImageTwigExtension.php" />
             </errorLevel>
         </MissingConstructor>
+        <ClassMustBeFinal>
+            <errorLevel type="suppress">
+                <directory name="tests/src/App/Entity" />
+            </errorLevel>
+        </ClassMustBeFinal>
+        <InvalidDocblock>
+            <errorLevel type="suppress">
+                <file name="packages/file-symfony-bridge/src/Constraints/Image.php" />
+            </errorLevel>
+        </InvalidDocblock>
     </issueHandlers>
 
     <plugins>

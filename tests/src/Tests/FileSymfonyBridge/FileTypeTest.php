@@ -21,7 +21,7 @@ use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileTypeTest extends TypeTestCase
+final class FileTypeTest extends TypeTestCase
 {
     use FileTestTrait;
 

@@ -15,7 +15,7 @@ namespace Rekalogika\File\Association\Exception\PropertyWriter;
 
 use Rekalogika\File\Association\Exception\FileAssociationException;
 
-class PropertyWriterException extends FileAssociationException
+final class PropertyWriterException extends FileAssociationException
 {
     /**
      * @param object|array<array-key,mixed> $object

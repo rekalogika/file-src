@@ -23,7 +23,7 @@ use Rekalogika\File\Exception\FilesystemRepository\FilesystemNotFoundException;
 use Rekalogika\File\Filesystem\LocalFilesystemDecorator;
 use Rekalogika\File\Filesystem\RemoteFilesystemDecorator;
 
-class FilesystemRepository implements FilesystemRepositoryInterface
+final class FilesystemRepository implements FilesystemRepositoryInterface
 {
     private static ?MetadataAwareFilesystemOperator $localFilesystem = null;
 

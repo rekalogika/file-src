@@ -15,6 +15,15 @@ parameters:
         -
             identifier: method.nonObject
             path: packages/file-bundle/src/DependencyInjection/Configuration.php
+        -
+            identifier: parameter.unresolvableType
+            path: packages/file-symfony-bridge/src/Constraints/Image.php
+        -
+            identifier: return.unusedType
+            path: packages/file-symfony-bridge/src/HttpFoundation/ToHttpFoundationFileAdapter.php
+        -
+            message: '#.#'
+            path: packages/file-symfony-bridge/src/Constraints/ImageValidator.php
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon

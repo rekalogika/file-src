@@ -17,7 +17,7 @@ use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\Metadata\HttpMetadataInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class FileResponse extends StreamedResponse
+final class FileResponse extends StreamedResponse
 {
     /**
      * @param int $status HTTP status code (200 OK by default)

@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\File\File as HttpFoundationFile;
 /**
  * Universal adapter. Converts any supported object to a FileInterface.
  */
-class FileAdapter
+final class FileAdapter
 {
     private function __construct() {}
 

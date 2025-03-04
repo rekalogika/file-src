@@ -17,7 +17,7 @@ use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\NullFilePointerInterface;
 
-class NullPointer implements NullFilePointerInterface
+final class NullPointer implements NullFilePointerInterface
 {
     #[\Override]
     public function getFilesystemIdentifier(): ?string

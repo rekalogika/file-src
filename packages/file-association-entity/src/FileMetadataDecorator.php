@@ -18,7 +18,7 @@ use Rekalogika\Contracts\File\RawMetadataInterface;
 /**
  * @implements \IteratorAggregate<string,int|string|bool|null>
  */
-class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggregate
+final class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggregate
 {
     /**
      * @param RawMetadataInterface $embeddedMetadata Metadata embedded in entities

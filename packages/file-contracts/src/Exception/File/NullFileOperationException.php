@@ -18,4 +18,4 @@ namespace Rekalogika\Contracts\File\Exception\File;
  * involving a null file that will potentially cause a side effect should throw
  * this exception.
  */
-class NullFileOperationException extends FileException {}
+final class NullFileOperationException extends FileException {}

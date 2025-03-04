@@ -19,7 +19,7 @@ use Rekalogika\File\File;
 /**
  * Adapter to convert an \SplFileInfo to a FileInterface object.
  */
-class FromSplFileInfoAdapter extends File
+final class FromSplFileInfoAdapter extends File
 {
     private function __construct(
         private readonly \SplFileInfo $source,

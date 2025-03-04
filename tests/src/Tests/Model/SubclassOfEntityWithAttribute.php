@@ -16,7 +16,7 @@ namespace Rekalogika\File\Tests\Tests\Model;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
 
-class SubclassOfEntityWithAttribute extends EntityWithAttribute
+final class SubclassOfEntityWithAttribute extends EntityWithAttribute
 {
     #[AsFileAssociation]
     private ?FileInterface $anotherFile = null;

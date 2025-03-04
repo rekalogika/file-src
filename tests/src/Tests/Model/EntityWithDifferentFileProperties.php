@@ -17,7 +17,7 @@ use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
 
 /** @psalm-suppress MissingConstructor */
-class EntityWithDifferentFileProperties
+final class EntityWithDifferentFileProperties
 {
     #[AsFileAssociation(fetch: 'EAGER')]
     protected ?FileInterface $mandatoryEager = null;
