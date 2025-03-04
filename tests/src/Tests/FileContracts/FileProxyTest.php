@@ -24,7 +24,7 @@ use Rekalogika\File\Tests\Tests\File\FileTestTrait;
 use Rekalogika\File\Tests\Tests\Model\EntityWithFileProxyUtilGetterSetter;
 use Rekalogika\File\Tests\Tests\Model\EntityWithPlainGetterSetter;
 
-class FileProxyTest extends TestCase
+final class FileProxyTest extends TestCase
 {
     use FileTestTrait;
 

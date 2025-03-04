@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\File\File as HttpFoundationFile;
  * and then passing that to the HttpFoundation File constructor. If the file is
  * local, it will be used directly.
  */
-class ToHttpFoundationFileAdapter extends HttpFoundationFile
+final class ToHttpFoundationFileAdapter extends HttpFoundationFile
 {
     /**
      * We keep the original output of createLocalTemporaryFile here to prevent

@@ -30,6 +30,9 @@ use Rekalogika\File\Contracts\MetadataAwareFilesystemReader;
 use Rekalogika\File\Contracts\MetadataAwareFilesystemWriter;
 use Rekalogika\File\Repository\FilesystemRepository;
 
+/**
+ * @api
+ */
 class File implements FileInterface
 {
     use EqualityTrait;

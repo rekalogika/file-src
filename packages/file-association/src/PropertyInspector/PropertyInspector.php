@@ -18,7 +18,7 @@ use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
 use Rekalogika\File\Association\Exception\PropertyInspector\MissingPropertyException;
 use Rekalogika\File\Association\Model\PropertyInspectorResult;
 
-class PropertyInspector implements PropertyInspectorInterface
+final class PropertyInspector implements PropertyInspectorInterface
 {
     /**
      * @var array<string,PropertyInspectorResult>

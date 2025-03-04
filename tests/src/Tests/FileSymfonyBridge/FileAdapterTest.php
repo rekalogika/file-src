@@ -24,7 +24,7 @@ use Rekalogika\File\Tests\Tests\File\FileTestTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
-class FileAdapterTest extends KernelTestCase
+final class FileAdapterTest extends KernelTestCase
 {
     use FileTestTrait;
 

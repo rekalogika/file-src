@@ -18,7 +18,7 @@ use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 /**
  * Chains multiple property listers
  */
-class ChainPropertyLister implements PropertyListerInterface
+final class ChainPropertyLister implements PropertyListerInterface
 {
     /**
      * @param iterable<PropertyListerInterface> $propertyListers

@@ -22,7 +22,7 @@ use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
 use Symfony\Component\Form\Test\TypeTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileExtensionTest extends TypeTestCase
+final class FileExtensionTest extends TypeTestCase
 {
     use FileTestTrait;
 

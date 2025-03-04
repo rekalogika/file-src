@@ -17,7 +17,7 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class FileTypeExtension extends AbstractTypeExtension
+final class FileTypeExtension extends AbstractTypeExtension
 {
     #[\Override]
     public static function getExtendedTypes(): iterable

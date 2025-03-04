@@ -15,7 +15,7 @@ namespace Rekalogika\File\Tests\Tests\Model;
 
 use Rekalogika\Contracts\File\FileInterface;
 
-class EntityWithoutId
+final class EntityWithoutId
 {
     private ?FileInterface $file = null;
 

@@ -16,7 +16,7 @@ namespace Rekalogika\File\Tests\Tests\Model;
 use Rekalogika\Contracts\File\Association\FileAssociationInterface;
 use Rekalogika\Contracts\File\FileInterface;
 
-class Entity implements FileAssociationInterface
+final class Entity implements FileAssociationInterface
 {
     private ?FileInterface $file = null;
 

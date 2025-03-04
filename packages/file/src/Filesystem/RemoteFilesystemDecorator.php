@@ -31,7 +31,7 @@ use Rekalogika\File\RawMetadata;
  * A decorator for Flysystem Operators that stores and caches metadata in a
  * sidecar file.
  */
-class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
+final class RemoteFilesystemDecorator implements MetadataAwareFilesystemOperator
 {
     private ?FilesystemOperator $wrapped = null;
 

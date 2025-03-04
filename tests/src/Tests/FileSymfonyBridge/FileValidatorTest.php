@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 /**
  * @extends ConstraintValidatorTestCase<FileValidator>
  */
-class FileValidatorTest extends ConstraintValidatorTestCase
+final class FileValidatorTest extends ConstraintValidatorTestCase
 {
     #[\Override]
     protected function createValidator(): ConstraintValidatorInterface

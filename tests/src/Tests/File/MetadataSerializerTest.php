@@ -19,7 +19,7 @@ use Rekalogika\File\File;
 use Rekalogika\File\MetadataSerializer\MetadataSerializer;
 use Rekalogika\File\RawMetadata;
 
-class MetadataSerializerTest extends TestCase
+final class MetadataSerializerTest extends TestCase
 {
     public function testSerialize(): void
     {

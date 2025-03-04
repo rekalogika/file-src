@@ -26,7 +26,7 @@ use Rekalogika\File\Tests\Tests\Model\EntityWithLazyFile;
 use Rekalogika\File\Tests\Tests\Model\EntityWithMandatoryFile;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class FileAssociationManagerTest extends KernelTestCase
+final class FileAssociationManagerTest extends KernelTestCase
 {
     use FileTestTrait;
 
@@ -167,6 +167,7 @@ class FileAssociationManagerTest extends KernelTestCase
         $this->fileAssociationManager?->load($entity);
 
         $file = $entity->getFile();
+        /** @psalm-suppress DocblockTypeContradiction */
         $this->assertInstanceOf(File::class, $file);
 
         // remove
@@ -200,6 +201,7 @@ class FileAssociationManagerTest extends KernelTestCase
         $this->fileAssociationManager?->load($entity);
 
         $file = $entity->getFile();
+        /** @psalm-suppress DocblockTypeContradiction */
         $this->assertInstanceOf(FileProxy::class, $file);
 
         // remove

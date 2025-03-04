@@ -31,7 +31,7 @@ use Rekalogika\File\MetadataGenerator\MetadataGeneratorInterface;
 use Rekalogika\File\RawMetadata;
 use Rekalogika\File\TemporaryFile;
 
-class FileRepository implements FileRepositoryInterface
+final class FileRepository implements FileRepositoryInterface
 {
     /**
      * @var array<string,FileInterface>

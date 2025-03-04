@@ -24,7 +24,7 @@ use Rekalogika\Domain\File\Null\NullType;
  * A null file that indicates the file is expected to exist, but missing in the
  * storage backend.
  */
-class MissingFile extends \Exception implements NullFileInterface
+final class MissingFile extends \Exception implements NullFileInterface
 {
     use NullFileTrait;
 

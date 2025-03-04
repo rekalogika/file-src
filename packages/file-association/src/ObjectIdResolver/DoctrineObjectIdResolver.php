@@ -23,7 +23,7 @@ use Rekalogika\File\Association\Exception\ObjectIdResolver\ObjectNotSupportedExc
  *
  * @todo this code is untested
  */
-class DoctrineObjectIdResolver implements ObjectIdResolverInterface
+final class DoctrineObjectIdResolver implements ObjectIdResolverInterface
 {
     public function __construct(
         private readonly ManagerRegistry $managerRegistry,

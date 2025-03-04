@@ -18,7 +18,7 @@ use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Model\FilePointer;
 
-class DefaultFileLocationResolver implements FileLocationResolverInterface
+final class DefaultFileLocationResolver implements FileLocationResolverInterface
 {
     public function __construct(
         private readonly ObjectIdResolverInterface $objectIdResolver,

@@ -21,7 +21,7 @@ use Rekalogika\Domain\File\Association\Entity\EmbeddedMetadata;
 use Rekalogika\Domain\File\Association\Entity\FileDecorator;
 
 #[Entity()]
-class EntityWithEmbeddedMetadata
+final class EntityWithEmbeddedMetadata
 {
     private ?FileInterface $file = null;
 

@@ -16,7 +16,7 @@ namespace Rekalogika\File;
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\Trait\EqualityTrait;
 
-class FilePointer implements FilePointerInterface
+final class FilePointer implements FilePointerInterface
 {
     use EqualityTrait;
 

@@ -5,6 +5,7 @@
 * fix: fix phpstan errors
 * build: schedule weekly CI
 * build: update to phpstan 2
+* build: update to psalm 6
 
 ## 1.11.0
 

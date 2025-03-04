@@ -22,7 +22,7 @@ use Rekalogika\Domain\File\Null\NullPointer;
 use Rekalogika\Domain\File\Null\NullType;
 use Rekalogika\File\File;
 
-class NullFileTest extends TestCase
+final class NullFileTest extends TestCase
 {
     public function testNullFile(): void
     {

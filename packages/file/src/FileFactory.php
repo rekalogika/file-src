@@ -23,7 +23,7 @@ use Rekalogika\File\MetadataSerializer\MetadataSerializerInterface;
 use Rekalogika\File\Repository\FileRepository;
 use Rekalogika\File\Repository\FilesystemRepository;
 
-class FileFactory
+final class FileFactory
 {
     //
     // properties

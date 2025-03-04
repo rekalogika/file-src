@@ -18,7 +18,7 @@ use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Exception\FileLocationResolver\ChainedObjectNotSupportedException;
 use Rekalogika\File\Association\Exception\FileLocationResolver\ObjectNotSupportedException;
 
-class ChainedFileLocationResolver implements FileLocationResolverInterface
+final class ChainedFileLocationResolver implements FileLocationResolverInterface
 {
     /**
      * @param iterable<FileLocationResolverInterface> $fileLocationResolvers

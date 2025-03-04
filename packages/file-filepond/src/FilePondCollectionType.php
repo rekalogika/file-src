@@ -26,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Form type for handling multiple files.
  */
-class FilePondCollectionType extends FileType
+final class FilePondCollectionType extends FileType
 {
     #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options): void

@@ -18,7 +18,7 @@ use Rekalogika\File\FilePointer;
 use Rekalogika\TemporaryUrl\TemporaryUrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class TemporaryUrlTest extends KernelTestCase
+final class TemporaryUrlTest extends KernelTestCase
 {
     public function testTemporaryUrlWithFilePointer(): void
     {

@@ -21,7 +21,7 @@ use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Tests\Tests\Model\EntityWithAnyId;
 use Rekalogika\File\Tests\Tests\Model\EntityWithoutId;
 
-class DefaultObjectIdResolverTest extends TestCase
+final class DefaultObjectIdResolverTest extends TestCase
 {
     public function testIntegerIdDefaultObjectIdResolver(): void
     {

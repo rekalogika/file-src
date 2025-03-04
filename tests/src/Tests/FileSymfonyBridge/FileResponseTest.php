@@ -18,7 +18,7 @@ use Rekalogika\File\Bridge\Symfony\HttpFoundation\FileResponse;
 use Rekalogika\File\File;
 use Symfony\Component\HttpFoundation\Response;
 
-class FileResponseTest extends TestCase
+final class FileResponseTest extends TestCase
 {
     public function testResponse(): void
     {

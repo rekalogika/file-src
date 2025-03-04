@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Exception\ObjectIdResolver;
 
-class ChainedObjectIdResolverException extends ObjectIdResolverException
+final class ChainedObjectIdResolverException extends ObjectIdResolverException
 {
     /**
      * @param iterable<ObjectIdResolverException> $exceptions

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Exception\PropertyInspector;
 
-class MissingPropertyException extends PropertyInspectorException
+final class MissingPropertyException extends PropertyInspectorException
 {
     public function __construct(
         string $propertyName,

@@ -25,7 +25,7 @@ use Rekalogika\File\MetadataSerializer\MetadataSerializer;
 use Rekalogika\File\Repository\FileRepository;
 use Rekalogika\File\Repository\FilesystemRepository;
 
-class FileFactory
+final class FileFactory
 {
     private function __construct() {}
 

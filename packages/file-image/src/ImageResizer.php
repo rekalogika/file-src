@@ -18,7 +18,7 @@ use Intervention\Image\ImageManager;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Derivation\Filter\AbstractFileFilter;
 
-class ImageResizer extends AbstractFileFilter
+final class ImageResizer extends AbstractFileFilter
 {
     //
     // constants
@@ -97,9 +97,9 @@ class ImageResizer extends AbstractFileFilter
         $height = $this->maxWidthOrHeight;
 
         if ($width / $height > $ratio) {
-            $width = $height * $ratio;
+            $width = (float) $height * (float) $ratio;
         } else {
-            $height = $width / $ratio;
+            $height = (float) $width / (float) $ratio;
         }
 
         $img->resize((int) round($width), (int) round($height));

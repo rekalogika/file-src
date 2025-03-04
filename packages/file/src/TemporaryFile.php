@@ -16,7 +16,7 @@ namespace Rekalogika\File;
 use League\Flysystem\FilesystemOperator;
 use Rekalogika\Contracts\File\Exception\File\TemporaryFileException;
 
-class TemporaryFile extends File
+final class TemporaryFile extends File
 {
     private function __construct(
         string $key,

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Association\Attribute;
 
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-class AsFileAssociation
+final class AsFileAssociation
 {
     /**
      * @var 'EAGER'|'LAZY'

@@ -21,7 +21,7 @@ use League\Flysystem\Local\LocalFilesystemAdapter;
  * Provides a good default, ready-to-use filesystem post-installation without
  * any dependency except on Flysystem.
  */
-class DefaultFilesystemFactory
+final class DefaultFilesystemFactory
 {
     private ?FilesystemOperator $filesystem = null;
 

@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Rekalogika\File\Association\PropertyInspector\PropertyInspector;
 use Rekalogika\File\Tests\Tests\Model\EntityWithDifferentFileProperties;
 
-class PropertyInspectorTest extends TestCase
+final class PropertyInspectorTest extends TestCase
 {
     public function testPropertyInspector(): void
     {

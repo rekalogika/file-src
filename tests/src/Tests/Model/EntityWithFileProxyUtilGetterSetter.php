@@ -16,7 +16,7 @@ namespace Rekalogika\File\Tests\Tests\Model;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileProxy;
 
-class EntityWithFileProxyUtilGetterSetter
+final class EntityWithFileProxyUtilGetterSetter
 {
     public function __construct(
         private ?FileInterface $file = null,

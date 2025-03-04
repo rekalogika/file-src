@@ -20,7 +20,7 @@ use Rekalogika\File\FilePointer;
 use Rekalogika\File\Image\ImageResizer;
 use Rekalogika\File\Tests\Tests\File\FileFactory;
 
-class ImageResizerTest extends TestCase
+final class ImageResizerTest extends TestCase
 {
     private FileRepositoryInterface $fileRepository;
 

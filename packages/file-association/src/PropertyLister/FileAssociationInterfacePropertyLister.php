@@ -20,7 +20,7 @@ use Rekalogika\File\Association\Contracts\PropertyListerInterface;
  * Determines applicable file association properties by using
  * FileAssociationInterface.
  */
-class FileAssociationInterfacePropertyLister implements PropertyListerInterface
+final class FileAssociationInterfacePropertyLister implements PropertyListerInterface
 {
     #[\Override]
     public function getFileProperties(object $object): iterable

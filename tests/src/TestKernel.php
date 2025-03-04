@@ -52,7 +52,7 @@ use Symfony\UX\StimulusBundle\StimulusBundle;
 use Symfony\UX\Turbo\TurboBundle;
 use Twig\Extra\TwigExtraBundle\TwigExtraBundle;
 
-class TestKernel extends HttpKernelKernel
+final class TestKernel extends HttpKernelKernel
 {
     use MicroKernelTrait {
         registerContainerConfiguration as private baseRegisterContainerConfiguration;
@@ -101,6 +101,7 @@ class TestKernel extends HttpKernelKernel
 
     }
 
+    #[\Override]
     public function getBuildDir(): string
     {
         return $this->getProjectDir() . '/var/build/' . $this->env;

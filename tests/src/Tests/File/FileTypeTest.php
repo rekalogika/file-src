@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Rekalogika\Domain\File\Metadata\Model\MimeMapFileTypeAdapter;
 use Symfony\Contracts\Translation\TranslatableInterface;
 
-class FileTypeTest extends TestCase
+final class FileTypeTest extends TestCase
 {
     public function testFileType(): void
     {

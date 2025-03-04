@@ -15,7 +15,7 @@ namespace Rekalogika\File\Tests\Tests\Model;
 
 use Rekalogika\Contracts\File\FileInterface;
 
-class EntityWithPlainGetterSetter
+final class EntityWithPlainGetterSetter
 {
     public function __construct(
         private ?FileInterface $file = null,

@@ -15,7 +15,7 @@ namespace Rekalogika\Contracts\File\Exception\FileRepository;
 
 use Rekalogika\Contracts\File\FileInterface;
 
-class AdHocFilesystemException extends FileRepositoryException
+final class AdHocFilesystemException extends FileRepositoryException
 {
     public function __construct(
         FileInterface $file,

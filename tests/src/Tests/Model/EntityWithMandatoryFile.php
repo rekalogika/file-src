@@ -18,7 +18,7 @@ use Rekalogika\File\Association\Attribute\AsFileAssociation;
 use Rekalogika\File\Association\Attribute\WithFileAssociation;
 
 #[WithFileAssociation]
-class EntityWithMandatoryFile
+final class EntityWithMandatoryFile
 {
     #[AsFileAssociation]
     private FileInterface $file;

@@ -21,7 +21,7 @@ use Rekalogika\File\TemporaryFile;
 use Rekalogika\File\Tests\Tests\File\FileTestTrait;
 use Rekalogika\File\Tests\Tests\Model\EntityWithEmbeddedMetadata;
 
-class EmbeddedMetadataTest extends TestCase
+final class EmbeddedMetadataTest extends TestCase
 {
     use FileTestTrait;
 

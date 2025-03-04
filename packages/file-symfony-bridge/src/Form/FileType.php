@@ -17,7 +17,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType as SymfonyFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class FileType extends AbstractType
+final class FileType extends AbstractType
 {
     #[\Override]
     public function getParent(): string

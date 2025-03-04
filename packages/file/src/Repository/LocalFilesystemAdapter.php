@@ -15,7 +15,7 @@ namespace Rekalogika\File\Repository;
 
 use League\Flysystem\Local\LocalFilesystemAdapter as FlysystemLocalFilesystemAdapter;
 
-class LocalFilesystemAdapter extends FlysystemLocalFilesystemAdapter
+final class LocalFilesystemAdapter extends FlysystemLocalFilesystemAdapter
 {
     #[\Override]
     protected function ensureDirectoryExists(string $dirname, int $visibility): void {}

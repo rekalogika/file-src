@@ -18,7 +18,7 @@ use League\Flysystem\FilesystemOperator;
 use League\Flysystem\InMemory\InMemoryFilesystemAdapter;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class Factory
+final class Factory
 {
     public static function createUrlGenerator(): UrlGeneratorInterface
     {

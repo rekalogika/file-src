@@ -20,7 +20,7 @@ use Symfony\Contracts\Service\ServiceSubscriberInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class ImageTwigExtension extends AbstractExtension implements ServiceSubscriberInterface
+final class ImageTwigExtension extends AbstractExtension implements ServiceSubscriberInterface
 {
     protected ContainerInterface $container;
 

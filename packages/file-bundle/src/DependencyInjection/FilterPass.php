@@ -18,7 +18,7 @@ use Rekalogika\File\Derivation\Filter\FileFilterInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class FilterPass implements CompilerPassInterface
+final class FilterPass implements CompilerPassInterface
 {
     #[\Override]
     public function process(ContainerBuilder $container): void

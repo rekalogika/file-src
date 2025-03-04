@@ -22,7 +22,7 @@ use Symfony\Component\PropertyAccess\Exception\InvalidArgumentException;
 use Symfony\Component\PropertyAccess\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface as SymfonyPropertyAccessorInterface;
 
-class SymfonyPropertyAccessorBridge implements
+final class SymfonyPropertyAccessorBridge implements
     PropertyReaderInterface,
     PropertyWriterInterface
 {

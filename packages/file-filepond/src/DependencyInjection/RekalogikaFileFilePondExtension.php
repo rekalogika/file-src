@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
-class RekalogikaFileFilePondExtension extends Extension implements
+final class RekalogikaFileFilePondExtension extends Extension implements
     PrependExtensionInterface
 {
     #[\Override]

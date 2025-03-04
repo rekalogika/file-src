@@ -20,7 +20,7 @@ use Rekalogika\File\Association\Contracts\PropertyListerInterface;
  * Determines all the file association properties by looking at
  * AsFileAssociation attributes.
  */
-class AttributesPropertyLister implements PropertyListerInterface
+final class AttributesPropertyLister implements PropertyListerInterface
 {
     /**
      * @var array<string,iterable<string>>

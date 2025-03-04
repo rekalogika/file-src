@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Exception\FilesystemRepository;
 
-class FilesystemAlreadyExistsException extends FilesystemRepositoryException
+final class FilesystemAlreadyExistsException extends FilesystemRepositoryException
 {
     public function __construct(string $filesystemId)
     {
