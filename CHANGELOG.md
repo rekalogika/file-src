@@ -6,7 +6,6 @@
 * build: schedule weekly CI
 * build: update to phpstan 2
 * build: update to psalm 6
-* fix: can no longer extend symfony/validator Image because it was made final
 
 ## 1.11.0
 
