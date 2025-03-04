@@ -54,6 +54,9 @@ final class ImageTwigExtension extends AbstractExtension implements ServiceSubsc
         ];
     }
 
+    /**
+     * @param ImageResizer::ASPECTRATIO_* $aspect
+     */
     public function fileImageResize(
         ?FileInterface $file,
         int $maxWidthOrHeight = 512,

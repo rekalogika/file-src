@@ -60,9 +60,13 @@ final class ImageResizerTest extends TestCase
         $imageResizer = new ImageResizer();
         $imageResizer->setFileRepository($this->fileRepository);
 
-        $imageResizer
+        $resizedFile = $imageResizer
             ->take($file)
             ->resize(120, ImageResizer::ASPECTRATIO_SQUARE)
             ->getResult();
+
+        $this->assertEquals(120, $resizedFile->get(ImageMetadataInterface::class)?->getWidth());
+        $this->assertEquals(120, $resizedFile->get(ImageMetadataInterface::class)?->getHeight());
+        $this->assertEquals('corrupt.d/square-120', $resizedFile->getKey());
     }
 }

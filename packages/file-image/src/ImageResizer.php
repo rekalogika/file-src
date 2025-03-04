@@ -14,12 +14,21 @@ declare(strict_types=1);
 namespace Rekalogika\File\Image;
 
 use Intervention\Image\Encoders\AutoEncoder;
+use Intervention\Image\Encoders\MediaTypeEncoder;
+use Intervention\Image\Exceptions\EncoderException;
+use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
+use Intervention\Image\Interfaces\ImageInterface;
+use Psr\Log\LoggerInterface;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Derivation\Filter\AbstractFileFilter;
 
 final class ImageResizer extends AbstractFileFilter
 {
+    // vars
+
+    private ImageManager $manager;
+
     //
     // constants
     //
@@ -29,17 +38,34 @@ final class ImageResizer extends AbstractFileFilter
     final public const ASPECTRATIO_SQUARE = 'square';
 
     //
+    // constructor
+    //
+
+    public function __construct(
+        ?ImageManager $manager = null,
+        private ?LoggerInterface $logger = null,
+    ) {
+        $this->manager = $manager ?? ImageManager::gd();
+    }
+
+    //
     // properties
     //
 
     private int $maxWidthOrHeight = 512;
 
+    /**
+     * @var self::ASPECTRATIO_*
+     */
     private string $aspect = self::ASPECTRATIO_ORIGINAL;
 
     //
     // action setters
     //
 
+    /**
+     * @param self::ASPECTRATIO_* $aspect
+     */
     public function resize(
         int $maxWidthOrHeight = 512,
         string $aspect = self::ASPECTRATIO_ORIGINAL,
@@ -68,47 +94,65 @@ final class ImageResizer extends AbstractFileFilter
     #[\Override]
     protected function process(): FileInterface
     {
-        $ratio = null;
-
-        $img = ImageManager::gd()
-            ->read($this->getSourceFile()->getContentAsStream()->detach());
-
-        $w = $img->width();
-        $h = $img->height();
-
-        if ($this->aspect === self::ASPECTRATIO_SQUARE) {
-            if ($w > $h) {
-                $img->crop($h, $h);
-            } else {
-                $img->crop($w, $w);
-            }
-
-            $ratio = 1;
-        } elseif ($this->aspect === self::ASPECTRATIO_ORIGINAL) {
-            $ratio = $w / $h;
-        } else {
-            throw new \InvalidArgumentException(\sprintf(
-                'Unknown aspect ratio "%s"',
-                $this->aspect,
-            ));
-        }
-
         $width = $this->maxWidthOrHeight;
         $height = $this->maxWidthOrHeight;
 
-        if ($width / $height > $ratio) {
-            $width = (float) $height * (float) $ratio;
-        } else {
-            $height = (float) $width / (float) $ratio;
-        }
+        try {
+            $ratio = null;
 
-        $img->resize((int) round($width), (int) round($height));
-        $encoded = $img->encode(new AutoEncoder());
+            $img = $this->manager
+                ->read($this->getSourceFile()->getContentAsStream()->detach());
+
+            $w = $img->width();
+            $h = $img->height();
+
+            if ($this->aspect === self::ASPECTRATIO_SQUARE) {
+                if ($w > $h) {
+                    $img->crop($h, $h);
+                } else {
+                    $img->crop($w, $w);
+                }
+
+                $ratio = 1;
+            } else {
+                $ratio = $w / $h;
+            }
+
+            if ($width / $height > $ratio) {
+                $width = (int) round((float) $height * (float) $ratio);
+            } else {
+                $height = (int) round((float) $width / (float) $ratio);
+            }
+
+            $img->resize($width, $height);
+            $encoded = $img->encode(new AutoEncoder());
+        } catch (\Throwable $e) {
+            // log the exception
+            $this->logger?->error($e->getMessage(), ['exception' => $e]);
+
+            // output gray image
+            $mimeType = $this->getSourceFile()->getType()->getName();
+
+            $img = $this->createBlankImage($width, $height);
+
+            try {
+                $encoded = $img->encode(new AutoEncoder($mimeType));
+            } catch (EncoderException) {
+                $encoded = $img->encode(new MediaTypeEncoder('image/png'));
+            }
+        }
 
         return $this->getFileRepository()
             ->createFromString(
                 $this->getDerivationFilePointer(),
                 $encoded->toString(),
             );
+    }
+
+    private function createBlankImage(int $width, int $height): ImageInterface
+    {
+        $manager = ImageManager::gd();
+
+        return $manager->create($width, $height)->fill('808080');
     }
 }
