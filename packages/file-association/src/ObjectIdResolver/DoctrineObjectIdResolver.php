@@ -40,7 +40,6 @@ class DoctrineObjectIdResolver implements ObjectIdResolverInterface
         }
 
         if (method_exists($objectManager, 'getUnitOfWork')) {
-            /** @var UnitOfWork */
             $unitOfWork = $objectManager->getUnitOfWork();
             if (!$unitOfWork instanceof UnitOfWork) {
                 throw new \LogicException('Expected Doctrine\ORM\UnitOfWork');

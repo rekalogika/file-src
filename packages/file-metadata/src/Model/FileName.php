@@ -64,7 +64,6 @@ final class FileName implements FileNameInterface
     {
         if ($this->name === null) {
             $full = $this->getFull();
-            \assert($full instanceof TranslatableInterface);
 
             return $full->trans($translator, $locale);
         }

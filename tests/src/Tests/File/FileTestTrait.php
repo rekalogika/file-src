@@ -86,6 +86,7 @@ trait FileTestTrait
         $this->assertSame($file->getSize(), \strlen($content));
 
         // last modified
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(\DateTimeInterface::class, $file->getLastModified());
 
         // metadata tests
@@ -98,6 +99,7 @@ trait FileTestTrait
         $this->assertSame($metadata->get(Constants::FILE_TYPE), $type);
 
         $fileMetadata =  $file->get(FileMetadataInterface::class);
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertNotNull($fileMetadata);
         $this->assertSame((string) $fileMetadata->getType(), $type);
 

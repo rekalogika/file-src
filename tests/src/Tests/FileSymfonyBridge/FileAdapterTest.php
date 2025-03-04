@@ -33,6 +33,7 @@ class FileAdapterTest extends KernelTestCase
         $fileRepository = static::getContainer()
             ->get(FileRepositoryInterface::class);
 
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(FileRepositoryInterface::class, $fileRepository);
 
         return $fileRepository->createFromString(new FilePointer('default', 'key'), 'asdf');

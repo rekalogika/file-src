@@ -43,6 +43,7 @@ class FileTransformer implements DataTransformerInterface
             return $value;
         }
 
+        // @phpstan-ignore instanceof.alwaysTrue
         if (!$value instanceof FileInterface) {
             throw new TransformationFailedException(\sprintf(
                 'Expecting "%s", but getting "%s" instead.',
@@ -71,6 +72,7 @@ class FileTransformer implements DataTransformerInterface
             return $value;
         }
 
+        // @phpstan-ignore instanceof.alwaysTrue
         if (!$value instanceof File) {
             throw new TransformationFailedException(\sprintf(
                 'Expecting "%s", but getting "%s" instead.',

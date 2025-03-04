@@ -35,9 +35,6 @@ class Entity implements FileAssociationInterface
         return $this->id;
     }
 
-    /**
-     * @phpstan-impure
-     */
     public function getFile(): ?FileInterface
     {
         return $this->file;

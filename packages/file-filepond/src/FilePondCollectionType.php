@@ -57,8 +57,6 @@ class FilePondCollectionType extends FileType
                     }
                 }
 
-                /** @var array<array-key,UploadedFile|FileInterface|string> $incomingFiles */
-
                 foreach ($incomingFiles as $file) {
                     if ($file instanceof UploadedFile) {
                         $file = FromHttpFoundationFileAdapter::adapt($file);

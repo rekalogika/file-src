@@ -25,8 +25,8 @@ class FromOneUpUploaderFileAdapter extends File
 {
     private function __construct(TheirFileInterface $file)
     {
+        /** @psalm-suppress MixedAssignment */
         $filesystem = $file->getFileSystem();
-        \assert($filesystem === null || $filesystem instanceof FilesystemOperator);
 
         if ($filesystem === null) {
             $ourFilesystem = null;

@@ -19,9 +19,6 @@ class EntityWithoutId
 {
     private ?FileInterface $file = null;
 
-    /**
-     * @phpstan-impure
-     */
     public function getFile(): ?FileInterface
     {
         return $this->file;

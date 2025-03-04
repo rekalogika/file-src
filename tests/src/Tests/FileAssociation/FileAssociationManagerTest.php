@@ -40,6 +40,7 @@ class FileAssociationManagerTest extends KernelTestCase
 
         $fileAssociationManager = static::getContainer()
             ->get(FileAssociationManager::class);
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(
             FileAssociationManager::class,
             $fileAssociationManager,
@@ -50,6 +51,7 @@ class FileAssociationManagerTest extends KernelTestCase
         $fileRepository = static::getContainer()
             ->get(FileRepositoryInterface::class);
 
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(
             FileRepositoryInterface::class,
             $fileRepository,
@@ -71,6 +73,7 @@ class FileAssociationManagerTest extends KernelTestCase
         $entity->setFile($newFile);
 
         $file = $entity->getFile();
+        // @phpstan-ignore method.impossibleType
         $this->assertInstanceOf(TemporaryFile::class, $file);
         $oldPointer = $file->getPointer();
 
@@ -80,6 +83,7 @@ class FileAssociationManagerTest extends KernelTestCase
         $this->assertInstanceOf(File::class, $file);
         $newPointer = $file->getPointer();
 
+        // @phpstan-ignore argument.type
         $this->assertFalse($newPointer->isEqualTo($oldPointer));
         $this->assertFileInterface(
             file: $file,

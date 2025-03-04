@@ -37,6 +37,7 @@ class FileTypeTest extends TestCase
     {
         $type = new MimeMapFileTypeAdapter('application/x-zerosize');
         $this->assertSame('Unknown file type (application/x-zerosize)', (string) $type->getDescription());
+        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(TranslatableInterface::class, $type->getDescription());
     }
 }

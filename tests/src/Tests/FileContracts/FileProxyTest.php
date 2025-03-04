@@ -32,7 +32,6 @@ class FileProxyTest extends TestCase
     {
         $fileRepository = FileFactory::createFileRepository();
 
-        $this->assertTrue(true);
         $file = TemporaryFile::createFromString('foo', 'test.txt');
         $pointer = $file->getPointer();
         $proxy = new FileProxy($pointer, $fileRepository);
