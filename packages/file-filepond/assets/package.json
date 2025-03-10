@@ -86,7 +86,7 @@
         "filepond": "^4.32.7",
         "filepond-plugin-file-encode": "^2.1.11",
         "filepond-plugin-file-metadata": "^1.0.8",
-        "filepond-plugin-file-poster": "^2.5.1",
+        "filepond-plugin-file-poster": "^2.5.2",
         "filepond-plugin-file-validate-size": "^2.2.8",
         "filepond-plugin-file-validate-type": "^1.2.8",
         "filepond-plugin-image-crop": "^2.0.6",
