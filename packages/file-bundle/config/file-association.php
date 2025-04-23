@@ -16,6 +16,7 @@ use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\DirectPropertyAccessor;
 use Rekalogika\File\Association\Command\FileLocationResolverCommand;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\ObjectClassNameResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
@@ -24,6 +25,9 @@ use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\FileAssociationManager;
 use Rekalogika\File\Association\FileLocationResolver\ChainedFileLocationResolver;
 use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver;
+use Rekalogika\File\Association\ObjectClassNameResolver\ChainedObjectClassNameResolver;
+use Rekalogika\File\Association\ObjectClassNameResolver\DefaultObjectClassNameResolver;
+use Rekalogika\File\Association\ObjectClassNameResolver\DoctrineObjectClassNameResolver;
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DoctrineObjectIdResolver;
@@ -73,6 +77,35 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ]);
 
     //
+    // object class name resolver
+    //
+
+    $services->alias(
+        ObjectClassNameResolverInterface::class,
+        ChainedObjectClassNameResolver::class,
+    );
+
+    $services->set(ChainedObjectClassNameResolver::class)
+        ->args([
+            tagged_iterator('rekalogika.file.association.object_class_name_resolver'),
+        ]);
+
+    $services->set(DefaultObjectClassNameResolver::class)
+        ->tag('rekalogika.file.association.object_class_name_resolver', [
+            'priority' => -1000,
+        ]);
+
+    if (interface_exists(ManagerRegistry::class)) {
+        $services->set(DoctrineObjectClassNameResolver::class)
+            ->args([
+                service(ManagerRegistry::class),
+            ])
+            ->tag('rekalogika.file.association.object_class_name_resolver', [
+                'priority' => -999,
+            ]);
+    }
+
+    //
     // object id resolver
     //
 
@@ -117,6 +150,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(DefaultFileLocationResolver::class)
         ->args([
+            service(ObjectClassNameResolverInterface::class),
             service(ObjectIdResolverInterface::class),
         ])
         ->tag('rekalogika.file.association.file_location_resolver', [

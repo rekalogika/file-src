@@ -15,12 +15,14 @@ namespace Rekalogika\File\Association\FileLocationResolver;
 
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\ObjectClassNameResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Model\FilePointer;
 
 final class DefaultFileLocationResolver implements FileLocationResolverInterface
 {
     public function __construct(
+        private readonly ObjectClassNameResolverInterface $objectClassNameResolver,
         private readonly ObjectIdResolverInterface $objectIdResolver,
         private readonly string $filesystemIdentifier = 'default',
         private readonly string $prefix = 'entity',
@@ -32,12 +34,13 @@ final class DefaultFileLocationResolver implements FileLocationResolverInterface
         object $object,
         string $propertyName,
     ): FilePointerInterface {
+        $className = $this->objectClassNameResolver->getObjectClassName($object);
         $id = $this->objectIdResolver->getObjectId($object);
 
         $splittedHash = str_split(sha1($id), 2);
         $hash = implode('/', \array_slice($splittedHash, 0, $this->hashLevel));
 
-        $classHash = sha1($object::class);
+        $classHash = sha1($className);
 
         $key = \sprintf(
             '%s/%s/%s/%s/%s',
