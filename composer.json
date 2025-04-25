@@ -13,7 +13,6 @@
     "require": {
         "cardinalby/content-disposition": "^1.1",
         "doctrine/collections": "^2.0",
-        "doctrine/persistence": "^4.0",
         "fileeye/mimemap": "^2.0",
         "guzzlehttp/psr7": "^2.6",
         "intervention/image": "^3.3",
@@ -50,6 +49,7 @@
     "require-dev": {
         "bnf/phpstan-psr-container": "^1.0",
         "doctrine/doctrine-bundle": "^2.10",
+        "doctrine/persistence": "^3.1 || ^4.0",
         "ekino/phpstan-banned-code": "^3.0",
         "league/flysystem-memory": "^3.16",
         "mockery/mockery": "^1.6",
