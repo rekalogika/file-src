@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.0
+
+* deps: remove dependency on `doctrine/persistence`
+
 ## 1.12.0
 
 * fix: fix phpstan errors
