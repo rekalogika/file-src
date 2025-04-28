@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
@@ -22,19 +23,14 @@ use Rekalogika\File\Association\Attribute\WithFileAssociation;
 #[WithFileAssociation]
 class User
 {
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: 'integer')]
+    #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: Types::INTEGER)]
     private ?int $id = null; // @phpstan-ignore property.unusedType
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private string $name;
 
     #[AsFileAssociation]
     private ?FileInterface $image = null;
 
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-    }
+    public function __construct(#[ORM\Column(type: Types::STRING, length: 255)]
+        private string $name) {}
 
     public function getId(): ?int
     {

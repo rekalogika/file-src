@@ -18,13 +18,13 @@ use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 /**
  * Chains multiple property listers
  */
-final class ChainPropertyLister implements PropertyListerInterface
+final readonly class ChainPropertyLister implements PropertyListerInterface
 {
     /**
      * @param iterable<PropertyListerInterface> $propertyListers
      */
     public function __construct(
-        private readonly iterable $propertyListers,
+        private iterable $propertyListers,
     ) {}
 
     #[\Override]

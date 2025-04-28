@@ -29,12 +29,12 @@ final class FileFactory
     // properties
     //
 
-    protected ?FileRepository $fileRepository = null;
+    private ?FileRepository $fileRepository = null;
 
     /**
      * @var array<string,FilesystemOperator>
      */
-    protected array $filesystems = [];
+    private array $filesystems = [];
 
     //
     // magic methods
@@ -45,8 +45,8 @@ final class FileFactory
      */
     public function __construct(
         iterable $filesystems = [],
-        protected ?string $defaultFilesystemIdForTemporaryFile = null,
-        protected ?MimeTypeDetector $mimeTypeDetector = null,
+        private ?string $defaultFilesystemIdForTemporaryFile = null,
+        private ?MimeTypeDetector $mimeTypeDetector = null,
     ) {
         $this->filesystems = $filesystems instanceof \Traversable
             ? iterator_to_array($filesystems)
@@ -82,7 +82,7 @@ final class FileFactory
         );
     }
 
-    protected function getMetadataSidecarFilesystemOperatorDecorator(): RemoteFilesystemDecorator
+    private function getMetadataSidecarFilesystemOperatorDecorator(): RemoteFilesystemDecorator
     {
         return new RemoteFilesystemDecorator(
             $this->getMetadataSerializer(),
@@ -90,12 +90,12 @@ final class FileFactory
         );
     }
 
-    protected function getMetadataSerializer(): MetadataSerializerInterface
+    private function getMetadataSerializer(): MetadataSerializerInterface
     {
         return new MetadataSerializer();
     }
 
-    protected function getMetadataGenerator(): MetadataGeneratorInterface
+    private function getMetadataGenerator(): MetadataGeneratorInterface
     {
         return new MetadataGenerator($this->mimeTypeDetector);
     }

@@ -20,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 abstract class DoctrineTestCase extends KernelTestCase
 {
     #[\Override]
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

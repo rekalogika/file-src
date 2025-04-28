@@ -114,7 +114,7 @@ final class FileDecorator implements FileInterface
     {
         if (!$file instanceof self) {
             throw new \InvalidArgumentException(
-                \sprintf('"syncMetadata()" only accepts %s', static::class),
+                \sprintf('"syncMetadata()" only accepts %s', self::class),
             );
         }
 

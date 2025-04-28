@@ -18,13 +18,13 @@ use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Exception\FileLocationResolver\ChainedObjectNotSupportedException;
 use Rekalogika\File\Association\Exception\FileLocationResolver\ObjectNotSupportedException;
 
-final class ChainedFileLocationResolver implements FileLocationResolverInterface
+final readonly class ChainedFileLocationResolver implements FileLocationResolverInterface
 {
     /**
      * @param iterable<FileLocationResolverInterface> $fileLocationResolvers
      */
     public function __construct(
-        private readonly iterable $fileLocationResolvers,
+        private iterable $fileLocationResolvers,
     ) {}
 
     #[\Override]

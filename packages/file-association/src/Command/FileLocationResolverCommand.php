@@ -65,7 +65,7 @@ final class FileLocationResolverCommand extends Command
 
         $object = $this->managerRegistry->getRepository($class)->find($id);
 
-        if (!$object) {
+        if ($object === null) {
             throw new \InvalidArgumentException('Object not found');
         }
 

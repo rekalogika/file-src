@@ -20,10 +20,10 @@ use Rekalogika\Reconstitutor\Contract\AttributeReconstitutorInterface;
 /**
  * Reconstitutes objects with WithFileAssociation attribute
  */
-final class AttributeReconstitutor implements AttributeReconstitutorInterface
+final readonly class AttributeReconstitutor implements AttributeReconstitutorInterface
 {
     public function __construct(
-        private readonly FileAssociationManager $fileAssociationManager,
+        private FileAssociationManager $fileAssociationManager,
     ) {}
 
     #[\Override]
