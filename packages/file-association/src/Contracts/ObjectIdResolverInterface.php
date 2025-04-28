@@ -17,10 +17,11 @@ use Rekalogika\File\Association\Exception\ObjectIdResolver\ObjectIdResolverExcep
 
 /**
  * Determines the unique identifier of an object
- *
- * @throws ObjectIdResolverException
  */
 interface ObjectIdResolverInterface
 {
+    /**
+     * @throws ObjectIdResolverException
+     */
     public function getObjectId(object $object): string;
 }

@@ -5,6 +5,8 @@
 * fix: fix web serving
 * refactor(PropertyInspector): change interface to accept class, not object;
   BC break but probably won't affect anyone. add caching using symfony/cache.
+* chore: rector run
+* fix: fix interface phpdoc
 
 ## 1.13.0
 

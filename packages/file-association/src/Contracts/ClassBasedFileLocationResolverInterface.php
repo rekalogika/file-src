@@ -17,15 +17,14 @@ use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\File\Association\Exception\FileLocationResolver\FileLocationResolverException;
 
 /**
- * Determines where a file is stored depending on the object and
+ * Determines where a file is stored depending on the class, identifier, and
  * property name.
- *
- * @throws FileLocationResolverException
  */
 interface ClassBasedFileLocationResolverInterface
 {
     /**
      * @param class-string $class
+     * @throws FileLocationResolverException
      */
     public function getFileLocation(
         string $class,
