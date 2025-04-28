@@ -27,15 +27,15 @@ final class ImageResizer extends AbstractFileFilter
 {
     // vars
 
-    private ImageManager $manager;
+    private readonly ImageManager $manager;
 
     //
     // constants
     //
 
-    final public const ASPECTRATIO_ORIGINAL = 'original';
+    public const ASPECTRATIO_ORIGINAL = 'original';
 
-    final public const ASPECTRATIO_SQUARE = 'square';
+    public const ASPECTRATIO_SQUARE = 'square';
 
     //
     // constructor
@@ -43,7 +43,7 @@ final class ImageResizer extends AbstractFileFilter
 
     public function __construct(
         ?ImageManager $manager = null,
-        private ?LoggerInterface $logger = null,
+        private readonly ?LoggerInterface $logger = null,
     ) {
         $this->manager = $manager ?? ImageManager::gd();
     }

@@ -35,7 +35,7 @@ final readonly class DoctrineObjectIdResolver implements ObjectIdResolverInterfa
         $objectManager = $this->managerRegistry
             ->getManagerForClass($object::class);
 
-        if (!$objectManager) {
+        if ($objectManager === null) {
             throw new ObjectNotSupportedException($object);
         }
 

@@ -20,7 +20,10 @@ return RectorConfig::configure()
     ->withPhpVersion(PhpVersion::PHP_83)
     ->withPaths([
         __DIR__ . '/packages',
-        __DIR__ . '/tests',
+        __DIR__ . '/tests/src',
+        __DIR__ . '/tests/config',
+        __DIR__ . '/tests/bin',
+        __DIR__ . '/tests/public',
     ])
     ->withPreparedSets(
         deadCode: true,

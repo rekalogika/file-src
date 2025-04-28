@@ -47,6 +47,7 @@ final class CommandTest extends DoctrineTestCase
         ]);
 
         $commandTester->assertCommandIsSuccessful();
+
         $output = $commandTester->getDisplay();
         $this->assertStringContainsString('entity/', $output);
     }

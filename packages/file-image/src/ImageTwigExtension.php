@@ -22,7 +22,7 @@ use Twig\TwigFilter;
 
 final class ImageTwigExtension extends AbstractExtension implements ServiceSubscriberInterface
 {
-    protected ContainerInterface $container;
+    private ContainerInterface $container;
 
     #[\Override]
     public static function getSubscribedServices(): array

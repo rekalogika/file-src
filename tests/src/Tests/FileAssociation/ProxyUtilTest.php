@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\Tests\FileAssociation;
 
+use MongoDBODMProxies\__PM__\Rekalogika\File\Tests\App\Entity\DummyEntity\Generated93deedc1e7b56ba9c8d5a337a376eda9;
 use PHPUnit\Framework\TestCase;
 use Rekalogika\File\Association\Util\ProxyUtil;
+use Rekalogika\File\Tests\App\Entity\DummyEntity;
 
 final class ProxyUtilTest extends TestCase
 {
@@ -42,13 +44,13 @@ final class ProxyUtilTest extends TestCase
     public static function provideTestProxy(): iterable
     {
         yield 'Doctrine ORM' => [
-            'Proxies\__CG__\Rekalogika\File\Tests\App\Entity\DummyEntity',
-            'Rekalogika\File\Tests\App\Entity\DummyEntity',
+            \Proxies\__CG__\Rekalogika\File\Tests\App\Entity\DummyEntity::class,
+            DummyEntity::class,
         ];
 
         yield 'Doctrine ODM' => [
-            'MongoDBODMProxies\__PM__\Rekalogika\File\Tests\App\Entity\DummyEntity\Generated93deedc1e7b56ba9c8d5a337a376eda9',
-            'Rekalogika\File\Tests\App\Entity\DummyEntity',
+            Generated93deedc1e7b56ba9c8d5a337a376eda9::class,
+            DummyEntity::class,
         ];
     }
 }
