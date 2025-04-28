@@ -70,6 +70,7 @@ monorepo-release-%:
 
 .PHONY: serve
 serve:
+	cd tests/assets/controllers/rekalogika/file-filepond && for A in ../../../../../packages/file-filepond/assets/dist/* ; do ln -sf $$A ; done
 	$(PHP) tests/bin/console cache:clear
 	$(PHP) tests/bin/console importmap:install
 	$(PHP) tests/bin/console asset-map:compile

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.13.1
+
+* fix: fix web serving
+
 ## 1.13.0
 
 * deps: remove dependency on `doctrine/persistence`
