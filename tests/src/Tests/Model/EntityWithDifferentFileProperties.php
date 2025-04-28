@@ -20,19 +20,79 @@ use Rekalogika\File\Association\Attribute\AsFileAssociation;
 final class EntityWithDifferentFileProperties
 {
     #[AsFileAssociation(fetch: 'EAGER')]
-    protected ?FileInterface $mandatoryEager = null;
+    private ?FileInterface $mandatoryEager = null;
 
     #[AsFileAssociation(fetch: 'EAGER')]
-    protected FileInterface $notMandatoryEager;
+    private FileInterface $notMandatoryEager;
 
     #[AsFileAssociation(fetch: 'LAZY')]
-    protected ?FileInterface $mandatoryLazy = null;
+    private ?FileInterface $mandatoryLazy = null;
 
     #[AsFileAssociation(fetch: 'LAZY')]
-    protected FileInterface $notMandatoryLazy;
+    private FileInterface $notMandatoryLazy;
 
     #[AsFileAssociation]
-    protected \stdClass $nonFileProperty;
+    private \stdClass $nonFileProperty;
 
-    protected FileInterface $fileWithoutAttribute;
+    private FileInterface $fileWithoutAttribute;
+
+    public function getMandatoryEager(): ?FileInterface
+    {
+        return $this->mandatoryEager;
+    }
+
+    public function setMandatoryEager(?FileInterface $mandatoryEager): void
+    {
+        $this->mandatoryEager = $mandatoryEager;
+    }
+
+    public function getNotMandatoryEager(): FileInterface
+    {
+        return $this->notMandatoryEager;
+    }
+
+    public function setNotMandatoryEager(FileInterface $notMandatoryEager): void
+    {
+        $this->notMandatoryEager = $notMandatoryEager;
+    }
+
+    public function getMandatoryLazy(): ?FileInterface
+    {
+        return $this->mandatoryLazy;
+    }
+
+    public function setMandatoryLazy(?FileInterface $mandatoryLazy): void
+    {
+        $this->mandatoryLazy = $mandatoryLazy;
+    }
+
+    public function getNotMandatoryLazy(): FileInterface
+    {
+        return $this->notMandatoryLazy;
+    }
+
+    public function setNotMandatoryLazy(FileInterface $notMandatoryLazy): void
+    {
+        $this->notMandatoryLazy = $notMandatoryLazy;
+    }
+
+    public function getNonFileProperty(): \stdClass
+    {
+        return $this->nonFileProperty;
+    }
+
+    public function setNonFileProperty(\stdClass $nonFileProperty): void
+    {
+        $this->nonFileProperty = $nonFileProperty;
+    }
+
+    public function getFileWithoutAttribute(): FileInterface
+    {
+        return $this->fileWithoutAttribute;
+    }
+
+    public function setFileWithoutAttribute(FileInterface $fileWithoutAttribute): void
+    {
+        $this->fileWithoutAttribute = $fileWithoutAttribute;
+    }
 }
