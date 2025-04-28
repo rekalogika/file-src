@@ -4,6 +4,7 @@
 
 * deps: remove dependency on `doctrine/persistence`
 * fix: correctly handle common proxy objects
+* deps: update JS dependencies
 
 ## 1.12.0
 
