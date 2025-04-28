@@ -21,6 +21,7 @@ use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\Model\MissingFile;
+use Rekalogika\File\Association\Util\ProxyUtil;
 
 final readonly class FileAssociationManager
 {
@@ -118,7 +119,8 @@ final readonly class FileAssociationManager
         object $object,
         string $propertyName,
     ): void {
-        $inspectorResult = $this->inspector->inspect($object, $propertyName);
+        $class = ProxyUtil::normalizeClassName($object::class);
+        $inspectorResult = $this->inspector->inspect($class, $propertyName);
         $filePointer = $this->fileLocationResolver
             ->getFileLocation($object, $propertyName);
 

@@ -17,14 +17,15 @@ use Rekalogika\File\Association\Exception\PropertyInspector\PropertyInspectorExc
 use Rekalogika\File\Association\Model\PropertyInspectorResult;
 
 /**
- * Writes a valuo to a property of an object.
- *
  * @throws PropertyInspectorException
  */
 interface PropertyInspectorInterface
 {
+    /**
+     * @param class-string $class
+     */
     public function inspect(
-        object $object,
+        string $class,
         string $propertyName,
     ): PropertyInspectorResult;
 }

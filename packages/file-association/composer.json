@@ -26,6 +26,7 @@
         }
     },
     "require": {
+        "psr/cache": "^2 || ^3",
         "rekalogika/direct-property-access": "^1.1.2 || ^1.2",
         "rekalogika/file-association-contracts": "^1.13",
         "rekalogika/file-contracts": "^1.13",

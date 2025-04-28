@@ -1,8 +1,10 @@
 # CHANGELOG
 
-## 1.13.1
+## 1.14.0
 
 * fix: fix web serving
+* refactor(PropertyInspector): change interface to accept class, not object;
+  BC break but probably won't affect anyone. add caching using symfony/cache.
 
 ## 1.13.0
 

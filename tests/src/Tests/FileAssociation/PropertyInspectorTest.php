@@ -23,20 +23,21 @@ final class PropertyInspectorTest extends TestCase
     {
         $inspector = new PropertyInspector();
         $object = new EntityWithDifferentFileProperties();
+        $class = $object::class;
 
-        $result = $inspector->inspect($object, 'mandatoryEager');
+        $result = $inspector->inspect($class, 'mandatoryEager');
         $this->assertFalse($result->isMandatory());
         $this->assertTrue($result->getFetch() === 'EAGER');
 
-        $result = $inspector->inspect($object, 'notMandatoryEager');
+        $result = $inspector->inspect($class, 'notMandatoryEager');
         $this->assertTrue($result->isMandatory());
         $this->assertTrue($result->getFetch() === 'EAGER');
 
-        $result = $inspector->inspect($object, 'mandatoryLazy');
+        $result = $inspector->inspect($class, 'mandatoryLazy');
         $this->assertFalse($result->isMandatory());
         $this->assertTrue($result->getFetch() === 'LAZY');
 
-        $result = $inspector->inspect($object, 'notMandatoryLazy');
+        $result = $inspector->inspect($class, 'notMandatoryLazy');
         $this->assertTrue($result->isMandatory());
         $this->assertTrue($result->getFetch() === 'LAZY');
     }

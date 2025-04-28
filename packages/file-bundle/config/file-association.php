@@ -30,6 +30,7 @@ use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DoctrineObjectIdResolver;
+use Rekalogika\File\Association\PropertyInspector\CachingPropertyInspector;
 use Rekalogika\File\Association\PropertyInspector\PropertyInspector;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Association\PropertyLister\ChainPropertyLister;
@@ -187,6 +188,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     //
 
     $services->set(PropertyInspectorInterface::class, PropertyInspector::class);
+
+    $services
+        ->set('rekalogika.file.association.property_inspector.cache')
+        ->parent('cache.system')
+        ->tag('cache.pool');
+
+    $services->set(CachingPropertyInspector::class)
+        ->decorate(PropertyInspectorInterface::class)
+        ->args([
+            service('.inner'),
+            service('rekalogika.file.association.property_inspector.cache'),
+        ]);
 
     //
     // commands
