@@ -24,7 +24,7 @@ use Rekalogika\File\Association\Attribute\WithFileAssociation;
 class User
 {
     #[ORM\Id, ORM\GeneratedValue, ORM\Column(type: Types::INTEGER)]
-    private ?int $id = null;
+    private ?int $id = null; // @phpstan-ignore property.unusedType
 
     #[AsFileAssociation]
     private ?FileInterface $image = null;
