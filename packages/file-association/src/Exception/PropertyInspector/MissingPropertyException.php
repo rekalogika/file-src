@@ -15,15 +15,18 @@ namespace Rekalogika\File\Association\Exception\PropertyInspector;
 
 final class MissingPropertyException extends PropertyInspectorException
 {
+    /**
+     * @param class-string $class
+     */
     public function __construct(
         string $propertyName,
-        object $object,
+        string $class,
     ) {
         parent::__construct(
             \sprintf(
-                'Property "%s" not found in object "%s"',
+                'Property "%s" not found in class "%s"',
                 $propertyName,
-                $object::class,
+                $class,
             ),
         );
     }

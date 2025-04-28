@@ -20,21 +20,10 @@ use Rekalogika\File\Association\Model\PropertyInspectorResult;
 
 final class PropertyInspector implements PropertyInspectorInterface
 {
-    /**
-     * @var array<string,PropertyInspectorResult>
-     */
-    private array $cache = [];
-
     #[\Override]
-    public function inspect(object $object, string $propertyName): PropertyInspectorResult
+    public function inspect(string $class, string $propertyName): PropertyInspectorResult
     {
-        $cacheKey = $object::class . '::' . $propertyName;
-
-        if (isset($this->cache[$cacheKey])) {
-            return $this->cache[$cacheKey];
-        }
-
-        $reflectionClass = new \ReflectionClass($object);
+        $reflectionClass = new \ReflectionClass($class);
         $reflectionProperty = null;
 
         while ($reflectionClass instanceof \ReflectionClass) {
@@ -49,7 +38,7 @@ final class PropertyInspector implements PropertyInspectorInterface
         if (!$reflectionProperty instanceof \ReflectionProperty) {
             throw new MissingPropertyException(
                 propertyName: $propertyName,
-                object: $object,
+                class: $class,
             );
         }
 
@@ -60,7 +49,7 @@ final class PropertyInspector implements PropertyInspectorInterface
             ->getAttributes(AsFileAssociation::class);
 
         if ($attributes === []) {
-            return $this->cache[$cacheKey] = new PropertyInspectorResult(
+            return new PropertyInspectorResult(
                 mandatory: $mandatory,
                 fetch: 'EAGER',
             );
@@ -68,7 +57,7 @@ final class PropertyInspector implements PropertyInspectorInterface
 
         $attribute = $attributes[0]->newInstance();
 
-        return $this->cache[$cacheKey] = new PropertyInspectorResult(
+        return new PropertyInspectorResult(
             mandatory: $mandatory,
             fetch: $attribute->fetch,
         );
