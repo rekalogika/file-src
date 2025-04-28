@@ -33,8 +33,8 @@
         "psr/http-factory-implementation": "^1.0",
         "league/flysystem": "^3.16",
         "league/mime-type-detection": "^1.0.0",
-        "rekalogika/file-contracts": "^1.12",
-        "rekalogika/file-metadata": "^1.12",
+        "rekalogika/file-contracts": "^1.13",
+        "rekalogika/file-metadata": "^1.13",
         "symfony/deprecation-contracts": "^3.1"
     },
     "require-dev": {
@@ -47,7 +47,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "1.14-dev"
         }
     }
 }
