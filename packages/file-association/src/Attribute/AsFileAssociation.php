@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Rekalogika\File\Association\Attribute;
 
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-final class AsFileAssociation
+final readonly class AsFileAssociation
 {
     /**
      * @var 'EAGER'|'LAZY'
      */
-    public readonly string $fetch;
+    public string $fetch;
 
     /**
      * @param 'EAGER'|'LAZY' $fetch

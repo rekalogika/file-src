@@ -22,10 +22,10 @@ use Rekalogika\Reconstitutor\Contract\ClassReconstitutorInterface;
  *
  * @implements ClassReconstitutorInterface<FileAssociationInterface>
  */
-final class InterfaceReconstitutor implements ClassReconstitutorInterface
+final readonly class InterfaceReconstitutor implements ClassReconstitutorInterface
 {
     public function __construct(
-        private readonly FileAssociationManager $fileAssociationService,
+        private FileAssociationManager $fileAssociationService,
     ) {}
 
     #[\Override]

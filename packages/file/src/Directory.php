@@ -26,14 +26,14 @@ use Rekalogika\Domain\File\Metadata\Model\FileName;
  * @implements \IteratorAggregate<TKey,T>
  * @implements DirectoryInterface<TKey,T>
  */
-final class Directory implements DirectoryInterface, \IteratorAggregate
+final readonly class Directory implements DirectoryInterface, \IteratorAggregate
 {
     /**
      * @param array<TKey,T> $entries
      */
     public function __construct(
-        private readonly string $name,
-        private readonly array $entries = [],
+        private string $name,
+        private array $entries = [],
     ) {}
 
     #[\Override]

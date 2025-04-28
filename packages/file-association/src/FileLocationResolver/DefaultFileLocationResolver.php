@@ -19,11 +19,11 @@ use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Util\ProxyUtil;
 
-final class DefaultFileLocationResolver implements FileLocationResolverInterface
+final readonly class DefaultFileLocationResolver implements FileLocationResolverInterface
 {
     public function __construct(
-        private readonly ObjectIdResolverInterface $objectIdResolver,
-        private readonly ClassBasedFileLocationResolverInterface $classBasedFileLocationResolver,
+        private ObjectIdResolverInterface $objectIdResolver,
+        private ClassBasedFileLocationResolverInterface $classBasedFileLocationResolver,
     ) {}
 
     #[\Override]

@@ -17,12 +17,12 @@ use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Model\FilePointer;
 
-final class DefaultClassBasedFileLocationResolver implements ClassBasedFileLocationResolverInterface
+final readonly class DefaultClassBasedFileLocationResolver implements ClassBasedFileLocationResolverInterface
 {
     public function __construct(
-        private readonly string $filesystemIdentifier = 'default',
-        private readonly string $prefix = 'entity',
-        private readonly int $hashLevel = 4,
+        private string $filesystemIdentifier = 'default',
+        private string $prefix = 'entity',
+        private int $hashLevel = 4,
     ) {}
 
     #[\Override]

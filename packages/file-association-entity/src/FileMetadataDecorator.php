@@ -18,15 +18,15 @@ use Rekalogika\Contracts\File\RawMetadataInterface;
 /**
  * @implements \IteratorAggregate<string,int|string|bool|null>
  */
-final class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggregate
+final readonly class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggregate
 {
     /**
      * @param RawMetadataInterface $embeddedMetadata Metadata embedded in entities
      * @param RawMetadataInterface $fileMetadata Metadata from the real file
      */
     public function __construct(
-        private readonly RawMetadataInterface $embeddedMetadata,
-        private readonly RawMetadataInterface $fileMetadata,
+        private RawMetadataInterface $embeddedMetadata,
+        private RawMetadataInterface $fileMetadata,
     ) {}
 
     #[\Override]

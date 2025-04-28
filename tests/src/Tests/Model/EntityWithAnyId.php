@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\Tests\Model;
 
-final class EntityWithAnyId
+final readonly class EntityWithAnyId
 {
     public function __construct(
-        private readonly mixed $id,
+        private mixed $id,
     ) {}
 
     public function getId(): mixed

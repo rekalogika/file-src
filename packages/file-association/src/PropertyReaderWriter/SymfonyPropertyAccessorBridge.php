@@ -22,12 +22,12 @@ use Symfony\Component\PropertyAccess\Exception\InvalidArgumentException;
 use Symfony\Component\PropertyAccess\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface as SymfonyPropertyAccessorInterface;
 
-final class SymfonyPropertyAccessorBridge implements
+final readonly class SymfonyPropertyAccessorBridge implements
     PropertyReaderInterface,
     PropertyWriterInterface
 {
     public function __construct(
-        private readonly SymfonyPropertyAccessorInterface $propertyAccessor,
+        private SymfonyPropertyAccessorInterface $propertyAccessor,
     ) {}
 
     #[\Override]
