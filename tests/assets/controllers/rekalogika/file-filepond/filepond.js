@@ -1,0 +1,1 @@
+../../../../../packages/file-filepond/assets/dist/filepond.js
