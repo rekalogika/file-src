@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Tests\Tests\FileAssociation;
 
 use PHPUnit\Framework\TestCase;
+use Rekalogika\File\Association\ClassBasedFileLocationResolver\DefaultClassBasedFileLocationResolver;
 use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Tests\Tests\Model\Entity;
@@ -23,7 +24,13 @@ final class DefaultFileLocationResolverTest extends TestCase
     public function testDefaultLocationResolver(): void
     {
         $objectIdResolver = new DefaultObjectIdResolver();
-        $locationResolver = new DefaultFileLocationResolver($objectIdResolver);
+        $classBasedFileLocationResolver = new DefaultClassBasedFileLocationResolver();
+
+        $locationResolver = new DefaultFileLocationResolver(
+            objectIdResolver: $objectIdResolver,
+            classBasedFileLocationResolver: $classBasedFileLocationResolver,
+        );
+
         $object = new Entity('entity_id');
 
         $location = $locationResolver->getFileLocation($object, 'file');

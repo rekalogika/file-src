@@ -57,6 +57,7 @@
         <ClassMustBeFinal>
             <errorLevel type="suppress">
                 <directory name="tests/src/App/Entity" />
+                <file name="tests/src/Tests/FileAssociation/ProxyUtilTest.php" />
             </errorLevel>
         </ClassMustBeFinal>
     </issueHandlers>

@@ -3,6 +3,7 @@
 ## 1.13.0
 
 * deps: remove dependency on `doctrine/persistence`
+* fix: correctly handle common proxy objects
 
 ## 1.12.0
 

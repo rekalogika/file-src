@@ -14,7 +14,10 @@ declare(strict_types=1);
 use Doctrine\Persistence\ManagerRegistry;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\DirectPropertyAccessor;
+use Rekalogika\File\Association\ClassBasedFileLocationResolver\ChainedClassBasedFileLocationResolver;
+use Rekalogika\File\Association\ClassBasedFileLocationResolver\DefaultClassBasedFileLocationResolver;
 use Rekalogika\File\Association\Command\FileLocationResolverCommand;
+use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
@@ -118,8 +121,28 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(DefaultFileLocationResolver::class)
         ->args([
             service(ObjectIdResolverInterface::class),
+            service(ClassBasedFileLocationResolverInterface::class),
         ])
         ->tag('rekalogika.file.association.file_location_resolver', [
+            'priority' => -1000,
+        ]);
+
+    //
+    // class-based file location resolver
+    //
+
+    $services->alias(
+        ClassBasedFileLocationResolverInterface::class,
+        ChainedClassBasedFileLocationResolver::class,
+    );
+
+    $services->set(ChainedClassBasedFileLocationResolver::class)
+        ->args([
+            tagged_iterator('rekalogika.file.association.class_based_file_location_resolver'),
+        ]);
+
+    $services->set(DefaultClassBasedFileLocationResolver::class)
+        ->tag('rekalogika.file.association.class_based_file_location_resolver', [
             'priority' => -1000,
         ]);
 

@@ -14,17 +14,16 @@ declare(strict_types=1);
 namespace Rekalogika\File\Association\FileLocationResolver;
 
 use Rekalogika\Contracts\File\FilePointerInterface;
+use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
-use Rekalogika\File\Association\Model\FilePointer;
+use Rekalogika\File\Association\Util\ProxyUtil;
 
 final class DefaultFileLocationResolver implements FileLocationResolverInterface
 {
     public function __construct(
         private readonly ObjectIdResolverInterface $objectIdResolver,
-        private readonly string $filesystemIdentifier = 'default',
-        private readonly string $prefix = 'entity',
-        private readonly int $hashLevel = 4,
+        private readonly ClassBasedFileLocationResolverInterface $classBasedFileLocationResolver,
     ) {}
 
     #[\Override]
@@ -33,24 +32,12 @@ final class DefaultFileLocationResolver implements FileLocationResolverInterface
         string $propertyName,
     ): FilePointerInterface {
         $id = $this->objectIdResolver->getObjectId($object);
+        $class = ProxyUtil::normalizeClassName($object::class);
 
-        $splittedHash = str_split(sha1($id), 2);
-        $hash = implode('/', \array_slice($splittedHash, 0, $this->hashLevel));
-
-        $classHash = sha1($object::class);
-
-        $key = \sprintf(
-            '%s/%s/%s/%s/%s',
-            $this->prefix,
-            $classHash,
-            $propertyName,
-            $hash,
-            $id,
+        return $this->classBasedFileLocationResolver->getFileLocation(
+            class: $class,
+            id: $id,
+            propertyName: $propertyName,
         );
-
-        $key = preg_replace('/\/+/', '/', $key);
-        \assert(\is_string($key));
-
-        return new FilePointer($this->filesystemIdentifier, $key);
     }
 }
