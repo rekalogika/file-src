@@ -16,13 +16,11 @@ namespace Rekalogika\File\Association\Contracts;
 use Rekalogika\File\Association\Exception\PropertyInspector\PropertyInspectorException;
 use Rekalogika\File\Association\Model\PropertyInspectorResult;
 
-/**
- * @throws PropertyInspectorException
- */
 interface PropertyInspectorInterface
 {
     /**
      * @param class-string $class
+     * @throws PropertyInspectorException
      */
     public function inspect(
         string $class,

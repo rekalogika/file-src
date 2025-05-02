@@ -19,11 +19,12 @@ use Rekalogika\File\Association\Exception\FileLocationResolver\FileLocationResol
 /**
  * Determines where a file is stored depending on the object and
  * property name.
- *
- * @throws FileLocationResolverException
  */
 interface FileLocationResolverInterface
 {
+    /**
+     * @throws FileLocationResolverException
+     */
     public function getFileLocation(
         object $object,
         string $propertyName,
