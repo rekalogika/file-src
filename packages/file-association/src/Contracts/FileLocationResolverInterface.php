@@ -19,6 +19,8 @@ use Rekalogika\File\Association\Exception\FileLocationResolver\FileLocationResol
 /**
  * Determines where a file is stored depending on the object and
  * property name.
+ *
+ * @deprecated version 2.0.0, use `ClassBasedFileLocationResolverInterface` instead
  */
 interface FileLocationResolverInterface
 {
