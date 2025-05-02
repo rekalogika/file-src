@@ -7,6 +7,7 @@
   BC break but probably won't affect anyone. add caching using symfony/cache.
 * chore: rector run
 * fix: fix interface phpdoc
+* fix: remove no longer needed psr-16
 
 ## 1.13.0
 

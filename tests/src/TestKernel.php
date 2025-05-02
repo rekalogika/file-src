@@ -92,7 +92,6 @@ final class TestKernel extends HttpKernelKernel
         yield new RekalogikaFileBundle();
         yield new RekalogikaFileFilePondBundle();
         yield new RekalogikaTemporaryUrlBundle();
-        yield new RekalogikaPsr16SimpleCacheBundle();
         yield new FlysystemBundle();
     }
 
