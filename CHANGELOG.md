@@ -16,6 +16,7 @@
   in file locations
 * refactor: make `FileAssociationManager` use `ClassMetadataFactoryInterface`
   instead of `PropertyListerInterface`
+* deprecation: `FileLocationResolverInterface`
 
 ## 1.13.0
 
