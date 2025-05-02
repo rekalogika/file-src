@@ -6,6 +6,7 @@
 * refactor: Make `FileAssociationManager` use `ClassBasedFileLocationResolverInterface`
 * chore: remove deprecated `FileLocationResolverInterface`
 * refactor: move property related methods to `FilePropertyManagerInterface`
+* refactor: use `PropertyMetadata` as arguments for simplicity
 
 ## 1.14.0
 

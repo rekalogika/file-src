@@ -13,21 +13,14 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Model;
 
-/**
- * The result of a property inspection.
- */
-final readonly class PropertyMetadata
+final readonly class Property
 {
     /**
      * @param class-string $class
-     * @param class-string $scopeClass
      */
     public function __construct(
         private string $class,
-        private string $scopeClass,
         private string $name,
-        private bool $mandatory,
-        private FetchMode $fetch,
     ) {}
 
     public function getName(): string
@@ -41,23 +34,5 @@ final readonly class PropertyMetadata
     public function getClass(): string
     {
         return $this->class;
-    }
-
-    /**
-     * @return class-string
-     */
-    public function getScopeClass(): string
-    {
-        return $this->scopeClass;
-    }
-
-    public function isMandatory(): bool
-    {
-        return $this->mandatory;
-    }
-
-    public function getFetch(): FetchMode
-    {
-        return $this->fetch;
     }
 }

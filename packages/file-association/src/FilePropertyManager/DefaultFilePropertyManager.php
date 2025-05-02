@@ -16,12 +16,12 @@ namespace Rekalogika\File\Association\FilePropertyManager;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
-use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\Model\FetchMode;
 use Rekalogika\File\Association\Model\MissingFile;
+use Rekalogika\File\Association\Model\PropertyMetadata;
 
 final readonly class DefaultFilePropertyManager implements FilePropertyManagerInterface
 {
@@ -29,24 +29,23 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         private FileRepositoryInterface $fileRepository,
         private PropertyReaderInterface $reader,
         private PropertyWriterInterface $writer,
-        private ClassMetadataFactoryInterface $classMetadataFactory,
         private ClassBasedFileLocationResolverInterface $fileLocationResolver,
     ) {}
 
     /**
      * Process a potential incoming file upload on a property
-     *
-     * @param class-string $class
      */
     #[\Override]
     public function saveProperty(
+        PropertyMetadata $propertyMetadata,
         object $object,
-        string $class,
         string $id,
-        string $propertyName,
     ): void {
+        $propertyName = $propertyMetadata->getName();
+        $class = $propertyMetadata->getClass();
+
+        /** @psalm-suppress MixedAssignment */
         $currentFile = $this->reader->read($object, $propertyName);
-        \assert($currentFile instanceof FileInterface || null === $currentFile);
 
         if ($currentFile instanceof FileInterface) {
             $filePointer = $this->fileLocationResolver->getFileLocation(
@@ -63,17 +62,15 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
 
             // replace with the new file
             $this->loadProperty(
-                class: $class,
-                id: $id,
+                propertyMetadata: $propertyMetadata,
                 object: $object,
-                propertyName: $propertyName,
+                id: $id,
             );
         } elseif (null === $currentFile) {
             $this->removeProperty(
-                class: $class,
-                id: $id,
+                propertyMetadata: $propertyMetadata,
                 object: $object,
-                propertyName: $propertyName,
+                id: $id,
             );
         } else {
             throw new \InvalidArgumentException(
@@ -89,16 +86,16 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
 
     /**
      * Process a file removal on an attribute
-     *
-     * @param class-string $class
      */
     #[\Override]
     public function removeProperty(
+        PropertyMetadata $propertyMetadata,
         object $object,
-        string $class,
         string $id,
-        string $propertyName,
     ): void {
+        $propertyName = $propertyMetadata->getName();
+        $class = $propertyMetadata->getClass();
+
         $filePointer = $this->fileLocationResolver->getFileLocation(
             class: $class,
             id: $id,
@@ -110,19 +107,15 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
 
     /**
      * Process an attribute on an object loading
-     *
-     * @param class-string $class
      */
     #[\Override]
     public function loadProperty(
+        PropertyMetadata $propertyMetadata,
         object $object,
-        string $class,
         string $id,
-        string $propertyName,
     ): void {
-        $propertyMetadata = $this->classMetadataFactory
-            ->getClassMetadata($class)
-            ->getProperty($propertyName);
+        $propertyName = $propertyMetadata->getName();
+        $class = $propertyMetadata->getClass();
 
         $filePointer = $this->fileLocationResolver->getFileLocation(
             class: $class,
