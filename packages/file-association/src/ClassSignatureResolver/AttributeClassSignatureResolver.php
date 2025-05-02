@@ -32,6 +32,6 @@ final readonly class AttributeClassSignatureResolver implements ClassSignatureRe
 
         $attributeInstance = $attribute->newInstance();
 
-        return $attributeInstance->getClassSignature();
+        return $attributeInstance->getSignature();
     }
 }

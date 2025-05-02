@@ -15,5 +15,5 @@ namespace Rekalogika\File\Tests\Tests\Model;
 
 use Rekalogika\File\Association\Attribute\WithFileAssociation;
 
-#[WithFileAssociation(classSignature: 'foo')]
+#[WithFileAssociation(signature: 'foo')]
 final class EntityWithOverridenSignature {}

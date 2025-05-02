@@ -19,23 +19,23 @@ use Rekalogika\File\Association\Exception\InvalidClassSignatureException;
 final class WithFileAssociation
 {
     public function __construct(
-        private readonly ?string $classSignature = null,
+        private readonly ?string $signature = null,
     ) {
         // if not null, ensure $classSignature contains only alphanumeric characters only
 
         if (
-            $classSignature !== null
-            && !preg_match('/^[a-zA-Z0-9_]+$/', $classSignature)
+            $signature !== null
+            && !preg_match('/^[a-zA-Z0-9_]+$/', $signature)
         ) {
             throw new InvalidClassSignatureException(\sprintf(
                 'Class signature must contain only alphanumeric characters and underscores, "%s" given',
-                $classSignature,
+                $signature,
             ));
         }
     }
 
-    public function getClassSignature(): ?string
+    public function getSignature(): ?string
     {
-        return $this->classSignature;
+        return $this->signature;
     }
 }
