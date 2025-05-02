@@ -28,8 +28,8 @@
     "require": {
         "psr/cache": "^2 || ^3",
         "rekalogika/direct-property-access": "^1.1.2 || ^1.2",
-        "rekalogika/file-association-contracts": "^1.13",
-        "rekalogika/file-contracts": "^1.13",
+        "rekalogika/file-association-contracts": "^1.14",
+        "rekalogika/file-contracts": "^1.14",
         "rekalogika/reconstitutor": "^1.3.2 || ^1.4",
         "symfony/deprecation-contracts": "^3.1",
         "symfony/property-access": "^6.2 || ^7.0"
@@ -39,7 +39,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.14-dev"
+            "dev-main": "1.15-dev"
         }
     }
 }

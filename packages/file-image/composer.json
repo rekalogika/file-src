@@ -27,15 +27,15 @@
     },
     "require": {
         "intervention/image": "^3.3",
-        "rekalogika/file-contracts": "^1.13",
-        "rekalogika/file-derivation": "^1.13",
+        "rekalogika/file-contracts": "^1.14",
+        "rekalogika/file-derivation": "^1.14",
         "symfony/service-contracts": "^3.3",
         "twig/twig": "^2.12|^3.0",
         "webmozart/assert": "^1.11"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.14-dev"
+            "dev-main": "1.15-dev"
         }
     }
 }

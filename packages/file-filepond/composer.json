@@ -25,13 +25,13 @@
         }
     },
     "require": {
-        "rekalogika/file": "^1.13",
-        "rekalogika/file-association-entity": "^1.13",
-        "rekalogika/file-bundle": "^1.13",
-        "rekalogika/file-contracts": "^1.13",
-        "rekalogika/file-image": "^1.13",
-        "rekalogika/file-server": "^1.13",
-        "rekalogika/file-symfony-bridge": "^1.13",
+        "rekalogika/file": "^1.14",
+        "rekalogika/file-association-entity": "^1.14",
+        "rekalogika/file-bundle": "^1.14",
+        "rekalogika/file-contracts": "^1.14",
+        "rekalogika/file-image": "^1.14",
+        "rekalogika/file-server": "^1.14",
+        "rekalogika/file-symfony-bridge": "^1.14",
         "rekalogika/temporary-url-bundle": "^1.7",
         "symfony/form": "^6.2 || ^7.0",
         "symfony/options-resolver": "^6.2 || ^7.0",
@@ -39,7 +39,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.14-dev"
+            "dev-main": "1.15-dev"
         }
     }
 }
