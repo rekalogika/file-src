@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Util;
 
-use Rekalogika\File\Association\Exception\FileLocationResolver\ProxyResolvingException;
+use Rekalogika\File\Association\Exception\FileLocationResolver\InvalidProxyException;
 
 final readonly class ProxyUtil
 {
@@ -49,7 +49,7 @@ final readonly class ProxyUtil
         }
 
         if (!class_exists($realClass)) {
-            throw new ProxyResolvingException(
+            throw new InvalidProxyException(
                 \sprintf(
                     'Class "%s" is determined to be a proxy for "%s", but the class "%s" does not exist.',
                     $className,

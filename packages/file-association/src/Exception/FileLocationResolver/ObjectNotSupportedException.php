@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Exception\FileLocationResolver;
 
-use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 
 final class ObjectNotSupportedException extends FileLocationResolverException
 {
     /**
-     * @param class-string<FileLocationResolverInterface> $class
+     * @param class-string<ClassBasedFileLocationResolverInterface> $class
      */
     public function __construct(
         string $class,

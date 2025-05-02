@@ -17,9 +17,9 @@ use PHPUnit\Framework\TestCase;
 use Rekalogika\File\Association\ClassBasedFileLocationResolver\DefaultClassBasedFileLocationResolver;
 use Rekalogika\File\Association\ClassMetadataFactory\DefaultClassMetadataFactory;
 use Rekalogika\File\Association\ClassSignatureResolver\DefaultClassSignatureResolver;
-use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
+use Rekalogika\File\Association\Util\ProxyUtil;
 use Rekalogika\File\Tests\Tests\Model\Entity;
 
 final class DefaultFileLocationResolverTest extends TestCase
@@ -33,16 +33,15 @@ final class DefaultFileLocationResolverTest extends TestCase
 
         $objectIdResolver = new DefaultObjectIdResolver();
 
-        $classBasedFileLocationResolver = new DefaultClassBasedFileLocationResolver($classMetadataFactory);
-
-        $locationResolver = new DefaultFileLocationResolver(
-            objectIdResolver: $objectIdResolver,
-            classBasedFileLocationResolver: $classBasedFileLocationResolver,
-        );
+        $locationResolver = new DefaultClassBasedFileLocationResolver($classMetadataFactory);
 
         $object = new Entity('entity_id');
 
-        $location = $locationResolver->getFileLocation($object, 'file');
+        $location = $locationResolver->getFileLocation(
+            class: ProxyUtil::normalizeClassName($object::class),
+            id: $objectIdResolver->getObjectId($object),
+            propertyName: 'file',
+        );
         $this->assertSame('default', $location->getFilesystemIdentifier());
         $this->assertSame('entity/bf4f1cf543bb2ff30f0db7ffb4af653fcf8292b7/file/50/a7/74/1b/entity_id', $location->getKey());
     }

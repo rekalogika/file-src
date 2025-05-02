@@ -57,7 +57,7 @@ final readonly class FileAssociationManager
                 class: $class,
                 object: $object,
                 id: $id,
-                propertyName: $propertyName
+                propertyName: $propertyName,
             );
         }
     }
@@ -76,7 +76,7 @@ final readonly class FileAssociationManager
                 class: $class,
                 object: $object,
                 id: $id,
-                propertyName: $propertyName
+                propertyName: $propertyName,
             );
         }
     }
@@ -95,7 +95,7 @@ final readonly class FileAssociationManager
                 class: $class,
                 object: $object,
                 id: $id,
-                propertyName: $propertyName
+                propertyName: $propertyName,
             );
         }
     }
@@ -118,7 +118,7 @@ final readonly class FileAssociationManager
             $filePointer = $this->fileLocationResolver->getFileLocation(
                 class: $class,
                 id: $id,
-                propertyName: $propertyName
+                propertyName: $propertyName,
             );
 
             if ($currentFile->isEqualTo($filePointer)) {
@@ -132,14 +132,14 @@ final readonly class FileAssociationManager
                 class: $class,
                 id: $id,
                 object: $object,
-                propertyName: $propertyName
+                propertyName: $propertyName,
             );
         } elseif (null === $currentFile) {
             $this->removeProperty(
                 class: $class,
                 id: $id,
                 object: $object,
-                propertyName: $propertyName
+                propertyName: $propertyName,
             );
         } else {
             throw new \InvalidArgumentException(
@@ -167,7 +167,7 @@ final readonly class FileAssociationManager
         $filePointer = $this->fileLocationResolver->getFileLocation(
             class: $class,
             id: $id,
-            propertyName: $propertyName
+            propertyName: $propertyName,
         );
 
         $this->fileRepository->delete($filePointer);
@@ -191,7 +191,7 @@ final readonly class FileAssociationManager
         $filePointer = $this->fileLocationResolver->getFileLocation(
             class: $class,
             id: $id,
-            propertyName: $propertyName
+            propertyName: $propertyName,
         );
 
         if ($propertyMetadata->getFetch() === FetchMode::Eager) {

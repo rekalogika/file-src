@@ -13,4 +13,6 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Exception\FileLocationResolver;
 
-final class ProxyResolvingException extends FileLocationResolverException {}
+use Rekalogika\File\Association\Exception\FileAssociationException;
+
+final class InvalidProxyException extends FileAssociationException {}
