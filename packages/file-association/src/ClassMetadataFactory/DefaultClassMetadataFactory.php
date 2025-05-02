@@ -95,8 +95,9 @@ final readonly class DefaultClassMetadataFactory implements ClassMetadataFactory
 
         if ($attributes === []) {
             return new PropertyMetadata(
+                class: $class,
+                scopeClass: $declaringClass,
                 name: $propertyName,
-                class: $declaringClass,
                 mandatory: $mandatory,
                 fetch: FetchMode::Eager,
             );
@@ -105,8 +106,9 @@ final readonly class DefaultClassMetadataFactory implements ClassMetadataFactory
         $attribute = $attributes[0]->newInstance();
 
         return new PropertyMetadata(
+            class: $class,
+            scopeClass: $declaringClass,
             name: $propertyName,
-            class: $declaringClass,
             mandatory: $mandatory,
             fetch: $attribute->fetch,
         );

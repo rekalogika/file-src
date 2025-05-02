@@ -43,12 +43,11 @@ final readonly class FileAssociationManager
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
         $id = $this->objectIdResolver->getObjectId($object);
 
-        foreach ($classMetadata->getPropertyNames() as $propertyName) {
+        foreach ($classMetadata->getProperties() as $propertyMetadata) {
             $this->filePropertyManager->saveProperty(
+                propertyMetadata: $propertyMetadata,
                 object: $object,
-                class: $class,
                 id: $id,
-                propertyName: $propertyName,
             );
         }
     }
@@ -62,12 +61,11 @@ final readonly class FileAssociationManager
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
         $id = $this->objectIdResolver->getObjectId($object);
 
-        foreach ($classMetadata->getPropertyNames() as $propertyName) {
+        foreach ($classMetadata->getProperties() as $propertyMetadata) {
             $this->filePropertyManager->removeProperty(
+                propertyMetadata: $propertyMetadata,
                 object: $object,
-                class: $class,
                 id: $id,
-                propertyName: $propertyName,
             );
         }
     }
@@ -81,12 +79,11 @@ final readonly class FileAssociationManager
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
         $id = $this->objectIdResolver->getObjectId($object);
 
-        foreach ($classMetadata->getPropertyNames() as $propertyName) {
+        foreach ($classMetadata->getProperties() as $propertyMetadata) {
             $this->filePropertyManager->loadProperty(
+                propertyMetadata: $propertyMetadata,
                 object: $object,
-                class: $class,
                 id: $id,
-                propertyName: $propertyName,
             );
         }
     }

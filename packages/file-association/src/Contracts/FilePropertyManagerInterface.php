@@ -13,41 +13,37 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Contracts;
 
+use Rekalogika\File\Association\Model\PropertyMetadata;
+
+/**
+ * @internal
+ */
 interface FilePropertyManagerInterface
 {
     /**
      * Process a potential incoming file upload on a property
-     *
-     * @param class-string $class
      */
     public function saveProperty(
+        PropertyMetadata $propertyMetadata,
         object $object,
-        string $class,
         string $id,
-        string $propertyName,
     ): void;
 
     /**
      * Process a file removal on a property
-     *
-     * @param class-string $class
      */
     public function removeProperty(
+        PropertyMetadata $propertyMetadata,
         object $object,
-        string $class,
         string $id,
-        string $propertyName,
     ): void;
 
     /**
      * Process a property on an object load
-     *
-     * @param class-string $class
      */
     public function loadProperty(
+        PropertyMetadata $propertyMetadata,
         object $object,
-        string $class,
         string $id,
-        string $propertyName,
     ): void;
 }
