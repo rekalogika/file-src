@@ -73,7 +73,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(FileAssociationManager::class)
         ->args([
             '$fileRepository' => service(FileRepositoryInterface::class),
-            '$lister' => service(PropertyListerInterface::class),
             '$reader' => service(PropertyReaderInterface::class),
             '$writer' => service(PropertyWriterInterface::class),
             '$classMetadataFactory' => service(ClassMetadataFactoryInterface::class),

@@ -14,6 +14,8 @@
 * refactor: internalize property lister, property reader, property writer
 * feat: `ClassSignatureResolverInterface` for overriding class signatures used
   in file locations
+* refactor: make `FileAssociationManager` use `ClassMetadataFactoryInterface`
+  instead of `PropertyListerInterface`
 
 ## 1.13.0
 

@@ -49,6 +49,14 @@ final readonly class ClassMetadata
         return $this->properties;
     }
 
+    /**
+     * @return list<string>
+     */
+    public function getPropertyNames(): array
+    {
+        return \array_keys($this->properties);
+    }
+
     public function getProperty(string $name): PropertyMetadata
     {
         return $this->properties[$name] ?? throw new \InvalidArgumentException(\sprintf('Property "%s" not found in class "%s".', $name, $this->class));
