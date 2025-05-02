@@ -34,15 +34,23 @@ final readonly class FileAssociationManager
     ) {}
 
     /**
+     * @return class-string
+     */
+    private function getClass(object $object): string
+    {
+        return ProxyUtil::normalizeClassName($object::class);
+    }
+
+    /**
      * Called when the object is saved
      */
     public function save(object $object): void
     {
-        $class = ProxyUtil::normalizeClassName($object::class);
+        $class = $this->getClass($object);
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
 
         foreach ($classMetadata->getPropertyNames() as $propertyName) {
-            $this->saveProperty($object, $propertyName);
+            $this->saveProperty($class, $object, $propertyName);
         }
     }
 
@@ -51,11 +59,11 @@ final readonly class FileAssociationManager
      */
     public function remove(object $object): void
     {
-        $class = ProxyUtil::normalizeClassName($object::class);
+        $class = $this->getClass($object);
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
 
         foreach ($classMetadata->getPropertyNames() as $propertyName) {
-            $this->removeProperty($object, $propertyName);
+            $this->removeProperty($class, $object, $propertyName);
         }
     }
 
@@ -64,18 +72,21 @@ final readonly class FileAssociationManager
      */
     public function load(object $object): void
     {
-        $class = ProxyUtil::normalizeClassName($object::class);
+        $class = $this->getClass($object);
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
 
         foreach ($classMetadata->getPropertyNames() as $propertyName) {
-            $this->loadProperty($object, $propertyName);
+            $this->loadProperty($class, $object, $propertyName);
         }
     }
 
     /**
      * Process a potential incoming file upload on a property
+     *
+     * @param class-string $class
      */
     private function saveProperty(
+        string $class,
         object $object,
         string $propertyName,
     ): void {
@@ -93,9 +104,9 @@ final readonly class FileAssociationManager
             $this->fileRepository->copy($currentFile, $filePointer);
 
             // replace with the new file
-            $this->loadProperty($object, $propertyName);
+            $this->loadProperty($class, $object, $propertyName);
         } elseif (null === $currentFile) {
-            $this->removeProperty($object, $propertyName);
+            $this->removeProperty($class, $object, $propertyName);
         } else {
             throw new \InvalidArgumentException(
                 \sprintf(
@@ -110,25 +121,30 @@ final readonly class FileAssociationManager
 
     /**
      * Process a file removal on an attribute
+     *
+     * @param class-string $class
      */
     private function removeProperty(
+        string $class,
         object $object,
         string $propertyName,
     ): void {
         $filePointer = $this->fileLocationResolver
             ->getFileLocation($object, $propertyName);
+
         $this->fileRepository->delete($filePointer);
     }
 
     /**
      * Process an attribute on an object loading
+     *
+     * @param class-string $class
      */
     private function loadProperty(
+        string $class,
         object $object,
         string $propertyName,
     ): void {
-        $class = ProxyUtil::normalizeClassName($object::class);
-
         $propertyMetadata = $this->classMetadataFactory
             ->getClassMetadata($class)
             ->getProperty($propertyName);
