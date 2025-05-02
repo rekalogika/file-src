@@ -11,6 +11,7 @@
 * refactor: introduce `ClassMetadataFactoryInterface` to replace
   `PropertyInspectorInterface`
 * refactor: use `FetchMode` enum instead of EAGER and LAZY strings
+* refactor: internalize property lister, property reader, property writer
 
 ## 1.13.0
 

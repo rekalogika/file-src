@@ -17,6 +17,8 @@ use Rekalogika\File\Association\Exception\PropertyWriter\PropertyWriterException
 
 /**
  * Writes a valuo to a property of an object..
+ *
+ * @internal
  */
 interface PropertyWriterInterface
 {
