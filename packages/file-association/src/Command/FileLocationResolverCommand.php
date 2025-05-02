@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Command;
 
-use Doctrine\Persistence\ManagerRegistry;
-use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -28,8 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class FileLocationResolverCommand extends Command
 {
     public function __construct(
-        private readonly ManagerRegistry $managerRegistry,
-        private readonly FileLocationResolverInterface $fileLocationResolver,
+        private readonly ClassBasedFileLocationResolverInterface $fileLocationResolver,
     ) {
         parent::__construct();
     }
@@ -63,13 +61,11 @@ final class FileLocationResolverCommand extends Command
             throw new \InvalidArgumentException(\sprintf('Property name %s not found', get_debug_type($propertyName)));
         }
 
-        $object = $this->managerRegistry->getRepository($class)->find($id);
-
-        if ($object === null) {
-            throw new \InvalidArgumentException('Object not found');
-        }
-
-        $filePointer = $this->fileLocationResolver->getFileLocation($object, $propertyName);
+        $filePointer = $this->fileLocationResolver->getFileLocation(
+            class: $class,
+            id: $id,
+            propertyName: $propertyName,
+        );
 
         $output->writeln($filePointer->getKey());
 

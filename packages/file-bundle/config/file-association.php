@@ -25,14 +25,11 @@ use Rekalogika\File\Association\Command\FileLocationResolverCommand;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
-use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\FileAssociationManager;
-use Rekalogika\File\Association\FileLocationResolver\ChainedFileLocationResolver;
-use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver;
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DoctrineObjectIdResolver;
@@ -108,29 +105,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'priority' => -999,
             ]);
     }
-
-    //
-    // file location resolver
-    //
-
-    $services->alias(
-        FileLocationResolverInterface::class,
-        ChainedFileLocationResolver::class,
-    );
-
-    $services->set(ChainedFileLocationResolver::class)
-        ->args([
-            tagged_iterator('rekalogika.file.association.file_location_resolver'),
-        ]);
-
-    $services->set(DefaultFileLocationResolver::class)
-        ->args([
-            service(ObjectIdResolverInterface::class),
-            service(ClassBasedFileLocationResolverInterface::class),
-        ])
-        ->tag('rekalogika.file.association.file_location_resolver', [
-            'priority' => -1000,
-        ]);
 
     //
     // class-based file location resolver
@@ -242,8 +216,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(FileLocationResolverCommand::class)
         ->args([
-            '$managerRegistry' => service('doctrine'),
-            '$fileLocationResolver' => service(FileLocationResolverInterface::class),
+            '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
         ])
         ->tag('console.command');
 };

@@ -18,13 +18,10 @@ use League\FlysystemBundle\FlysystemBundle;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\RekalogikaDirectPropertyAccessBundle;
 use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
-use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\FileAssociationManager;
-use Rekalogika\File\Association\FileLocationResolver\ChainedFileLocationResolver;
-use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Association\PropertyLister\ChainPropertyLister;
 use Rekalogika\File\Association\PropertyLister\FileAssociationInterfacePropertyLister;
@@ -137,9 +134,6 @@ final class TestKernel extends HttpKernelKernel
             InterfaceReconstitutor::class,
             AttributeReconstitutor::class,
             FileAssociationManager::class,
-            FileLocationResolverInterface::class,
-            ChainedFileLocationResolver::class,
-            DefaultFileLocationResolver::class,
             PropertyListerInterface::class,
             ChainPropertyLister::class,
             FileAssociationInterfacePropertyLister::class,

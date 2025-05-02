@@ -60,14 +60,6 @@
                 <file name="tests/src/Tests/FileAssociation/ProxyUtilTest.php"/>
             </errorLevel>
         </ClassMustBeFinal>
-        <DeprecatedInterface>
-            <errorLevel type="suppress">
-                <file name="packages/file-association/src/Command/FileLocationResolverCommand.php"/>
-                <file name="packages/file-association/src/FileAssociationManager.php"/>
-                <directory name="packages/file-association/src/FileLocationResolver/"/>
-                <directory name="packages/file-association/src/Exception/FileLocationResolver" />
-            </errorLevel>
-        </DeprecatedInterface>
     </issueHandlers>
 
     <plugins>

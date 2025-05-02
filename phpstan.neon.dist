@@ -18,7 +18,6 @@ parameters:
         -
             identifier: return.unusedType
             path: packages/file-symfony-bridge/src/HttpFoundation/ToHttpFoundationFileAdapter.php
-        - '#deprecated interface Rekalogika\\File\\Association\\Contracts\\FileLocationResolverInterface#'
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
