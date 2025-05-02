@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.0
+
+* chore: clean up `FileAssociationManager`
+
 ## 1.14.0
 
 * fix: fix web serving

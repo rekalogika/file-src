@@ -54,7 +54,7 @@ final readonly class ClassMetadata
      */
     public function getPropertyNames(): array
     {
-        return \array_keys($this->properties);
+        return array_keys($this->properties);
     }
 
     public function getProperty(string $name): PropertyMetadata
