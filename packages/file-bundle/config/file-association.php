@@ -76,7 +76,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             '$reader' => service(PropertyReaderInterface::class),
             '$writer' => service(PropertyWriterInterface::class),
             '$classMetadataFactory' => service(ClassMetadataFactoryInterface::class),
-            '$fileLocationResolver' => service(FileLocationResolverInterface::class),
+            '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
+            '$objectIdResolver' => service(ObjectIdResolverInterface::class),
         ]);
 
     //

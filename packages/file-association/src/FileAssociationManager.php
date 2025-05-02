@@ -15,8 +15,9 @@ namespace Rekalogika\File\Association;
 
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
+use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
-use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\Model\FetchMode;
@@ -30,7 +31,8 @@ final readonly class FileAssociationManager
         private PropertyReaderInterface $reader,
         private PropertyWriterInterface $writer,
         private ClassMetadataFactoryInterface $classMetadataFactory,
-        private FileLocationResolverInterface $fileLocationResolver,
+        private ClassBasedFileLocationResolverInterface $fileLocationResolver,
+        private ObjectIdResolverInterface $objectIdResolver,
     ) {}
 
     /**
@@ -48,9 +50,15 @@ final readonly class FileAssociationManager
     {
         $class = $this->getClass($object);
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
+        $id = $this->objectIdResolver->getObjectId($object);
 
         foreach ($classMetadata->getPropertyNames() as $propertyName) {
-            $this->saveProperty($class, $object, $propertyName);
+            $this->saveProperty(
+                class: $class,
+                object: $object,
+                id: $id,
+                propertyName: $propertyName
+            );
         }
     }
 
@@ -61,9 +69,15 @@ final readonly class FileAssociationManager
     {
         $class = $this->getClass($object);
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
+        $id = $this->objectIdResolver->getObjectId($object);
 
         foreach ($classMetadata->getPropertyNames() as $propertyName) {
-            $this->removeProperty($class, $object, $propertyName);
+            $this->removeProperty(
+                class: $class,
+                object: $object,
+                id: $id,
+                propertyName: $propertyName
+            );
         }
     }
 
@@ -74,9 +88,15 @@ final readonly class FileAssociationManager
     {
         $class = $this->getClass($object);
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
+        $id = $this->objectIdResolver->getObjectId($object);
 
         foreach ($classMetadata->getPropertyNames() as $propertyName) {
-            $this->loadProperty($class, $object, $propertyName);
+            $this->loadProperty(
+                class: $class,
+                object: $object,
+                id: $id,
+                propertyName: $propertyName
+            );
         }
     }
 
@@ -88,14 +108,18 @@ final readonly class FileAssociationManager
     private function saveProperty(
         string $class,
         object $object,
+        string $id,
         string $propertyName,
     ): void {
         $currentFile = $this->reader->read($object, $propertyName);
         \assert($currentFile instanceof FileInterface || null === $currentFile);
 
         if ($currentFile instanceof FileInterface) {
-            $filePointer = $this->fileLocationResolver
-                ->getFileLocation($object, $propertyName);
+            $filePointer = $this->fileLocationResolver->getFileLocation(
+                class: $class,
+                id: $id,
+                propertyName: $propertyName
+            );
 
             if ($currentFile->isEqualTo($filePointer)) {
                 return;
@@ -104,9 +128,19 @@ final readonly class FileAssociationManager
             $this->fileRepository->copy($currentFile, $filePointer);
 
             // replace with the new file
-            $this->loadProperty($class, $object, $propertyName);
+            $this->loadProperty(
+                class: $class,
+                id: $id,
+                object: $object,
+                propertyName: $propertyName
+            );
         } elseif (null === $currentFile) {
-            $this->removeProperty($class, $object, $propertyName);
+            $this->removeProperty(
+                class: $class,
+                id: $id,
+                object: $object,
+                propertyName: $propertyName
+            );
         } else {
             throw new \InvalidArgumentException(
                 \sprintf(
@@ -127,10 +161,14 @@ final readonly class FileAssociationManager
     private function removeProperty(
         string $class,
         object $object,
+        string $id,
         string $propertyName,
     ): void {
-        $filePointer = $this->fileLocationResolver
-            ->getFileLocation($object, $propertyName);
+        $filePointer = $this->fileLocationResolver->getFileLocation(
+            class: $class,
+            id: $id,
+            propertyName: $propertyName
+        );
 
         $this->fileRepository->delete($filePointer);
     }
@@ -143,14 +181,18 @@ final readonly class FileAssociationManager
     private function loadProperty(
         string $class,
         object $object,
+        string $id,
         string $propertyName,
     ): void {
         $propertyMetadata = $this->classMetadataFactory
             ->getClassMetadata($class)
             ->getProperty($propertyName);
 
-        $filePointer = $this->fileLocationResolver
-            ->getFileLocation($object, $propertyName);
+        $filePointer = $this->fileLocationResolver->getFileLocation(
+            class: $class,
+            id: $id,
+            propertyName: $propertyName
+        );
 
         if ($propertyMetadata->getFetch() === FetchMode::Eager) {
             $file = $this->fileRepository->tryGet($filePointer);
