@@ -15,11 +15,12 @@ namespace Rekalogika\File\Association;
 
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
+use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
-use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
+use Rekalogika\File\Association\Model\FetchMode;
 use Rekalogika\File\Association\Model\MissingFile;
 use Rekalogika\File\Association\Util\ProxyUtil;
 
@@ -30,7 +31,7 @@ final readonly class FileAssociationManager
         private PropertyListerInterface $lister,
         private PropertyReaderInterface $reader,
         private PropertyWriterInterface $writer,
-        private PropertyInspectorInterface $inspector,
+        private ClassMetadataFactoryInterface $classMetadataFactory,
         private FileLocationResolverInterface $fileLocationResolver,
     ) {}
 
@@ -120,30 +121,25 @@ final readonly class FileAssociationManager
         string $propertyName,
     ): void {
         $class = ProxyUtil::normalizeClassName($object::class);
-        $inspectorResult = $this->inspector->inspect($class, $propertyName);
+
+        $propertyMetadata = $this->classMetadataFactory
+            ->getClassMetadata($class)
+            ->getProperty($propertyName);
+
         $filePointer = $this->fileLocationResolver
             ->getFileLocation($object, $propertyName);
 
-        if ($inspectorResult->getFetch() === 'EAGER') {
+        if ($propertyMetadata->getFetch() === FetchMode::Eager) {
             $file = $this->fileRepository->tryGet($filePointer);
 
-            if ($file === null && $inspectorResult->isMandatory()) {
+            if ($file === null && $propertyMetadata->isMandatory()) {
                 $file = new MissingFile(
                     $filePointer->getFilesystemIdentifier(),
                     $filePointer->getKey(),
                 );
             }
-        } elseif ($inspectorResult->getFetch() === 'LAZY') {
-            $file = $this->fileRepository->getReference($filePointer);
         } else {
-            throw new \InvalidArgumentException(
-                \sprintf(
-                    'Unknown fetch mode "%s" on property "%s" of object "%s"',
-                    $inspectorResult->getFetch(),
-                    $propertyName,
-                    $object::class,
-                ),
-            );
+            $file = $this->fileRepository->getReference($filePointer);
         }
 
         $this->writer->write($object, $propertyName, $file);

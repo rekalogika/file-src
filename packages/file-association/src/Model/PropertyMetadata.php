@@ -16,18 +16,29 @@ namespace Rekalogika\File\Association\Model;
 /**
  * The result of a property inspection.
  */
-final readonly class PropertyInspectorResult
+final readonly class PropertyMetadata
 {
     /**
-     * @param 'EAGER'|'LAZY' $fetch
+     * @param class-string $class
      */
     public function __construct(
+        private string $name,
+        private string $class,
         private bool $mandatory,
-        private string $fetch,
-    ) {
-        if (!\in_array($fetch, ['EAGER', 'LAZY'])) {
-            throw new \InvalidArgumentException('Fetch mode can only be EAGER or LAZY.');
-        }
+        private FetchMode $fetch,
+    ) {}
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return class-string
+     */
+    public function getClass(): string
+    {
+        return $this->class;
     }
 
     public function isMandatory(): bool
@@ -35,7 +46,7 @@ final readonly class PropertyInspectorResult
         return $this->mandatory;
     }
 
-    public function getFetch(): string
+    public function getFetch(): FetchMode
     {
         return $this->fetch;
     }

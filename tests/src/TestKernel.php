@@ -17,8 +17,8 @@ use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use League\FlysystemBundle\FlysystemBundle;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\RekalogikaDirectPropertyAccessBundle;
+use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
-use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
@@ -36,7 +36,6 @@ use Rekalogika\File\Bundle\RekalogikaFileBundle;
 use Rekalogika\File\Image\ImageResizer;
 use Rekalogika\File\Zip\FileZip;
 use Rekalogika\File\Zip\ZipDirectory;
-use Rekalogika\Psr16SimpleCacheBundle\RekalogikaPsr16SimpleCacheBundle;
 use Rekalogika\Reconstitutor\RekalogikaReconstitutorBundle;
 use Rekalogika\TemporaryUrl\RekalogikaTemporaryUrlBundle;
 use Rekalogika\TemporaryUrl\TemporaryUrlGeneratorInterface;
@@ -148,7 +147,7 @@ final class TestKernel extends HttpKernelKernel
             SymfonyPropertyAccessorBridge::class,
             PropertyReaderInterface::class,
             PropertyWriterInterface::class,
-            PropertyInspectorInterface::class,
+            ClassMetadataFactoryInterface::class,
 
             TemporaryUrlGeneratorInterface::class,
 

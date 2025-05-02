@@ -11,37 +11,37 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Association\PropertyInspector;
+namespace Rekalogika\File\Association\ClassMetadataFactory;
 
 use Psr\Cache\CacheItemPoolInterface;
-use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
-use Rekalogika\File\Association\Model\PropertyInspectorResult;
+use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
+use Rekalogika\File\Association\Model\ClassMetadata;
 
-final readonly class CachingPropertyInspector implements PropertyInspectorInterface
+final readonly class CachingClassMetadataFactory implements ClassMetadataFactoryInterface
 {
     public function __construct(
-        private PropertyInspectorInterface $propertyInspector,
+        private ClassMetadataFactoryInterface $classMetadataFactory,
         private CacheItemPoolInterface $cache,
     ) {}
 
     #[\Override]
-    public function inspect(string $class, string $propertyName): PropertyInspectorResult
+    public function getClassMetadata(string $class): ClassMetadata
     {
-        $cacheKey = \sprintf('%s::%s', $class, $propertyName);
+        $cacheKey = hash('xxh128', $class);
         $cacheItem = $this->cache->getItem($cacheKey);
 
         if ($cacheItem->isHit()) {
             /** @psalm-suppress MixedAssignment */
             $result = $cacheItem->get();
 
-            if ($result instanceof PropertyInspectorResult) {
+            if ($result instanceof ClassMetadata) {
                 return $result;
             }
 
             $this->cache->deleteItem($cacheKey);
         }
 
-        $result = $this->propertyInspector->inspect($class, $propertyName);
+        $result = $this->classMetadataFactory->getClassMetadata($class);
 
         $cacheItem->set($result);
         $this->cache->save($cacheItem);

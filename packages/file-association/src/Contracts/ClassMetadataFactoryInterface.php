@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Contracts;
 
-use Rekalogika\File\Association\Exception\PropertyInspector\PropertyInspectorException;
-use Rekalogika\File\Association\Model\PropertyInspectorResult;
+use Rekalogika\File\Association\Model\ClassMetadata;
 
-interface PropertyInspectorInterface
+/**
+ * Gets the metadata for a class.
+ */
+interface ClassMetadataFactoryInterface
 {
     /**
+     * Gets the metadata for a class.
+     *
      * @param class-string $class
-     * @throws PropertyInspectorException
      */
-    public function inspect(
-        string $class,
-        string $propertyName,
-    ): PropertyInspectorResult;
+    public function getClassMetadata(string $class): ClassMetadata;
 }

@@ -16,11 +16,13 @@ use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\DirectPropertyAccessor;
 use Rekalogika\File\Association\ClassBasedFileLocationResolver\ChainedClassBasedFileLocationResolver;
 use Rekalogika\File\Association\ClassBasedFileLocationResolver\DefaultClassBasedFileLocationResolver;
+use Rekalogika\File\Association\ClassMetadataFactory\CachingClassMetadataFactory;
+use Rekalogika\File\Association\ClassMetadataFactory\DefaultClassMetadataFactory;
 use Rekalogika\File\Association\Command\FileLocationResolverCommand;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
-use Rekalogika\File\Association\Contracts\PropertyInspectorInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
@@ -30,8 +32,6 @@ use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DoctrineObjectIdResolver;
-use Rekalogika\File\Association\PropertyInspector\CachingPropertyInspector;
-use Rekalogika\File\Association\PropertyInspector\PropertyInspector;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Association\PropertyLister\ChainPropertyLister;
 use Rekalogika\File\Association\PropertyLister\FileAssociationInterfacePropertyLister;
@@ -72,7 +72,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             '$lister' => service(PropertyListerInterface::class),
             '$reader' => service(PropertyReaderInterface::class),
             '$writer' => service(PropertyWriterInterface::class),
-            '$inspector' => service(PropertyInspectorInterface::class),
+            '$classMetadataFactory' => service(ClassMetadataFactoryInterface::class),
             '$fileLocationResolver' => service(FileLocationResolverInterface::class),
         ]);
 
@@ -184,21 +184,27 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     );
 
     //
-    // property inspector
+    // class metadata factory
     //
 
-    $services->set(PropertyInspectorInterface::class, PropertyInspector::class);
+    $services
+        ->set(ClassMetadataFactoryInterface::class)
+        ->class(DefaultClassMetadataFactory::class)
+        ->args([
+            service(PropertyListerInterface::class),
+        ]);
 
     $services
-        ->set('rekalogika.file.association.property_inspector.cache')
+        ->set('rekalogika.file.association.class_metadata_factory.cache')
         ->parent('cache.system')
         ->tag('cache.pool');
 
-    $services->set(CachingPropertyInspector::class)
-        ->decorate(PropertyInspectorInterface::class)
+    $services
+        ->set(CachingClassMetadataFactory::class)
+        ->decorate(ClassMetadataFactoryInterface::class)
         ->args([
             service('.inner'),
-            service('rekalogika.file.association.property_inspector.cache'),
+            service('rekalogika.file.association.class_metadata_factory.cache'),
         ]);
 
     //
