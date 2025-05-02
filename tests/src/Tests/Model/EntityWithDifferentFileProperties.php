@@ -15,20 +15,21 @@ namespace Rekalogika\File\Tests\Tests\Model;
 
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
+use Rekalogika\File\Association\Model\FetchMode;
 
 /** @psalm-suppress MissingConstructor */
 final class EntityWithDifferentFileProperties
 {
-    #[AsFileAssociation(fetch: 'EAGER')]
+    #[AsFileAssociation(fetch: FetchMode::Eager)]
     private ?FileInterface $mandatoryEager = null;
 
-    #[AsFileAssociation(fetch: 'EAGER')]
+    #[AsFileAssociation(fetch: FetchMode::Eager)]
     private FileInterface $notMandatoryEager;
 
-    #[AsFileAssociation(fetch: 'LAZY')]
+    #[AsFileAssociation(fetch: FetchMode::Lazy)]
     private ?FileInterface $mandatoryLazy = null;
 
-    #[AsFileAssociation(fetch: 'LAZY')]
+    #[AsFileAssociation(fetch: FetchMode::Lazy)]
     private FileInterface $notMandatoryLazy;
 
     #[AsFileAssociation]

@@ -8,6 +8,9 @@
 * chore: rector run
 * fix: fix interface phpdoc
 * fix: remove no longer needed psr-16
+* refactor: introduce `ClassMetadataFactoryInterface` to replace
+  `PropertyInspectorInterface`
+* refactor: use `FetchMode` enum instead of EAGER and LAZY strings
 
 ## 1.13.0
 

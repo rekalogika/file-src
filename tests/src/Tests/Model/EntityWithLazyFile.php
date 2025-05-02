@@ -16,11 +16,12 @@ namespace Rekalogika\File\Tests\Tests\Model;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
 use Rekalogika\File\Association\Attribute\WithFileAssociation;
+use Rekalogika\File\Association\Model\FetchMode;
 
 #[WithFileAssociation]
 final class EntityWithLazyFile
 {
-    #[AsFileAssociation(fetch: 'LAZY')]
+    #[AsFileAssociation(fetch: FetchMode::Lazy)]
     private ?FileInterface $file = null;
 
     public function __construct(private readonly string $id) {}
