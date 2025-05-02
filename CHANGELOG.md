@@ -5,6 +5,7 @@
 * chore: clean up `FileAssociationManager`
 * refactor: Make `FileAssociationManager` use `ClassBasedFileLocationResolverInterface`
 * chore: remove deprecated `FileLocationResolverInterface`
+* refactor: move property related methods to `FilePropertyManagerInterface`
 
 ## 1.14.0
 

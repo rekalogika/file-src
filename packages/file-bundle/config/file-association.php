@@ -30,6 +30,7 @@ use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\FileAssociationManager;
+use Rekalogika\File\Association\FilePropertyManager\DefaultFilePropertyManager;
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DoctrineObjectIdResolver;
@@ -67,14 +68,22 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // manager
     //
 
-    $services->set(FileAssociationManager::class)
+    $services
+        ->set(FileAssociationManager::class)
+        ->args([
+            '$classMetadataFactory' => service(ClassMetadataFactoryInterface::class),
+            '$objectIdResolver' => service(ObjectIdResolverInterface::class),
+            '$filePropertyManager' => service(DefaultFilePropertyManager::class),
+        ]);
+
+    $services
+        ->set(DefaultFilePropertyManager::class)
         ->args([
             '$fileRepository' => service(FileRepositoryInterface::class),
             '$reader' => service(PropertyReaderInterface::class),
             '$writer' => service(PropertyWriterInterface::class),
             '$classMetadataFactory' => service(ClassMetadataFactoryInterface::class),
             '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
-            '$objectIdResolver' => service(ObjectIdResolverInterface::class),
         ]);
 
     //
