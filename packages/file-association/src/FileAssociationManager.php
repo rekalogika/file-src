@@ -17,7 +17,6 @@ use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
-use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\Model\FetchMode;
@@ -28,7 +27,6 @@ final readonly class FileAssociationManager
 {
     public function __construct(
         private FileRepositoryInterface $fileRepository,
-        private PropertyListerInterface $lister,
         private PropertyReaderInterface $reader,
         private PropertyWriterInterface $writer,
         private ClassMetadataFactoryInterface $classMetadataFactory,
@@ -40,7 +38,10 @@ final readonly class FileAssociationManager
      */
     public function save(object $object): void
     {
-        foreach ($this->lister->getFileProperties($object) as $propertyName) {
+        $class = ProxyUtil::normalizeClassName($object::class);
+        $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
+
+        foreach ($classMetadata->getPropertyNames() as $propertyName) {
             $this->saveProperty($object, $propertyName);
         }
     }
@@ -50,7 +51,10 @@ final readonly class FileAssociationManager
      */
     public function remove(object $object): void
     {
-        foreach ($this->lister->getFileProperties($object) as $propertyName) {
+        $class = ProxyUtil::normalizeClassName($object::class);
+        $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
+
+        foreach ($classMetadata->getPropertyNames() as $propertyName) {
             $this->removeProperty($object, $propertyName);
         }
     }
@@ -60,7 +64,10 @@ final readonly class FileAssociationManager
      */
     public function load(object $object): void
     {
-        foreach ($this->lister->getFileProperties($object) as $propertyName) {
+        $class = ProxyUtil::normalizeClassName($object::class);
+        $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
+
+        foreach ($classMetadata->getPropertyNames() as $propertyName) {
             $this->loadProperty($object, $propertyName);
         }
     }
