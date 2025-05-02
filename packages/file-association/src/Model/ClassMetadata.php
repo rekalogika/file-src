@@ -24,6 +24,7 @@ final readonly class ClassMetadata
      */
     public function __construct(
         private string $class,
+        private string $signature,
         private array $properties,
     ) {}
 
@@ -33,6 +34,11 @@ final readonly class ClassMetadata
     public function getClass(): string
     {
         return $this->class;
+    }
+
+    public function getSignature(): string
+    {
+        return $this->signature;
     }
 
     /**

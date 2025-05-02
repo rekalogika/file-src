@@ -15,6 +15,7 @@ namespace Rekalogika\File\Tests\Tests\FileAssociation;
 
 use PHPUnit\Framework\TestCase;
 use Rekalogika\File\Association\ClassMetadataFactory\DefaultClassMetadataFactory;
+use Rekalogika\File\Association\ClassSignatureResolver\DefaultClassSignatureResolver;
 use Rekalogika\File\Association\Model\FetchMode;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Tests\Tests\Model\EntityWithDifferentFileProperties;
@@ -23,24 +24,27 @@ final class ClassMetadataFactoryTest extends TestCase
 {
     public function testPropertyInspector(): void
     {
-        $propertyLister = new AttributesPropertyLister();
-        $factory = new DefaultClassMetadataFactory($propertyLister);
+        $classMetadataFactory = new DefaultClassMetadataFactory(
+            propertyLister: new AttributesPropertyLister(),
+            classSignatureResolver: new DefaultClassSignatureResolver(),
+        );
+
         $object = new EntityWithDifferentFileProperties();
         $class = $object::class;
 
-        $result = $factory->getClassMetadata($class)->getProperty('mandatoryEager');
+        $result = $classMetadataFactory->getClassMetadata($class)->getProperty('mandatoryEager');
         $this->assertFalse($result->isMandatory());
         $this->assertTrue($result->getFetch() === FetchMode::Eager);
 
-        $result = $factory->getClassMetadata($class)->getProperty('notMandatoryEager');
+        $result = $classMetadataFactory->getClassMetadata($class)->getProperty('notMandatoryEager');
         $this->assertTrue($result->isMandatory());
         $this->assertTrue($result->getFetch() === FetchMode::Eager);
 
-        $result = $factory->getClassMetadata($class)->getProperty('mandatoryLazy');
+        $result = $classMetadataFactory->getClassMetadata($class)->getProperty('mandatoryLazy');
         $this->assertFalse($result->isMandatory());
         $this->assertTrue($result->getFetch() === FetchMode::Lazy);
 
-        $result = $factory->getClassMetadata($class)->getProperty('notMandatoryLazy');
+        $result = $classMetadataFactory->getClassMetadata($class)->getProperty('notMandatoryLazy');
         $this->assertTrue($result->isMandatory());
         $this->assertTrue($result->getFetch() === FetchMode::Lazy);
     }

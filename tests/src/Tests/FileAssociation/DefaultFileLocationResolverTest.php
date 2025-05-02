@@ -15,16 +15,25 @@ namespace Rekalogika\File\Tests\Tests\FileAssociation;
 
 use PHPUnit\Framework\TestCase;
 use Rekalogika\File\Association\ClassBasedFileLocationResolver\DefaultClassBasedFileLocationResolver;
+use Rekalogika\File\Association\ClassMetadataFactory\DefaultClassMetadataFactory;
+use Rekalogika\File\Association\ClassSignatureResolver\DefaultClassSignatureResolver;
 use Rekalogika\File\Association\FileLocationResolver\DefaultFileLocationResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
+use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Tests\Tests\Model\Entity;
 
 final class DefaultFileLocationResolverTest extends TestCase
 {
     public function testDefaultLocationResolver(): void
     {
+        $classMetadataFactory = new DefaultClassMetadataFactory(
+            propertyLister: new AttributesPropertyLister(),
+            classSignatureResolver: new DefaultClassSignatureResolver(),
+        );
+
         $objectIdResolver = new DefaultObjectIdResolver();
-        $classBasedFileLocationResolver = new DefaultClassBasedFileLocationResolver();
+
+        $classBasedFileLocationResolver = new DefaultClassBasedFileLocationResolver($classMetadataFactory);
 
         $locationResolver = new DefaultFileLocationResolver(
             objectIdResolver: $objectIdResolver,
