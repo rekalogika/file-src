@@ -17,6 +17,8 @@ use Rekalogika\File\Association\Exception\PropertyReader\PropertyReaderException
 
 /**
  * Reads a property of an object.
+ *
+ * @internal
  */
 interface PropertyReaderInterface
 {
