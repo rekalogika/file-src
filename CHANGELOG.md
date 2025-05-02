@@ -12,6 +12,8 @@
   `PropertyInspectorInterface`
 * refactor: use `FetchMode` enum instead of EAGER and LAZY strings
 * refactor: internalize property lister, property reader, property writer
+* feat: `ClassSignatureResolverInterface` for overriding class signatures used
+  in file locations
 
 ## 1.13.0
 

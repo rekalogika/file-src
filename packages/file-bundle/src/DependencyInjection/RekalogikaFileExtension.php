@@ -15,6 +15,7 @@ namespace Rekalogika\File\Bundle\DependencyInjection;
 
 use Rekalogika\Domain\File\Association\Entity\EmbeddedMetadata;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
@@ -124,6 +125,10 @@ final class RekalogikaFileExtension extends Extension implements PrependExtensio
         $container
             ->registerForAutoconfiguration(ClassBasedFileLocationResolverInterface::class)
             ->addTag('rekalogika.file.association.class_based_file_location_resolver');
+
+        $container
+            ->registerForAutoconfiguration(ClassSignatureResolverInterface::class)
+            ->addTag('rekalogika.file.association.class_signature_resolver');
 
         $container
             ->registerForAutoconfiguration(ObjectIdResolverInterface::class)

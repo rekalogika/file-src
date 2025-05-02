@@ -17,12 +17,12 @@ interface ClassSignatureResolverInterface
 {
     /**
      * Takes a class name and returns a string that uniquely identifies the
-     * class. The string will be used as part of the location of a file. The
+     * class. The string will be used as a part of the location of a file. The
      * result must consist of alphanumeric characters only. Because the location
      * of a file is potentially part of a public URL, the result should not
      * reveal internal information, like the class name itself.
      *
      * @param class-string $class
      */
-    public function getClassSignature(string $class): string;
+    public function getClassSignature(string $class): ?string;
 }

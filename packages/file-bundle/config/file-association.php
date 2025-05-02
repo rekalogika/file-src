@@ -18,9 +18,13 @@ use Rekalogika\File\Association\ClassBasedFileLocationResolver\ChainedClassBased
 use Rekalogika\File\Association\ClassBasedFileLocationResolver\DefaultClassBasedFileLocationResolver;
 use Rekalogika\File\Association\ClassMetadataFactory\CachingClassMetadataFactory;
 use Rekalogika\File\Association\ClassMetadataFactory\DefaultClassMetadataFactory;
+use Rekalogika\File\Association\ClassSignatureResolver\AttributeClassSignatureResolver;
+use Rekalogika\File\Association\ClassSignatureResolver\ChainClassSignatureResolver;
+use Rekalogika\File\Association\ClassSignatureResolver\DefaultClassSignatureResolver;
 use Rekalogika\File\Association\Command\FileLocationResolverCommand;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
+use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Contracts\FileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
@@ -132,19 +136,43 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // class-based file location resolver
     //
 
-    $services->alias(
-        ClassBasedFileLocationResolverInterface::class,
-        ChainedClassBasedFileLocationResolver::class,
-    );
-
-    $services->set(ChainedClassBasedFileLocationResolver::class)
+    $services
+        ->set(ClassBasedFileLocationResolverInterface::class)
+        ->class(ChainedClassBasedFileLocationResolver::class)
         ->args([
             tagged_iterator('rekalogika.file.association.class_based_file_location_resolver'),
         ]);
 
-    $services->set(DefaultClassBasedFileLocationResolver::class)
+    $services
+        ->set(DefaultClassBasedFileLocationResolver::class)
+        ->args([
+            service(ClassMetadataFactoryInterface::class),
+        ])
         ->tag('rekalogika.file.association.class_based_file_location_resolver', [
             'priority' => -1000,
+        ]);
+
+    //
+    // class signature resolver
+    //
+
+    $services
+        ->set(ClassSignatureResolverInterface::class)
+        ->class(ChainClassSignatureResolver::class)
+        ->args([
+            tagged_iterator('rekalogika.file.association.class_signature_resolver'),
+        ]);
+
+    $services
+        ->set(DefaultClassSignatureResolver::class)
+        ->tag('rekalogika.file.association.class_signature_resolver', [
+            'priority' => -1000,
+        ]);
+
+    $services
+        ->set(AttributeClassSignatureResolver::class)
+        ->tag('rekalogika.file.association.class_signature_resolver', [
+            'priority' => -999,
         ]);
 
     //
@@ -192,6 +220,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->class(DefaultClassMetadataFactory::class)
         ->args([
             service(PropertyListerInterface::class),
+            service(ClassSignatureResolverInterface::class),
         ]);
 
     $services

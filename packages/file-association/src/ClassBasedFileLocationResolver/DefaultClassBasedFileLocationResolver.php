@@ -15,11 +15,13 @@ namespace Rekalogika\File\Association\ClassBasedFileLocationResolver;
 
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Model\FilePointer;
 
 final readonly class DefaultClassBasedFileLocationResolver implements ClassBasedFileLocationResolverInterface
 {
     public function __construct(
+        private ClassMetadataFactoryInterface $classMetadataFactory,
         private string $filesystemIdentifier = 'default',
         private string $prefix = 'entity',
         private int $hashLevel = 4,
@@ -33,12 +35,15 @@ final readonly class DefaultClassBasedFileLocationResolver implements ClassBased
     ): FilePointerInterface {
         $splittedHash = str_split(sha1($id), 2);
         $hash = implode('/', \array_slice($splittedHash, 0, $this->hashLevel));
-        $classHash = sha1($class);
+
+        $classSignature = $this->classMetadataFactory
+            ->getClassMetadata($class)
+            ->getSignature();
 
         $key = \sprintf(
             '%s/%s/%s/%s/%s',
             $this->prefix,
-            $classHash,
+            $classSignature,
             $propertyName,
             $hash,
             $id,

@@ -13,9 +13,25 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\ClassSignatureResolver;
 
+use Rekalogika\File\Association\Attribute\WithFileAssociation;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 
 final readonly class AttributeClassSignatureResolver implements ClassSignatureResolverInterface
 {
-    public function getClassSignature(string $class): string { }
+    #[\Override]
+    public function getClassSignature(string $class): ?string
+    {
+        $reflectionClass = new \ReflectionClass($class);
+
+        $attribute = $reflectionClass
+            ->getAttributes(WithFileAssociation::class)[0] ?? null;
+
+        if ($attribute === null) {
+            return null;
+        }
+
+        $attributeInstance = $attribute->newInstance();
+
+        return $attributeInstance->getClassSignature();
+    }
 }

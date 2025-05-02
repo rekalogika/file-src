@@ -15,6 +15,7 @@ namespace Rekalogika\File\Association\ClassMetadataFactory;
 
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
 use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
+use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Exception\PropertyInspector\MissingPropertyException;
 use Rekalogika\File\Association\Model\ClassMetadata;
@@ -25,6 +26,7 @@ final readonly class DefaultClassMetadataFactory implements ClassMetadataFactory
 {
     public function __construct(
         private PropertyListerInterface $propertyLister,
+        private ClassSignatureResolverInterface $classSignatureResolver,
     ) {}
 
     #[\Override]
@@ -45,8 +47,15 @@ final readonly class DefaultClassMetadataFactory implements ClassMetadataFactory
             );
         }
 
+        $signature = $this->classSignatureResolver->getClassSignature($class)
+            ?? throw new \LogicException(\sprintf(
+                'No class signature resolver found for class "%s"',
+                $class,
+            ));
+
         return new ClassMetadata(
             class: $class,
+            signature: $signature,
             properties: $propertyMetadatas,
         );
     }

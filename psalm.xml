@@ -9,61 +9,61 @@
         findUnusedCode="false">
 
     <projectFiles>
-        <directory name="packages" />
-        <directory name="tests/src" />
+        <directory name="packages"/>
+        <directory name="tests/src"/>
         <ignoreFiles>
-            <directory name="vendor" />
-            <file name="packages/file-symfony-bridge/src/Constraints/ImageValidator.php" />
+            <directory name="vendor"/>
+            <file name="packages/file-symfony-bridge/src/Constraints/ImageValidator.php"/>
         </ignoreFiles>
     </projectFiles>
 
     <issueHandlers>
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
-                <directory name="packages/file-symfony-bridge/src/Constraints/" />
-                <file name="packages/file-symfony-bridge/src/HttpFoundation/FileResponse.php" />
-                <file name="tests/src/Tests/Model/EntityWithMandatoryFile.php" />
-                <file name="tests/src/Tests/Model/EntityExtendingAbstractFile.php" />
-                <file name="packages/file-zip/src/ZipDirectory.php" />
+                <directory name="packages/file-symfony-bridge/src/Constraints/"/>
+                <file name="packages/file-symfony-bridge/src/HttpFoundation/FileResponse.php"/>
+                <file name="tests/src/Tests/Model/EntityWithMandatoryFile.php"/>
+                <file name="tests/src/Tests/Model/EntityExtendingAbstractFile.php"/>
+                <file name="packages/file-zip/src/ZipDirectory.php"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
         <RedundantPropertyInitializationCheck>
             <errorLevel type="suppress">
-                <file name="packages/file-derivation/src/Filter/AbstractFileFilter.php" />
-                <file name="packages/file-association-entity/src/FileTrait.php" />
+                <file name="packages/file-derivation/src/Filter/AbstractFileFilter.php"/>
+                <file name="packages/file-association-entity/src/FileTrait.php"/>
             </errorLevel>
         </RedundantPropertyInitializationCheck>
         <MissingConstructor>
             <errorLevel type="suppress">
-                <file name="tests/src/Tests/File/FileRepositoryTest.php" />
-                <file name="tests/src/Tests/Model/EntityWithDifferentFileProperties.php" />
+                <file name="tests/src/Tests/File/FileRepositoryTest.php"/>
+                <file name="tests/src/Tests/Model/EntityWithDifferentFileProperties.php"/>
             </errorLevel>
         </MissingConstructor>
         <UndefinedMethod>
             <errorLevel type="suppress">
-                <file name="packages/file-bundle/src/DependencyInjection/Configuration.php" />
+                <file name="packages/file-bundle/src/DependencyInjection/Configuration.php"/>
             </errorLevel>
         </UndefinedMethod>
         <MixedMethodCall>
             <errorLevel type="suppress">
-                <file name="packages/file-bundle/src/DependencyInjection/Configuration.php" />
+                <file name="packages/file-bundle/src/DependencyInjection/Configuration.php"/>
             </errorLevel>
         </MixedMethodCall>
         <MissingConstructor>
             <errorLevel type="suppress">
-                <file name="packages/file-image/src/ImageTwigExtension.php" />
+                <file name="packages/file-image/src/ImageTwigExtension.php"/>
             </errorLevel>
         </MissingConstructor>
         <ClassMustBeFinal>
             <errorLevel type="suppress">
-                <directory name="tests/src/App/Entity" />
-                <file name="tests/src/Tests/FileAssociation/ProxyUtilTest.php" />
+                <directory name="tests/src/App/Entity"/>
+                <file name="tests/src/Tests/FileAssociation/ProxyUtilTest.php"/>
             </errorLevel>
         </ClassMustBeFinal>
     </issueHandlers>
 
     <plugins>
-        <pluginClass class="Psalm\PhpUnitPlugin\Plugin" />
-        <pluginClass class="Psalm\MockeryPlugin\Plugin" />
-    </plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+        <pluginClass class="Psalm\MockeryPlugin\Plugin"/>
+    <pluginClass class="Lctrs\PsalmPsrContainerPlugin\Plugin"/></plugins>
 </psalm>
