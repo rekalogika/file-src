@@ -48,24 +48,27 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         $currentFile = $this->reader->read($object, $propertyName);
 
         if ($currentFile instanceof FileInterface) {
+            // determine the file location
             $filePointer = $this->fileLocationResolver->getFileLocation(
                 class: $class,
                 id: $id,
                 propertyName: $propertyName,
             );
 
+            // if the file location of the current file is the same as the
+            // file location of the property, we don't need to do anything
             if ($currentFile->isEqualTo($filePointer)) {
                 return;
             }
 
+            // copy file to storage
             $this->fileRepository->copy($currentFile, $filePointer);
 
-            // replace with the new file
-            $this->loadProperty(
-                propertyMetadata: $propertyMetadata,
-                object: $object,
-                id: $id,
-            );
+            // get reference of the file from storage
+            $file = $this->fileRepository->getReference($filePointer);
+
+            // write the file to the object
+            $this->writer->write($object, $propertyName, $file);
         } elseif (null === $currentFile) {
             $this->removeProperty(
                 propertyMetadata: $propertyMetadata,
