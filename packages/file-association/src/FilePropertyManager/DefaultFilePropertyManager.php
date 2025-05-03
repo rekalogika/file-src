@@ -15,7 +15,6 @@ namespace Rekalogika\File\Association\FilePropertyManager;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
-use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
@@ -26,6 +25,7 @@ use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\Model\FetchMode;
 use Rekalogika\File\Association\Model\MissingFile;
 use Rekalogika\File\Association\Model\PropertyMetadata;
+use Rekalogika\File\Association\PropertyReaderWriter\DefaultPropertyReaderWriter;
 
 final class DefaultFilePropertyManager implements
     FilePropertyManagerInterface,
@@ -33,12 +33,15 @@ final class DefaultFilePropertyManager implements
 {
     use LoggerAwareTrait;
 
+    private readonly PropertyReaderInterface $reader;
+    private readonly PropertyWriterInterface $writer;
+
     public function __construct(
         private readonly FileRepositoryInterface $fileRepository,
-        private readonly PropertyReaderInterface $reader,
-        private readonly PropertyWriterInterface $writer,
         private readonly ClassBasedFileLocationResolverInterface $fileLocationResolver,
-    ) {}
+    ) {
+        $this->reader = $this->writer = new DefaultPropertyReaderWriter();
+    }
 
     private function log(
         PropertyMetadata $propertyMetadata,
@@ -78,7 +81,7 @@ final class DefaultFilePropertyManager implements
         $class = $propertyMetadata->getClass();
 
         /** @psalm-suppress MixedAssignment */
-        $currentFile = $this->reader->read($object, $propertyName);
+        $currentFile = $this->reader->read($object, $propertyMetadata);
 
         // determine the file location
         $filePointer = $this->fileLocationResolver->getFileLocation(
@@ -87,39 +90,8 @@ final class DefaultFilePropertyManager implements
             propertyName: $propertyName,
         );
 
-        if ($currentFile instanceof FileInterface) {
-            // if the file location of the current file is the same as the
-            // file location of the property, we don't need to do anything
-            if ($currentFile->isEqualTo($filePointer)) {
-                $this->log(
-                    propertyMetadata: $propertyMetadata,
-                    id: $id,
-                    filePointer: $filePointer,
-                    operation: FilePropertyOperation::FlushNothing,
-                );
-
-                return FilePropertyOperation::FlushNothing;
-            }
-
-            // copy file to storage
-            $this->fileRepository->copy($currentFile, $filePointer);
-
-            // get reference of the file from storage
-            $file = $this->fileRepository->getReference($filePointer);
-
-            // write the file to the object
-            $this->writer->write($object, $propertyName, $file);
-
-            // log
-            $this->log(
-                propertyMetadata: $propertyMetadata,
-                id: $id,
-                filePointer: $filePointer,
-                operation: FilePropertyOperation::FlushSave,
-            );
-
-            return FilePropertyOperation::FlushSave;
-        } elseif (null === $currentFile) {
+        // if the file is null, we need to remove the file from storage
+        if (null === $currentFile) {
             $this->fileRepository->delete($filePointer);
 
             $this->log(
@@ -132,14 +104,37 @@ final class DefaultFilePropertyManager implements
             return FilePropertyOperation::FlushRemove;
         }
 
-        throw new \InvalidArgumentException(
-            \sprintf(
-                'Property "%s" on object "%s" is not a %s instance',
-                $propertyName,
-                $object::class,
-                FileInterface::class,
-            ),
+        // if the file location of the current file is the same as the
+        // file location of the property, we don't need to do anything
+        if ($currentFile->isEqualTo($filePointer)) {
+            $this->log(
+                propertyMetadata: $propertyMetadata,
+                id: $id,
+                filePointer: $filePointer,
+                operation: FilePropertyOperation::FlushNothing,
+            );
+
+            return FilePropertyOperation::FlushNothing;
+        }
+
+        // copy file to storage
+        $this->fileRepository->copy($currentFile, $filePointer);
+
+        // get reference of the file from storage
+        $file = $this->fileRepository->getReference($filePointer);
+
+        // write the file to the object
+        $this->writer->write($object, $propertyMetadata, $file);
+
+        // log
+        $this->log(
+            propertyMetadata: $propertyMetadata,
+            id: $id,
+            filePointer: $filePointer,
+            operation: FilePropertyOperation::FlushSave,
         );
+
+        return FilePropertyOperation::FlushSave;
     }
 
     /**
@@ -212,7 +207,7 @@ final class DefaultFilePropertyManager implements
             $result = FilePropertyOperation::LoadLazy;
         }
 
-        $this->writer->write($object, $propertyName, $file);
+        $this->writer->write($object, $propertyMetadata, $file);
 
         $this->log(
             propertyMetadata: $propertyMetadata,

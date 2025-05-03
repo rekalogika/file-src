@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Contracts;
 
-use Rekalogika\File\Association\Exception\PropertyWriter\PropertyWriterException;
+use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\File\Association\Model\PropertyMetadata;
 
 /**
  * Writes a valuo to a property of an object..
@@ -22,12 +23,9 @@ use Rekalogika\File\Association\Exception\PropertyWriter\PropertyWriterException
  */
 interface PropertyWriterInterface
 {
-    /**
-     * @throws PropertyWriterException
-     */
     public function write(
         object $object,
-        string $propertyName,
-        mixed $value,
+        PropertyMetadata $propertyMetadata,
+        ?FileInterface $value,
     ): void;
 }

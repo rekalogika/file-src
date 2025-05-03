@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Contracts;
 
-use Rekalogika\File\Association\Exception\PropertyReader\PropertyReaderException;
+use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\File\Association\Model\PropertyMetadata;
 
 /**
  * Reads a property of an object.
@@ -22,11 +23,8 @@ use Rekalogika\File\Association\Exception\PropertyReader\PropertyReaderException
  */
 interface PropertyReaderInterface
 {
-    /**
-     * @throws PropertyReaderException
-     */
     public function read(
         object $object,
-        string $propertyName,
-    ): mixed;
+        PropertyMetadata $propertyMetadata,
+    ): ?FileInterface;
 }

@@ -16,6 +16,7 @@
 * perf: after saving, use file reference as the new file
 * refactor: `FilePropertyManagerInterface`
 * feat: add logging
+* refactor: remove dependency on property access
 
 ## 1.14.0
 
