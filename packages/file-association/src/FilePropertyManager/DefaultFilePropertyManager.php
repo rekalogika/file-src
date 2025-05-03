@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\FilePropertyManager;
 
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Rekalogika\Contracts\File\FileInterface;
+use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
@@ -24,14 +27,43 @@ use Rekalogika\File\Association\Model\FetchMode;
 use Rekalogika\File\Association\Model\MissingFile;
 use Rekalogika\File\Association\Model\PropertyMetadata;
 
-final readonly class DefaultFilePropertyManager implements FilePropertyManagerInterface
+final class DefaultFilePropertyManager implements
+    FilePropertyManagerInterface,
+    LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     public function __construct(
-        private FileRepositoryInterface $fileRepository,
-        private PropertyReaderInterface $reader,
-        private PropertyWriterInterface $writer,
-        private ClassBasedFileLocationResolverInterface $fileLocationResolver,
+        private readonly FileRepositoryInterface $fileRepository,
+        private readonly PropertyReaderInterface $reader,
+        private readonly PropertyWriterInterface $writer,
+        private readonly ClassBasedFileLocationResolverInterface $fileLocationResolver,
     ) {}
+
+    private function log(
+        PropertyMetadata $propertyMetadata,
+        string $id,
+        FilePointerInterface $filePointer,
+        FilePropertyOperation $operation,
+    ): void {
+        if ($operation === FilePropertyOperation::FlushNothing) {
+            return;
+        }
+
+        $context = [
+            'class' => $propertyMetadata->getClass(),
+            'property' => $propertyMetadata->getName(),
+            'scopeClass' => $propertyMetadata->getScopeClass(),
+            'objectId' => $id,
+            'fileKey' => $filePointer->getKey(),
+            'fileFilesystemIdentifier' => $filePointer->getFilesystemIdentifier(),
+        ];
+
+        $this->logger?->debug(
+            $operation->getDescription(),
+            $context,
+        );
+    }
 
     /**
      * Process a potential incoming file upload on a property
@@ -48,17 +80,24 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         /** @psalm-suppress MixedAssignment */
         $currentFile = $this->reader->read($object, $propertyName);
 
-        if ($currentFile instanceof FileInterface) {
-            // determine the file location
-            $filePointer = $this->fileLocationResolver->getFileLocation(
-                class: $class,
-                id: $id,
-                propertyName: $propertyName,
-            );
+        // determine the file location
+        $filePointer = $this->fileLocationResolver->getFileLocation(
+            class: $class,
+            id: $id,
+            propertyName: $propertyName,
+        );
 
+        if ($currentFile instanceof FileInterface) {
             // if the file location of the current file is the same as the
             // file location of the property, we don't need to do anything
             if ($currentFile->isEqualTo($filePointer)) {
+                $this->log(
+                    propertyMetadata: $propertyMetadata,
+                    id: $id,
+                    filePointer: $filePointer,
+                    operation: FilePropertyOperation::FlushNothing,
+                );
+
                 return FilePropertyOperation::FlushNothing;
             }
 
@@ -71,12 +110,23 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
             // write the file to the object
             $this->writer->write($object, $propertyName, $file);
 
+            // log
+            $this->log(
+                propertyMetadata: $propertyMetadata,
+                id: $id,
+                filePointer: $filePointer,
+                operation: FilePropertyOperation::FlushSave,
+            );
+
             return FilePropertyOperation::FlushSave;
         } elseif (null === $currentFile) {
-            $this->removeProperty(
+            $this->fileRepository->delete($filePointer);
+
+            $this->log(
                 propertyMetadata: $propertyMetadata,
-                object: $object,
                 id: $id,
+                filePointer: $filePointer,
+                operation: FilePropertyOperation::FlushRemove,
             );
 
             return FilePropertyOperation::FlushRemove;
@@ -111,6 +161,13 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         );
 
         $this->fileRepository->delete($filePointer);
+
+        $this->log(
+            propertyMetadata: $propertyMetadata,
+            id: $id,
+            filePointer: $filePointer,
+            operation: FilePropertyOperation::Remove,
+        );
 
         return FilePropertyOperation::Remove;
     }
@@ -156,6 +213,13 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         }
 
         $this->writer->write($object, $propertyName, $file);
+
+        $this->log(
+            propertyMetadata: $propertyMetadata,
+            id: $id,
+            filePointer: $filePointer,
+            operation: $result,
+        );
 
         return $result;
     }
