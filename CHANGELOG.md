@@ -10,6 +10,7 @@
 * refactor: make `PropertyListerInterface` return property name and the class
   scope
 * test: enable monologbundle
+* deps: require reconstitutor 2
 
 ## 1.14.0
 

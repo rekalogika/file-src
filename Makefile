@@ -21,10 +21,13 @@ phpstan:
 psalm:
 	$(PHP) vendor/bin/psalm
 
-.PHONY: phpunit
-phpunit:
-	$(eval c ?=)
+.PHONY: clean
+clean:
 	rm -rf tests/var
+
+.PHONY: phpunit
+phpunit: clean
+	$(eval c ?=)
 	$(PHP) vendor/bin/phpunit $(c)
 
 .PHONY: composer-dump
