@@ -25,7 +25,7 @@ psalm:
 phpunit:
 	$(eval c ?=)
 	rm -rf tests/var
-	$(PHP) vendor/bin/phpunit $(c)
+	SYMFONY_DEPRECATIONS_HELPER='max[direct]=0' $(PHP) vendor/bin/phpunit $(c)
 
 .PHONY: composer-dump
 composer-dump:
