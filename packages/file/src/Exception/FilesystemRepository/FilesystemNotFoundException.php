@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Exception\FilesystemRepository;
 
-final class FilesystemNotFoundException extends FilesystemRepositoryException
+final class FilesystemNotFoundException extends \RuntimeException implements FilesystemRepositoryException
 {
     public function __construct(string $filesystemId)
     {

@@ -12,6 +12,7 @@
 * test: enable monologbundle
 * deps: require reconstitutor 2
 * deps: require reconstitutor 2.0.2
+* refactor: change exception to implement our interface
 
 ## 1.14.0
 

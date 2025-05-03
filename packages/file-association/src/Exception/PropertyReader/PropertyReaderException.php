@@ -15,7 +15,7 @@ namespace Rekalogika\File\Association\Exception\PropertyReader;
 
 use Rekalogika\File\Association\Exception\FileAssociationException;
 
-final class PropertyReaderException extends FileAssociationException
+final class PropertyReaderException extends \LogicException implements FileAssociationException
 {
     public function __construct(
         object $object,

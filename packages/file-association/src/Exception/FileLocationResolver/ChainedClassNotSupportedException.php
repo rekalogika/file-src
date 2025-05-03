@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Exception\FileLocationResolver;
 
-final class ChainedClassNotSupportedException extends FileLocationResolverException
+final class ChainedClassNotSupportedException extends \RuntimeException implements FileLocationResolverException
 {
     /**
      * @param class-string $class

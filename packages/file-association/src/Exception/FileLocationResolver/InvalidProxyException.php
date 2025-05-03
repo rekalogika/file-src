@@ -15,4 +15,4 @@ namespace Rekalogika\File\Association\Exception\FileLocationResolver;
 
 use Rekalogika\File\Association\Exception\FileAssociationException;
 
-final class InvalidProxyException extends FileAssociationException {}
+final class InvalidProxyException extends \LogicException implements FileAssociationException {}

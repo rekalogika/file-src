@@ -13,4 +13,4 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Exception;
 
-abstract class FileAssociationException extends \Exception {}
+interface FileAssociationException extends \Throwable {}

@@ -13,4 +13,4 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Exception;
 
-final class InvalidClassSignatureException extends FileAssociationException {}
+final class InvalidClassSignatureException extends \LogicException implements FileAssociationException {}

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Exception\ObjectIdResolver;
 
-final class EmptyIdException extends ObjectIdResolverException
+final class EmptyIdException extends \RuntimeException implements ObjectIdResolverException
 {
     public function __construct(
         object $object,
