@@ -17,9 +17,9 @@ use Rekalogika\File\Association\Attribute\AsFileAssociation;
 use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
-use Rekalogika\File\Association\Exception\PropertyInspector\MissingPropertyException;
 use Rekalogika\File\Association\Model\ClassMetadata;
 use Rekalogika\File\Association\Model\FetchMode;
+use Rekalogika\File\Association\Model\Property;
 use Rekalogika\File\Association\Model\PropertyMetadata;
 
 final readonly class DefaultClassMetadataFactory implements ClassMetadataFactoryInterface
@@ -32,18 +32,16 @@ final readonly class DefaultClassMetadataFactory implements ClassMetadataFactory
     #[\Override]
     public function getClassMetadata(string $class): ClassMetadata
     {
-        $reflectionClass = new \ReflectionClass($class);
-        $mockObject = $reflectionClass->newInstanceWithoutConstructor();
-
-        // @todo refactor property lister to accept class directly
-        $properties = $this->propertyLister->getFileProperties($mockObject);
+        $properties = $this->propertyLister->getFileProperties($class);
 
         $propertyMetadatas = [];
 
-        foreach ($properties as $propertyName) {
+        foreach ($properties as $property) {
+            $propertyName = $property->getName();
+
             $propertyMetadatas[$propertyName] = $this->createPropertyMetadata(
-                class: $class,
-                propertyName: $propertyName,
+                leafClass: $class,
+                property: $property,
             );
         }
 
@@ -61,33 +59,18 @@ final readonly class DefaultClassMetadataFactory implements ClassMetadataFactory
     }
 
     /**
-     * @param class-string $class
+     * @param class-string $leafClass
      */
     private function createPropertyMetadata(
-        string $class,
-        string $propertyName,
+        string $leafClass,
+        Property $property,
     ): PropertyMetadata {
+        $class = $property->getClass();
+        $propertyName = $property->getName();
+
         $reflectionClass = new \ReflectionClass($class);
-        $reflectionProperty = null;
-
-        while ($reflectionClass instanceof \ReflectionClass) {
-            if ($reflectionClass->hasProperty($propertyName)) {
-                $reflectionProperty = $reflectionClass->getProperty($propertyName);
-                break;
-            }
-
-            $reflectionClass = $reflectionClass->getParentClass();
-        }
-
-        if (!$reflectionProperty instanceof \ReflectionProperty) {
-            throw new MissingPropertyException(
-                propertyName: $propertyName,
-                class: $class,
-            );
-        }
-
+        $reflectionProperty = $reflectionClass->getProperty($propertyName);
         $reflectionType = $reflectionProperty->getType();
-        $declaringClass = $reflectionProperty->getDeclaringClass()->getName();
         $mandatory = !($reflectionType?->allowsNull() ?? true);
 
         $attributes = $reflectionProperty
@@ -95,8 +78,8 @@ final readonly class DefaultClassMetadataFactory implements ClassMetadataFactory
 
         if ($attributes === []) {
             return new PropertyMetadata(
-                class: $class,
-                scopeClass: $declaringClass,
+                class: $leafClass,
+                scopeClass: $class,
                 name: $propertyName,
                 mandatory: $mandatory,
                 fetch: FetchMode::Eager,
@@ -106,8 +89,8 @@ final readonly class DefaultClassMetadataFactory implements ClassMetadataFactory
         $attribute = $attributes[0]->newInstance();
 
         return new PropertyMetadata(
-            class: $class,
-            scopeClass: $declaringClass,
+            class: $leafClass,
+            scopeClass: $class,
             name: $propertyName,
             mandatory: $mandatory,
             fetch: $attribute->fetch,

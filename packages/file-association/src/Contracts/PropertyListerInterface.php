@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Contracts;
 
+use Rekalogika\File\Association\Model\Property;
+
 /**
  * Lists all the properties of an object that are considered file association.
  *
@@ -23,8 +25,9 @@ interface PropertyListerInterface
     /**
      * Returns the property names of the object that are file association.
      *
-     * @return iterable<string> Property names of the object that are file association.
+     * @param class-string $class
+     * @return iterable<Property> Property names of the object that are file association.
      *
      */
-    public function getFileProperties(object $object): iterable;
+    public function getFileProperties(string $class): iterable;
 }

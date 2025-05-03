@@ -76,3 +76,7 @@ serve:
 	$(PHP) tests/bin/console asset-map:compile
 	$(PHP) tests/bin/console asset:install tests/public/
 	cd tests && sh -c "$(SYMFONY) server:start --document-root=public"
+
+.PHONY: dump
+dump:
+	$(PHP) tests/bin/console server:dump

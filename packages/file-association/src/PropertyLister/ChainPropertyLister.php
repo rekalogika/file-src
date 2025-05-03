@@ -28,16 +28,22 @@ final readonly class ChainPropertyLister implements PropertyListerInterface
     ) {}
 
     #[\Override]
-    public function getFileProperties(object $object): iterable
+    public function getFileProperties(string $class): iterable
     {
         $properties = [];
 
         foreach ($this->propertyListers as $propertyLister) {
-            $newProperties = $propertyLister->getFileProperties($object);
-            $newProperties = \is_array($newProperties) ? $newProperties : iterator_to_array($newProperties);
-            $properties = array_merge($properties, $newProperties);
+            $newProperties = $propertyLister->getFileProperties($class);
+
+            $newProperties = \is_array($newProperties)
+                ? $newProperties
+                : iterator_to_array($newProperties);
+
+            foreach ($newProperties as $property) {
+                $properties[$property->getSignature()] = $property;
+            }
         }
 
-        return $properties;
+        yield from $properties;
     }
 }

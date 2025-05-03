@@ -32,19 +32,19 @@ final class ClassMetadataFactoryTest extends TestCase
         $object = new EntityWithDifferentFileProperties();
         $class = $object::class;
 
-        $result = $classMetadataFactory->getClassMetadata($class)->getProperty('mandatoryEager');
+        $result = $classMetadataFactory->getClassMetadata($class)->getPropertiesByName('mandatoryEager')[0];
         $this->assertFalse($result->isMandatory());
         $this->assertTrue($result->getFetch() === FetchMode::Eager);
 
-        $result = $classMetadataFactory->getClassMetadata($class)->getProperty('notMandatoryEager');
+        $result = $classMetadataFactory->getClassMetadata($class)->getPropertiesByName('notMandatoryEager')[0];
         $this->assertTrue($result->isMandatory());
         $this->assertTrue($result->getFetch() === FetchMode::Eager);
 
-        $result = $classMetadataFactory->getClassMetadata($class)->getProperty('mandatoryLazy');
+        $result = $classMetadataFactory->getClassMetadata($class)->getPropertiesByName('mandatoryLazy')[0];
         $this->assertFalse($result->isMandatory());
         $this->assertTrue($result->getFetch() === FetchMode::Lazy);
 
-        $result = $classMetadataFactory->getClassMetadata($class)->getProperty('notMandatoryLazy');
+        $result = $classMetadataFactory->getClassMetadata($class)->getPropertiesByName('notMandatoryLazy')[0];
         $this->assertTrue($result->isMandatory());
         $this->assertTrue($result->getFetch() === FetchMode::Lazy);
     }

@@ -19,14 +19,35 @@ namespace Rekalogika\File\Association\Model;
 final readonly class ClassMetadata
 {
     /**
+     * @var array<string,list<PropertyMetadata>>
+     */
+    private array $propertiesByName;
+
+    /**
+     * @var list<PropertyMetadata>
+     */
+    private array $allProperties;
+
+    /**
      * @param class-string $class
-     * @param array<string,PropertyMetadata> $properties
+     * @param iterable<PropertyMetadata> $properties
      */
     public function __construct(
         private string $class,
         private string $signature,
-        private array $properties,
-    ) {}
+        iterable $properties,
+    ) {
+        $propertiesByName = [];
+        $allProperties = [];
+
+        foreach ($properties as $property) {
+            $propertiesByName[$property->getName()][] = $property;
+            $allProperties[] = $property;
+        }
+
+        $this->propertiesByName = $propertiesByName;
+        $this->allProperties = $allProperties;
+    }
 
     /**
      * @return class-string
@@ -42,11 +63,11 @@ final readonly class ClassMetadata
     }
 
     /**
-     * @return array<string,PropertyMetadata>
+     * @return list<PropertyMetadata>
      */
     public function getProperties(): array
     {
-        return $this->properties;
+        return $this->allProperties;
     }
 
     /**
@@ -54,11 +75,15 @@ final readonly class ClassMetadata
      */
     public function getPropertyNames(): array
     {
-        return array_keys($this->properties);
+        return array_keys($this->propertiesByName);
     }
 
-    public function getProperty(string $name): PropertyMetadata
+    /**
+     * @return list<PropertyMetadata>
+     */
+    public function getPropertiesByName(string $name): array
     {
-        return $this->properties[$name] ?? throw new \InvalidArgumentException(\sprintf('Property "%s" not found in class "%s".', $name, $this->class));
+        return $this->propertiesByName[$name]
+            ?? throw new \InvalidArgumentException(\sprintf('Property "%s" not found in class "%s".', $name, $this->class));
     }
 }

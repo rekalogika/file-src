@@ -15,13 +15,17 @@ namespace Rekalogika\File\Association\Model;
 
 final readonly class Property
 {
+    private string $signature;
+
     /**
      * @param class-string $class
      */
     public function __construct(
         private string $class,
         private string $name,
-    ) {}
+    ) {
+        $this->signature = \sprintf('%s::%s', $class, $name);
+    }
 
     public function getName(): string
     {
@@ -34,5 +38,10 @@ final readonly class Property
     public function getClass(): string
     {
         return $this->class;
+    }
+
+    public function getSignature(): string
+    {
+        return $this->signature;
     }
 }
