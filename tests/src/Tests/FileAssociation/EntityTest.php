@@ -35,13 +35,6 @@ final class EntityTest extends DoctrineTestCase
 
         $user = $entityManager->getReference(User::class, $user->getId());
         $this->assertInstanceOf(User::class, $user);
-
-        // forcing entity load, should not be necessary
-        // remove if doctrine applies https://github.com/doctrine/orm/pull/11917
-        $this->assertNull($user->getImage());
-        $name = $user->getName();
-
-        // @phpstan-ignore method.impossibleType
         $this->assertInstanceOf(File::class, $user->getImage());
     }
 }
