@@ -9,6 +9,7 @@
 * refactor: use `PropertyMetadata` as arguments for simplicity
 * refactor: make `PropertyListerInterface` return property name and the class
   scope
+* test: enable monologbundle
 
 ## 1.14.0
 
