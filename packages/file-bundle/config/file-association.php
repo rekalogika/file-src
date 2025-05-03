@@ -58,7 +58,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             service(FileAssociationManager::class),
         ])
         ->tag('rekalogika.reconstitutor.class')
-        ->tag('rekalogika.reconstitutor')
     ;
 
     $services->set(AttributeReconstitutor::class)
@@ -66,7 +65,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             service(FileAssociationManager::class),
         ])
         ->tag('rekalogika.reconstitutor.attribute')
-        ->tag('rekalogika.reconstitutor')
     ;
 
     //

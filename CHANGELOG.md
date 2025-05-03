@@ -11,6 +11,7 @@
   scope
 * test: enable monologbundle
 * deps: require reconstitutor 2
+* deps: require reconstitutor 2.0.2
 
 ## 1.14.0
 
