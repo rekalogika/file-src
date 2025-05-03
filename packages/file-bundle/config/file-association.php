@@ -87,7 +87,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             '$reader' => service(PropertyReaderInterface::class),
             '$writer' => service(PropertyWriterInterface::class),
             '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
-        ]);
+        ])
+        ->call('setLogger', [service('logger')->ignoreOnInvalid()])
+        ->tag('monolog.logger', ['channel' => 'rekalogika.file'])
+    ;
 
     //
     // object id resolver

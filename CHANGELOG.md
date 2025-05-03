@@ -15,6 +15,7 @@
 * refactor: change exception to implement our interface
 * perf: after saving, use file reference as the new file
 * refactor: `FilePropertyManagerInterface`
+* feat: add logging
 
 ## 1.14.0
 
