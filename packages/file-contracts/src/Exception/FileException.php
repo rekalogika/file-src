@@ -13,4 +13,4 @@ declare(strict_types=1);
 
 namespace Rekalogika\Contracts\File\Exception;
 
-abstract class FileException extends \Exception {}
+interface FileException extends \Throwable {}

@@ -15,4 +15,4 @@ namespace Rekalogika\Contracts\File\Exception\FileRepository;
 
 use Rekalogika\Contracts\File\Exception\FileException;
 
-abstract class FileRepositoryException extends FileException {}
+interface FileRepositoryException extends FileException {}

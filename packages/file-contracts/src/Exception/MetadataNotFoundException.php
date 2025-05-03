@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\Contracts\File\Exception;
 
-final class MetadataNotFoundException extends \Exception
+final class MetadataNotFoundException extends \RuntimeException implements FileException
 {
     public function __construct(string $metadataName, ?\Throwable $previous = null)
     {

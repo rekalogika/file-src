@@ -15,7 +15,7 @@ namespace Rekalogika\File\Association\Exception\FileLocationResolver;
 
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 
-final class ObjectNotSupportedException extends FileLocationResolverException
+final class ObjectNotSupportedException extends \RuntimeException implements FileLocationResolverException
 {
     /**
      * @param class-string<ClassBasedFileLocationResolverInterface> $class

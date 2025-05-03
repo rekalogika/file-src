@@ -15,14 +15,14 @@ namespace Rekalogika\Contracts\File\Exception\FileRepository;
 
 use Rekalogika\Contracts\File\FileInterface;
 
-final class AdHocFilesystemException extends FileRepositoryException
+final class AdHocFilesystemException extends \RuntimeException implements FileRepositoryException
 {
     public function __construct(
         FileInterface $file,
         ?\Throwable $previous = null,
     ) {
         parent::__construct(\sprintf(
-            'File with key "%s" has an ad-hoc filesystem "%s", but the function you are using in the file repository is unable work with such a file.',
+            'File with key "%s" has an ad-hoc filesystem "%s", but the function you are using in the file repository cannot work with such a file.',
             $file->getKey(),
             $file->getFilesystemIdentifier() ?? 'null',
         ), 0, $previous);

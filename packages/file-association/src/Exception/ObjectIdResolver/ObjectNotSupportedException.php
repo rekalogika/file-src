@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Exception\ObjectIdResolver;
 
-final class ObjectNotSupportedException extends ObjectIdResolverException
+final class ObjectNotSupportedException extends \LogicException implements ObjectIdResolverException
 {
     public function __construct(
         object $object,

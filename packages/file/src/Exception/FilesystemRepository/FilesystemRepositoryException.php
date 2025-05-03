@@ -13,4 +13,6 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Exception\FilesystemRepository;
 
-class FilesystemRepositoryException extends \Exception {}
+use Rekalogika\Contracts\File\Exception\FileException;
+
+interface FilesystemRepositoryException extends FileException {}

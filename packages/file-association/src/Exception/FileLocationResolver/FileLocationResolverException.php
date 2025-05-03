@@ -15,4 +15,4 @@ namespace Rekalogika\File\Association\Exception\FileLocationResolver;
 
 use Rekalogika\File\Association\Exception\FileAssociationException;
 
-class FileLocationResolverException extends FileAssociationException {}
+interface FileLocationResolverException extends FileAssociationException {}

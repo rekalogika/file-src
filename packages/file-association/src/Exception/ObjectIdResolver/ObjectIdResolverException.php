@@ -15,4 +15,4 @@ namespace Rekalogika\File\Association\Exception\ObjectIdResolver;
 
 use Rekalogika\File\Association\Exception\FileAssociationException;
 
-class ObjectIdResolverException extends FileAssociationException {}
+interface ObjectIdResolverException extends FileAssociationException {}
