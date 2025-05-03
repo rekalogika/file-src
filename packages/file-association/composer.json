@@ -27,12 +27,10 @@
     },
     "require": {
         "psr/cache": "^2 || ^3",
-        "rekalogika/direct-property-access": "^1.1.2 || ^1.2",
         "rekalogika/file-association-contracts": "^1.14",
         "rekalogika/file-contracts": "^1.14",
         "rekalogika/reconstitutor": "^2.0.2",
-        "symfony/deprecation-contracts": "^3.1",
-        "symfony/property-access": "^6.2 || ^7.0"
+        "symfony/deprecation-contracts": "^3.1"
     },
     "suggest": {
         "symfony/console": "Enables console commands"

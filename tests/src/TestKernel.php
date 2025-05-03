@@ -19,13 +19,10 @@ use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\DirectPropertyAccess\RekalogikaDirectPropertyAccessBundle;
 use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
-use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
-use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\FileAssociationManager;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Association\PropertyLister\ChainPropertyLister;
 use Rekalogika\File\Association\PropertyLister\FileAssociationInterfacePropertyLister;
-use Rekalogika\File\Association\PropertyReaderWriter\SymfonyPropertyAccessorBridge;
 use Rekalogika\File\Association\Reconstitutor\AttributeReconstitutor;
 use Rekalogika\File\Association\Reconstitutor\InterfaceReconstitutor;
 use Rekalogika\File\Bridge\FilePond\RekalogikaFileFilePondBundle;
@@ -140,9 +137,6 @@ final class TestKernel extends HttpKernelKernel
             ChainPropertyLister::class,
             FileAssociationInterfacePropertyLister::class,
             AttributesPropertyLister::class,
-            SymfonyPropertyAccessorBridge::class,
-            PropertyReaderInterface::class,
-            PropertyWriterInterface::class,
             ClassMetadataFactoryInterface::class,
 
             TemporaryUrlGeneratorInterface::class,

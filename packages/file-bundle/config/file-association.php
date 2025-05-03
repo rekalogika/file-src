@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 use Doctrine\Persistence\ManagerRegistry;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
-use Rekalogika\DirectPropertyAccess\DirectPropertyAccessor;
 use Rekalogika\File\Association\ClassBasedFileLocationResolver\ChainedClassBasedFileLocationResolver;
 use Rekalogika\File\Association\ClassBasedFileLocationResolver\DefaultClassBasedFileLocationResolver;
 use Rekalogika\File\Association\ClassMetadataFactory\CachingClassMetadataFactory;
@@ -28,8 +27,6 @@ use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
-use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
-use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\FileAssociationManager;
 use Rekalogika\File\Association\FilePropertyManager\DefaultFilePropertyManager;
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
@@ -38,7 +35,6 @@ use Rekalogika\File\Association\ObjectIdResolver\DoctrineObjectIdResolver;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Association\PropertyLister\ChainPropertyLister;
 use Rekalogika\File\Association\PropertyLister\FileAssociationInterfacePropertyLister;
-use Rekalogika\File\Association\PropertyReaderWriter\SymfonyPropertyAccessorBridge;
 use Rekalogika\File\Association\Reconstitutor\AttributeReconstitutor;
 use Rekalogika\File\Association\Reconstitutor\InterfaceReconstitutor;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -84,8 +80,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->class(DefaultFilePropertyManager::class)
         ->args([
             '$fileRepository' => service(FileRepositoryInterface::class),
-            '$reader' => service(PropertyReaderInterface::class),
-            '$writer' => service(PropertyWriterInterface::class),
             '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
         ])
         ->call('setLogger', [service('logger')->ignoreOnInvalid()])
@@ -180,25 +174,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(AttributesPropertyLister::class)
         ->tag('rekalogika.file.association.property_lister');
-
-    //
-    // property reader writer
-    //
-
-    $services->set(SymfonyPropertyAccessorBridge::class)
-        ->args([
-            service(DirectPropertyAccessor::class),
-        ]);
-
-    $services->alias(
-        PropertyReaderInterface::class,
-        SymfonyPropertyAccessorBridge::class,
-    );
-
-    $services->alias(
-        PropertyWriterInterface::class,
-        SymfonyPropertyAccessorBridge::class,
-    );
 
     //
     // class metadata factory
