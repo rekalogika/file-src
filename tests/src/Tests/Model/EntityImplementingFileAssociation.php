@@ -13,15 +13,22 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\Tests\Model;
 
+use Rekalogika\Contracts\File\Association\FileAssociationInterface;
 use Rekalogika\Contracts\File\FileInterface;
-use Rekalogika\File\Association\Attribute\AsFileAssociation;
 
-class EntityWithAttribute
+class EntityImplementingFileAssociation implements FileAssociationInterface
 {
-    #[AsFileAssociation]
+    #[\Override]
+    public static function getFileAssociationPropertyList(): array
+    {
+        return [
+            'file',
+            'protectedFile',
+        ];
+    }
+
     private ?FileInterface $file = null;
 
-    #[AsFileAssociation]
     protected ?FileInterface $protectedFile = null;
 
     private ?FileInterface $nonAssociatedFile = null;

@@ -14,28 +14,118 @@ declare(strict_types=1);
 namespace Rekalogika\File\Tests\Tests\FileAssociation;
 
 use PHPUnit\Framework\TestCase;
+use Rekalogika\File\Association\Contracts\PropertyListerInterface;
+use Rekalogika\File\Association\Model\Property;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
+use Rekalogika\File\Association\PropertyLister\FileAssociationInterfacePropertyLister;
+use Rekalogika\File\Tests\Tests\Model\EntityImplementingFileAssociation;
 use Rekalogika\File\Tests\Tests\Model\EntityWithAttribute;
+use Rekalogika\File\Tests\Tests\Model\SubclassOfEntityImplementingFileAssociation;
 use Rekalogika\File\Tests\Tests\Model\SubclassOfEntityWithAttribute;
 
 final class PropertyListerTest extends TestCase
 {
-    public function testAttributePropertyLister(): void
+    /**
+     * @param class-string $class
+     * @param list<Property> $expectedProperties
+     * @dataProvider propertyListerProvider
+     */
+    public function testPropertyLister(
+        PropertyListerInterface $lister,
+        string $class,
+        array $expectedProperties,
+    ): void {
+        $properties = $lister->getFileProperties($class);
+
+        $properties = $properties instanceof \Traversable
+            ? iterator_to_array($properties)
+            : $properties;
+
+        // dump($expectedProperties);
+        // dump($properties);
+
+        $this->assertEqualsCanonicalizing($expectedProperties, $properties);
+    }
+
+    /**
+     * @return iterable<array-key,array{PropertyListerInterface,class-string,list<Property>}>
+     */
+    public static function propertyListerProvider(): iterable
     {
-        $lister = new AttributesPropertyLister();
+        yield [
+            new AttributesPropertyLister(),
+            EntityWithAttribute::class,
+            [
+                new Property(
+                    class: EntityWithAttribute::class,
+                    name: 'file',
+                ),
+                new Property(
+                    class: EntityWithAttribute::class,
+                    name: 'protectedFile',
+                ),
+            ],
+        ];
 
-        $entity = new EntityWithAttribute('id');
-        $properties = $lister->getFileProperties($entity);
-        $properties = $properties instanceof \Traversable
-            ? iterator_to_array($properties)
-            : $properties;
-        $this->assertSame(['file'], $properties);
+        yield [
+            new AttributesPropertyLister(),
+            SubclassOfEntityWithAttribute::class,
+            [
+                new Property(
+                    class: SubclassOfEntityWithAttribute::class,
+                    name: 'anotherFile',
+                ),
+                new Property(
+                    class: EntityWithAttribute::class,
+                    name: 'file',
+                ),
+                new Property(
+                    class: SubclassOfEntityWithAttribute::class,
+                    name: 'file',
+                ),
+                new Property(
+                    class: SubclassOfEntityWithAttribute::class,
+                    name: 'protectedFile',
+                ),
+            ],
+        ];
 
-        $subclassedEntity = new SubclassOfEntityWithAttribute('id');
-        $properties = $lister->getFileProperties($subclassedEntity);
-        $properties = $properties instanceof \Traversable
-            ? iterator_to_array($properties)
-            : $properties;
-        $this->assertSame(['anotherFile', 'file'], $properties);
+        yield [
+            new FileAssociationInterfacePropertyLister(),
+            EntityImplementingFileAssociation::class,
+            [
+                new Property(
+                    class: EntityImplementingFileAssociation::class,
+                    name: 'file',
+                ),
+                new Property(
+                    class: EntityImplementingFileAssociation::class,
+                    name: 'protectedFile',
+                ),
+            ],
+        ];
+
+        yield [
+            new FileAssociationInterfacePropertyLister(),
+            SubclassOfEntityImplementingFileAssociation::class,
+            [
+                new Property(
+                    class: SubclassOfEntityImplementingFileAssociation::class,
+                    name: 'anotherFile',
+                ),
+                new Property(
+                    class: EntityImplementingFileAssociation::class,
+                    name: 'file',
+                ),
+                new Property(
+                    class: SubclassOfEntityImplementingFileAssociation::class,
+                    name: 'file',
+                ),
+                new Property(
+                    class: SubclassOfEntityImplementingFileAssociation::class,
+                    name: 'protectedFile',
+                ),
+            ],
+        ];
     }
 }

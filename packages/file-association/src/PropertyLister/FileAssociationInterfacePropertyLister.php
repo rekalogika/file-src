@@ -15,6 +15,8 @@ namespace Rekalogika\File\Association\PropertyLister;
 
 use Rekalogika\Contracts\File\Association\FileAssociationInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
+use Rekalogika\File\Association\Model\Property;
+use Rekalogika\File\Association\Util\ClassUtil;
 
 /**
  * Determines applicable file association properties by using
@@ -23,12 +25,24 @@ use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 final class FileAssociationInterfacePropertyLister implements PropertyListerInterface
 {
     #[\Override]
-    public function getFileProperties(object $object): iterable
+    public function getFileProperties(string $class): iterable
     {
-        if (!$object instanceof FileAssociationInterface) {
+        if (!is_a($class, FileAssociationInterface::class, true)) {
             return [];
         }
 
-        return $object::getFileAssociationPropertyList();
+        $propertyNames = $class::getFileAssociationPropertyList();
+        $properties = ClassUtil::getReflectionProperties($class);
+
+        foreach ($properties as $reflectionProperty) {
+            if (!\in_array($reflectionProperty->getName(), $propertyNames, true)) {
+                continue;
+            }
+
+            yield new Property(
+                class: $reflectionProperty->getDeclaringClass()->getName(),
+                name: $reflectionProperty->getName(),
+            );
+        }
     }
 }

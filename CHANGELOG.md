@@ -7,6 +7,8 @@
 * chore: remove deprecated `FileLocationResolverInterface`
 * refactor: move property related methods to `FilePropertyManagerInterface`
 * refactor: use `PropertyMetadata` as arguments for simplicity
+* refactor: make `PropertyListerInterface` return property name and the class
+  scope
 
 ## 1.14.0
 
