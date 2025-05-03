@@ -14,6 +14,7 @@
 * deps: require reconstitutor 2.0.2
 * refactor: change exception to implement our interface
 * perf: after saving, use file reference as the new file
+* refactor: `FilePropertyManagerInterface`
 
 ## 1.14.0
 

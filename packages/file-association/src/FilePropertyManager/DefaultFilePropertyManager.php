@@ -17,6 +17,7 @@ use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
+use Rekalogika\File\Association\Contracts\FilePropertyOperation;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\Model\FetchMode;
@@ -36,11 +37,11 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
      * Process a potential incoming file upload on a property
      */
     #[\Override]
-    public function saveProperty(
+    public function flushProperty(
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): void {
+    ): FilePropertyOperation {
         $propertyName = $propertyMetadata->getName();
         $class = $propertyMetadata->getClass();
 
@@ -58,7 +59,7 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
             // if the file location of the current file is the same as the
             // file location of the property, we don't need to do anything
             if ($currentFile->isEqualTo($filePointer)) {
-                return;
+                return FilePropertyOperation::FlushNothing;
             }
 
             // copy file to storage
@@ -69,22 +70,26 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
 
             // write the file to the object
             $this->writer->write($object, $propertyName, $file);
+
+            return FilePropertyOperation::FlushSave;
         } elseif (null === $currentFile) {
             $this->removeProperty(
                 propertyMetadata: $propertyMetadata,
                 object: $object,
                 id: $id,
             );
-        } else {
-            throw new \InvalidArgumentException(
-                \sprintf(
-                    'Property "%s" on object "%s" is not a %s instance',
-                    $propertyName,
-                    $object::class,
-                    FileInterface::class,
-                ),
-            );
+
+            return FilePropertyOperation::FlushRemove;
         }
+
+        throw new \InvalidArgumentException(
+            \sprintf(
+                'Property "%s" on object "%s" is not a %s instance',
+                $propertyName,
+                $object::class,
+                FileInterface::class,
+            ),
+        );
     }
 
     /**
@@ -95,7 +100,7 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): void {
+    ): FilePropertyOperation {
         $propertyName = $propertyMetadata->getName();
         $class = $propertyMetadata->getClass();
 
@@ -106,6 +111,8 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         );
 
         $this->fileRepository->delete($filePointer);
+
+        return FilePropertyOperation::Remove;
     }
 
     /**
@@ -116,7 +123,7 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): void {
+    ): FilePropertyOperation {
         $propertyName = $propertyMetadata->getName();
         $class = $propertyMetadata->getClass();
 
@@ -129,16 +136,27 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         if ($propertyMetadata->getFetch() === FetchMode::Eager) {
             $file = $this->fileRepository->tryGet($filePointer);
 
-            if ($file === null && $propertyMetadata->isMandatory()) {
-                $file = new MissingFile(
-                    $filePointer->getFilesystemIdentifier(),
-                    $filePointer->getKey(),
-                );
+            if ($file === null) {
+                if ($propertyMetadata->isMandatory()) {
+                    $file = new MissingFile(
+                        $filePointer->getFilesystemIdentifier(),
+                        $filePointer->getKey(),
+                    );
+
+                    $result = FilePropertyOperation::LoadMissing;
+                } else {
+                    $result = FilePropertyOperation::LoadNull;
+                }
+            } else {
+                $result = FilePropertyOperation::LoadNormal;
             }
         } else {
             $file = $this->fileRepository->getReference($filePointer);
+            $result = FilePropertyOperation::LoadLazy;
         }
 
         $this->writer->write($object, $propertyName, $file);
+
+        return $result;
     }
 }

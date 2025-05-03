@@ -44,7 +44,7 @@ final readonly class FileAssociationManager
         $id = $this->objectIdResolver->getObjectId($object);
 
         foreach ($classMetadata->getProperties() as $propertyMetadata) {
-            $this->filePropertyManager->saveProperty(
+            $this->filePropertyManager->flushProperty(
                 propertyMetadata: $propertyMetadata,
                 object: $object,
                 id: $id,

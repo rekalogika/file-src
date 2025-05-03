@@ -23,11 +23,11 @@ interface FilePropertyManagerInterface
     /**
      * Process a potential incoming file upload on a property
      */
-    public function saveProperty(
+    public function flushProperty(
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): void;
+    ): FilePropertyOperation;
 
     /**
      * Process a file removal on a property
@@ -36,7 +36,7 @@ interface FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): void;
+    ): FilePropertyOperation;
 
     /**
      * Process a property on an object load
@@ -45,5 +45,5 @@ interface FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): void;
+    ): FilePropertyOperation;
 }
