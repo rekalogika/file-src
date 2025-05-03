@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.14.1
+
+* fix: bump to reconstitutor 1.4 which pulls doctrine/orm version containing
+  an important fix
+
 ## 1.14.0
 
 * fix: fix web serving
