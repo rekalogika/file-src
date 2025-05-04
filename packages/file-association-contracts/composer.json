@@ -16,6 +16,9 @@
             "email": "priyadi@rekalogika.com"
         }
     ],
+    "require": {
+        "php": "^8.2"
+    },
     "autoload": {
         "psr-4": {
             "Rekalogika\\Contracts\\File\\Association\\": "src/"

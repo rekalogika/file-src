@@ -26,6 +26,7 @@
         }
     },
     "require": {
+        "php": "^8.2",
         "intervention/image": "^3.3",
         "psr/container": "^2.0",
         "psr/log": "^2 || ^3",

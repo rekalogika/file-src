@@ -26,6 +26,7 @@
         }
     },
     "require": {
+        "php": "^8.2",
         "rekalogika/file": "^1.14",
         "rekalogika/file-contracts": "^1.14",
         "rekalogika/file-metadata-contracts": "^1.14",

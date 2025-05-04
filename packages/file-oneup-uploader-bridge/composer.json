@@ -23,6 +23,7 @@
         }
     },
     "require": {
+        "php": "^8.2",
         "oneup/uploader-bundle": "^5.0",
         "rekalogika/file-contracts": "^1.14",
         "rekalogika/file": "^1.14"
