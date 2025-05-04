@@ -32,6 +32,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 final class RekalogikaFileExtension extends Extension implements PrependExtensionInterface
 {
@@ -43,6 +44,8 @@ final class RekalogikaFileExtension extends Extension implements PrependExtensio
             new FileLocator(__DIR__ . '/../../config'),
         );
 
+        $debug = (bool) $container->getParameter('kernel.debug');
+
         //
         // load service configurations
         //
@@ -52,6 +55,10 @@ final class RekalogikaFileExtension extends Extension implements PrependExtensio
 
         if (interface_exists(ObjectManagerInterface::class)) {
             $loader->load('file-association.php');
+
+            if ($debug && class_exists(Stopwatch::class)) {
+                $loader->load('file-association-debug.php');
+            }
         }
 
         if (class_exists(ImageResizer::class)) {

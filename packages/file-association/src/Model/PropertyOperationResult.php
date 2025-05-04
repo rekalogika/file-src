@@ -15,31 +15,34 @@ namespace Rekalogika\File\Association\Model;
 
 use Rekalogika\Contracts\File\FilePointerInterface;
 
-final readonly class FilePropertyOperationResult
+final readonly class PropertyOperationResult
 {
     /**
      * @param class-string $class
      * @param class-string $scopeClass
      */
     public function __construct(
-        public FilePropertyOperationType $type,
-        public FilePropertyOperationAction $action,
+        public ObjectOperationType $type,
+        public PropertyOperationAction $action,
         public string $class,
         public string $scopeClass,
         public string $property,
         public string $objectId,
         public FilePointerInterface $filePointer,
+        public ?float $duration = null,
     ) {}
 
-    public function getDescription(): string
+    public function withDuration(float $duration): self
     {
-        $type = $this->type->toString();
-        $action = $this->action->toString();
-
-        return \sprintf(
-            'File operation "%s" with result action "%s"',
-            $type,
-            $action,
+        return new self(
+            type: $this->type,
+            action: $this->action,
+            class: $this->class,
+            scopeClass: $this->scopeClass,
+            property: $this->property,
+            objectId: $this->objectId,
+            filePointer: $this->filePointer,
+            duration: $duration,
         );
     }
 }

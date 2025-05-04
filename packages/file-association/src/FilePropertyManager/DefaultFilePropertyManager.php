@@ -20,11 +20,11 @@ use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\Model\FetchMode;
-use Rekalogika\File\Association\Model\FilePropertyOperationAction;
-use Rekalogika\File\Association\Model\FilePropertyOperationResult;
-use Rekalogika\File\Association\Model\FilePropertyOperationType;
 use Rekalogika\File\Association\Model\MissingFile;
+use Rekalogika\File\Association\Model\ObjectOperationType;
 use Rekalogika\File\Association\Model\PropertyMetadata;
+use Rekalogika\File\Association\Model\PropertyOperationAction;
+use Rekalogika\File\Association\Model\PropertyOperationResult;
 use Rekalogika\File\Association\PropertyReaderWriter\DefaultPropertyReaderWriter;
 
 final readonly class DefaultFilePropertyManager implements FilePropertyManagerInterface
@@ -47,7 +47,7 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperationResult {
+    ): PropertyOperationResult {
         $propertyName = $propertyMetadata->getName();
         $class = $propertyMetadata->getClass();
 
@@ -67,9 +67,9 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         if (null === $currentFile) {
             $this->fileRepository->delete($filePointer);
 
-            return new FilePropertyOperationResult(
-                type: FilePropertyOperationType::Flush,
-                action: FilePropertyOperationAction::Removed,
+            return new PropertyOperationResult(
+                type: ObjectOperationType::Flush,
+                action: PropertyOperationAction::Removed,
                 class: $propertyMetadata->getClass(),
                 scopeClass: $propertyMetadata->getScopeClass(),
                 property: $propertyName,
@@ -82,9 +82,9 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         // file location of the property, we don't need to do anything
 
         if ($currentFile->isEqualTo($filePointer)) {
-            return new FilePropertyOperationResult(
-                type: FilePropertyOperationType::Flush,
-                action: FilePropertyOperationAction::Nothing,
+            return new PropertyOperationResult(
+                type: ObjectOperationType::Flush,
+                action: PropertyOperationAction::Nothing,
                 class: $propertyMetadata->getClass(),
                 scopeClass: $propertyMetadata->getScopeClass(),
                 property: $propertyName,
@@ -102,9 +102,9 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         // inject the file to the object
         $this->writer->write($object, $propertyMetadata, $file);
 
-        return new FilePropertyOperationResult(
-            type: FilePropertyOperationType::Flush,
-            action: FilePropertyOperationAction::Saved,
+        return new PropertyOperationResult(
+            type: ObjectOperationType::Flush,
+            action: PropertyOperationAction::Saved,
             class: $propertyMetadata->getClass(),
             scopeClass: $propertyMetadata->getScopeClass(),
             property: $propertyName,
@@ -121,7 +121,7 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperationResult {
+    ): PropertyOperationResult {
         $propertyName = $propertyMetadata->getName();
         $class = $propertyMetadata->getClass();
 
@@ -133,9 +133,9 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
 
         $this->fileRepository->delete($filePointer);
 
-        return new FilePropertyOperationResult(
-            type: FilePropertyOperationType::Remove,
-            action: FilePropertyOperationAction::Removed,
+        return new PropertyOperationResult(
+            type: ObjectOperationType::Remove,
+            action: PropertyOperationAction::Removed,
             class: $propertyMetadata->getClass(),
             scopeClass: $propertyMetadata->getScopeClass(),
             property: $propertyName,
@@ -152,7 +152,7 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperationResult {
+    ): PropertyOperationResult {
         $propertyName = $propertyMetadata->getName();
         $class = $propertyMetadata->getClass();
 
@@ -172,9 +172,9 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
                         $filePointer->getKey(),
                     );
 
-                    $result = new FilePropertyOperationResult(
-                        type: FilePropertyOperationType::Load,
-                        action: FilePropertyOperationAction::LoadedMissing,
+                    $result = new PropertyOperationResult(
+                        type: ObjectOperationType::Load,
+                        action: PropertyOperationAction::LoadedMissing,
                         class: $propertyMetadata->getClass(),
                         scopeClass: $propertyMetadata->getScopeClass(),
                         property: $propertyName,
@@ -182,9 +182,9 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
                         filePointer: $filePointer,
                     );
                 } else {
-                    $result = new FilePropertyOperationResult(
-                        type: FilePropertyOperationType::Load,
-                        action: FilePropertyOperationAction::LoadedNotFound,
+                    $result = new PropertyOperationResult(
+                        type: ObjectOperationType::Load,
+                        action: PropertyOperationAction::LoadedNotFound,
                         class: $propertyMetadata->getClass(),
                         scopeClass: $propertyMetadata->getScopeClass(),
                         property: $propertyName,
@@ -193,9 +193,9 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
                     );
                 }
             } else {
-                $result = new FilePropertyOperationResult(
-                    type: FilePropertyOperationType::Load,
-                    action: FilePropertyOperationAction::LoadedNormal,
+                $result = new PropertyOperationResult(
+                    type: ObjectOperationType::Load,
+                    action: PropertyOperationAction::LoadedNormal,
                     class: $propertyMetadata->getClass(),
                     scopeClass: $propertyMetadata->getScopeClass(),
                     property: $propertyName,
@@ -207,13 +207,13 @@ final readonly class DefaultFilePropertyManager implements FilePropertyManagerIn
             $file = $this->fileRepository->getReference($filePointer);
 
             if ($file instanceof FileProxy) {
-                $action = FilePropertyOperationAction::LoadedLazy;
+                $action = PropertyOperationAction::LoadedLazy;
             } else {
-                $action = FilePropertyOperationAction::LoadedNormal;
+                $action = PropertyOperationAction::LoadedNormal;
             }
 
-            $result = new FilePropertyOperationResult(
-                type: FilePropertyOperationType::Load,
+            $result = new PropertyOperationResult(
+                type: ObjectOperationType::Load,
                 action: $action,
                 class: $propertyMetadata->getClass(),
                 scopeClass: $propertyMetadata->getScopeClass(),

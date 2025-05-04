@@ -15,9 +15,9 @@ namespace Rekalogika\File\Association\FilePropertyManager;
 
 use Psr\Log\LoggerInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
-use Rekalogika\File\Association\Model\FilePropertyOperationAction;
-use Rekalogika\File\Association\Model\FilePropertyOperationResult;
 use Rekalogika\File\Association\Model\PropertyMetadata;
+use Rekalogika\File\Association\Model\PropertyOperationAction;
+use Rekalogika\File\Association\Model\PropertyOperationResult;
 
 final class LoggingFilePropertyManager implements FilePropertyManagerInterface
 {
@@ -31,7 +31,7 @@ final class LoggingFilePropertyManager implements FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperationResult {
+    ): PropertyOperationResult {
         $result = $this->decorated->flushProperty($propertyMetadata, $object, $id);
 
         $this->log($result);
@@ -44,7 +44,7 @@ final class LoggingFilePropertyManager implements FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperationResult {
+    ): PropertyOperationResult {
         $result = $this->decorated->removeProperty($propertyMetadata, $object, $id);
 
         $this->log($result);
@@ -57,7 +57,7 @@ final class LoggingFilePropertyManager implements FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperationResult {
+    ): PropertyOperationResult {
         $result = $this->decorated->loadProperty($propertyMetadata, $object, $id);
 
         $this->log($result);
@@ -65,9 +65,9 @@ final class LoggingFilePropertyManager implements FilePropertyManagerInterface
         return $result;
     }
 
-    private function log(FilePropertyOperationResult $result): void
+    private function log(PropertyOperationResult $result): void
     {
-        if ($result->action === FilePropertyOperationAction::Nothing) {
+        if ($result->action === PropertyOperationAction::Nothing) {
             return;
         }
 

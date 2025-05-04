@@ -16,7 +16,7 @@ namespace Rekalogika\File\Association\Model;
 /**
  * @internal
  */
-enum FilePropertyOperationType
+enum ObjectOperationType
 {
     case Flush;
 
