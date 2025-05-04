@@ -13,14 +13,17 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\FilePropertyManager;
 
+use Psr\Log\LoggerInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
-use Rekalogika\File\Association\Contracts\FilePropertyOperation;
+use Rekalogika\File\Association\Model\FilePropertyOperationAction;
+use Rekalogika\File\Association\Model\FilePropertyOperationResult;
 use Rekalogika\File\Association\Model\PropertyMetadata;
 
-final class TraceableFilePropertyManager implements FilePropertyManagerInterface
+final class LoggingFilePropertyManager implements FilePropertyManagerInterface
 {
     public function __construct(
         private readonly FilePropertyManagerInterface $decorated,
+        private readonly ?LoggerInterface $logger,
     ) {}
 
     #[\Override]
@@ -28,8 +31,10 @@ final class TraceableFilePropertyManager implements FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperation {
+    ): FilePropertyOperationResult {
         $result = $this->decorated->flushProperty($propertyMetadata, $object, $id);
+
+        $this->log($result);
 
         return $result;
     }
@@ -39,8 +44,10 @@ final class TraceableFilePropertyManager implements FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperation {
+    ): FilePropertyOperationResult {
         $result = $this->decorated->removeProperty($propertyMetadata, $object, $id);
+
+        $this->log($result);
 
         return $result;
     }
@@ -50,9 +57,34 @@ final class TraceableFilePropertyManager implements FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperation {
+    ): FilePropertyOperationResult {
         $result = $this->decorated->loadProperty($propertyMetadata, $object, $id);
 
+        $this->log($result);
+
         return $result;
+    }
+
+    private function log(FilePropertyOperationResult $result): void
+    {
+        if ($result->action === FilePropertyOperationAction::Nothing) {
+            return;
+        }
+
+        $context = [
+            'type' => $result->type->toString(),
+            'action' => $result->action->toString(),
+            'class' => $result->class,
+            'property' => $result->property,
+            'scopeClass' => $result->scopeClass,
+            'objectId' => $result->objectId,
+            'fileKey' => $result->filePointer->getKey(),
+            'fileFilesystemIdentifier' => $result->filePointer->getFilesystemIdentifier(),
+        ];
+
+        $this->logger?->debug(
+            'File operation "{type}", with result action "{action}"',
+            $context,
+        );
     }
 }
