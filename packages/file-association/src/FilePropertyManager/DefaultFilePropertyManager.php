@@ -13,59 +13,30 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\FilePropertyManager;
 
-use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerAwareTrait;
-use Rekalogika\Contracts\File\FilePointerInterface;
+use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
-use Rekalogika\File\Association\Contracts\FilePropertyOperation;
 use Rekalogika\File\Association\Contracts\PropertyReaderInterface;
 use Rekalogika\File\Association\Contracts\PropertyWriterInterface;
 use Rekalogika\File\Association\Model\FetchMode;
+use Rekalogika\File\Association\Model\FilePropertyOperationAction;
+use Rekalogika\File\Association\Model\FilePropertyOperationResult;
+use Rekalogika\File\Association\Model\FilePropertyOperationType;
 use Rekalogika\File\Association\Model\MissingFile;
 use Rekalogika\File\Association\Model\PropertyMetadata;
 use Rekalogika\File\Association\PropertyReaderWriter\DefaultPropertyReaderWriter;
 
-final class DefaultFilePropertyManager implements
-    FilePropertyManagerInterface,
-    LoggerAwareInterface
+final readonly class DefaultFilePropertyManager implements FilePropertyManagerInterface
 {
-    use LoggerAwareTrait;
-
-    private readonly PropertyReaderInterface $reader;
-    private readonly PropertyWriterInterface $writer;
+    private PropertyReaderInterface $reader;
+    private PropertyWriterInterface $writer;
 
     public function __construct(
-        private readonly FileRepositoryInterface $fileRepository,
-        private readonly ClassBasedFileLocationResolverInterface $fileLocationResolver,
+        private FileRepositoryInterface $fileRepository,
+        private ClassBasedFileLocationResolverInterface $fileLocationResolver,
     ) {
         $this->reader = $this->writer = new DefaultPropertyReaderWriter();
-    }
-
-    private function log(
-        PropertyMetadata $propertyMetadata,
-        string $id,
-        FilePointerInterface $filePointer,
-        FilePropertyOperation $operation,
-    ): void {
-        if ($operation === FilePropertyOperation::FlushNothing) {
-            return;
-        }
-
-        $context = [
-            'class' => $propertyMetadata->getClass(),
-            'property' => $propertyMetadata->getName(),
-            'scopeClass' => $propertyMetadata->getScopeClass(),
-            'objectId' => $id,
-            'fileKey' => $filePointer->getKey(),
-            'fileFilesystemIdentifier' => $filePointer->getFilesystemIdentifier(),
-        ];
-
-        $this->logger?->debug(
-            $operation->getDescription(),
-            $context,
-        );
     }
 
     /**
@@ -76,7 +47,7 @@ final class DefaultFilePropertyManager implements
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperation {
+    ): FilePropertyOperationResult {
         $propertyName = $propertyMetadata->getName();
         $class = $propertyMetadata->getClass();
 
@@ -90,31 +61,36 @@ final class DefaultFilePropertyManager implements
             propertyName: $propertyName,
         );
 
-        // if the file is null, we need to remove the file from storage
+        // if the file is null, we need to remove the file from storage, then
+        // we are done
+
         if (null === $currentFile) {
             $this->fileRepository->delete($filePointer);
 
-            $this->log(
-                propertyMetadata: $propertyMetadata,
-                id: $id,
+            return new FilePropertyOperationResult(
+                type: FilePropertyOperationType::Flush,
+                action: FilePropertyOperationAction::Removed,
+                class: $propertyMetadata->getClass(),
+                scopeClass: $propertyMetadata->getScopeClass(),
+                property: $propertyName,
+                objectId: $id,
                 filePointer: $filePointer,
-                operation: FilePropertyOperation::FlushRemove,
             );
-
-            return FilePropertyOperation::FlushRemove;
         }
 
         // if the file location of the current file is the same as the
         // file location of the property, we don't need to do anything
-        if ($currentFile->isEqualTo($filePointer)) {
-            $this->log(
-                propertyMetadata: $propertyMetadata,
-                id: $id,
-                filePointer: $filePointer,
-                operation: FilePropertyOperation::FlushNothing,
-            );
 
-            return FilePropertyOperation::FlushNothing;
+        if ($currentFile->isEqualTo($filePointer)) {
+            return new FilePropertyOperationResult(
+                type: FilePropertyOperationType::Flush,
+                action: FilePropertyOperationAction::Nothing,
+                class: $propertyMetadata->getClass(),
+                scopeClass: $propertyMetadata->getScopeClass(),
+                property: $propertyName,
+                objectId: $id,
+                filePointer: $filePointer,
+            );
         }
 
         // copy file to storage
@@ -123,18 +99,18 @@ final class DefaultFilePropertyManager implements
         // get reference of the file from storage
         $file = $this->fileRepository->getReference($filePointer);
 
-        // write the file to the object
+        // inject the file to the object
         $this->writer->write($object, $propertyMetadata, $file);
 
-        // log
-        $this->log(
-            propertyMetadata: $propertyMetadata,
-            id: $id,
+        return new FilePropertyOperationResult(
+            type: FilePropertyOperationType::Flush,
+            action: FilePropertyOperationAction::Saved,
+            class: $propertyMetadata->getClass(),
+            scopeClass: $propertyMetadata->getScopeClass(),
+            property: $propertyName,
+            objectId: $id,
             filePointer: $filePointer,
-            operation: FilePropertyOperation::FlushSave,
         );
-
-        return FilePropertyOperation::FlushSave;
     }
 
     /**
@@ -145,7 +121,7 @@ final class DefaultFilePropertyManager implements
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperation {
+    ): FilePropertyOperationResult {
         $propertyName = $propertyMetadata->getName();
         $class = $propertyMetadata->getClass();
 
@@ -157,14 +133,15 @@ final class DefaultFilePropertyManager implements
 
         $this->fileRepository->delete($filePointer);
 
-        $this->log(
-            propertyMetadata: $propertyMetadata,
-            id: $id,
+        return new FilePropertyOperationResult(
+            type: FilePropertyOperationType::Remove,
+            action: FilePropertyOperationAction::Removed,
+            class: $propertyMetadata->getClass(),
+            scopeClass: $propertyMetadata->getScopeClass(),
+            property: $propertyName,
+            objectId: $id,
             filePointer: $filePointer,
-            operation: FilePropertyOperation::Remove,
         );
-
-        return FilePropertyOperation::Remove;
     }
 
     /**
@@ -175,7 +152,7 @@ final class DefaultFilePropertyManager implements
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperation {
+    ): FilePropertyOperationResult {
         $propertyName = $propertyMetadata->getName();
         $class = $propertyMetadata->getClass();
 
@@ -195,26 +172,58 @@ final class DefaultFilePropertyManager implements
                         $filePointer->getKey(),
                     );
 
-                    $result = FilePropertyOperation::LoadMissing;
+                    $result = new FilePropertyOperationResult(
+                        type: FilePropertyOperationType::Load,
+                        action: FilePropertyOperationAction::LoadedMissing,
+                        class: $propertyMetadata->getClass(),
+                        scopeClass: $propertyMetadata->getScopeClass(),
+                        property: $propertyName,
+                        objectId: $id,
+                        filePointer: $filePointer,
+                    );
                 } else {
-                    $result = FilePropertyOperation::LoadNull;
+                    $result = new FilePropertyOperationResult(
+                        type: FilePropertyOperationType::Load,
+                        action: FilePropertyOperationAction::LoadedNotFound,
+                        class: $propertyMetadata->getClass(),
+                        scopeClass: $propertyMetadata->getScopeClass(),
+                        property: $propertyName,
+                        objectId: $id,
+                        filePointer: $filePointer,
+                    );
                 }
             } else {
-                $result = FilePropertyOperation::LoadNormal;
+                $result = new FilePropertyOperationResult(
+                    type: FilePropertyOperationType::Load,
+                    action: FilePropertyOperationAction::LoadedNormal,
+                    class: $propertyMetadata->getClass(),
+                    scopeClass: $propertyMetadata->getScopeClass(),
+                    property: $propertyName,
+                    objectId: $id,
+                    filePointer: $filePointer,
+                );
             }
         } else {
             $file = $this->fileRepository->getReference($filePointer);
-            $result = FilePropertyOperation::LoadLazy;
+
+            if ($file instanceof FileProxy) {
+                $action = FilePropertyOperationAction::LoadedLazy;
+            } else {
+                $action = FilePropertyOperationAction::LoadedNormal;
+            }
+
+            $result = new FilePropertyOperationResult(
+                type: FilePropertyOperationType::Load,
+                action: $action,
+                class: $propertyMetadata->getClass(),
+                scopeClass: $propertyMetadata->getScopeClass(),
+                property: $propertyName,
+                objectId: $id,
+                filePointer: $filePointer,
+            );
         }
 
         $this->writer->write($object, $propertyMetadata, $file);
-
-        $this->log(
-            propertyMetadata: $propertyMetadata,
-            id: $id,
-            filePointer: $filePointer,
-            operation: $result,
-        );
 
         return $result;
     }

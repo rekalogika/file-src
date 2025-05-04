@@ -28,6 +28,7 @@ use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\FilePropertyManager\DefaultFilePropertyManager;
+use Rekalogika\File\Association\FilePropertyManager\LoggingFilePropertyManager;
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DoctrineObjectIdResolver;
@@ -64,7 +65,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ;
 
     //
-    // manager
+    // object manager
     //
 
     $services
@@ -76,6 +77,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             '$filePropertyManager' => service(FilePropertyManagerInterface::class),
         ]);
 
+    //
+    // property manager
+    //
+
     $services
         ->set(FilePropertyManagerInterface::class)
         ->class(DefaultFilePropertyManager::class)
@@ -83,7 +88,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             '$fileRepository' => service(FileRepositoryInterface::class),
             '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
         ])
-        ->call('setLogger', [service('logger')->ignoreOnInvalid()])
+    ;
+
+    $services
+        ->set(LoggingFilePropertyManager::class)
+        ->decorate(FilePropertyManagerInterface::class)
+        ->args([
+            service('.inner'),
+            service('logger')->nullOnInvalid(),
+        ])
         ->tag('monolog.logger', ['channel' => 'rekalogika.file'])
     ;
 

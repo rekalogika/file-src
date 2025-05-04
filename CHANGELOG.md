@@ -26,6 +26,7 @@
   subscriber
 * refactor: rename `FileAssociationManager` to `DefaultObjectManager` and add
   interface `ObjectManagerInterface`
+* refactor: refactor `FilePropertyManager` to return status result
 
 ## 1.14.0
 

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Contracts;
 
+use Rekalogika\File\Association\Model\FilePropertyOperationResult;
 use Rekalogika\File\Association\Model\PropertyMetadata;
 
 /**
@@ -27,7 +28,7 @@ interface FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperation;
+    ): FilePropertyOperationResult;
 
     /**
      * Process a file removal on a property
@@ -36,7 +37,7 @@ interface FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperation;
+    ): FilePropertyOperationResult;
 
     /**
      * Process a property on an object load
@@ -45,5 +46,5 @@ interface FilePropertyManagerInterface
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperation;
+    ): FilePropertyOperationResult;
 }
