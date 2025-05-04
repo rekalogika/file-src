@@ -21,6 +21,7 @@
 * deprecation: stop accepting string as `AsFileAssociation` argument
 * fix: add architecture test, fix missing dependencies
 * deps: add dependency on PHP 8.2 on all packages
+* deprecation: remove deprecated tree-contracts package
 
 ## 1.14.0
 
