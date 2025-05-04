@@ -17,6 +17,7 @@
 * refactor: `FilePropertyManagerInterface`
 * feat: add logging
 * refactor: remove dependency on property access
+* refactor: move console command to bundle as it is Symfony-specific
 
 ## 1.14.0
 

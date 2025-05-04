@@ -11,7 +11,7 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Association\Command;
+namespace Rekalogika\File\Bundle\Command;
 
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Symfony\Component\Console\Attribute\AsCommand;

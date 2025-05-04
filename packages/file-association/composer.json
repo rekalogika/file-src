@@ -32,9 +32,6 @@
         "rekalogika/reconstitutor": "^2.0.2",
         "symfony/deprecation-contracts": "^3.1"
     },
-    "suggest": {
-        "symfony/console": "Enables console commands"
-    },
     "extra": {
         "branch-alias": {
             "dev-main": "1.15-dev"

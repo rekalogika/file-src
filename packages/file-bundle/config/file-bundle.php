@@ -12,6 +12,8 @@ declare(strict_types=1);
  */
 
 use League\Flysystem\FilesystemOperator;
+use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
+use Rekalogika\File\Bundle\Command\FileLocationResolverCommand;
 use Rekalogika\File\Bundle\DefaultFilesystemFactory;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -20,11 +22,28 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->set(DefaultFilesystemFactory::class);
+    //
+    // filesystem
+    //
 
-    $services->set('rekalogika.file.default_filesystem', FilesystemOperator::class)
+    $services
+        ->set(DefaultFilesystemFactory::class);
+
+    $services
+        ->set('rekalogika.file.default_filesystem', FilesystemOperator::class)
         ->factory([
             service(DefaultFilesystemFactory::class),
             'getDefaultFilesystem',
         ]);
+
+
+    //
+    // commands
+    //
+
+    $services->set(FileLocationResolverCommand::class)
+        ->args([
+            '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
+        ])
+        ->tag('console.command');
 };
