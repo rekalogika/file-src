@@ -18,6 +18,7 @@
 * feat: add logging
 * refactor: remove dependency on property access
 * refactor: move console command to bundle as it is Symfony-specific
+* deprecation: stop accepting string as `AsFileAssociation` argument
 
 ## 1.14.0
 

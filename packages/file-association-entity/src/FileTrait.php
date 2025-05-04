@@ -18,6 +18,7 @@ use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\Trait\FileDecoratorTrait;
 use Rekalogika\Domain\File\Null\NullFile;
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
+use Rekalogika\File\Association\Model\FetchMode;
 
 /**
  * Trait to help the creation of a file entity (an entity implementing
@@ -31,7 +32,7 @@ trait FileTrait
 {
     use FileDecoratorTrait;
 
-    #[AsFileAssociation(fetch: 'LAZY')]
+    #[AsFileAssociation(FetchMode::Lazy)]
     private FileInterface $file;
 
     #[Embedded()]
