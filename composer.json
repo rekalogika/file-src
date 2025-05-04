@@ -90,22 +90,22 @@
         "vimeo/psalm": "^6.0"
     },
     "replace": {
-        "rekalogika/file": "1.14.0",
-        "rekalogika/file-association": "1.14.0",
-        "rekalogika/file-association-contracts": "1.14.0",
-        "rekalogika/file-association-entity": "1.14.0",
-        "rekalogika/file-bundle": "1.14.0",
-        "rekalogika/file-contracts": "1.14.0",
-        "rekalogika/file-derivation": "1.14.0",
-        "rekalogika/file-filepond": "1.14.0",
-        "rekalogika/file-image": "1.14.0",
-        "rekalogika/file-metadata": "1.14.0",
-        "rekalogika/file-metadata-contracts": "1.14.0",
-        "rekalogika/file-null": "1.14.0",
-        "rekalogika/file-oneup-uploader-bridge": "1.14.0",
-        "rekalogika/file-server": "1.14.0",
-        "rekalogika/file-symfony-bridge": "1.14.0",
-        "rekalogika/file-zip": "1.14.0"
+        "rekalogika/file": "2.0.0",
+        "rekalogika/file-association": "2.0.0",
+        "rekalogika/file-association-contracts": "2.0.0",
+        "rekalogika/file-association-entity": "2.0.0",
+        "rekalogika/file-bundle": "2.0.0",
+        "rekalogika/file-contracts": "2.0.0",
+        "rekalogika/file-derivation": "2.0.0",
+        "rekalogika/file-filepond": "2.0.0",
+        "rekalogika/file-image": "2.0.0",
+        "rekalogika/file-metadata": "2.0.0",
+        "rekalogika/file-metadata-contracts": "2.0.0",
+        "rekalogika/file-null": "2.0.0",
+        "rekalogika/file-oneup-uploader-bridge": "2.0.0",
+        "rekalogika/file-server": "2.0.0",
+        "rekalogika/file-symfony-bridge": "2.0.0",
+        "rekalogika/file-zip": "2.0.0"
     },
     "autoload": {
         "psr-4": {
