@@ -16,7 +16,6 @@ namespace Rekalogika\File\Image;
 use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\Encoders\MediaTypeEncoder;
 use Intervention\Image\Exceptions\EncoderException;
-use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Interfaces\ImageInterface;
 use Psr\Log\LoggerInterface;

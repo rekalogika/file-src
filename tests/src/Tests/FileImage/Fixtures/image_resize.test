@@ -1,0 +1,10 @@
+--TEST--
+image_resize
+--TEMPLATE--
+{{ (getvar('image')|image_resize(10)).pointer.key }}
+--DATA--
+return [];
+--CONFIG--
+return []
+--EXPECT--
+smiley.d/original-10
