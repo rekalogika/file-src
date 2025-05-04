@@ -24,7 +24,7 @@ enum ObjectOperationType
 
     case Remove;
 
-    public function toString(): string
+    public function getString(): string
     {
         return match ($this) {
             self::Flush => 'Flush',

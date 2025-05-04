@@ -11,20 +11,24 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Association\FilePropertyManager;
+namespace Rekalogika\File\Bundle\Debug;
 
-use Psr\Log\LoggerInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
 use Rekalogika\File\Association\Model\PropertyMetadata;
-use Rekalogika\File\Association\Model\PropertyOperationAction;
 use Rekalogika\File\Association\Model\PropertyOperationResult;
+use Symfony\Component\Stopwatch\Stopwatch;
 
-final class LoggingFilePropertyManager implements FilePropertyManagerInterface
+final readonly class TraceableFilePropertyManager implements FilePropertyManagerInterface
 {
     public function __construct(
-        private readonly FilePropertyManagerInterface $decorated,
-        private readonly ?LoggerInterface $logger,
+        private FilePropertyManagerInterface $decorated,
+        private Stopwatch $stopwatch,
     ) {}
+
+    private function getRandom(): string
+    {
+        return substr(hash('xxh128', uniqid((string) mt_rand(), true)), 0, 6);
+    }
 
     #[\Override]
     public function flushProperty(
@@ -32,9 +36,13 @@ final class LoggingFilePropertyManager implements FilePropertyManagerInterface
         object $object,
         string $id,
     ): PropertyOperationResult {
-        $result = $this->decorated->flushProperty($propertyMetadata, $object, $id);
+        $stopwatchId = 'file.property.flush-' . $this->getRandom();
 
-        $this->log($result);
+        $this->stopwatch->start($stopwatchId);
+        $result = $this->decorated->flushProperty($propertyMetadata, $object, $id);
+        $end = $this->stopwatch->stop($stopwatchId);
+
+        $result = $result->withDuration($end->getDuration());
 
         return $result;
     }
@@ -45,9 +53,13 @@ final class LoggingFilePropertyManager implements FilePropertyManagerInterface
         object $object,
         string $id,
     ): PropertyOperationResult {
-        $result = $this->decorated->removeProperty($propertyMetadata, $object, $id);
+        $stopwatchId = 'file.property.remove-' . $this->getRandom();
 
-        $this->log($result);
+        $this->stopwatch->start($stopwatchId);
+        $result = $this->decorated->removeProperty($propertyMetadata, $object, $id);
+        $end = $this->stopwatch->stop($stopwatchId);
+
+        $result = $result->withDuration($end->getDuration());
 
         return $result;
     }
@@ -58,33 +70,14 @@ final class LoggingFilePropertyManager implements FilePropertyManagerInterface
         object $object,
         string $id,
     ): PropertyOperationResult {
-        $result = $this->decorated->loadProperty($propertyMetadata, $object, $id);
+        $stopwatchId = 'file.property.load-' . $this->getRandom();
 
-        $this->log($result);
+        $this->stopwatch->start($stopwatchId);
+        $result = $this->decorated->loadProperty($propertyMetadata, $object, $id);
+        $end = $this->stopwatch->stop($stopwatchId);
+
+        $result = $result->withDuration($end->getDuration());
 
         return $result;
-    }
-
-    private function log(PropertyOperationResult $result): void
-    {
-        if ($result->action === PropertyOperationAction::Nothing) {
-            return;
-        }
-
-        $context = [
-            'type' => $result->type->getString(),
-            'action' => $result->action->getString(),
-            'class' => $result->class,
-            'property' => $result->property,
-            'scopeClass' => $result->scopeClass,
-            'objectId' => $result->objectId,
-            'fileKey' => $result->filePointer->getKey(),
-            'fileFilesystemIdentifier' => $result->filePointer->getFilesystemIdentifier(),
-        ];
-
-        $this->logger?->debug(
-            'File operation "{type}", with result action "{action}"',
-            $context,
-        );
     }
 }
