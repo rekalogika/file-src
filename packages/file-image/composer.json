@@ -31,7 +31,7 @@
         "psr/log": "^2 || ^3",
         "rekalogika/file-contracts": "^1.14",
         "rekalogika/file-derivation": "^1.14",
-        "twig/twig": "^3.8"
+        "twig/twig": "^3.9"
     },
     "extra": {
         "branch-alias": {
