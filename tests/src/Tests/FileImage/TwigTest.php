@@ -70,4 +70,9 @@ final class TwigTest extends IntegrationTestCase
     {
         return __DIR__ . '/Fixtures/';
     }
+
+    protected function getFixturesDir(): string
+    {
+        return __DIR__ . '/Fixtures/';
+    }
 }
