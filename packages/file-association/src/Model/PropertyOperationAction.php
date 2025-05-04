@@ -26,7 +26,7 @@ enum PropertyOperationAction
     case LoadedMissing;
     case LoadedNotFound;
 
-    public function toString(): string
+    public function getString(): string
     {
         return match ($this) {
             self::Nothing => 'Nothing',

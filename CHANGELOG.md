@@ -28,6 +28,7 @@
   interface `ObjectManagerInterface`
 * refactor: refactor `FilePropertyManager` to return status result
 * refactor: refactor `ObjectManager` to return status result
+* feat: data collector and profiler pane
 
 ## 1.14.0
 

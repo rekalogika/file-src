@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
 use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
+use Rekalogika\File\Bundle\Debug\FileDataCollector;
 use Rekalogika\File\Bundle\Debug\TraceableFilePropertyManager;
 use Rekalogika\File\Bundle\Debug\TraceableObjectManager;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -23,12 +24,22 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services
+        ->set(FileDataCollector::class)
+        ->tag('data_collector', [
+            'id' => 'rekalogika_file',
+        ])
+        ->tag('kernel.reset', ['method' => 'reset'])
+    ;
+
+    $services
         ->set(TraceableObjectManager::class)
         ->decorate(ObjectManagerInterface::class)
         ->args([
             service('.inner'),
             service('debug.stopwatch'),
-        ]);
+            service(FileDataCollector::class),
+        ])
+    ;
 
     $services
         ->set(TraceableFilePropertyManager::class)
@@ -36,5 +47,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->args([
             service('.inner'),
             service('debug.stopwatch'),
-        ]);
+        ])
+    ;
 };
