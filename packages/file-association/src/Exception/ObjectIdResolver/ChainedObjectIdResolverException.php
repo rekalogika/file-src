@@ -23,7 +23,7 @@ final class ChainedObjectIdResolverException extends \LogicException implements 
         private readonly iterable $exceptions,
         ?\Throwable $previous = null,
     ) {
-        \Exception::__construct(
+        parent::__construct(
             \sprintf(
                 'None of the object ID resolvers registered in the system supports the object "%s"',
                 $object::class,

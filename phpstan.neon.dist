@@ -26,3 +26,10 @@ includes:
     - vendor/phpstan/phpstan-mockery/extension.neon
     - vendor/bnf/phpstan-psr-container/extension.neon
     - vendor/ekino/phpstan-banned-code/extension.neon
+    - vendor/phpat/phpat/extension.neon
+
+services:
+    -
+        class: Rekalogika\File\Tests\Tests\Architecture\Architecture
+        tags:
+            - phpat.test

@@ -19,6 +19,7 @@
 * refactor: remove dependency on property access
 * refactor: move console command to bundle as it is Symfony-specific
 * deprecation: stop accepting string as `AsFileAssociation` argument
+* fix: add architecture test, fix missing dependencies
 
 ## 1.14.0
 

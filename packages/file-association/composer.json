@@ -27,8 +27,11 @@
     },
     "require": {
         "psr/cache": "^2 || ^3",
+        "psr/log": "^2 || ^3",
+        "psr/http-message": "^1.0 || ^2.0",
         "rekalogika/file-association-contracts": "^1.14",
         "rekalogika/file-contracts": "^1.14",
+        "rekalogika/file-null": "^1.14",
         "rekalogika/reconstitutor": "^2.0.2",
         "symfony/deprecation-contracts": "^3.1"
     },

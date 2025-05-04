@@ -24,7 +24,7 @@ use Rekalogika\Domain\File\Null\NullType;
  * A null file that indicates the file is unset. Used by `FileTrait` when the
  * file property is unset.
  */
-final class UnsetFile extends \Exception implements NullFileInterface
+final class UnsetFile extends \RuntimeException implements NullFileInterface
 {
     use NullFileTrait;
 

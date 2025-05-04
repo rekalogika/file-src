@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Bundle;
 
 use Rekalogika\File\Bundle\DependencyInjection\FilterPass;
+use Rekalogika\File\Derivation\Filter\FileFilterInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -30,8 +31,8 @@ final class RekalogikaFileBundle extends Bundle
     {
         parent::build($container);
 
-        $container
-            ->addCompilerPass(new FilterPass())
-        ;
+        if (interface_exists(FileFilterInterface::class)) {
+            $container->addCompilerPass(new FilterPass());
+        }
     }
 }
