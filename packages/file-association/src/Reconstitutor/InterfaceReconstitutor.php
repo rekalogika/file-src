@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Association\Reconstitutor;
 
 use Rekalogika\Contracts\File\Association\FileAssociationInterface;
-use Rekalogika\File\Association\FileAssociationManager;
+use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\Reconstitutor\Contract\ClassReconstitutorInterface;
 
 /**
@@ -25,7 +25,7 @@ use Rekalogika\Reconstitutor\Contract\ClassReconstitutorInterface;
 final readonly class InterfaceReconstitutor implements ClassReconstitutorInterface
 {
     public function __construct(
-        private FileAssociationManager $fileAssociationService,
+        private ObjectManagerInterface $objectManager,
     ) {}
 
     #[\Override]
@@ -37,19 +37,19 @@ final readonly class InterfaceReconstitutor implements ClassReconstitutorInterfa
     #[\Override]
     public function onSave(object $object): void
     {
-        $this->fileAssociationService->save($object);
+        $this->objectManager->flushObject($object);
     }
 
     #[\Override]
     public function onRemove(object $object): void
     {
-        $this->fileAssociationService->remove($object);
+        $this->objectManager->removeObject($object);
     }
 
     #[\Override]
     public function onLoad(object $object): void
     {
-        $this->fileAssociationService->load($object);
+        $this->objectManager->loadObject($object);
     }
 
     #[\Override]

@@ -16,7 +16,7 @@ namespace Rekalogika\File\Tests\Tests\FileAssociation;
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
 use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
-use Rekalogika\File\Association\FileAssociationManager;
+use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\File\Association\Model\MissingFile;
 use Rekalogika\File\File;
 use Rekalogika\File\TemporaryFile;
@@ -26,11 +26,11 @@ use Rekalogika\File\Tests\Tests\Model\EntityWithLazyFile;
 use Rekalogika\File\Tests\Tests\Model\EntityWithMandatoryFile;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-final class FileAssociationManagerTest extends KernelTestCase
+final class ObjectManagerTest extends KernelTestCase
 {
     use FileTestTrait;
 
-    private ?FileAssociationManager $fileAssociationManager = null;
+    private ?ObjectManagerInterface $objectManager = null;
 
     private ?FileRepositoryInterface $fileRepository = null;
 
@@ -39,14 +39,15 @@ final class FileAssociationManagerTest extends KernelTestCase
     {
 
         $fileAssociationManager = static::getContainer()
-            ->get(FileAssociationManager::class);
+            ->get(ObjectManagerInterface::class);
+
         // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(
-            FileAssociationManager::class,
+            ObjectManagerInterface::class,
             $fileAssociationManager,
         );
 
-        $this->fileAssociationManager = $fileAssociationManager;
+        $this->objectManager = $fileAssociationManager;
 
         $fileRepository = static::getContainer()
             ->get(FileRepositoryInterface::class);
@@ -78,7 +79,7 @@ final class FileAssociationManagerTest extends KernelTestCase
         $oldPointer = $file->getPointer();
 
         // persist
-        $this->fileAssociationManager?->save($entity);
+        $this->objectManager?->flushObject($entity);
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
         $newPointer = $file->getPointer();
@@ -102,7 +103,7 @@ final class FileAssociationManagerTest extends KernelTestCase
         $this->assertNull($entity->getFile());
 
         // persist
-        $this->fileAssociationManager?->save($entity);
+        $this->objectManager?->flushObject($entity);
 
         try {
             $file = $this->fileRepository?->get($pointer);
@@ -126,13 +127,13 @@ final class FileAssociationManagerTest extends KernelTestCase
         $entity->setFile($newFile);
 
         // persist
-        $this->fileAssociationManager?->save($entity);
+        $this->objectManager?->flushObject($entity);
 
         // remove
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
         $pointer = $file->getPointer();
-        $this->fileAssociationManager?->remove($entity);
+        $this->objectManager?->removeObject($entity);
 
         try {
             $file = $this->fileRepository?->get($pointer);
@@ -156,7 +157,7 @@ final class FileAssociationManagerTest extends KernelTestCase
         $entity->setFile($newFile);
 
         // persist
-        $this->fileAssociationManager?->save($entity);
+        $this->objectManager?->flushObject($entity);
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
         $pointer = $file->getPointer();
@@ -164,14 +165,14 @@ final class FileAssociationManagerTest extends KernelTestCase
         // reload
         $entity = new Entity('entity_id');
         $this->assertNull($entity->getFile());
-        $this->fileAssociationManager?->load($entity);
+        $this->objectManager?->loadObject($entity);
 
         $file = $entity->getFile();
         /** @psalm-suppress DocblockTypeContradiction */
         $this->assertInstanceOf(File::class, $file);
 
         // remove
-        $this->fileAssociationManager?->remove($entity);
+        $this->objectManager?->removeObject($entity);
     }
 
 
@@ -188,7 +189,7 @@ final class FileAssociationManagerTest extends KernelTestCase
         $entity->setFile($newFile);
 
         // persist
-        $this->fileAssociationManager?->save($entity);
+        $this->objectManager?->flushObject($entity);
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
 
@@ -198,14 +199,14 @@ final class FileAssociationManagerTest extends KernelTestCase
         // reload
         $entity = new EntityWithLazyFile('entity_id');
         $this->assertNull($entity->getFile());
-        $this->fileAssociationManager?->load($entity);
+        $this->objectManager?->loadObject($entity);
 
         $file = $entity->getFile();
         /** @psalm-suppress DocblockTypeContradiction */
         $this->assertInstanceOf(FileProxy::class, $file);
 
         // remove
-        $this->fileAssociationManager?->remove($entity);
+        $this->objectManager?->removeObject($entity);
     }
 
     public function testEntityWithNonNullableFile(): void
@@ -216,7 +217,7 @@ final class FileAssociationManagerTest extends KernelTestCase
         $entity->setFile($file);
 
         // persist
-        $this->fileAssociationManager?->save($entity);
+        $this->objectManager?->flushObject($entity);
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
 
@@ -225,17 +226,17 @@ final class FileAssociationManagerTest extends KernelTestCase
 
         // reload
         $entity = new EntityWithMandatoryFile('entity_id');
-        $this->fileAssociationManager?->load($entity);
+        $this->objectManager?->loadObject($entity);
 
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
 
         // remove
-        $this->fileAssociationManager?->remove($entity);
+        $this->objectManager?->removeObject($entity);
 
         // reload again
         $entity = new EntityWithMandatoryFile('entity_id');
-        $this->fileAssociationManager?->load($entity);
+        $this->objectManager?->loadObject($entity);
 
         $file = $entity->getFile();
         $this->assertInstanceOf(MissingFile::class, $file);
