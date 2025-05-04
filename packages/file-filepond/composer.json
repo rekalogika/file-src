@@ -25,6 +25,7 @@
         }
     },
     "require": {
+        "php": "^8.2",
         "rekalogika/file": "^1.14",
         "rekalogika/file-association-entity": "^1.14",
         "rekalogika/file-bundle": "^1.14",

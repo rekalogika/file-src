@@ -23,6 +23,7 @@
         }
     },
     "require": {
+        "php": "^8.2",
         "cardinalby/content-disposition": "^1.1",
         "fileeye/mimemap": "^2.0",
         "rekalogika/file-contracts": "^1.14",

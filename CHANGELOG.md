@@ -20,6 +20,7 @@
 * refactor: move console command to bundle as it is Symfony-specific
 * deprecation: stop accepting string as `AsFileAssociation` argument
 * fix: add architecture test, fix missing dependencies
+* deps: add dependency on PHP 8.2 on all packages
 
 ## 1.14.0
 

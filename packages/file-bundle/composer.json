@@ -25,6 +25,7 @@
         }
     },
     "require": {
+        "php": "^8.2",
         "league/flysystem": "^3.16",
         "league/flysystem-local": "^3.16",
         "rekalogika/file": "^1.14",
