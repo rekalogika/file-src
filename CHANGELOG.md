@@ -22,6 +22,8 @@
 * fix: add architecture test, fix missing dependencies
 * deps: add dependency on PHP 8.2 on all packages
 * deprecation: remove deprecated tree-contracts package
+* refactor: change file-image twig extension to use runtime instead of service
+  subscriber
 
 ## 1.14.0
 

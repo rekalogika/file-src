@@ -61,6 +61,11 @@
                 <file name="tests/src/Tests/FileAssociation/ProxyUtilTest.php"/>
             </errorLevel>
         </ClassMustBeFinal>
+        <MissingOverrideAttribute>
+            <errorLevel type="suppress">
+                <file name="tests/src/Tests/FileImage/TwigTest.php" />
+            </errorLevel>
+        </MissingOverrideAttribute>
     </issueHandlers>
 
     <plugins>
