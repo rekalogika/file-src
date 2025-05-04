@@ -104,7 +104,6 @@
         "rekalogika/file-oneup-uploader-bridge": "1.14.0",
         "rekalogika/file-server": "1.14.0",
         "rekalogika/file-symfony-bridge": "1.14.0",
-        "rekalogika/file-tree-contracts": "1.14.0",
         "rekalogika/file-zip": "1.14.0"
     },
     "autoload": {
@@ -112,7 +111,6 @@
             "Rekalogika\\Contracts\\File\\": "packages/file-contracts/src/",
             "Rekalogika\\Contracts\\File\\Association\\": "packages/file-association-contracts/src/",
             "Rekalogika\\Contracts\\File\\Metadata\\": "packages/file-metadata-contracts/src/",
-            "Rekalogika\\Contracts\\File\\Tree\\": "packages/file-tree-contracts/src/",
             "Rekalogika\\Domain\\File\\Association\\Entity\\": "packages/file-association-entity/src/",
             "Rekalogika\\Domain\\File\\Metadata\\": "packages/file-metadata/src/",
             "Rekalogika\\Domain\\File\\Null\\": "packages/file-null/src/",
