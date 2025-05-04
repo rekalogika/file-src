@@ -44,7 +44,6 @@ final class Architecture
             Selector::not($this->getFileBundle()),
             Selector::not($this->getFileDerivation()),
             Selector::not($this->getFileImage()),
-            Selector::not($this->getFileRepository()),
             Selector::not($this->getFileServer()),
             Selector::not($this->getFileZip()),
         );
@@ -114,11 +113,6 @@ final class Architecture
         return Selector::inNamespace('Rekalogika\File\Bridge\OneupUploader');
     }
 
-    private function getFileRepository(): SelectorInterface
-    {
-        return Selector::inNamespace('Rekalogika\File\Repository');
-    }
-
     private function getFileServer(): SelectorInterface
     {
         return Selector::inNamespace('Rekalogika\File\Server');
@@ -150,7 +144,6 @@ final class Architecture
                 // dependencies on our packages
                 $this->getFileContracts(),
                 $this->getFileMetadata(),
-                $this->getFileRepository(),
 
                 // external dependencies
                 Selector::inNamespace('Http\Discovery'),
@@ -369,8 +362,8 @@ final class Architecture
                 $this->getFileDerivation(),
 
                 // dependencies on our packages
+                $this->getFile(),
                 $this->getFileContracts(),
-                $this->getFileRepository(),
 
                 // soft dependencies
                 Selector::classname(\Override::class),
