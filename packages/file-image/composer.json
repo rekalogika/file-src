@@ -27,11 +27,12 @@
     },
     "require": {
         "intervention/image": "^3.3",
+        "psr/container": "^2.0",
+        "psr/log": "^2 || ^3",
         "rekalogika/file-contracts": "^1.14",
         "rekalogika/file-derivation": "^1.14",
         "symfony/service-contracts": "^3.3",
-        "twig/twig": "^2.12|^3.0",
-        "webmozart/assert": "^1.11"
+        "twig/twig": "^2.12|^3.0"
     },
     "extra": {
         "branch-alias": {

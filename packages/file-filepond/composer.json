@@ -33,7 +33,10 @@
         "rekalogika/file-server": "^1.14",
         "rekalogika/file-symfony-bridge": "^1.14",
         "rekalogika/temporary-url-bundle": "^1.7",
+        "symfony/dependency-injection": "^6.2 || ^7.0",
         "symfony/form": "^6.2 || ^7.0",
+        "symfony/http-foundation": "^6.2 || ^7.0",
+        "symfony/http-kernel": "^6.2 || ^7.0",
         "symfony/options-resolver": "^6.2 || ^7.0",
         "symfony/stimulus-bundle": "^2.12"
     },

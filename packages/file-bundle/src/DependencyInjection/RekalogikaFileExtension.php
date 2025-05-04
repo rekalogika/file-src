@@ -109,9 +109,11 @@ final class RekalogikaFileExtension extends Extension implements PrependExtensio
         // autoconfigure services
         //
 
-        $container
-            ->registerForAutoconfiguration(FileFilterInterface::class)
-            ->addTag('rekalogika.file.derivation.filter');
+        if (interface_exists(FileFilterInterface::class)) {
+            $container
+                ->registerForAutoconfiguration(FileFilterInterface::class)
+                ->addTag('rekalogika.file.derivation.filter');
+        }
 
         $container
             ->registerForAutoconfiguration(PropertyListerInterface::class)

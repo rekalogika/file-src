@@ -24,7 +24,7 @@ final class ChainedClassNotSupportedException extends \RuntimeException implemen
         private readonly iterable $exceptions,
         ?\Throwable $previous = null,
     ) {
-        \Exception::__construct(
+        parent::__construct(
             \sprintf(
                 'Cannot find a resolver that supports class "%s"',
                 $class,
