@@ -20,7 +20,6 @@ use Rekalogika\File\Association\ClassMetadataFactory\DefaultClassMetadataFactory
 use Rekalogika\File\Association\ClassSignatureResolver\AttributeClassSignatureResolver;
 use Rekalogika\File\Association\ClassSignatureResolver\ChainClassSignatureResolver;
 use Rekalogika\File\Association\ClassSignatureResolver\DefaultClassSignatureResolver;
-use Rekalogika\File\Association\Command\FileLocationResolverCommand;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
@@ -199,14 +198,4 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             service('.inner'),
             service('rekalogika.file.association.class_metadata_factory.cache'),
         ]);
-
-    //
-    // commands
-    //
-
-    $services->set(FileLocationResolverCommand::class)
-        ->args([
-            '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
-        ])
-        ->tag('console.command');
 };

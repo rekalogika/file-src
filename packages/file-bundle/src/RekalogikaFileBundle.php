@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Rekalogika\File\Bundle;
 
 use Rekalogika\File\Bundle\DependencyInjection\FilterPass;
-use Rekalogika\File\Bundle\DependencyInjection\RemoveUnusedPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -33,7 +32,6 @@ final class RekalogikaFileBundle extends Bundle
 
         $container
             ->addCompilerPass(new FilterPass())
-            ->addCompilerPass(new RemoveUnusedPass())
         ;
     }
 }
