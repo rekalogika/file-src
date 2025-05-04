@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Association\Contracts;
 
+use Rekalogika\File\Association\Model\ObjectOperationResult;
+
 /**
  * @internal
  */
@@ -21,15 +23,15 @@ interface ObjectManagerInterface
     /**
      * Called when the object is saved
      */
-    public function flushObject(object $object): void;
+    public function flushObject(object $object): ObjectOperationResult;
 
     /**
      * Called when the object is removed
      */
-    public function removeObject(object $object): void;
+    public function removeObject(object $object): ObjectOperationResult;
 
     /**
      * Called when the object is loaded
      */
-    public function loadObject(object $object): void;
+    public function loadObject(object $object): ObjectOperationResult;
 }

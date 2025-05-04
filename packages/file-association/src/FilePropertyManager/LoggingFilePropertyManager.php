@@ -11,21 +11,19 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Bundle\Debug;
+namespace Rekalogika\File\Association\FilePropertyManager;
 
-use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
+use Psr\Log\LoggerInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
-use Rekalogika\File\Association\Model\FilePropertyOperationResult;
-use Rekalogika\File\Association\Model\FilePropertyOperationType;
 use Rekalogika\File\Association\Model\PropertyMetadata;
-use Symfony\Component\Stopwatch\Stopwatch;
+use Rekalogika\File\Association\Model\PropertyOperationAction;
+use Rekalogika\File\Association\Model\PropertyOperationResult;
 
-final readonly class TraceableFilePropertyManager implements FilePropertyManagerInterface
+final class LoggingFilePropertyManager implements FilePropertyManagerInterface
 {
     public function __construct(
-        private FilePropertyManagerInterface $decorated,
-        private Stopwatch $stopwatch,
-        private FileDataCollector $dataCollector,
+        private readonly FilePropertyManagerInterface $decorated,
+        private readonly ?LoggerInterface $logger,
     ) {}
 
     #[\Override]
@@ -33,12 +31,8 @@ final readonly class TraceableFilePropertyManager implements FilePropertyManager
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperationResult {
-        $this->stopwatch->start('file.property_manager.flush');
+    ): PropertyOperationResult {
         $result = $this->decorated->flushProperty($propertyMetadata, $object, $id);
-        $this->stopwatch->stop('file.property_manager.flush');
-
-        $this->dataCollector->collectFilePropertyOperationResult($result);
 
         $this->log($result);
 
@@ -50,12 +44,8 @@ final readonly class TraceableFilePropertyManager implements FilePropertyManager
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperationResult {
-        $this->stopwatch->start('file.property_manager.remove');
+    ): PropertyOperationResult {
         $result = $this->decorated->removeProperty($propertyMetadata, $object, $id);
-        $this->stopwatch->stop('file.property_manager.remove');
-
-        $this->dataCollector->collectFilePropertyOperationResult($result);
 
         $this->log($result);
 
@@ -67,21 +57,17 @@ final readonly class TraceableFilePropertyManager implements FilePropertyManager
         PropertyMetadata $propertyMetadata,
         object $object,
         string $id,
-    ): FilePropertyOperationResult {
-        $this->stopwatch->start('file.property_manager.load');
+    ): PropertyOperationResult {
         $result = $this->decorated->loadProperty($propertyMetadata, $object, $id);
-        $this->stopwatch->stop('file.property_manager.load');
-
-        $this->dataCollector->collectFilePropertyOperationResult($result);
 
         $this->log($result);
 
         return $result;
     }
 
-    private function log(FilePropertyOperationResult $result): void
+    private function log(PropertyOperationResult $result): void
     {
-        if ($result->action === FilePropertyOperationAction::Nothing) {
+        if ($result->action === PropertyOperationAction::Nothing) {
             return;
         }
 

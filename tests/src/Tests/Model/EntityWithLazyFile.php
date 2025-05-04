@@ -27,7 +27,8 @@ final class EntityWithLazyFile
     public function __construct(private readonly string $id) {}
 
     /**
-     * Get the value of file
+     * @impure
+     * @phpstan-ignore impureMethod.pure
      */
     public function getFile(): ?FileInterface
     {

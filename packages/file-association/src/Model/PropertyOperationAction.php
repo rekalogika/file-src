@@ -16,7 +16,7 @@ namespace Rekalogika\File\Association\Model;
 /**
  * @internal
  */
-enum FilePropertyOperationAction
+enum PropertyOperationAction
 {
     case Nothing;
     case Saved;

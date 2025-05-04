@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Tests\Tests\FileAssociation;
 
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
+use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileProxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
@@ -30,9 +31,9 @@ final class ObjectManagerTest extends KernelTestCase
 {
     use FileTestTrait;
 
-    private ?ObjectManagerInterface $objectManager = null;
+    private ObjectManagerInterface $objectManager;
 
-    private ?FileRepositoryInterface $fileRepository = null;
+    private FileRepositoryInterface $fileRepository;
 
     #[\Override]
     protected function setUp(): void
@@ -74,17 +75,15 @@ final class ObjectManagerTest extends KernelTestCase
         $entity->setFile($newFile);
 
         $file = $entity->getFile();
-        // @phpstan-ignore method.impossibleType
         $this->assertInstanceOf(TemporaryFile::class, $file);
         $oldPointer = $file->getPointer();
 
         // persist
-        $this->objectManager?->flushObject($entity);
+        $this->objectManager->flushObject($entity);
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
         $newPointer = $file->getPointer();
 
-        // @phpstan-ignore argument.type
         $this->assertFalse($newPointer->isEqualTo($oldPointer));
         $this->assertFileInterface(
             file: $file,
@@ -103,10 +102,10 @@ final class ObjectManagerTest extends KernelTestCase
         $this->assertNull($entity->getFile());
 
         // persist
-        $this->objectManager?->flushObject($entity);
+        $this->objectManager->flushObject($entity);
 
         try {
-            $file = $this->fileRepository?->get($pointer);
+            $file = $this->fileRepository->get($pointer);
         } catch (FileNotFoundException) {
             $file = null;
         }
@@ -127,16 +126,16 @@ final class ObjectManagerTest extends KernelTestCase
         $entity->setFile($newFile);
 
         // persist
-        $this->objectManager?->flushObject($entity);
+        $this->objectManager->flushObject($entity);
 
         // remove
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
         $pointer = $file->getPointer();
-        $this->objectManager?->removeObject($entity);
+        $this->objectManager->removeObject($entity);
 
         try {
-            $file = $this->fileRepository?->get($pointer);
+            $file = $this->fileRepository->get($pointer);
         } catch (FileNotFoundException) {
             $file = null;
         }
@@ -157,22 +156,21 @@ final class ObjectManagerTest extends KernelTestCase
         $entity->setFile($newFile);
 
         // persist
-        $this->objectManager?->flushObject($entity);
+        $this->objectManager->flushObject($entity);
         $file = $entity->getFile();
-        $this->assertInstanceOf(File::class, $file);
+        $this->assertInstanceOf(FileInterface::class, $file);
         $pointer = $file->getPointer();
 
         // reload
         $entity = new Entity('entity_id');
         $this->assertNull($entity->getFile());
-        $this->objectManager?->loadObject($entity);
+        $this->objectManager->loadObject($entity);
 
         $file = $entity->getFile();
-        /** @psalm-suppress DocblockTypeContradiction */
-        $this->assertInstanceOf(File::class, $file);
+        $this->assertInstanceOf(FileInterface::class, $file);
 
         // remove
-        $this->objectManager?->removeObject($entity);
+        $this->objectManager->removeObject($entity);
     }
 
 
@@ -189,24 +187,24 @@ final class ObjectManagerTest extends KernelTestCase
         $entity->setFile($newFile);
 
         // persist
-        $this->objectManager?->flushObject($entity);
+        $this->objectManager->flushObject($entity);
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
 
         // clear cache
-        $this->fileRepository?->clear();
+        $this->fileRepository->clear();
 
         // reload
         $entity = new EntityWithLazyFile('entity_id');
         $this->assertNull($entity->getFile());
-        $this->objectManager?->loadObject($entity);
+        $this->objectManager->loadObject($entity);
 
         $file = $entity->getFile();
         /** @psalm-suppress DocblockTypeContradiction */
         $this->assertInstanceOf(FileProxy::class, $file);
 
         // remove
-        $this->objectManager?->removeObject($entity);
+        $this->objectManager->removeObject($entity);
     }
 
     public function testEntityWithNonNullableFile(): void
@@ -217,26 +215,26 @@ final class ObjectManagerTest extends KernelTestCase
         $entity->setFile($file);
 
         // persist
-        $this->objectManager?->flushObject($entity);
+        $this->objectManager->flushObject($entity);
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
 
         // clear cache
-        $this->fileRepository?->clear();
+        $this->fileRepository->clear();
 
         // reload
         $entity = new EntityWithMandatoryFile('entity_id');
-        $this->objectManager?->loadObject($entity);
+        $this->objectManager->loadObject($entity);
 
         $file = $entity->getFile();
         $this->assertInstanceOf(File::class, $file);
 
         // remove
-        $this->objectManager?->removeObject($entity);
+        $this->objectManager->removeObject($entity);
 
         // reload again
         $entity = new EntityWithMandatoryFile('entity_id');
-        $this->objectManager?->loadObject($entity);
+        $this->objectManager->loadObject($entity);
 
         $file = $entity->getFile();
         $this->assertInstanceOf(MissingFile::class, $file);
