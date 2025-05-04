@@ -65,7 +65,6 @@ final class TwigTest extends IntegrationTestCase
         ];
     }
 
-    #[\Override]
     protected static function getFixturesDirectory(): string
     {
         return __DIR__ . '/Fixtures/';
