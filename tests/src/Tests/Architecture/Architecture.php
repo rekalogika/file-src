@@ -299,10 +299,13 @@ final class Architecture
 
                 // external dependencies
                 Selector::inNamespace('League\Flysystem'),
+                Selector::inNamespace('Symfony\Bundle\FrameworkBundle\DataCollector'),
                 Selector::inNamespace('Symfony\Component\Config'),
                 Selector::inNamespace('Symfony\Component\Console'),
                 Selector::inNamespace('Symfony\Component\DependencyInjection'),
+                Selector::inNamespace('Symfony\Component\HttpFoundation'),
                 Selector::inNamespace('Symfony\Component\HttpKernel'),
+                Selector::inNamespace('Symfony\Component\Stopwatch'),
 
                 // soft dependencies (attributes)
                 Selector::classname(\Override::class),
@@ -311,6 +314,7 @@ final class Architecture
                 Selector::classname(\ReflectionClass::class),
 
                 // exceptions
+                Selector::classname(\Throwable::class),
                 Selector::classname(\RuntimeException::class),
                 Selector::classname(\InvalidArgumentException::class),
 

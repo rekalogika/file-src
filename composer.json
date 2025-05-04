@@ -86,7 +86,8 @@
         "symfony/yaml": "^6.2 || ^7.0",
         "symplify/monorepo-builder": "^11.2.20 || ^11.3",
         "twig/extra-bundle": "^2.12|^3.0",
-        "vimeo/psalm": "^6.0"
+        "vimeo/psalm": "^6.0",
+        "symfony/stopwatch": "^7.2"
     },
     "replace": {
         "rekalogika/file": "1.14.0",

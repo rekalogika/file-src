@@ -11,19 +11,21 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Association\FilePropertyManager;
+namespace Rekalogika\File\Bundle\Debug;
 
-use Psr\Log\LoggerInterface;
+use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
-use Rekalogika\File\Association\Model\FilePropertyOperationAction;
 use Rekalogika\File\Association\Model\FilePropertyOperationResult;
+use Rekalogika\File\Association\Model\FilePropertyOperationType;
 use Rekalogika\File\Association\Model\PropertyMetadata;
+use Symfony\Component\Stopwatch\Stopwatch;
 
-final class LoggingFilePropertyManager implements FilePropertyManagerInterface
+final readonly class TraceableFilePropertyManager implements FilePropertyManagerInterface
 {
     public function __construct(
-        private readonly FilePropertyManagerInterface $decorated,
-        private readonly ?LoggerInterface $logger,
+        private FilePropertyManagerInterface $decorated,
+        private Stopwatch $stopwatch,
+        private FileDataCollector $dataCollector,
     ) {}
 
     #[\Override]
@@ -32,7 +34,11 @@ final class LoggingFilePropertyManager implements FilePropertyManagerInterface
         object $object,
         string $id,
     ): FilePropertyOperationResult {
+        $this->stopwatch->start('file.property_manager.flush');
         $result = $this->decorated->flushProperty($propertyMetadata, $object, $id);
+        $this->stopwatch->stop('file.property_manager.flush');
+
+        $this->dataCollector->collectFilePropertyOperationResult($result);
 
         $this->log($result);
 
@@ -45,7 +51,11 @@ final class LoggingFilePropertyManager implements FilePropertyManagerInterface
         object $object,
         string $id,
     ): FilePropertyOperationResult {
+        $this->stopwatch->start('file.property_manager.remove');
         $result = $this->decorated->removeProperty($propertyMetadata, $object, $id);
+        $this->stopwatch->stop('file.property_manager.remove');
+
+        $this->dataCollector->collectFilePropertyOperationResult($result);
 
         $this->log($result);
 
@@ -58,7 +68,11 @@ final class LoggingFilePropertyManager implements FilePropertyManagerInterface
         object $object,
         string $id,
     ): FilePropertyOperationResult {
+        $this->stopwatch->start('file.property_manager.load');
         $result = $this->decorated->loadProperty($propertyMetadata, $object, $id);
+        $this->stopwatch->stop('file.property_manager.load');
+
+        $this->dataCollector->collectFilePropertyOperationResult($result);
 
         $this->log($result);
 
