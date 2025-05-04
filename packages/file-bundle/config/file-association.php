@@ -25,12 +25,13 @@ use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
+use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
-use Rekalogika\File\Association\FileAssociationManager;
 use Rekalogika\File\Association\FilePropertyManager\DefaultFilePropertyManager;
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DefaultObjectIdResolver;
 use Rekalogika\File\Association\ObjectIdResolver\DoctrineObjectIdResolver;
+use Rekalogika\File\Association\ObjectManager\DefaultObjectManager;
 use Rekalogika\File\Association\PropertyLister\AttributesPropertyLister;
 use Rekalogika\File\Association\PropertyLister\ChainPropertyLister;
 use Rekalogika\File\Association\PropertyLister\FileAssociationInterfacePropertyLister;
@@ -50,14 +51,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(InterfaceReconstitutor::class)
         ->args([
-            service(FileAssociationManager::class),
+            service(ObjectManagerInterface::class),
         ])
         ->tag('rekalogika.reconstitutor.class')
     ;
 
     $services->set(AttributeReconstitutor::class)
         ->args([
-            service(FileAssociationManager::class),
+            service(ObjectManagerInterface::class),
         ])
         ->tag('rekalogika.reconstitutor.attribute')
     ;
@@ -67,7 +68,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     //
 
     $services
-        ->set(FileAssociationManager::class)
+        ->set(ObjectManagerInterface::class)
+        ->class(DefaultObjectManager::class)
         ->args([
             '$classMetadataFactory' => service(ClassMetadataFactoryInterface::class),
             '$objectIdResolver' => service(ObjectIdResolverInterface::class),

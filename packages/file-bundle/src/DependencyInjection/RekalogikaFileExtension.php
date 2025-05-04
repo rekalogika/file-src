@@ -17,8 +17,8 @@ use Rekalogika\Domain\File\Association\Entity\EmbeddedMetadata;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
+use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
-use Rekalogika\File\Association\FileAssociationManager;
 use Rekalogika\File\Bundle\DefaultFilesystemFactory;
 use Rekalogika\File\Derivation\Filter\FileFilterInterface;
 use Rekalogika\File\FileFactory;
@@ -50,7 +50,7 @@ final class RekalogikaFileExtension extends Extension implements PrependExtensio
         $loader->load('file.php');
         $loader->load('file-bundle.php');
 
-        if (class_exists(FileAssociationManager::class)) {
+        if (interface_exists(ObjectManagerInterface::class)) {
             $loader->load('file-association.php');
         }
 

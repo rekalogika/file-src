@@ -11,14 +11,15 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Association;
+namespace Rekalogika\File\Association\ObjectManager;
 
 use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
+use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\File\Association\Util\ProxyUtil;
 
-final readonly class FileAssociationManager
+final readonly class DefaultObjectManager implements ObjectManagerInterface
 {
     public function __construct(
         private ClassMetadataFactoryInterface $classMetadataFactory,
@@ -37,7 +38,8 @@ final readonly class FileAssociationManager
     /**
      * Called when the object is saved
      */
-    public function save(object $object): void
+    #[\Override]
+    public function flushObject(object $object): void
     {
         $class = $this->getClass($object);
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
@@ -55,7 +57,8 @@ final readonly class FileAssociationManager
     /**
      * Called when the object is removed
      */
-    public function remove(object $object): void
+    #[\Override]
+    public function removeObject(object $object): void
     {
         $class = $this->getClass($object);
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);
@@ -73,7 +76,8 @@ final readonly class FileAssociationManager
     /**
      * Called after the object is loaded
      */
-    public function load(object $object): void
+    #[\Override]
+    public function loadObject(object $object): void
     {
         $class = $this->getClass($object);
         $classMetadata = $this->classMetadataFactory->getClassMetadata($class);

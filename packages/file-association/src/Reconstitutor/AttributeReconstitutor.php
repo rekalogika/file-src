@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Association\Reconstitutor;
 
 use Rekalogika\File\Association\Attribute\WithFileAssociation;
-use Rekalogika\File\Association\FileAssociationManager;
+use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\Reconstitutor\Contract\AttributeReconstitutorInterface;
 
 /**
@@ -23,7 +23,7 @@ use Rekalogika\Reconstitutor\Contract\AttributeReconstitutorInterface;
 final readonly class AttributeReconstitutor implements AttributeReconstitutorInterface
 {
     public function __construct(
-        private FileAssociationManager $fileAssociationManager,
+        private ObjectManagerInterface $objectManager,
     ) {}
 
     #[\Override]
@@ -35,19 +35,19 @@ final readonly class AttributeReconstitutor implements AttributeReconstitutorInt
     #[\Override]
     public function onSave(object $object): void
     {
-        $this->fileAssociationManager->save($object);
+        $this->objectManager->flushObject($object);
     }
 
     #[\Override]
     public function onRemove(object $object): void
     {
-        $this->fileAssociationManager->remove($object);
+        $this->objectManager->removeObject($object);
     }
 
     #[\Override]
     public function onLoad(object $object): void
     {
-        $this->fileAssociationManager->load($object);
+        $this->objectManager->loadObject($object);
     }
 
     #[\Override]

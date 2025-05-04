@@ -24,6 +24,8 @@
 * deprecation: remove deprecated tree-contracts package
 * refactor: change file-image twig extension to use runtime instead of service
   subscriber
+* refactor: rename `FileAssociationManager` to `DefaultObjectManager` and add
+  interface `ObjectManagerInterface`
 
 ## 1.14.0
 
