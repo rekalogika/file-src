@@ -21,7 +21,6 @@ use Rekalogika\File\Association\ClassSignatureResolver\AttributeClassSignatureRe
 use Rekalogika\File\Association\ClassSignatureResolver\ChainClassSignatureResolver;
 use Rekalogika\File\Association\ClassSignatureResolver\DefaultClassSignatureResolver;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
-use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\FilePropertyManager\DefaultFilePropertyManager;
@@ -73,7 +72,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set('rekalogika.file.association.object_manager')
         ->class(DefaultObjectManager::class)
         ->args([
-            '$classMetadataFactory' => service(ClassMetadataFactoryInterface::class),
+            '$classMetadataFactory' => service('rekalogika.file.association.class_metadata_factory'),
             '$objectIdResolver' => service(ObjectIdResolverInterface::class),
             '$filePropertyManager' => service('rekalogika.file.association.file_property_manager'),
         ])
@@ -161,7 +160,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set('rekalogika.file.association.class_based_file_location_resolver.default')
         ->class(DefaultClassBasedFileLocationResolver::class)
         ->args([
-            service(ClassMetadataFactoryInterface::class),
+            service('rekalogika.file.association.class_metadata_factory'),
         ])
         ->tag('rekalogika.file.association.class_based_file_location_resolver', [
             'priority' => -1000,
@@ -235,7 +234,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     //
 
     $services
-        ->set(ClassMetadataFactoryInterface::class)
+        ->set('rekalogika.file.association.class_metadata_factory')
         ->class(DefaultClassMetadataFactory::class)
         ->args([
             service('rekalogika.file.association.property_lister'),
@@ -252,7 +251,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services
         ->set('rekalogika.file.association.class_metadata_factory.caching')
         ->class(CachingClassMetadataFactory::class)
-        ->decorate(ClassMetadataFactoryInterface::class)
+        ->decorate('rekalogika.file.association.class_metadata_factory')
         ->args([
             service('.inner'),
             service('rekalogika.file.association.class_metadata_factory.cache'),
