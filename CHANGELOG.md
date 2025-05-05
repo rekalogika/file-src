@@ -5,6 +5,7 @@
 * fix: make `FileRepository` implement `ResetInterface`
 * style: improve profiler UI
 * refactor: make internal services use non-class service names
+* fix: make `ClassMetadataFactoryInterface` autowireable
 
 ## 2.0.0
 
