@@ -7,6 +7,7 @@
 * refactor: make internal services use non-class service names
 * refactor: make user-facing `ClassSignatureResolverInterface` gets the result
   from metadata
+* refactor: refactor directory hashing code to a separate class for reusability
 
 ## 2.0.0
 
