@@ -150,6 +150,7 @@ final class Architecture
                 Selector::inNamespace('League\Flysystem'),
                 Selector::inNamespace('League\MimeTypeDetection'),
                 Selector::inNamespace('Psr\Http\Message'),
+                Selector::inNamespace('Symfony\Contracts\Service'),
 
                 // dependencies on optional packages
                 $this->getFileSymfonyBridge(),
