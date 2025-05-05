@@ -19,11 +19,11 @@ use Rekalogika\File\Association\Model\PropertyMetadata;
 use Rekalogika\File\Association\Model\PropertyOperationAction;
 use Rekalogika\File\Association\Model\PropertyOperationResult;
 
-final class LoggingFilePropertyManager implements FilePropertyManagerInterface
+final readonly class LoggingFilePropertyManager implements FilePropertyManagerInterface
 {
     public function __construct(
-        private readonly FilePropertyManagerInterface $decorated,
-        private readonly ?LoggerInterface $logger,
+        private FilePropertyManagerInterface $decorated,
+        private ?LoggerInterface $logger,
     ) {}
 
     #[\Override]
