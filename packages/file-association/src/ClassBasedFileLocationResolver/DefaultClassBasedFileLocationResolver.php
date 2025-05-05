@@ -15,13 +15,13 @@ namespace Rekalogika\File\Association\ClassBasedFileLocationResolver;
 
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
-use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
+use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Model\FilePointer;
 
 final readonly class DefaultClassBasedFileLocationResolver implements ClassBasedFileLocationResolverInterface
 {
     public function __construct(
-        private ClassMetadataFactoryInterface $classMetadataFactory,
+        private ClassSignatureResolverInterface $classSignatureResolver,
         private string $filesystemIdentifier = 'default',
         private string $prefix = 'entity',
         private int $hashLevel = 4,
@@ -36,9 +36,12 @@ final readonly class DefaultClassBasedFileLocationResolver implements ClassBased
         $splittedHash = str_split(sha1($id), 2);
         $hash = implode('/', \array_slice($splittedHash, 0, $this->hashLevel));
 
-        $classSignature = $this->classMetadataFactory
-            ->getClassMetadata($class)
-            ->getSignature();
+        $classSignature = $this->classSignatureResolver
+            ->getClassSignature($class)
+            ?? throw new \LogicException(\sprintf(
+                'Class signature resolver not found for class "%s"',
+                $class,
+            ));
 
         $key = \sprintf(
             '%s/%s/%s/%s/%s',

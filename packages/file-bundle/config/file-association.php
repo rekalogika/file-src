@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 
 use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\Metadata\Metadata;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\Association\ClassBasedFileLocationResolver\ChainedClassBasedFileLocationResolver;
 use Rekalogika\File\Association\ClassBasedFileLocationResolver\DefaultClassBasedFileLocationResolver;
@@ -20,6 +21,7 @@ use Rekalogika\File\Association\ClassMetadataFactory\DefaultClassMetadataFactory
 use Rekalogika\File\Association\ClassSignatureResolver\AttributeClassSignatureResolver;
 use Rekalogika\File\Association\ClassSignatureResolver\ChainClassSignatureResolver;
 use Rekalogika\File\Association\ClassSignatureResolver\DefaultClassSignatureResolver;
+use Rekalogika\File\Association\ClassSignatureResolver\MetadataClassSignatureResolver;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
@@ -160,7 +162,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set('rekalogika.file.association.class_based_file_location_resolver.default')
         ->class(DefaultClassBasedFileLocationResolver::class)
         ->args([
-            service('rekalogika.file.association.class_metadata_factory'),
+            service(ClassSignatureResolverInterface::class),
         ])
         ->tag('rekalogika.file.association.class_based_file_location_resolver', [
             'priority' => -1000,
@@ -168,13 +170,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ;
 
     //
-    // class signature resolver
+    // class signature resolver, user-facing
     //
 
-    $services->alias(
-        ClassSignatureResolverInterface::class,
-        'rekalogika.file.association.class_signature_resolver.chained',
-    );
+    $services
+        ->set(ClassSignatureResolverInterface::class)
+        ->class(MetadataClassSignatureResolver::class)
+        ->args([
+            service('rekalogika.file.association.class_metadata_factory'),
+        ])
+    ;
+
+    //
+    // class signature resolver, backend
+    //
 
     $services
         ->set('rekalogika.file.association.class_signature_resolver.chained')
@@ -238,7 +247,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->class(DefaultClassMetadataFactory::class)
         ->args([
             service('rekalogika.file.association.property_lister'),
-            service(ClassSignatureResolverInterface::class),
+            service('rekalogika.file.association.class_signature_resolver.chained'),
         ])
     ;
 

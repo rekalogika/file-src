@@ -21,7 +21,6 @@ use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Bundle\DefaultFilesystemFactory;
 use Rekalogika\File\Derivation\Filter\FileFilterInterface;
-use Rekalogika\File\FileFactory;
 use Rekalogika\File\Image\ImageResizer;
 use Rekalogika\File\Server\FileInterfaceResourceServer;
 use Rekalogika\File\Tests\TestKernel;
