@@ -21,11 +21,16 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->set(FileFactory::class);
+    $services
+        ->set(FileFactory::class);
 
-    $services->set(FileRepositoryInterface::class, FileRepository::class)
+    $services
+        ->set(FileRepositoryInterface::class)
+        ->class(FileRepository::class)
         ->factory([
             service(FileFactory::class),
             'getFileRepository',
-        ]);
+        ])
+        ->tag('kernel.reset', ['method' => 'reset'])
+    ;
 };

@@ -30,8 +30,9 @@ use Rekalogika\File\File;
 use Rekalogika\File\MetadataGenerator\MetadataGeneratorInterface;
 use Rekalogika\File\RawMetadata;
 use Rekalogika\File\TemporaryFile;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class FileRepository implements FileRepositoryInterface
+final class FileRepository implements FileRepositoryInterface, ResetInterface
 {
     /**
      * @var array<string,FileInterface>
@@ -44,6 +45,12 @@ final class FileRepository implements FileRepositoryInterface
         private readonly MetadataGeneratorInterface $metadataGenerator,
         private readonly ?string $defaultFilesystemIdForTemporaryFile = null,
     ) {}
+
+    #[\Override]
+    public function reset()
+    {
+        $this->fileCache = [];
+    }
 
     #[\Override]
     public function clear(): void

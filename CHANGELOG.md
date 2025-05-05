@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1
+
+* fix: make `FileRepository` implement `ResetInterface`
+
 ## 2.0.0
 
 * chore: clean up `FileAssociationManager`
