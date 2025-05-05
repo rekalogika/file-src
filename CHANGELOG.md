@@ -5,6 +5,8 @@
 * fix: make `FileRepository` implement `ResetInterface`
 * style: improve profiler UI
 * refactor: make internal services use non-class service names
+* refactor: make user-facing `ClassSignatureResolverInterface` gets the result
+  from metadata
 
 ## 2.0.0
 
