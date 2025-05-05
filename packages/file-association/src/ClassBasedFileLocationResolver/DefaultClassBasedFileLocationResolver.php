@@ -17,6 +17,7 @@ use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Model\FilePointer;
+use Rekalogika\File\Association\Util\FileLocationUtil;
 
 final readonly class DefaultClassBasedFileLocationResolver implements ClassBasedFileLocationResolverInterface
 {
@@ -33,8 +34,7 @@ final readonly class DefaultClassBasedFileLocationResolver implements ClassBased
         string $id,
         string $propertyName,
     ): FilePointerInterface {
-        $splittedHash = str_split(sha1($id), 2);
-        $hash = implode('/', \array_slice($splittedHash, 0, $this->hashLevel));
+        $hash = FileLocationUtil::createHashedDirectory($id, $this->hashLevel);
 
         $classSignature = $this->classSignatureResolver
             ->getClassSignature($class)
@@ -51,9 +51,6 @@ final readonly class DefaultClassBasedFileLocationResolver implements ClassBased
             $hash,
             $id,
         );
-
-        $key = preg_replace('/\/+/', '/', $key);
-        \assert(\is_string($key));
 
         return new FilePointer($this->filesystemIdentifier, $key);
     }
