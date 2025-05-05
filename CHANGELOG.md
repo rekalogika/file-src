@@ -3,6 +3,7 @@
 ## 2.0.1
 
 * fix: make `FileRepository` implement `ResetInterface`
+* style: improve profiler UI
 
 ## 2.0.0
 

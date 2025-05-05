@@ -35,6 +35,9 @@
     <span class="label {{ not collector.objectCount ? 'disabled' }}">
         <span class="icon">{{ source("@RekalogikaFile/file.svg") }}</span>
         <strong>File</strong>
+        <span class="count">
+            <span>{{ collector.objectCount }}</span>
+        </span>
     </span>
 {% endblock %}
 
@@ -85,9 +88,15 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Class/Property</th>
-                        <th>Action/Result</th>
-                        <th>ObjectID/File Location</th>
+                        <th>Class</th>
+                        <th>Action</th>
+                        <th>Object ID</th>
+                        <th>Duration</th>
+                    </tr>
+                    <tr>
+                        <th>Property</th>
+                        <th>Result</th>
+                        <th>Filesystem ID &mdash; Key</th>
                         <th>Duration</th>
                     </tr>
                 </thead>
@@ -101,7 +110,7 @@
 {% endblock %}
 
 {% block object_result %}
-    <tr>
+    <tr class="status-success">
         <th>{{ object_result.class|abbr_class }}</th>
         <th>
             <span class="badge badge-success">{{ object_result.type.string }}</span>
@@ -117,7 +126,7 @@
 
 {% block property_result %}
     <tr>
-        <th>└&nbsp;{{ property_result.property }}</th>
+        <th>{{ property_result.property }}</th>
         <th>
             <span class="badge">{{ property_result.action.string }}</span>
         </th>
