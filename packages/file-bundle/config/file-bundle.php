@@ -27,7 +27,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     //
 
     $services
-        ->set(DefaultFilesystemFactory::class);
+        ->set(DefaultFilesystemFactory::class)
+    ;
 
     $services
         ->set('rekalogika.file.default_filesystem')
@@ -49,5 +50,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->args([
             '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
         ])
-        ->tag('console.command');
+        ->tag('console.command')
+    ;
 };

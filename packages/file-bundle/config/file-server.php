@@ -20,7 +20,9 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->set(FileInterfaceResourceServer::class)
+    $services
+        ->set('rekalogika.file.server.file_interface_resource_server')
+        ->class(FileInterfaceResourceServer::class)
         ->tag('rekalogika.temporary_url.resource_server', [
             'method' => 'respond',
         ])

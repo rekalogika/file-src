@@ -22,13 +22,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services
-        ->set(FileFactory::class);
+        ->set('rekalogika.file.factory')
+        ->class(FileFactory::class)
+    ;
 
     $services
         ->set(FileRepositoryInterface::class)
         ->class(FileRepository::class)
         ->factory([
-            service(FileFactory::class),
+            service('rekalogika.file.factory'),
             'getFileRepository',
         ])
         ->tag('kernel.reset', ['method' => 'reset'])

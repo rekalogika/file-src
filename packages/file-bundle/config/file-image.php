@@ -23,14 +23,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services
         ->set(ImageResizer::class)
-        ->tag('rekalogika.file.derivation.filter');
+        ->tag('rekalogika.file.derivation.filter')
+    ;
 
     $services
         ->set('rekalogika.file.image.twig_extension')
         ->class(ImageTwigExtension::class)
         ->tag('twig.extension', [
             'priority' => 1000000,
-        ]);
+        ])
+    ;
 
     $services
         ->set('rekalogika.file.image.twig_runtime')
@@ -40,5 +42,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ])
         ->tag('twig.runtime', [
             'priority' => 1000000,
-        ]);
+        ])
+    ;
 };

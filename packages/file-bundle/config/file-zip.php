@@ -23,19 +23,26 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
-    $services->set(FileZip::class)
+    $services
+        ->set(FileZip::class)
         ->args([
-            service(ZipDirectory::class),
+            service('rekalogika.file.zip.zip_directory'),
             service(TranslatorInterface::class),
-        ]);
+        ])
+    ;
 
-    $services->set(ZipDirectory::class)
+    $services
+        ->set('rekalogika.file.zip.zip_directory')
+        ->class(ZipDirectory::class)
         ->args([
             service(FileRepositoryInterface::class),
             service(TranslatorInterface::class)->nullOnInvalid(),
-        ]);
+        ])
+    ;
 
-    $services->set(DirectoryResourceServer::class)
+    $services
+        ->set('rekalogika.file.zip.directory_resource_server')
+        ->class(DirectoryResourceServer::class)
         ->args([
             service(FileZip::class),
             service(TranslatorInterface::class),
@@ -45,5 +52,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ])
         ->tag('rekalogika.temporary_url.resource_transformer', [
             'method' => 'transform',
-        ]);
+        ])
+    ;
 };
