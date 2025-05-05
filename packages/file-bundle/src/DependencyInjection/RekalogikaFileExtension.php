@@ -105,11 +105,13 @@ final class RekalogikaFileExtension extends Extension implements PrependExtensio
         }
 
         $newFilesystems = [];
+
         foreach ($filesystems as $name => $serviceId) {
             $newFilesystems[$name] = new Reference($serviceId);
         }
 
-        $container->getDefinition(FileFactory::class)
+        $container
+            ->getDefinition('rekalogika.file.factory')
             ->setArgument('$filesystems', $newFilesystems);
 
         //

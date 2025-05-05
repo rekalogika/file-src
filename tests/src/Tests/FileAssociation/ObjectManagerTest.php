@@ -39,16 +39,15 @@ final class ObjectManagerTest extends KernelTestCase
     protected function setUp(): void
     {
 
-        $fileAssociationManager = static::getContainer()
-            ->get(ObjectManagerInterface::class);
+        $objectManager = static::getContainer()
+            ->get('rekalogika.file.association.object_manager');
 
-        // @phpstan-ignore method.alreadyNarrowedType
         $this->assertInstanceOf(
             ObjectManagerInterface::class,
-            $fileAssociationManager,
+            $objectManager,
         );
 
-        $this->objectManager = $fileAssociationManager;
+        $this->objectManager = $objectManager;
 
         $fileRepository = static::getContainer()
             ->get(FileRepositoryInterface::class);

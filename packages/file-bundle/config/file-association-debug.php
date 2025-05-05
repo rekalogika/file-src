@@ -11,8 +11,6 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
-use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\File\Bundle\Debug\FileDataCollector;
 use Rekalogika\File\Bundle\Debug\TraceableFilePropertyManager;
 use Rekalogika\File\Bundle\Debug\TraceableObjectManager;
@@ -24,7 +22,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
 
     $services
-        ->set(FileDataCollector::class)
+        ->set('rekalogika.file.association.debug.data_collector')
+        ->class(FileDataCollector::class)
         ->tag('data_collector', [
             'id' => 'rekalogika_file',
         ])
@@ -32,18 +31,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ;
 
     $services
-        ->set(TraceableObjectManager::class)
-        ->decorate(ObjectManagerInterface::class)
+        ->set('rekalogika.file.association.debug.traceable_object_manager')
+        ->class(TraceableObjectManager::class)
+        ->decorate('rekalogika.file.association.object_manager')
         ->args([
             service('.inner'),
             service('debug.stopwatch'),
-            service(FileDataCollector::class),
+            service('rekalogika.file.association.debug.data_collector'),
         ])
     ;
 
     $services
-        ->set(TraceableFilePropertyManager::class)
-        ->decorate(FilePropertyManagerInterface::class)
+        ->set('rekalogika.file.association.debug.traceable_file_property_manager')
+        ->class(TraceableFilePropertyManager::class)
+        ->decorate('rekalogika.file.association.file_property_manager')
         ->args([
             service('.inner'),
             service('debug.stopwatch'),

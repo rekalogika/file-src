@@ -21,12 +21,8 @@ use Rekalogika\File\Association\ClassSignatureResolver\AttributeClassSignatureRe
 use Rekalogika\File\Association\ClassSignatureResolver\ChainClassSignatureResolver;
 use Rekalogika\File\Association\ClassSignatureResolver\DefaultClassSignatureResolver;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
-use Rekalogika\File\Association\Contracts\ClassMetadataFactoryInterface;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
-use Rekalogika\File\Association\Contracts\FilePropertyManagerInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
-use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
-use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\FilePropertyManager\DefaultFilePropertyManager;
 use Rekalogika\File\Association\FilePropertyManager\LoggingFilePropertyManager;
 use Rekalogika\File\Association\ObjectIdResolver\ChainedObjectIdResolver;
@@ -50,16 +46,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // reconstitutors
     //
 
-    $services->set(InterfaceReconstitutor::class)
+    $services
+        ->set('rekalogika.file.association.reconstitutor.interface')
+        ->class(InterfaceReconstitutor::class)
         ->args([
-            service(ObjectManagerInterface::class),
+            service('rekalogika.file.association.object_manager'),
         ])
         ->tag('rekalogika.reconstitutor.class')
     ;
 
-    $services->set(AttributeReconstitutor::class)
+    $services
+        ->set('rekalogika.file.association.reconstitutor.attribute')
+        ->class(AttributeReconstitutor::class)
         ->args([
-            service(ObjectManagerInterface::class),
+            service('rekalogika.file.association.object_manager'),
         ])
         ->tag('rekalogika.reconstitutor.attribute')
     ;
@@ -69,20 +69,21 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     //
 
     $services
-        ->set(ObjectManagerInterface::class)
+        ->set('rekalogika.file.association.object_manager')
         ->class(DefaultObjectManager::class)
         ->args([
-            '$classMetadataFactory' => service(ClassMetadataFactoryInterface::class),
+            '$classMetadataFactory' => service('rekalogika.file.association.class_metadata_factory'),
             '$objectIdResolver' => service(ObjectIdResolverInterface::class),
-            '$filePropertyManager' => service(FilePropertyManagerInterface::class),
-        ]);
+            '$filePropertyManager' => service('rekalogika.file.association.file_property_manager'),
+        ])
+    ;
 
     //
     // property manager
     //
 
     $services
-        ->set(FilePropertyManagerInterface::class)
+        ->set('rekalogika.file.association.file_property_manager')
         ->class(DefaultFilePropertyManager::class)
         ->args([
             '$fileRepository' => service(FileRepositoryInterface::class),
@@ -91,8 +92,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ;
 
     $services
-        ->set(LoggingFilePropertyManager::class)
-        ->decorate(FilePropertyManagerInterface::class)
+        ->set('rekalogika.file.association.file_property_manager.logging')
+        ->class(LoggingFilePropertyManager::class)
+        ->decorate('rekalogika.file.association.file_property_manager')
         ->args([
             service('.inner'),
             service('logger')->nullOnInvalid(),
@@ -106,111 +108,153 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->alias(
         ObjectIdResolverInterface::class,
-        ChainedObjectIdResolver::class,
+        'rekalogika.file.association.object_id_resolver.chained',
     );
 
-    $services->set(ChainedObjectIdResolver::class)
+    $services
+        ->set('rekalogika.file.association.object_id_resolver.chained')
+        ->class(ChainedObjectIdResolver::class)
         ->args([
             tagged_iterator('rekalogika.file.association.object_id_resolver'),
-        ]);
+        ])
+    ;
 
-    $services->set(DefaultObjectIdResolver::class)
+    $services
+        ->set('rekalogika.file.association.object_id_resolver.default')
+        ->class(DefaultObjectIdResolver::class)
         ->tag('rekalogika.file.association.object_id_resolver', [
             'priority' => -1000,
-        ]);
+        ])
+    ;
 
     if (interface_exists(ManagerRegistry::class)) {
-        $services->set(DoctrineObjectIdResolver::class)
+        $services
+            ->set(DoctrineObjectIdResolver::class)
             ->args([
                 service(ManagerRegistry::class),
             ])
             ->tag('rekalogika.file.association.object_id_resolver', [
                 'priority' => -999,
-            ]);
+            ])
+        ;
     }
 
     //
     // class-based file location resolver
     //
 
+    $services->alias(
+        ClassBasedFileLocationResolverInterface::class,
+        'rekalogika.file.association.class_based_file_location_resolver.chained',
+    );
+
     $services
-        ->set(ClassBasedFileLocationResolverInterface::class)
+        ->set('rekalogika.file.association.class_based_file_location_resolver.chained')
         ->class(ChainedClassBasedFileLocationResolver::class)
         ->args([
             tagged_iterator('rekalogika.file.association.class_based_file_location_resolver'),
-        ]);
+        ])
+    ;
 
     $services
-        ->set(DefaultClassBasedFileLocationResolver::class)
+        ->set('rekalogika.file.association.class_based_file_location_resolver.default')
+        ->class(DefaultClassBasedFileLocationResolver::class)
         ->args([
-            service(ClassMetadataFactoryInterface::class),
+            service('rekalogika.file.association.class_metadata_factory'),
         ])
         ->tag('rekalogika.file.association.class_based_file_location_resolver', [
             'priority' => -1000,
-        ]);
+        ])
+    ;
 
     //
     // class signature resolver
     //
 
+    $services->alias(
+        ClassSignatureResolverInterface::class,
+        'rekalogika.file.association.class_signature_resolver.chained',
+    );
+
     $services
-        ->set(ClassSignatureResolverInterface::class)
+        ->set('rekalogika.file.association.class_signature_resolver.chained')
         ->class(ChainClassSignatureResolver::class)
         ->args([
             tagged_iterator('rekalogika.file.association.class_signature_resolver'),
-        ]);
+        ])
+    ;
 
     $services
-        ->set(DefaultClassSignatureResolver::class)
+        ->set('rekalogika.file.association.class_signature_resolver.default')
+        ->class(DefaultClassSignatureResolver::class)
         ->tag('rekalogika.file.association.class_signature_resolver', [
             'priority' => -1000,
-        ]);
+        ])
+    ;
 
     $services
-        ->set(AttributeClassSignatureResolver::class)
+        ->set('rekalogika.file.association.class_signature_resolver.attribute')
+        ->class(AttributeClassSignatureResolver::class)
         ->tag('rekalogika.file.association.class_signature_resolver', [
             'priority' => -999,
-        ]);
+        ])
+    ;
 
     //
     // property lister
     //
 
-    $services->alias(PropertyListerInterface::class, ChainPropertyLister::class);
+    $services->alias(
+        'rekalogika.file.association.property_lister',
+        'rekalogika.file.association.property_lister.chain',
+    );
 
-    $services->set(ChainPropertyLister::class)
+    $services
+        ->set('rekalogika.file.association.property_lister.chain')
+        ->class(ChainPropertyLister::class)
         ->args([
             tagged_iterator('rekalogika.file.association.property_lister'),
-        ]);
+        ])
+    ;
 
-    $services->set(FileAssociationInterfacePropertyLister::class)
-        ->tag('rekalogika.file.association.property_lister');
+    $services
+        ->set('rekalogika.file.association.property_lister.file_association_interface')
+        ->class(FileAssociationInterfacePropertyLister::class)
+        ->tag('rekalogika.file.association.property_lister')
+    ;
 
-    $services->set(AttributesPropertyLister::class)
-        ->tag('rekalogika.file.association.property_lister');
+    $services
+        ->set('rekalogika.file.association.property_lister.attributes')
+        ->class(AttributesPropertyLister::class)
+        ->tag('rekalogika.file.association.property_lister')
+    ;
 
     //
     // class metadata factory
     //
 
     $services
-        ->set(ClassMetadataFactoryInterface::class)
+        ->set('rekalogika.file.association.class_metadata_factory')
         ->class(DefaultClassMetadataFactory::class)
         ->args([
-            service(PropertyListerInterface::class),
+            service('rekalogika.file.association.property_lister'),
             service(ClassSignatureResolverInterface::class),
-        ]);
+        ])
+    ;
 
     $services
         ->set('rekalogika.file.association.class_metadata_factory.cache')
         ->parent('cache.system')
-        ->tag('cache.pool');
+        ->tag('cache.pool')
+    ;
 
     $services
-        ->set(CachingClassMetadataFactory::class)
-        ->decorate(ClassMetadataFactoryInterface::class)
+        ->set('rekalogika.file.association.class_metadata_factory.caching')
+        ->class(CachingClassMetadataFactory::class)
+        ->decorate('rekalogika.file.association.class_metadata_factory')
         ->args([
             service('.inner'),
             service('rekalogika.file.association.class_metadata_factory.cache'),
-        ]);
+        ])
+    ;
 };

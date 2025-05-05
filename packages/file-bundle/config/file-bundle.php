@@ -27,23 +27,29 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     //
 
     $services
-        ->set(DefaultFilesystemFactory::class);
+        ->set(DefaultFilesystemFactory::class)
+    ;
 
     $services
-        ->set('rekalogika.file.default_filesystem', FilesystemOperator::class)
+        ->set('rekalogika.file.default_filesystem')
+        ->class(FilesystemOperator::class)
         ->factory([
             service(DefaultFilesystemFactory::class),
             'getDefaultFilesystem',
-        ]);
+        ])
+    ;
 
 
     //
     // commands
     //
 
-    $services->set(FileLocationResolverCommand::class)
+    $services
+        ->set('rekalogika.file.command.file_location_resolver')
+        ->class(FileLocationResolverCommand::class)
         ->args([
             '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
         ])
-        ->tag('console.command');
+        ->tag('console.command')
+    ;
 };
