@@ -194,6 +194,7 @@ final class Architecture
                 Selector::inNamespace('Psr\Log'),
                 Selector::inNamespace('Psr\Cache'),
                 Selector::inNamespace('Rekalogika\Reconstitutor\Contract'),
+                Selector::inNamespace('Symfony\Contracts\Service'),
 
                 // dependencies on optional packages
                 Selector::classname(ManagerRegistry::class),
