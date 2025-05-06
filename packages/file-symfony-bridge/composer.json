@@ -27,17 +27,17 @@
     },
     "require": {
         "php": "^8.2",
-        "rekalogika/file": "^2.1",
-        "rekalogika/file-contracts": "^2.1",
-        "rekalogika/file-metadata-contracts": "^2.1",
-        "rekalogika/file-metadata": "^2.1",
+        "rekalogika/file": "^2.2",
+        "rekalogika/file-contracts": "^2.2",
+        "rekalogika/file-metadata-contracts": "^2.2",
+        "rekalogika/file-metadata": "^2.2",
         "symfony/form": "^6.2 || ^7.0",
         "symfony/http-foundation": "^6.2 || ^7.0",
         "symfony/validator": "^6.3 || ^7.1"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.2-dev"
+            "dev-main": "2.3-dev"
         }
     }
 }

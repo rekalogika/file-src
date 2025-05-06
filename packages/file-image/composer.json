@@ -29,13 +29,13 @@
         "php": "^8.2",
         "intervention/image": "^3.3",
         "psr/log": "^2 || ^3",
-        "rekalogika/file-contracts": "^2.1",
-        "rekalogika/file-derivation": "^2.1",
+        "rekalogika/file-contracts": "^2.2",
+        "rekalogika/file-derivation": "^2.2",
         "twig/twig": "^3.9"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.2-dev"
+            "dev-main": "2.3-dev"
         }
     }
 }
