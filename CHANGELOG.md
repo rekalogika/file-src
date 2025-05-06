@@ -10,6 +10,8 @@
 * refactor: refactor directory hashing code to a separate class for reusability
 * fix: disable `PropertyLister` autoconfiguration
 * fix: compatibility with reconstitutor 2.1
+* fix(AtributesPropertyLister): throw exception if there are two properties with
+  the same name in the same class hierarchy
 
 ## 2.0.0
 
