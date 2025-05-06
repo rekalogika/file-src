@@ -11,11 +11,11 @@ declare(strict_types=1);
  * that was distributed with this source code.
  */
 
-namespace Rekalogika\File\Association\FilePropertyManager;
+namespace Rekalogika\File\Association\PropertyRecorder;
 
 use Symfony\Contracts\Service\ResetInterface;
 
-final class InitialPropertyRecorder implements ResetInterface
+final class PropertyRecorder implements ResetInterface
 {
     /**
      * @var \WeakMap<object,array<string,mixed>>
@@ -40,7 +40,7 @@ final class InitialPropertyRecorder implements ResetInterface
         $this->properties = $properties;
     }
 
-    public function recordInitialProperty(
+    public function saveInitialProperty(
         object $object,
         string $propertyName,
         mixed $value,
@@ -63,5 +63,29 @@ final class InitialPropertyRecorder implements ResetInterface
 
         /** @psalm-suppress PossiblyNullArrayAccess */
         return $this->properties[$object][$propertyName] ?? null;
+    }
+
+    public function hasInitialProperty(
+        object $object,
+        string $propertyName,
+    ): bool {
+        if (!isset($this->properties[$object])) {
+            return false;
+        }
+
+        /** @psalm-suppress PossiblyNullArrayAccess */
+        return isset($this->properties[$object][$propertyName]);
+    }
+
+    public function removeInitialProperty(
+        object $object,
+        string $propertyName,
+    ): void {
+        if (!isset($this->properties[$object])) {
+            return;
+        }
+
+        /** @psalm-suppress PossiblyNullArrayAccess */
+        unset($this->properties[$object][$propertyName]);
     }
 }
