@@ -4,6 +4,7 @@
 
 * fix: throw exception if there are two properties with the same name in the
   same class hierarchy
+* feat: record initial value for avoid some file requests
 
 ## 2.1.0
 

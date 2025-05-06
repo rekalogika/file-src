@@ -91,6 +91,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             '$fileRepository' => service(FileRepositoryInterface::class),
             '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
         ])
+        ->tag('kernel.reset', [
+            'method' => 'reset',
+        ])
     ;
 
     $services
