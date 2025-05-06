@@ -9,6 +9,7 @@
   from metadata
 * refactor: refactor directory hashing code to a separate class for reusability
 * fix: disable `PropertyLister` autoconfiguration
+* fix: compatibility with reconstitutor 2.1
 
 ## 2.0.0
 
