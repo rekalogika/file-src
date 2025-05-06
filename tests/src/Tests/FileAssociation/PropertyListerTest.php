@@ -34,21 +34,23 @@ final class PropertyListerTest extends TestCase
         PropertyListerInterface $lister,
         string $class,
         array $expectedProperties,
+        bool $invalid,
     ): void {
+        if ($invalid) {
+            $this->expectException(\LogicException::class);
+        }
+
         $properties = $lister->getFileProperties($class);
 
         $properties = $properties instanceof \Traversable
             ? iterator_to_array($properties)
             : $properties;
 
-        // dump($expectedProperties);
-        // dump($properties);
-
         $this->assertEqualsCanonicalizing($expectedProperties, $properties);
     }
 
     /**
-     * @return iterable<array-key,array{PropertyListerInterface,class-string,list<Property>}>
+     * @return iterable<array-key,array{PropertyListerInterface,class-string,list<Property>,bool}>
      */
     public static function propertyListerProvider(): iterable
     {
@@ -65,6 +67,7 @@ final class PropertyListerTest extends TestCase
                     name: 'protectedFile',
                 ),
             ],
+            false,
         ];
 
         yield [
@@ -88,6 +91,7 @@ final class PropertyListerTest extends TestCase
                     name: 'protectedFile',
                 ),
             ],
+            true,
         ];
 
         yield [
@@ -103,6 +107,7 @@ final class PropertyListerTest extends TestCase
                     name: 'protectedFile',
                 ),
             ],
+            false,
         ];
 
         yield [
@@ -126,6 +131,7 @@ final class PropertyListerTest extends TestCase
                     name: 'protectedFile',
                 ),
             ],
+            true,
         ];
     }
 }

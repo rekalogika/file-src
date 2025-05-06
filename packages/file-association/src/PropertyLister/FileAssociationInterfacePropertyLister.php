@@ -15,6 +15,7 @@ namespace Rekalogika\File\Association\PropertyLister;
 
 use Rekalogika\Contracts\File\Association\FileAssociationInterface;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
+use Rekalogika\File\Association\Exception\DuplicatePropertyNameException;
 use Rekalogika\File\Association\Model\Property;
 use Rekalogika\File\Association\Util\ClassUtil;
 
@@ -33,16 +34,32 @@ final class FileAssociationInterfacePropertyLister implements PropertyListerInte
 
         $propertyNames = $class::getFileAssociationPropertyList();
         $properties = ClassUtil::getReflectionProperties($class);
+        $result = [];
 
         foreach ($properties as $reflectionProperty) {
-            if (!\in_array($reflectionProperty->getName(), $propertyNames, true)) {
+            $name = $reflectionProperty->getName();
+
+            if (!\in_array($name, $propertyNames, true)) {
                 continue;
             }
 
-            yield new Property(
+            if (isset($result[$name])) {
+                $previous = $result[$name];
+
+                throw new DuplicatePropertyNameException(
+                    propertyName: $name,
+                    class1: $previous->getClass(),
+                    class2: $reflectionProperty->getDeclaringClass()->getName(),
+                    leafClass: $class,
+                );
+            }
+
+            $result[$name] = new Property(
                 class: $reflectionProperty->getDeclaringClass()->getName(),
-                name: $reflectionProperty->getName(),
+                name: $name,
             );
         }
+
+        return array_values($result);
     }
 }
