@@ -50,7 +50,7 @@ final class PropertyListerTest extends TestCase
     }
 
     /**
-     * @return iterable<array-key,array{PropertyListerInterface,class-string,list<Property>}>
+     * @return iterable<array-key,array{PropertyListerInterface,class-string,list<Property>,bool}>
      */
     public static function propertyListerProvider(): iterable
     {
