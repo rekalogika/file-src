@@ -54,4 +54,6 @@ final readonly class InterfaceReconstitutor implements ClassReconstitutorInterfa
 
     #[\Override]
     public function onCreate(object $object): void {}
+
+    public function onClear(object $object): void {}
 }

@@ -52,4 +52,6 @@ final readonly class AttributeReconstitutor implements AttributeReconstitutorInt
 
     #[\Override]
     public function onCreate(object $object): void {}
+
+    public function onClear(object $object): void {}
 }
