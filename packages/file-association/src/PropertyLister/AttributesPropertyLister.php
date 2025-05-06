@@ -15,7 +15,7 @@ namespace Rekalogika\File\Association\PropertyLister;
 
 use Rekalogika\File\Association\Attribute\AsFileAssociation;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
-use Rekalogika\File\Association\Exception\LogicException;
+use Rekalogika\File\Association\Exception\DuplicatePropertyNameException;
 use Rekalogika\File\Association\Model\Property;
 use Rekalogika\File\Association\Util\ClassUtil;
 
@@ -39,15 +39,14 @@ final readonly class AttributesPropertyLister implements PropertyListerInterface
             $name = $reflectionProperty->getName();
 
             if (isset($result[$name])) {
-                $existing = $result[$name];
+                $previous = $result[$name];
 
-                throw new LogicException(sprintf(
-                    'Two involved properties having the same name "%s" are declared in "%s" and "%s", which are in the hierarchy of class "%s". The framework does not support this situation. Please rename one of the properties.',
-                    $name,
-                    $existing->getClass(),
-                    $reflectionProperty->getDeclaringClass()->getName(),
-                    $class,
-                ));
+                throw new DuplicatePropertyNameException(
+                    propertyName: $name,
+                    class1: $previous->getClass(),
+                    class2: $reflectionProperty->getDeclaringClass()->getName(),
+                    leafClass: $class,
+                );
             }
 
             $result[$name] = new Property(
