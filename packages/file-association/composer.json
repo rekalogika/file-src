@@ -30,15 +30,15 @@
         "psr/cache": "^2 || ^3",
         "psr/log": "^2 || ^3",
         "psr/http-message": "^1.0 || ^2.0",
-        "rekalogika/file-association-contracts": "^2.0",
-        "rekalogika/file-contracts": "^2.0",
-        "rekalogika/file-null": "^2.0",
+        "rekalogika/file-association-contracts": "^2.1",
+        "rekalogika/file-contracts": "^2.1",
+        "rekalogika/file-null": "^2.1",
         "rekalogika/reconstitutor": "^2.1",
         "symfony/deprecation-contracts": "^3.1"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.1-dev"
+            "dev-main": "2.2-dev"
         }
     }
 }
