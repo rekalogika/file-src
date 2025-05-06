@@ -18,6 +18,12 @@ parameters:
         -
             identifier: return.unusedType
             path: packages/file-symfony-bridge/src/HttpFoundation/ToHttpFoundationFileAdapter.php
+        -
+            message: '#Call to an undefined method ReflectionClass<.*>::isUninitializedLazyObject#'
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method ReflectionClass<.*>::initializeLazyObject#'
+            reportUnmatched: false
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
