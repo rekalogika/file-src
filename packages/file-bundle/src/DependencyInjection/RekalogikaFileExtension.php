@@ -18,7 +18,6 @@ use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterfac
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectIdResolverInterface;
 use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
-use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Bundle\DefaultFilesystemFactory;
 use Rekalogika\File\Derivation\Filter\FileFilterInterface;
 use Rekalogika\File\Image\ImageResizer;
@@ -122,10 +121,6 @@ final class RekalogikaFileExtension extends Extension implements PrependExtensio
                 ->registerForAutoconfiguration(FileFilterInterface::class)
                 ->addTag('rekalogika.file.derivation.filter');
         }
-
-        $container
-            ->registerForAutoconfiguration(PropertyListerInterface::class)
-            ->addTag('rekalogika.file.association.property_lister');
 
         $container
             ->registerForAutoconfiguration(ClassBasedFileLocationResolverInterface::class)
