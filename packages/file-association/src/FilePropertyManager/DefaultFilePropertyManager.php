@@ -26,6 +26,7 @@ use Rekalogika\File\Association\Model\PropertyMetadata;
 use Rekalogika\File\Association\Model\PropertyOperationAction;
 use Rekalogika\File\Association\Model\PropertyOperationResult;
 use Rekalogika\File\Association\PropertyReaderWriter\DefaultPropertyReaderWriter;
+use Rekalogika\File\Association\PropertyRecorder\PropertyRecorder;
 use Symfony\Contracts\Service\ResetInterface;
 
 final readonly class DefaultFilePropertyManager implements
@@ -35,20 +36,20 @@ final readonly class DefaultFilePropertyManager implements
     private PropertyReaderInterface $reader;
     private PropertyWriterInterface $writer;
 
-    private InitialPropertyRecorder $initialPropertyRecorder;
+    private PropertyRecorder $propertyRecorder;
 
     public function __construct(
         private FileRepositoryInterface $fileRepository,
         private ClassBasedFileLocationResolverInterface $fileLocationResolver,
     ) {
         $this->reader = $this->writer = new DefaultPropertyReaderWriter();
-        $this->initialPropertyRecorder = new InitialPropertyRecorder();
+        $this->propertyRecorder = new PropertyRecorder();
     }
 
     #[\Override]
     public function reset(): void
     {
-        $this->initialPropertyRecorder->reset();
+        $this->propertyRecorder->reset();
     }
 
     /**
@@ -71,13 +72,15 @@ final readonly class DefaultFilePropertyManager implements
         );
 
         /** @psalm-suppress MixedAssignment */
-        $initialProperty = $this->initialPropertyRecorder->getInitialProperty(
+        $initialProperty = $this->propertyRecorder->getInitialProperty(
             object: $object,
             propertyName: $propertyName,
         );
 
         /** @psalm-suppress MixedAssignment */
         $currentFile = $this->reader->read($object, $propertyMetadata);
+
+        // if property is unchanged, we don't need to do anything
 
         if ($initialProperty === $currentFile) {
             return new PropertyOperationResult(
@@ -99,7 +102,7 @@ final readonly class DefaultFilePropertyManager implements
 
             // record the initial property
 
-            $this->initialPropertyRecorder->recordInitialProperty(
+            $this->propertyRecorder->saveInitialProperty(
                 object: $object,
                 propertyName: $propertyName,
                 value: null,
@@ -117,7 +120,8 @@ final readonly class DefaultFilePropertyManager implements
         }
 
         // if the file location of the current file is the same as the
-        // file location of the property, we don't need to do anything
+        // file location of the property, we don't need to do anything.
+        // possibly not necessary.
 
         if ($currentFile->isEqualTo($filePointer)) {
             return new PropertyOperationResult(
@@ -137,11 +141,11 @@ final readonly class DefaultFilePropertyManager implements
         // get reference of the file from storage
         $file = $this->fileRepository->getReference($filePointer);
 
-        // inject the file to the object
+        // inject the reference to the object
         $this->writer->write($object, $propertyMetadata, $file);
 
         // record the initial property
-        $this->initialPropertyRecorder->recordInitialProperty(
+        $this->propertyRecorder->saveInitialProperty(
             object: $object,
             propertyName: $propertyName,
             value: $file,
@@ -159,7 +163,7 @@ final readonly class DefaultFilePropertyManager implements
     }
 
     /**
-     * Process a file removal on an attribute
+     * Process a file removal on a property
      */
     #[\Override]
     public function removeProperty(
@@ -176,6 +180,31 @@ final readonly class DefaultFilePropertyManager implements
             propertyName: $propertyName,
         );
 
+        /** @psalm-suppress MixedAssignment */
+        $initialProperty = $this->propertyRecorder->getInitialProperty(
+            object: $object,
+            propertyName: $propertyName,
+        );
+
+        // remove the initial property
+        $this->propertyRecorder->removeInitialProperty(
+            object: $object,
+            propertyName: $propertyName,
+        );
+
+        // if the initial property is null, we don't need to do anything
+        if ($initialProperty === null) {
+            return new PropertyOperationResult(
+                type: ObjectOperationType::Remove,
+                action: PropertyOperationAction::Nothing,
+                class: $propertyMetadata->getClass(),
+                scopeClass: $propertyMetadata->getScopeClass(),
+                property: $propertyName,
+                objectId: $id,
+                filePointer: $filePointer,
+            );
+        }
+
         $this->fileRepository->delete($filePointer);
 
         return new PropertyOperationResult(
@@ -190,7 +219,7 @@ final readonly class DefaultFilePropertyManager implements
     }
 
     /**
-     * Process an attribute on an object loading
+     * Process an property on an object loading
      */
     #[\Override]
     public function loadProperty(
@@ -270,7 +299,7 @@ final readonly class DefaultFilePropertyManager implements
 
         $this->writer->write($object, $propertyMetadata, $file);
 
-        $this->initialPropertyRecorder->recordInitialProperty(
+        $this->propertyRecorder->saveInitialProperty(
             object: $object,
             propertyName: $propertyName,
             value: $file,
