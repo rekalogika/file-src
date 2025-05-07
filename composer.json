@@ -1,15 +1,15 @@
 {
     "name": "rekalogika/file-src",
     "description": "Monorepo for rekalogika/file and related packages",
+    "homepage": "https://rekalogika.dev/file",
     "license": "MIT",
-    "type": "project",
     "authors": [
         {
             "name": "Priyadi Iman Nurcahyo",
             "email": "priyadi@rekalogika.com"
         }
     ],
-    "homepage": "https://rekalogika.dev/file",
+    "type": "project",
     "require": {
         "cardinalby/content-disposition": "^1.1",
         "doctrine/collections": "^2.0",
@@ -89,24 +89,6 @@
         "twig/extra-bundle": "^2.12|^3.0",
         "vimeo/psalm": "^6.0"
     },
-    "replace": {
-        "rekalogika/file": "2.2.0",
-        "rekalogika/file-association": "2.2.0",
-        "rekalogika/file-association-contracts": "2.2.0",
-        "rekalogika/file-association-entity": "2.2.0",
-        "rekalogika/file-bundle": "2.2.0",
-        "rekalogika/file-contracts": "2.2.0",
-        "rekalogika/file-derivation": "2.2.0",
-        "rekalogika/file-filepond": "2.2.0",
-        "rekalogika/file-image": "2.2.0",
-        "rekalogika/file-metadata": "2.2.0",
-        "rekalogika/file-metadata-contracts": "2.2.0",
-        "rekalogika/file-null": "2.2.0",
-        "rekalogika/file-oneup-uploader-bridge": "2.2.0",
-        "rekalogika/file-server": "2.2.0",
-        "rekalogika/file-symfony-bridge": "2.2.0",
-        "rekalogika/file-zip": "2.2.0"
-    },
     "autoload": {
         "psr-4": {
             "Rekalogika\\Contracts\\File\\": "packages/file-contracts/src/",
@@ -138,5 +120,23 @@
             "php-http/discovery": true,
             "symfony/runtime": true
         }
+    },
+    "replace": {
+        "rekalogika/file": "2.2.1",
+        "rekalogika/file-association": "2.2.1",
+        "rekalogika/file-association-contracts": "2.2.1",
+        "rekalogika/file-association-entity": "2.2.1",
+        "rekalogika/file-bundle": "2.2.1",
+        "rekalogika/file-contracts": "2.2.1",
+        "rekalogika/file-derivation": "2.2.1",
+        "rekalogika/file-filepond": "2.2.1",
+        "rekalogika/file-image": "2.2.1",
+        "rekalogika/file-metadata": "2.2.1",
+        "rekalogika/file-metadata-contracts": "2.2.1",
+        "rekalogika/file-null": "2.2.1",
+        "rekalogika/file-oneup-uploader-bridge": "2.2.1",
+        "rekalogika/file-server": "2.2.1",
+        "rekalogika/file-symfony-bridge": "2.2.1",
+        "rekalogika/file-zip": "2.2.1"
     }
 }

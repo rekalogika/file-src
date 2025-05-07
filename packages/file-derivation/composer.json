@@ -22,8 +22,8 @@
     },
     "require": {
         "php": "^8.2",
-        "rekalogika/file-contracts": "^2.2",
-        "rekalogika/file": "^2.2"
+        "rekalogika/file-contracts": "^2.2.1",
+        "rekalogika/file": "^2.2.1"
     },
     "extra": {
         "branch-alias": {
