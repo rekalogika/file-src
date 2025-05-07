@@ -29,8 +29,8 @@
         "php": "^8.2",
         "intervention/image": "^3.3",
         "psr/log": "^2 || ^3",
-        "rekalogika/file-contracts": "^2.2",
-        "rekalogika/file-derivation": "^2.2",
+        "rekalogika/file-contracts": "^2.2.1",
+        "rekalogika/file-derivation": "^2.2.1",
         "twig/twig": "^3.9"
     },
     "extra": {

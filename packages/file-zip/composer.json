@@ -28,8 +28,8 @@
     "require": {
         "php": "^8.2",
         "psr/http-message": "^1.0 || ^2.0",
-        "rekalogika/file-contracts": "^2.2",
-        "rekalogika/file-metadata": "^2.2",
+        "rekalogika/file-contracts": "^2.2.1",
+        "rekalogika/file-metadata": "^2.2.1",
         "rekalogika/temporary-url-bundle": "^1.7.2",
         "maennchen/zipstream-php": "^3.1",
         "symfony/http-foundation": "^6.2 || ^7.0",
