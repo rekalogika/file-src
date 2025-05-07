@@ -56,6 +56,9 @@ jobs:
       env:
         SYMFONY_REQUIRE: ${{ matrix.symfony }}
 
+    - name: Lint container
+      run: tests/bin/console lint:container
+
     - name: Run psalm
       run: vendor/bin/psalm
       if: matrix.dep == 'highest'
