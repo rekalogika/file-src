@@ -4,6 +4,7 @@
 
 * fix: fix bug that `kernel.reset` is applied to outer decorators
 * deps: bump js dependencies
+* ci: add lint container
 
 ## 2.2.0
 
