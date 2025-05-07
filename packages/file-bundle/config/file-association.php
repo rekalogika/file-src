@@ -70,8 +70,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // object manager
     //
 
+    $services->alias(
+        'rekalogika.file.association.object_manager',
+        'rekalogika.file.association.object_manager.default',
+    );
+
     $services
-        ->set('rekalogika.file.association.object_manager')
+        ->set('rekalogika.file.association.object_manager.default')
         ->class(DefaultObjectManager::class)
         ->args([
             '$classMetadataFactory' => service('rekalogika.file.association.class_metadata_factory'),
@@ -84,8 +89,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // property manager
     //
 
+    $services->alias(
+        'rekalogika.file.association.file_property_manager',
+        'rekalogika.file.association.file_property_manager.default',
+    );
+
     $services
-        ->set('rekalogika.file.association.file_property_manager')
+        ->set('rekalogika.file.association.file_property_manager.default')
         ->class(DefaultFilePropertyManager::class)
         ->args([
             '$fileRepository' => service(FileRepositoryInterface::class),
@@ -245,8 +255,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // class metadata factory
     //
 
+    $services->alias(
+        'rekalogika.file.association.class_metadata_factory',
+        'rekalogika.file.association.class_metadata_factory.default',
+    );
+
     $services
-        ->set('rekalogika.file.association.class_metadata_factory')
+        ->set('rekalogika.file.association.class_metadata_factory.default')
         ->class(DefaultClassMetadataFactory::class)
         ->args([
             service('rekalogika.file.association.property_lister'),

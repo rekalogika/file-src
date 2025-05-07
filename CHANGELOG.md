@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.2.1
+
+* fix: fix bug that `kernel.reset` is applied to outer decorators
+
 ## 2.2.0
 
 * fix: throw exception if there are two properties with the same name in the
