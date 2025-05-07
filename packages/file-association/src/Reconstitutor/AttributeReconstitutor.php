@@ -19,6 +19,8 @@ use Rekalogika\Reconstitutor\Contract\AttributeReconstitutorInterface;
 
 /**
  * Reconstitutes objects with WithFileAssociation attribute
+ *
+ * @implements AttributeReconstitutorInterface<object>
  */
 final readonly class AttributeReconstitutor implements AttributeReconstitutorInterface
 {

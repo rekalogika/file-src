@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.2.2
+
+* fix: fix generics on `AttributeReconstitutor`
+
 ## 2.2.1
 
 * fix: fix bug that `kernel.reset` is applied to outer decorators
