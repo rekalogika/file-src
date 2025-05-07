@@ -39,6 +39,7 @@
         "symfony/framework-bundle": "^6.2 || ^7.0",
         "symfony/http-foundation": "^6.2 || ^7.0",
         "symfony/http-kernel": "^6.2 || ^7.0",
+        "symfony/service-contracts": "^3.1",
         "twig/twig": "^3.9"
     },
     "require-dev": {

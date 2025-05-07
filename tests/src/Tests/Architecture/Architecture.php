@@ -308,6 +308,7 @@ final class Architecture
                 Selector::inNamespace('Symfony\Component\HttpFoundation'),
                 Selector::inNamespace('Symfony\Component\HttpKernel'),
                 Selector::inNamespace('Symfony\Component\Stopwatch'),
+                Selector::inNamespace('Symfony\Contracts\Service'),
 
                 // soft dependencies (attributes)
                 Selector::classname(\Override::class),
