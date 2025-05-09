@@ -66,6 +66,11 @@
                 <file name="tests/src/Tests/FileImage/TwigTest.php" />
             </errorLevel>
         </MissingOverrideAttribute>
+        <PossiblyNullReference>
+            <errorLevel type="suppress">
+                <file name="packages/file-association/src/PropertyRecorder/PropertyRecorder.php"/>
+            </errorLevel>
+        </PossiblyNullReference>
     </issueHandlers>
 
     <plugins>

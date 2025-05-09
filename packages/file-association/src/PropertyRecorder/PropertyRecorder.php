@@ -18,7 +18,7 @@ use Symfony\Contracts\Service\ResetInterface;
 final class PropertyRecorder implements ResetInterface
 {
     /**
-     * @var \WeakMap<object,array<string,mixed>>
+     * @var \WeakMap<object,\ArrayObject<string,mixed>>
      */
     private \WeakMap $properties;
 
@@ -35,8 +35,9 @@ final class PropertyRecorder implements ResetInterface
 
     private function init(): void
     {
-        /** @var \WeakMap<object,array<string,mixed>> */
+        /** @var \WeakMap<object,\ArrayObject<string,mixed>> */
         $properties = new \WeakMap();
+
         $this->properties = $properties;
     }
 
@@ -46,11 +47,15 @@ final class PropertyRecorder implements ResetInterface
         mixed $value,
     ): void {
         if (!isset($this->properties[$object])) {
-            $this->properties[$object] = [];
+            /** @var \ArrayObject<string,mixed> */
+            $arrayObject = new \ArrayObject();
+
+            $this->properties->offsetSet($object, $arrayObject);
         }
 
-        /** @psalm-suppress MixedArgument */
-        $this->properties[$object][$propertyName] = $value;
+        $this->properties
+            ->offsetGet($object)
+            ->offsetSet($propertyName, $value);
     }
 
     public function getInitialProperty(
@@ -61,8 +66,9 @@ final class PropertyRecorder implements ResetInterface
             return null;
         }
 
-        /** @psalm-suppress PossiblyNullArrayAccess */
-        return $this->properties[$object][$propertyName] ?? null;
+        return $this->properties
+            ->offsetGet($object)
+            ->offsetGet($propertyName);
     }
 
     public function hasInitialProperty(
@@ -73,8 +79,9 @@ final class PropertyRecorder implements ResetInterface
             return false;
         }
 
-        /** @psalm-suppress PossiblyNullArrayAccess */
-        return isset($this->properties[$object][$propertyName]);
+        return $this->properties
+            ->offsetGet($object)
+            ->offsetExists($propertyName);
     }
 
     public function removeInitialProperty(
@@ -85,7 +92,8 @@ final class PropertyRecorder implements ResetInterface
             return;
         }
 
-        /** @psalm-suppress PossiblyNullArrayAccess */
-        unset($this->properties[$object][$propertyName]);
+        $this->properties
+            ->offsetGet($object)
+            ->offsetUnset($propertyName);
     }
 }

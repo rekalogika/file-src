@@ -3,6 +3,7 @@
 ## 2.2.2
 
 * fix: fix generics on `AttributeReconstitutor`
+* fix: `WeakMap` indirect modification bug
 
 ## 2.2.1
 
