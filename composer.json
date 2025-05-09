@@ -122,21 +122,21 @@
         }
     },
     "replace": {
-        "rekalogika/file": "2.2.1",
-        "rekalogika/file-association": "2.2.1",
-        "rekalogika/file-association-contracts": "2.2.1",
-        "rekalogika/file-association-entity": "2.2.1",
-        "rekalogika/file-bundle": "2.2.1",
-        "rekalogika/file-contracts": "2.2.1",
-        "rekalogika/file-derivation": "2.2.1",
-        "rekalogika/file-filepond": "2.2.1",
-        "rekalogika/file-image": "2.2.1",
-        "rekalogika/file-metadata": "2.2.1",
-        "rekalogika/file-metadata-contracts": "2.2.1",
-        "rekalogika/file-null": "2.2.1",
-        "rekalogika/file-oneup-uploader-bridge": "2.2.1",
-        "rekalogika/file-server": "2.2.1",
-        "rekalogika/file-symfony-bridge": "2.2.1",
-        "rekalogika/file-zip": "2.2.1"
+        "rekalogika/file": "2.2.2",
+        "rekalogika/file-association": "2.2.2",
+        "rekalogika/file-association-contracts": "2.2.2",
+        "rekalogika/file-association-entity": "2.2.2",
+        "rekalogika/file-bundle": "2.2.2",
+        "rekalogika/file-contracts": "2.2.2",
+        "rekalogika/file-derivation": "2.2.2",
+        "rekalogika/file-filepond": "2.2.2",
+        "rekalogika/file-image": "2.2.2",
+        "rekalogika/file-metadata": "2.2.2",
+        "rekalogika/file-metadata-contracts": "2.2.2",
+        "rekalogika/file-null": "2.2.2",
+        "rekalogika/file-oneup-uploader-bridge": "2.2.2",
+        "rekalogika/file-server": "2.2.2",
+        "rekalogika/file-symfony-bridge": "2.2.2",
+        "rekalogika/file-zip": "2.2.2"
     }
 }
