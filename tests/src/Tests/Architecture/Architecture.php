@@ -208,6 +208,7 @@ final class Architecture
                 Selector::classname(\DateTimeInterface::class),
                 Selector::classname(\DateTimeImmutable::class),
                 Selector::classname(\WeakMap::class),
+                Selector::classname(\ArrayObject::class),
                 Selector::classname(\UnitEnum::class),
 
                 // reflection
