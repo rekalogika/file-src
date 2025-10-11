@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 use League\Flysystem\FilesystemOperator;
 use Rekalogika\File\Association\Contracts\ClassBasedFileLocationResolverInterface;
+use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\File\Bundle\Command\FileLocationResolverCommand;
 use Rekalogika\File\Bundle\DefaultFilesystemFactory;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -27,8 +28,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     //
 
     $services
-        ->set(DefaultFilesystemFactory::class)
-    ;
+        ->set(DefaultFilesystemFactory::class);
 
     $services
         ->set('rekalogika.file.default_filesystem')
@@ -44,12 +44,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // commands
     //
 
-    $services
-        ->set('rekalogika.file.command.file_location_resolver')
-        ->class(FileLocationResolverCommand::class)
-        ->args([
-            '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
-        ])
-        ->tag('console.command')
-    ;
+    if (interface_exists(ObjectManagerInterface::class)) {
+        $services
+            ->set('rekalogika.file.command.file_location_resolver')
+            ->class(FileLocationResolverCommand::class)
+            ->args([
+                '$fileLocationResolver' => service(ClassBasedFileLocationResolverInterface::class),
+            ])
+            ->tag('console.command')
+        ;
+    }
 };
