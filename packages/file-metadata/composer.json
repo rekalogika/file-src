@@ -26,8 +26,8 @@
         "php": "^8.2",
         "cardinalby/content-disposition": "^1.1",
         "fileeye/mimemap": "^2.0",
-        "rekalogika/file-contracts": "^2.2.4",
-        "rekalogika/file-metadata-contracts": "^2.2.4",
+        "rekalogika/file-contracts": "^2.2.5",
+        "rekalogika/file-metadata-contracts": "^2.2.5",
         "symfony/translation-contracts": "^3.0"
     },
     "extra": {
