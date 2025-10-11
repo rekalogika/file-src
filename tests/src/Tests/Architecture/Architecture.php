@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Rekalogika\File\Tests\Tests\Architecture;
 
 use Doctrine\ORM\Mapping\Embedded;
+use Doctrine\ORM\UnitOfWork;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPat\Selector\Selector;
 use PHPat\Selector\SelectorInterface;
@@ -198,6 +199,7 @@ final class Architecture
 
                 // dependencies on optional packages
                 Selector::classname(ManagerRegistry::class),
+                Selector::classname(UnitOfWork::class),
 
                 // soft dependencies
                 Selector::classname(\Override::class),
@@ -210,6 +212,7 @@ final class Architecture
                 Selector::classname(\WeakMap::class),
                 Selector::classname(\ArrayObject::class),
                 Selector::classname(\UnitEnum::class),
+                Selector::classname(\Stringable::class),
 
                 // reflection
                 Selector::classname(\ReflectionClass::class),
@@ -393,6 +396,7 @@ final class Architecture
                 // dependencies on our packages
                 $this->getFileContracts(),
                 $this->getFileSymfonyBridge(),
+                $this->getFileAssociationEntity(),
 
                 // external dependencies
                 Selector::inNamespace('Symfony\Component\DependencyInjection'),
@@ -518,6 +522,7 @@ final class Architecture
 
                 // exceptions
                 Selector::classname(\RuntimeException::class),
+                Selector::classname(\Throwable::class),
             );
     }
 
@@ -590,6 +595,7 @@ final class Architecture
                 // internal PHP classes
                 Selector::classname(\SplFileInfo::class),
                 Selector::classname(\SplFileObject::class),
+                Selector::classname(\Traversable::class),
 
                 // exceptions
                 Selector::classname(\RuntimeException::class),

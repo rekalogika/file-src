@@ -24,6 +24,10 @@ parameters:
         -
             message: '#Call to an undefined method ReflectionClass<.*>::initializeLazyObject#'
             reportUnmatched: false
+        -
+            message: '#Parameter \#1 \$class of method SplFileInfo#'
+        -
+            message: '#getFileInfo\(\) should return T of SplFileInfo but returns SplFileInfo#'
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
