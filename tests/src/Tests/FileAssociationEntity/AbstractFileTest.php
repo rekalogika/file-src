@@ -83,7 +83,6 @@ final class AbstractFileTest extends TestCase
         $metadata->set(Constants::FILE_MODIFICATION_TIME, 1234567890);
 
         $reflectionProperty = $abstractFileReflection->getProperty('metadata');
-        $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue($entity, $metadata);
 
         static::assertSame('foo.txt', (string) $entity->getName()->getFull());
@@ -109,7 +108,6 @@ final class AbstractFileTest extends TestCase
 
         $classReflection = new \ReflectionClass($metadata);
         $modificationTime = $classReflection->getProperty('modificationTime');
-        $modificationTime->setAccessible(true);
 
         /** @psalm-suppress MixedAssignment */
         $modificationTime = $modificationTime->getValue($metadata);
