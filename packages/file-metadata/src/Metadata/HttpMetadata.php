@@ -34,7 +34,9 @@ final class HttpMetadata extends AbstractMetadata implements
 
     public function getDate(): string
     {
-        return (new \DateTimeImmutable())->format(\DateTimeInterface::RFC7231);
+        return (new \DateTimeImmutable())
+            ->setTimezone(new \DateTimeZone('UTC'))
+            ->format('D, d M Y H:i:s \G\M\T');
     }
 
     #[\Override]
