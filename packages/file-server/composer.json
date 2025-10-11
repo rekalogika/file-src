@@ -24,8 +24,8 @@
     },
     "require": {
         "php": "^8.2",
-        "rekalogika/file-contracts": "^2.2.2",
-        "rekalogika/file-symfony-bridge": "^2.2.2",
+        "rekalogika/file-contracts": "^2.2.4",
+        "rekalogika/file-symfony-bridge": "^2.2.4",
         "rekalogika/temporary-url-bundle": "^1.7.2",
         "symfony/http-foundation": "^6.2 || ^7.0"
     },
