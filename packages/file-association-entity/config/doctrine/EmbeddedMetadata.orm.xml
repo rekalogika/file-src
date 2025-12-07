@@ -22,7 +22,7 @@
         <field
                 name="modificationTime"
                 column="modification_time"
-                type="datetime"
+                type="datetime_immutable"
                 nullable="true" />
         <field
                 name="width"
