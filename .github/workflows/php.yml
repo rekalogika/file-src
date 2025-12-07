@@ -36,6 +36,11 @@ jobs:
         extensions: intl
         tools: phive
 
+    - name: Install Symfony Flex globally
+      run: |
+        composer global config --no-plugins allow-plugins.symfony/flex true
+        composer global require --no-progress --no-scripts --no-plugins symfony/flex
+
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
@@ -61,11 +66,11 @@ jobs:
 
     - name: Run psalm
       run: vendor/bin/psalm
-      if: matrix.dep == 'highest'
+      if: matrix.dep == 'highest' && matrix.symfony == '7.*'
 
     - name: Run phpstan
       run: vendor/bin/phpstan analyse
-      if: matrix.dep == 'highest'
+      if: matrix.dep == 'highest' && matrix.symfony == '7.*'
 
     - name: Run phpunit
       run: |

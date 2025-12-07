@@ -8,13 +8,9 @@ parameters:
     #         missingCheckedExceptionInThrows: true
     #         tooWideThrowType: true
     ignoreErrors:
-        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children#'
         -
             message: '#Attribute class Override does not exist#'
             reportUnmatched: false
-        -
-            identifier: method.nonObject
-            path: packages/file-bundle/src/DependencyInjection/Configuration.php
         -
             identifier: return.unusedType
             path: packages/file-symfony-bridge/src/HttpFoundation/ToHttpFoundationFileAdapter.php
