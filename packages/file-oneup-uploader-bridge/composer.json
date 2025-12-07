@@ -25,8 +25,8 @@
     "require": {
         "php": "^8.2",
         "oneup/uploader-bundle": "^5.0",
-        "rekalogika/file-contracts": "^2.2.5",
-        "rekalogika/file": "^2.2.5"
+        "rekalogika/file-contracts": "^2.2.6",
+        "rekalogika/file": "^2.2.6"
     },
     "extra": {
         "branch-alias": {
