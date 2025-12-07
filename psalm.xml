@@ -39,16 +39,6 @@
                 <file name="tests/src/Tests/Model/EntityWithDifferentFileProperties.php"/>
             </errorLevel>
         </MissingConstructor>
-        <UndefinedMethod>
-            <errorLevel type="suppress">
-                <file name="packages/file-bundle/src/DependencyInjection/Configuration.php"/>
-            </errorLevel>
-        </UndefinedMethod>
-        <MixedMethodCall>
-            <errorLevel type="suppress">
-                <file name="packages/file-bundle/src/DependencyInjection/Configuration.php"/>
-            </errorLevel>
-        </MixedMethodCall>
         <MissingConstructor>
             <errorLevel type="suppress">
                 <file name="packages/file-image/src/ImageTwigExtension.php"/>
