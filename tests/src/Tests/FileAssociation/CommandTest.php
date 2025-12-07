@@ -33,11 +33,10 @@ final class CommandTest extends DoctrineTestCase
         $entityManager->persist($user);
         $entityManager->flush();
 
-        /**
-         * @psalm-suppress InvalidArgument
-         * @phpstan-ignore argument.type
-         */
-        $application = new Application(self::$kernel);
+        $kernel = self::$kernel;
+        $this->assertNotNull($kernel);
+
+        $application = new Application($kernel);
         $command = $application->find('rekalogika:file:resolve');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
