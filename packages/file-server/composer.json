@@ -27,7 +27,7 @@
         "rekalogika/file-contracts": "^2.2.6",
         "rekalogika/file-symfony-bridge": "^2.2.6",
         "rekalogika/temporary-url-bundle": "^1.7.2",
-        "symfony/http-foundation": "^6.2 || ^7.0"
+        "symfony/http-foundation": "^6.2 || ^7.0 || ^8.0"
     },
     "extra": {
         "branch-alias": {
