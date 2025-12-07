@@ -1,15 +1,15 @@
 {
     "name": "rekalogika/file-src",
     "description": "Monorepo for rekalogika/file and related packages",
-    "homepage": "https://rekalogika.dev/file",
     "license": "MIT",
+    "type": "project",
     "authors": [
         {
             "name": "Priyadi Iman Nurcahyo",
             "email": "priyadi@rekalogika.com"
         }
     ],
-    "type": "project",
+    "homepage": "https://rekalogika.dev/file",
     "require": {
         "cardinalby/content-disposition": "^1.1",
         "doctrine/collections": "^2.0",
@@ -32,20 +32,20 @@
         "rekalogika/doctrine-collections-decorator": "^2.0",
         "rekalogika/reconstitutor": "^2.4",
         "rekalogika/temporary-url-bundle": "^1.7.2",
-        "symfony/cache": "^6.2 || ^7.0",
-        "symfony/config": "^6.2 || ^7.0",
-        "symfony/console": "^6.2 || ^7.0",
-        "symfony/dependency-injection": "^6.2 || ^7.0",
+        "symfony/cache": "^6.2 || ^7.0 || ^8.0",
+        "symfony/config": "^6.2 || ^7.0 || ^8.0",
+        "symfony/console": "^6.2 || ^7.0 || ^8.0",
+        "symfony/dependency-injection": "^6.2 || ^7.0 || ^8.0",
         "symfony/deprecation-contracts": "^3.1",
-        "symfony/form": "^6.2 || ^7.0",
-        "symfony/framework-bundle": "^6.2 || ^7.0",
-        "symfony/http-foundation": "^6.2 || ^7.0",
-        "symfony/http-kernel": "^6.2 || ^7.0",
-        "symfony/options-resolver": "^6.2 || ^7.0",
+        "symfony/form": "^6.2 || ^7.0 || ^8.0",
+        "symfony/framework-bundle": "^6.2 || ^7.0 || ^8.0",
+        "symfony/http-foundation": "^6.2 || ^7.0 || ^8.0",
+        "symfony/http-kernel": "^6.2 || ^7.0 || ^8.0",
+        "symfony/options-resolver": "^6.2 || ^7.0 || ^8.0",
         "symfony/service-contracts": "^3.1",
         "symfony/stimulus-bundle": "^2.12",
         "symfony/translation-contracts": "^3.0",
-        "symfony/validator": "^6.3 || ^7.1",
+        "symfony/validator": "^6.3 || ^7.1 || ^8.0",
         "twig/twig": "^3.9",
         "webmozart/assert": "^1.11"
     },
@@ -77,7 +77,7 @@
         "symfony/monolog-bundle": "^3.0",
         "symfony/phpunit-bridge": "^6.3 || ^7.0",
         "symfony/property-info": "^6.2 || ^7.0",
-        "symfony/routing": "^6.2 || ^7.0",
+        "symfony/routing": "^6.2 || ^7.0 || ^8.0",
         "symfony/runtime": "^6.2 || ^7.0",
         "symfony/stopwatch": "^7.2",
         "symfony/twig-bundle": "^6.2 || ^7.0",
@@ -88,6 +88,24 @@
         "symplify/monorepo-builder": "^11.2.20 || ^11.3",
         "twig/extra-bundle": "^2.12|^3.0",
         "vimeo/psalm": "^6.0"
+    },
+    "replace": {
+        "rekalogika/file": "2.2.6",
+        "rekalogika/file-association": "2.2.6",
+        "rekalogika/file-association-contracts": "2.2.6",
+        "rekalogika/file-association-entity": "2.2.6",
+        "rekalogika/file-bundle": "2.2.6",
+        "rekalogika/file-contracts": "2.2.6",
+        "rekalogika/file-derivation": "2.2.6",
+        "rekalogika/file-filepond": "2.2.6",
+        "rekalogika/file-image": "2.2.6",
+        "rekalogika/file-metadata": "2.2.6",
+        "rekalogika/file-metadata-contracts": "2.2.6",
+        "rekalogika/file-null": "2.2.6",
+        "rekalogika/file-oneup-uploader-bridge": "2.2.6",
+        "rekalogika/file-server": "2.2.6",
+        "rekalogika/file-symfony-bridge": "2.2.6",
+        "rekalogika/file-zip": "2.2.6"
     },
     "autoload": {
         "psr-4": {
@@ -120,23 +138,5 @@
             "php-http/discovery": true,
             "symfony/runtime": true
         }
-    },
-    "replace": {
-        "rekalogika/file": "2.2.6",
-        "rekalogika/file-association": "2.2.6",
-        "rekalogika/file-association-contracts": "2.2.6",
-        "rekalogika/file-association-entity": "2.2.6",
-        "rekalogika/file-bundle": "2.2.6",
-        "rekalogika/file-contracts": "2.2.6",
-        "rekalogika/file-derivation": "2.2.6",
-        "rekalogika/file-filepond": "2.2.6",
-        "rekalogika/file-image": "2.2.6",
-        "rekalogika/file-metadata": "2.2.6",
-        "rekalogika/file-metadata-contracts": "2.2.6",
-        "rekalogika/file-null": "2.2.6",
-        "rekalogika/file-oneup-uploader-bridge": "2.2.6",
-        "rekalogika/file-server": "2.2.6",
-        "rekalogika/file-symfony-bridge": "2.2.6",
-        "rekalogika/file-zip": "2.2.6"
     }
 }
