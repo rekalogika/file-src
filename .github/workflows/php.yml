@@ -36,6 +36,11 @@ jobs:
         extensions: intl
         tools: phive
 
+    - name: Install Symfony Flex globally
+      run: |
+        composer global config --no-plugins allow-plugins.symfony/flex true
+        composer global require --no-progress --no-scripts --no-plugins symfony/flex
+
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
