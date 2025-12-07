@@ -30,7 +30,7 @@ final class EmbeddedMetadata implements RawMetadataInterface, \IteratorAggregate
 
     private ?string $type = null;
 
-    private ?\DateTimeInterface $modificationTime = null;
+    private ?\DateTimeImmutable $modificationTime = null;
 
     private ?int $width = null;
 
