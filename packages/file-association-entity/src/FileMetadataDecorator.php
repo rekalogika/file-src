@@ -26,7 +26,7 @@ final class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggr
 
     /**
      * @param RawMetadataInterface $embeddedMetadata Metadata embedded in entities
-     * @param FileInterface $file Metadata from the real file
+     * @param FileInterface $file The underlying file object from which metadata will be lazily loaded
      */
     public function __construct(
         private readonly RawMetadataInterface $embeddedMetadata,
