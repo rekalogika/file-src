@@ -22,12 +22,12 @@
     },
     "require": {
         "php": "^8.2",
-        "rekalogika/file-contracts": "^2.2.6",
-        "rekalogika/file": "^2.2.6"
+        "rekalogika/file-contracts": "^2.3",
+        "rekalogika/file": "^2.3"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.3-dev"
+            "dev-main": "2.4-dev"
         }
     }
 }
