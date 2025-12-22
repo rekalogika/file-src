@@ -8,8 +8,8 @@ $finder = PhpCsFixer\Finder::create()
 
 $config = new PhpCsFixer\Config();
 return $config->setRules([
-    '@PER-CS2.0' => true,
-    '@PER-CS2.0:risky' => true,
+    '@PER-CS2x0' => true,
+    '@PER-CS2x0:risky' => true,
     'fully_qualified_strict_types' => [
         'import_symbols' => true,
     ],

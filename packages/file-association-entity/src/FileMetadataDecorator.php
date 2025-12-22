@@ -13,21 +13,31 @@ declare(strict_types=1);
 
 namespace Rekalogika\Domain\File\Association\Entity;
 
+use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\RawMetadataInterface;
+use Rekalogika\File\RawMetadata;
 
 /**
  * @implements \IteratorAggregate<string,int|string|bool|null>
  */
-final readonly class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggregate
+final class FileMetadataDecorator implements RawMetadataInterface, \IteratorAggregate
 {
+    private ?RawMetadataInterface $cachedFileMetadata = null;
+
     /**
      * @param RawMetadataInterface $embeddedMetadata Metadata embedded in entities
-     * @param RawMetadataInterface $fileMetadata Metadata from the real file
+     * @param FileInterface $file The underlying file object from which metadata will be lazily loaded
      */
     public function __construct(
-        private RawMetadataInterface $embeddedMetadata,
-        private RawMetadataInterface $fileMetadata,
+        private readonly RawMetadataInterface $embeddedMetadata,
+        private readonly FileInterface $file,
     ) {}
+
+    private function getFileMetadata(): RawMetadataInterface
+    {
+        return $this->cachedFileMetadata
+            ??= $this->file->get(RawMetadataInterface::class) ?? new RawMetadata();
+    }
 
     #[\Override]
     public function getIterator(): \Traversable
@@ -51,21 +61,21 @@ final readonly class FileMetadataDecorator implements RawMetadataInterface, \Ite
     public function set(string $key, int|string|bool|null $value): void
     {
         $this->embeddedMetadata->set($key, $value);
-        $this->fileMetadata->set($key, $value);
+        $this->getFileMetadata()->set($key, $value);
     }
 
     #[\Override]
     public function delete(string $key): void
     {
         $this->embeddedMetadata->delete($key);
-        $this->fileMetadata->delete($key);
+        $this->getFileMetadata()->delete($key);
     }
 
     #[\Override]
     public function merge(iterable $metadata): void
     {
         $this->embeddedMetadata->merge($metadata);
-        $this->fileMetadata->merge($metadata);
+        $this->getFileMetadata()->merge($metadata);
     }
 
     #[\Override]
