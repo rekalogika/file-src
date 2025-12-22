@@ -20,6 +20,7 @@ use Rekalogika\Domain\File\Metadata\Constants;
 use Rekalogika\File\TemporaryFile;
 use Rekalogika\File\Tests\Tests\File\FileTestTrait;
 use Rekalogika\File\Tests\Tests\Model\EntityWithEmbeddedMetadata;
+use Rekalogika\File\Tests\Tests\Model\FailingTemporaryFile;
 
 final class EmbeddedMetadataTest extends TestCase
 {
@@ -142,5 +143,20 @@ final class EmbeddedMetadataTest extends TestCase
             $originalMetadata->get(Constants::FILE_TYPE),
             $entityMetadata->get(Constants::FILE_TYPE),
         );
+    }
+
+    public function testGetNotCalled(): void
+    {
+        $entity = new EntityWithEmbeddedMetadata('foo');
+        $file = FailingTemporaryFile::create('test');
+        $entity->setFile($file);
+
+        $file->setFailIfGetAccessed(true);
+
+        $entity->getFile()?->getName();
+        $entity->getFile()?->getSize();
+        $entity->getFile()?->getType();
+
+        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
     }
 }
