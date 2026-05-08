@@ -61,6 +61,11 @@
                 <file name="packages/file-association/src/PropertyRecorder/PropertyRecorder.php"/>
             </errorLevel>
         </PossiblyNullReference>
+        <InternalClass>
+            <errorLevel type="suppress">
+                <file name="tests/src/TestKernel.php"/>
+            </errorLevel>
+        </InternalClass>
     </issueHandlers>
 
     <plugins>

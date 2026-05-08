@@ -22,7 +22,7 @@ use Rekalogika\File\Bundle\DefaultFilesystemFactory;
 use Rekalogika\File\Derivation\Filter\FileFilterInterface;
 use Rekalogika\File\Image\ImageResizer;
 use Rekalogika\File\Server\FileInterfaceResourceServer;
-use Rekalogika\File\Tests\TestKernel;
+use Rekalogika\File\Tests\TestKernel; // @phpstan-ignore ekinoBannedCode.test
 use Rekalogika\File\Zip\FileZip;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
