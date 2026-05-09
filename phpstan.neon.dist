@@ -26,6 +26,23 @@ parameters:
             message: '#Parameter \#1 \$class of method SplFileInfo#'
         -
             message: '#getFileInfo\(\) should return T of SplFileInfo but returns SplFileInfo#'
+        # intervention/image v3 compatibility: read()/create() were removed in v4.
+        -
+            message: '#Call to an undefined method Intervention\\Image\\ImageManager::read\(\)#'
+            path: packages/file-image/src/ImageResizer.php
+            reportUnmatched: false
+        -
+            message: '#Call to an undefined method Intervention\\Image\\ImageManager::create\(\)#'
+            path: packages/file-image/src/ImageResizer.php
+            reportUnmatched: false
+        -
+            message: '#Method Rekalogika\\File\\Image\\ImageResizer::(decodeStream|createBlankImage)\(\) should return Intervention\\Image\\Interfaces\\ImageInterface but returns mixed#'
+            path: packages/file-image/src/ImageResizer.php
+            reportUnmatched: false
+        -
+            message: '#Cannot call method fill\(\) on mixed#'
+            path: packages/file-image/src/ImageResizer.php
+            reportUnmatched: false
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon

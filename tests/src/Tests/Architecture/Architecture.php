@@ -137,7 +137,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFile())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFile(),
@@ -180,7 +180,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileAssociation())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileAssociation(),
@@ -231,7 +231,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileAssociationContracts())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileAssociationContracts(),
@@ -242,7 +242,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileAssociationEntity())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileAssociationEntity(),
@@ -286,7 +286,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileBundle())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileBundle(),
@@ -337,7 +337,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileContracts())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileContracts(),
@@ -367,7 +367,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileDerivation())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileDerivation(),
@@ -388,7 +388,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileFilepond())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileFilepond(),
@@ -427,7 +427,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileImage())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileImage(),
@@ -455,7 +455,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileMetadata())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileMetadata(),
@@ -488,7 +488,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileMetadataContracts())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileMetadataContracts(),
@@ -499,7 +499,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileNull())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileNull(),
@@ -530,7 +530,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileOneupUploaderBridge())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileOneupUploaderBridge(),
@@ -554,7 +554,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileServer())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileServer(),
@@ -573,7 +573,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileSymfonyBridge())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileSymfonyBridge(),
@@ -611,7 +611,7 @@ final class Architecture
     {
         return PHPat::rule()
             ->classes($this->getFileZip())
-            ->canOnlyDependOn()
+            ->canOnly()->dependOn()
             ->classes(
                 // self
                 $this->getFileZip(),
