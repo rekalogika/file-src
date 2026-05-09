@@ -13,17 +13,21 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\Tests\FileAssociation;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Rekalogika\File\Association\Contracts\ClassSignatureResolverInterface;
+use Rekalogika\File\Tests\RestoresExceptionHandlersTrait;
 use Rekalogika\File\Tests\Tests\Model\Entity;
 use Rekalogika\File\Tests\Tests\Model\EntityWithOverridenSignature;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ClassSignatureTest extends KernelTestCase
 {
+    use RestoresExceptionHandlersTrait;
+
     /**
      * @param class-string $class
-     * @dataProvider classSignatureProvider
      */
+    #[DataProvider('classSignatureProvider')]
     public function testClassSignature(
         string $class,
         string $expectedSignature,

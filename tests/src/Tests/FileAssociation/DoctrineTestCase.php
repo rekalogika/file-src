@@ -17,10 +17,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Persistence\Proxy;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
+use Rekalogika\File\Tests\RestoresExceptionHandlersTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 abstract class DoctrineTestCase extends KernelTestCase
 {
+    use RestoresExceptionHandlersTrait;
+
     protected EntityManagerInterface $entityManager;
     protected FileRepositoryInterface $fileRepository;
 

@@ -20,6 +20,7 @@ use Rekalogika\File\Bridge\Symfony\HttpFoundation\ToHttpFoundationFileAdapter;
 use Rekalogika\File\FilePointer;
 use Rekalogika\File\LocalTemporaryFile;
 use Rekalogika\File\TemporaryFile;
+use Rekalogika\File\Tests\RestoresExceptionHandlersTrait;
 use Rekalogika\File\Tests\Tests\File\FileTestTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\File\File;
@@ -27,6 +28,7 @@ use Symfony\Component\HttpFoundation\File\File;
 final class FileAdapterTest extends KernelTestCase
 {
     use FileTestTrait;
+    use RestoresExceptionHandlersTrait;
 
     private function createRemoteFile(): FileInterface
     {

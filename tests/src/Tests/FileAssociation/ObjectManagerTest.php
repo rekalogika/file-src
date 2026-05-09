@@ -21,6 +21,7 @@ use Rekalogika\File\Association\Contracts\ObjectManagerInterface;
 use Rekalogika\File\Association\Model\MissingFile;
 use Rekalogika\File\File;
 use Rekalogika\File\TemporaryFile;
+use Rekalogika\File\Tests\RestoresExceptionHandlersTrait;
 use Rekalogika\File\Tests\Tests\File\FileTestTrait;
 use Rekalogika\File\Tests\Tests\Model\Entity;
 use Rekalogika\File\Tests\Tests\Model\EntityWithLazyFile;
@@ -30,6 +31,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 final class ObjectManagerTest extends KernelTestCase
 {
     use FileTestTrait;
+    use RestoresExceptionHandlersTrait;
 
     private ObjectManagerInterface $objectManager;
 

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\Tests\FileAssociation;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Rekalogika\File\Association\Contracts\PropertyListerInterface;
 use Rekalogika\File\Association\Model\Property;
@@ -28,8 +29,8 @@ final class PropertyListerTest extends TestCase
     /**
      * @param class-string $class
      * @param list<Property> $expectedProperties
-     * @dataProvider propertyListerProvider
      */
+    #[DataProvider('propertyListerProvider')]
     public function testPropertyLister(
         PropertyListerInterface $lister,
         string $class,

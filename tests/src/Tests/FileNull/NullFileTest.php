@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Tests\Tests\FileNull;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
@@ -38,9 +39,7 @@ final class NullFileTest extends TestCase
         $this->assertInstanceOf(NullPointer::class, $nullPointer);
     }
 
-    /**
-     * @dataProvider equalityProvider
-     */
+    #[DataProvider('equalityProvider')]
     public function testEquality(
         bool $expected,
         FilePointerInterface|FileInterface $file1,
