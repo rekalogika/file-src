@@ -66,6 +66,17 @@
                 <file name="tests/src/TestKernel.php"/>
             </errorLevel>
         </InternalClass>
+        <!-- intervention/image v3 compatibility: read()/create() were removed in v4. -->
+        <MixedReturnStatement>
+            <errorLevel type="suppress">
+                <file name="packages/file-image/src/ImageResizer.php"/>
+            </errorLevel>
+        </MixedReturnStatement>
+        <MixedMethodCall>
+            <errorLevel type="suppress">
+                <file name="packages/file-image/src/ImageResizer.php"/>
+            </errorLevel>
+        </MixedMethodCall>
     </issueHandlers>
 
     <plugins>
