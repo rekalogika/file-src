@@ -17,6 +17,7 @@ use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\Encoders\MediaTypeEncoder;
 use Intervention\Image\Exceptions\EncoderException;
+use Intervention\Image\Exceptions\NotSupportedException;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Interfaces\ImageInterface;
 use Psr\Log\LoggerInterface;
@@ -148,7 +149,10 @@ final class ImageResizer extends AbstractFileFilter
 
             try {
                 $encoded = $img->encode(new AutoEncoder($mimeType));
-            } catch (EncoderException) {
+            } catch (EncoderException | NotSupportedException) {
+                // EncoderException covers driver-level failures; NotSupportedException
+                // fires when AutoEncoder can't resolve the source's media type
+                // (e.g. corrupt input reported as application/octet-stream).
                 $encoded = $img->encode(new MediaTypeEncoder('image/png'));
             }
         }
