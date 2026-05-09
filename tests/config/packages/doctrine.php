@@ -16,7 +16,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (ContainerConfigurator $container): void {
     $orm = [
-        'auto_generate_proxy_classes' => true,
         'naming_strategy' => 'doctrine.orm.naming_strategy.underscore_number_aware',
         'controller_resolver' => [
             'auto_mapping' => false,
@@ -32,10 +31,12 @@ return static function (ContainerConfigurator $container): void {
         ],
     ];
 
-    // doctrine-bundle 2.x had these as opt-in flags; without them on 2.x we
-    // get deprecation warnings that fail CI's max[direct]=0 check. 3.x removed
-    // them (always-on now), so emit only on 2.x.
+    // 2.x-only options: superseded by always-on behavior in 3.x (proxy
+    // generation replaced by native lazy objects; lazy ghost & where-declared
+    // reporting are mandatory). On 2.x they're opt-in and required to keep
+    // CI's max[direct]=0 deprecation check green.
     if (version_compare(InstalledVersions::getVersion('doctrine/doctrine-bundle') ?? '0', '3.0.0', '<')) {
+        $orm['auto_generate_proxy_classes'] = true;
         $orm['enable_lazy_ghost_objects'] = true;
         $orm['report_fields_where_declared'] = true;
     }
