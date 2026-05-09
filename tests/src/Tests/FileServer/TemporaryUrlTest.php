@@ -15,11 +15,14 @@ namespace Rekalogika\File\Tests\Tests\FileServer;
 
 use Rekalogika\File\File;
 use Rekalogika\File\FilePointer;
+use Rekalogika\File\Tests\RestoresExceptionHandlersTrait;
 use Rekalogika\TemporaryUrl\TemporaryUrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class TemporaryUrlTest extends KernelTestCase
 {
+    use RestoresExceptionHandlersTrait;
+
     public function testTemporaryUrlWithFilePointer(): void
     {
         $this->markTestSkipped();

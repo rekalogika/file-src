@@ -16,12 +16,15 @@ namespace Rekalogika\File\Tests\Tests\FileZip;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
 use Rekalogika\File\FilePointer;
+use Rekalogika\File\Tests\RestoresExceptionHandlersTrait;
 use Rekalogika\File\Zip\FileZip;
 use Rekalogika\File\Zip\Model\Directory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ZipTest extends KernelTestCase
 {
+    use RestoresExceptionHandlersTrait;
+
     private ?FileRepositoryInterface $fileRepository = null;
 
     private ?FileZip $fileZip = null;
