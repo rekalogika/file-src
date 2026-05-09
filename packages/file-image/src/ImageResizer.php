@@ -164,20 +164,27 @@ final class ImageResizer extends AbstractFileFilter
             );
     }
 
+    /**
+     * @psalm-suppress UndefinedMethod, MixedReturnStatement, MixedMethodCall
+     */
     private function createBlankImage(int $width, int $height): ImageInterface
     {
         $manager = self::createGdManager();
 
         if (method_exists($manager, 'create')) {
+            // intervention/image v3
             return $manager->create($width, $height)->fill('808080');
         }
 
+        // intervention/image v4
         return $manager->createImage($width, $height)->fill('808080');
     }
 
     /**
      * Cross-version decoder: v3 exposes `read()` for a stream resource; v4
      * routes the same input through `decode()`/`decodeStream()`.
+     *
+     * @psalm-suppress UndefinedMethod, MixedReturnStatement, MixedMethodCall
      */
     private function decodeStream(mixed $stream): ImageInterface
     {
