@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Image;
 
+use Intervention\Image\Drivers\Gd\Driver as GdDriver;
 use Intervention\Image\Encoders\AutoEncoder;
 use Intervention\Image\Encoders\MediaTypeEncoder;
 use Intervention\Image\Exceptions\EncoderException;
+use Intervention\Image\Exceptions\NotSupportedException;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Interfaces\ImageInterface;
 use Psr\Log\LoggerInterface;
@@ -44,7 +46,17 @@ final class ImageResizer extends AbstractFileFilter
         ?ImageManager $manager = null,
         private readonly ?LoggerInterface $logger = null,
     ) {
-        $this->manager = $manager ?? ImageManager::gd();
+        $this->manager = $manager ?? self::createGdManager();
+    }
+
+    /**
+     * Constructs a manager bound to the GD driver. Using the constructor
+     * directly (rather than the v3-only `ImageManager::gd()` static factory)
+     * keeps this compatible with both Intervention Image v3 and v4.
+     */
+    private static function createGdManager(): ImageManager
+    {
+        return new ImageManager(new GdDriver());
     }
 
     //
@@ -99,8 +111,9 @@ final class ImageResizer extends AbstractFileFilter
         try {
             $ratio = null;
 
-            $img = $this->manager
-                ->read($this->getSourceFile()->getContentAsStream()->detach());
+            $img = $this->decodeStream(
+                $this->getSourceFile()->getContentAsStream()->detach(),
+            );
 
             $w = $img->width();
             $h = $img->height();
@@ -136,7 +149,10 @@ final class ImageResizer extends AbstractFileFilter
 
             try {
                 $encoded = $img->encode(new AutoEncoder($mimeType));
-            } catch (EncoderException) {
+            } catch (EncoderException | NotSupportedException) {
+                // EncoderException covers driver-level failures; NotSupportedException
+                // fires when AutoEncoder can't resolve the source's media type
+                // (e.g. corrupt input reported as application/octet-stream).
                 $encoded = $img->encode(new MediaTypeEncoder('image/png'));
             }
         }
@@ -148,10 +164,34 @@ final class ImageResizer extends AbstractFileFilter
             );
     }
 
+    /**
+     * @psalm-suppress UndefinedMethod, MixedReturnStatement, MixedMethodCall
+     */
     private function createBlankImage(int $width, int $height): ImageInterface
     {
-        $manager = ImageManager::gd();
+        $manager = self::createGdManager();
 
-        return $manager->create($width, $height)->fill('808080');
+        if (method_exists($manager, 'create')) {
+            // intervention/image v3
+            return $manager->create($width, $height)->fill('808080');
+        }
+
+        // intervention/image v4
+        return $manager->createImage($width, $height)->fill('808080');
+    }
+
+    /**
+     * Cross-version decoder: v3 exposes `read()` for a stream resource; v4
+     * routes the same input through `decode()`/`decodeStream()`.
+     *
+     * @psalm-suppress UndefinedMethod, MixedReturnStatement, MixedMethodCall
+     */
+    private function decodeStream(mixed $stream): ImageInterface
+    {
+        if (method_exists($this->manager, 'read')) {
+            return $this->manager->read($stream);
+        }
+
+        return $this->manager->decode($stream);
     }
 }

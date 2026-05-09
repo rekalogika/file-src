@@ -43,7 +43,7 @@
         "twig/twig": "^3.9"
     },
     "require-dev": {
-        "symfony/routing": "^6.2 || ^7.0"
+        "symfony/routing": "^6.2 || ^7.0 || ^8.0"
     },
     "suggest": {
         "rekalogika/file-image": "Allows easy resizing image",
