@@ -74,7 +74,7 @@
         "symfony/dotenv": "^6.2 || ^7.0 || ^8.0",
         "symfony/http-client": "^6.2 || ^7.0 || ^8.0",
         "symfony/maker-bundle": "^1.55",
-        "symfony/monolog-bundle": "^3.0",
+        "symfony/monolog-bundle": "^3.0 || ^4.0",
         "symfony/phpunit-bridge": "^6.3 || ^7.0 || ^8.0",
         "symfony/property-info": "^6.2 || ^7.0 || ^8.0",
         "symfony/routing": "^6.2 || ^7.0",
