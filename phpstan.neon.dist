@@ -3,6 +3,8 @@ parameters:
     paths:
         - packages
         - tests/src
+    banned_code:
+        non_ignorable: false
     # exceptions:
     #     check:
     #         missingCheckedExceptionInThrows: true
