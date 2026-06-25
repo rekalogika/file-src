@@ -37,7 +37,7 @@ final class FileAdapter
             return FromHttpFoundationFileAdapter::adapt($source);
         } elseif ($source instanceof \SplFileInfo) {
             return FromSplFileInfoAdapter::adapt($source);
-        } elseif (class_exists(OneupUploaderFileInterface::class) && $source instanceof OneupUploaderFileInterface) {
+        } elseif (class_exists(OneupUploaderFileInterface::class) && $source instanceof OneupUploaderFileInterface) { // @phpstan-ignore function.impossibleType
             return FromOneUpUploaderFileAdapter::adapt($source);
         }
 
