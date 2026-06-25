@@ -109,7 +109,7 @@ function getCurrentLocale() {
     locale = document.documentElement.lang;
   }
   if (locale.length > 2) {
-    locale = locale.replace('_', '-').toLowerCase;
+    locale = locale.replace('_', '-').toLowerCase();
     if (locale != 'zh-cn' && locale != 'zh-tw') {
       locale = locale.substring(0, 2);
     }
