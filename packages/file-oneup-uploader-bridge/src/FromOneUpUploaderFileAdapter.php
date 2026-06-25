@@ -30,7 +30,7 @@ final class FromOneUpUploaderFileAdapter extends File
 
         if ($filesystem === null) {
             $ourFilesystem = null;
-        } elseif (class_exists(FilesystemOperator::class) && $filesystem instanceof FilesystemOperator) {
+        } elseif (class_exists(FilesystemOperator::class) && $filesystem instanceof FilesystemOperator) { // @phpstan-ignore function.impossibleType
             $ourFilesystem = $filesystem;
         } else {
             throw new \InvalidArgumentException('Unsupported filesystem type: ' . get_debug_type($filesystem));
