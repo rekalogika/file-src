@@ -157,11 +157,7 @@ final class ImageResizer extends AbstractFileFilter
             }
         }
 
-        return $this->getFileRepository()
-            ->createFromString(
-                $this->getDerivationFilePointer(),
-                $encoded->toString(),
-            );
+        return $this->createResultFromString($encoded->toString());
     }
 
     /**

@@ -39,4 +39,23 @@ final class ImageTwigRuntime implements RuntimeExtensionInterface
             ->resize($maxWidthOrHeight, $aspect)
             ->getResult();
     }
+
+    /**
+     * Renders the file inline as a data URI. Unlike a temporary URL, this does
+     * not require the file to still exist when the browser dereferences it,
+     * which makes it the only way to preview a file that is not persisted, and
+     * therefore will be gone by the next request.
+     */
+    public function fileDataUri(?FileInterface $file): ?string
+    {
+        if ($file === null) {
+            return null;
+        }
+
+        return \sprintf(
+            'data:%s;base64,%s',
+            $file->getType()->getName(),
+            base64_encode($file->getContent()),
+        );
+    }
 }

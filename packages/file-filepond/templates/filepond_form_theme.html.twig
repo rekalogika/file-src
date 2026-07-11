@@ -1,9 +1,17 @@
+{# A preview living in a managed filesystem is served through a temporary URL.
+   One that is not — an upload being redisplayed after a failed validation — is
+   gone by the time the browser follows that URL, so it is inlined instead. #}
+{% macro preview_href(file) %}
+    {%- set preview = file|image_resize(1024) -%}
+    {{- preview.filesystemIdentifier ? preview|temporary_url : preview|rekalogika_file_data_uri -}}
+{% endmacro %}
+
 {% block rekalogika_file_filepond_widget %}
     <div data-controller="rekalogika--file-filepond--filepond">
         {% if data %}
             <data
                 {% if data.get('imageMetadata') %}
-                    data-href="{{ data|image_resize(1024)|temporary_url }}"
+                    data-href="{{ _self.preview_href(data) }}"
                 {% endif %}
                 data-name="{{ data.name.full|trans }}"
                 data-size="{{ data.size }}"
@@ -19,7 +27,7 @@
         {% for id, entry in data %}
             <data
                 {% if entry.get('imageMetadata') %}
-                    data-href="{{ entry|image_resize(1024)|temporary_url }}"
+                    data-href="{{ _self.preview_href(entry) }}"
                 {% endif %}
                 data-id="{{ id }}"
                 data-name="{{ entry.name.full|trans }}"
