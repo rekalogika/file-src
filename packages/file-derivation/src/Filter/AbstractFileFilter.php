@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Rekalogika\File\Derivation\Filter;
 
+use Rekalogika\Contracts\File\Exception\File\DerivationNotSupportedException;
 use Rekalogika\Contracts\File\Exception\File\FileNotFoundException;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FilePointerInterface;
 use Rekalogika\Contracts\File\FileRepositoryInterface;
+use Rekalogika\File\TemporaryFile;
 
 abstract class AbstractFileFilter implements FileFilterInterface
 {
@@ -65,6 +67,42 @@ abstract class AbstractFileFilter implements FileFilterInterface
         return $this->sourceFile->getDerivation($this->getDerivationId());
     }
 
+    /**
+     * Whether the source file is able to host a derivation. Files that do not
+     * live in a filesystem managed by the file repository cannot; most notably
+     * a file that has just been submitted through a form, but is not yet
+     * persisted.
+     */
+    final protected function supportsDerivation(): bool
+    {
+        try {
+            $this->sourceFile->getDerivation($this->getDerivationId());
+        } catch (DerivationNotSupportedException) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Subclasses return the output of process() through this method. The result
+     * is written to the derivation location if the source file can host one, so
+     * that subsequent calls are served from the cache. If it cannot, the result
+     * is returned as a temporary file, valid for the current request only.
+     */
+    final protected function createResultFromString(
+        string $content,
+    ): FileInterface {
+        if (!$this->supportsDerivation()) {
+            return TemporaryFile::createFromString($content);
+        }
+
+        return $this->fileRepository->createFromString(
+            $this->getDerivationFilePointer(),
+            $content,
+        );
+    }
+
     //
     // methods to be implemented by subclasses
     //
@@ -97,6 +135,13 @@ abstract class AbstractFileFilter implements FileFilterInterface
             throw new \LogicException(
                 'Call "take()" first before calling "getResult()"',
             );
+        }
+
+        // The derivation is only a cache location. A source file that cannot
+        // host one is still perfectly processable, the result simply cannot be
+        // cached, and is returned as a temporary file instead.
+        if (!$this->supportsDerivation()) {
+            return $this->process();
         }
 
         $derivationFilePointer = $this->getDerivationFilePointer();

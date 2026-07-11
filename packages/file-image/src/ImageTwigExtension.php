@@ -26,6 +26,10 @@ final class ImageTwigExtension extends AbstractExtension
                 'image_resize',
                 [ImageTwigRuntime::class, 'fileImageResize'],
             ),
+            new TwigFilter(
+                'rekalogika_file_data_uri',
+                [ImageTwigRuntime::class, 'fileDataUri'],
+            ),
         ];
     }
 }
