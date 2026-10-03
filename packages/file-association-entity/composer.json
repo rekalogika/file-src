@@ -32,7 +32,6 @@
         "rekalogika/file-contracts": "^2.4.4",
         "rekalogika/file-metadata": "^2.4.4",
         "rekalogika/file-null": "^2.4.4",
-        "rekalogika/doctrine-collections-decorator": "^2.0",
         "symfony/translation-contracts": "^3.0"
     },
     "extra": {
