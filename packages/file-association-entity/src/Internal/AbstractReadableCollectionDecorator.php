@@ -266,7 +266,7 @@ abstract class AbstractReadableCollectionDecorator implements
 
         // doctrine/collections 2.x does not require a ReadableCollection to be
         // Selectable
-        return (new ArrayCollection($wrapped->toArray()))->matching($criteria);
+        return (new ArrayCollection($this->toArray()))->matching($criteria);
     }
 
     /**

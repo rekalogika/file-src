@@ -46,6 +46,16 @@ parameters:
             message: '#Cannot call method fill\(\) on mixed#'
             path: packages/file-image/src/ImageResizer.php
             reportUnmatched: false
+        # doctrine/collections cross-version compatibility: in v3, every
+        # ReadableCollection is Selectable, so the check only matters in v2.
+        -
+            identifier: instanceof.alwaysTrue
+            path: packages/file-association-entity/src/Internal/AbstractReadableCollectionDecorator.php
+            reportUnmatched: false
+        -
+            identifier: assert.alreadyNarrowedType
+            path: packages/file-association-entity/src/Internal/AbstractReadableCollectionDecorator.php
+            reportUnmatched: false
 
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon

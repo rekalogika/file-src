@@ -87,6 +87,9 @@ final class TestKernel extends HttpKernelKernel
         yield new RekalogikaFileBundle();
         yield new RekalogikaFileFilePondBundle();
         yield new RekalogikaTemporaryUrlBundle();
+
+        // FlysystemBundle is marked internal only in older versions
+        /** @psalm-suppress InternalClass */
         yield new FlysystemBundle();
     }
 
