@@ -255,7 +255,6 @@ final class Architecture
                 // external dependencies
                 Selector::inNamespace('Psr\Http\Message'),
                 Selector::inNamespace('Symfony\Contracts\Translation'),
-                Selector::inNamespace('Rekalogika\Collections\Decorator'),
                 Selector::inNamespace('Doctrine\Common\Collections'),
 
                 // soft dependencies (attributes)
@@ -272,6 +271,7 @@ final class Architecture
                 Selector::classname(\Stringable::class),
                 Selector::classname(\IteratorAggregate::class),
                 Selector::classname(\Traversable::class),
+                Selector::classname(\Closure::class),
 
                 // exceptions
                 Selector::classname(\RuntimeException::class),
