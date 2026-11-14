@@ -63,7 +63,12 @@ final class RekalogikaFileFilePondExtension extends Extension implements
             return false;
         }
 
-        $frameworkBundleMetadata = $bundlesMetadata['FrameworkBundle'] ?? null;
+        // Symfony 8.2 moved AssetMapper out of FrameworkBundle into AssetMapperBundle
+        if (isset($bundlesMetadata['AssetMapperBundle'])) {
+            return true;
+        }
+
+        $frameworkBundleMetadata =$bundlesMetadata['FrameworkBundle'] ?? null;
 
         if (!\is_array($frameworkBundleMetadata)) {
             return false;
