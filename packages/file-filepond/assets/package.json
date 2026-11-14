@@ -77,7 +77,7 @@
     },
     "devDependencies": {
         "@babel/cli": "^8.1",
-        "@babel/core": "^8.0",
+        "@babel/core": "^8.1",
         "@babel/preset-env": "^8.0",
         "@hotwired/stimulus": "^3.0"
     },
