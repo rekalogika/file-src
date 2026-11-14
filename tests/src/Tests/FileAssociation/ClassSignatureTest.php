@@ -35,6 +35,9 @@ final class ClassSignatureTest extends KernelTestCase
         $classSignatureResolver = static::getContainer()
             ->get(ClassSignatureResolverInterface::class);
 
+        // @phpstan-ignore method.alreadyNarrowedType
+        $this->assertInstanceOf(ClassSignatureResolverInterface::class, $classSignatureResolver);
+
         $signature = $classSignatureResolver->getClassSignature($class);
 
         $this->assertSame($expectedSignature, $signature);
